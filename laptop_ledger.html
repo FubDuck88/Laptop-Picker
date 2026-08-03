@@ -1198,7 +1198,7 @@
       </div>
     </div>
 
-    <!-- Store / Source (populated dynamically if multiple stores exist) -->
+    <!-- Store / Source -->
     <div class="filter-group" id="fg-store-wrap" style="display:none;">
       <div class="filter-group-header open" data-target="fg-store">
         <span class="filter-group-label">Store / Source</span>
@@ -1209,7 +1209,7 @@
       </div>
     </div>
 
-    <!-- CPU Series — matched against data from actual CSV -->
+    <!-- CPU Series -->
     <div class="filter-group">
       <div class="filter-group-header" data-target="fg-cpu">
         <span class="filter-group-label">CPU Series</span>
@@ -1253,7 +1253,7 @@
       </div>
     </div>
 
-    <!-- GPU Model — all GPUs present in multi-store database -->
+    <!-- GPU Model -->
     <div class="filter-group">
       <div class="filter-group-header" data-target="fg-gpu">
         <span class="filter-group-label">GPU Model</span>
@@ -1299,7 +1299,7 @@
       </div>
     </div>
 
-    <!-- Memory — sizes present in actual data -->
+    <!-- Memory -->
     <div class="filter-group">
       <div class="filter-group-header" data-target="fg-mem">
         <span class="filter-group-label">Memory</span>
@@ -1327,7 +1327,7 @@
       </div>
     </div>
 
-    <!-- Storage — sizes present in actual data -->
+    <!-- Storage -->
     <div class="filter-group">
       <div class="filter-group-header" data-target="fg-sto">
         <span class="filter-group-label">Storage</span>
@@ -1397,14 +1397,10 @@
     <header class="top">
       <p class="eyebrow">/// spec ledger</p>
       <h1>Laptop Ledger</h1>
-      <p class="sub">Load your scraped catalog, filter by budget and specs, and pull up a side-by-side comparison for
-        anything you are weighing.</p>
+      <p class="sub">Live scraped catalog, filtered by budget and specs, with side-by-side comparisons.</p>
 
       <div class="file-toolbar" id="fileToolbar" style="display:none;">
         <span class="loaded-file-badge" id="loadedFileBadge">📄 master_laptops.csv</span>
-        <label class="btn secondary sm" for="updateFileInput">↻ Update / Change CSV</label>
-        <input type="file" id="updateFileInput" accept=".csv" />
-        <button class="btn danger sm" id="removeFileBtn">✕ Unload CSV</button>
       </div>
 
       <div class="ticker" id="ticker" style="display:none;">
@@ -1416,15 +1412,11 @@
     </header>
 
     <main>
-      <div class="dropzone" id="dropzone">
+      <div class="dropzone" id="dropzone" style="display:none;">
         <h3>Load your CSV</h3>
-        <p>Drop the file exported by the scraper, or browse for it. Expected columns: id, title, price, url, processor,
-          graphics, memory, storage, display, wifi, battery, others.</p>
-        <label class="btn primary" for="fileInput">Choose CSV file</label>
-        <input type="file" id="fileInput" accept=".csv" />
       </div>
 
-      <div id="appArea" style="display:none;">
+      <div id="appArea">
         <div class="result-count" id="resultCount"></div>
         <div class="grid" id="grid"></div>
       </div>
@@ -1451,8 +1443,7 @@
   <div class="modal-overlay" id="detailModalOverlay">
     <div class="modal detail-modal-card">
       <div class="modal-head">
-        <h2
-          style="font-size:14px;font-family:'JetBrains Mono',monospace;color:var(--text-faint);text-transform:uppercase;margin:0;">
+        <h2 style="font-size:14px;font-family:'JetBrains Mono',monospace;color:var(--text-faint);text-transform:uppercase;margin:0;">
           /// PRODUCT SPECIFICATIONS & VENDOR DEALS</h2>
         <button class="close-btn" id="closeDetailModal">✕</button>
       </div>
@@ -1465,7 +1456,6 @@
     let allRows = [];
     let selectedIds = new Set();
 
-    // Hardcoded filter sets — values matched with includes() against CSV fields
     const activeFilters = {
       store: new Set(),
       cpu: new Set(),
@@ -1476,9 +1466,6 @@
     };
 
     const dropzone = document.getElementById('dropzone');
-    const fileInput = document.getElementById('fileInput');
-    const updateFileInput = document.getElementById('updateFileInput');
-    const removeFileBtn = document.getElementById('removeFileBtn');
     const fileToolbar = document.getElementById('fileToolbar');
     const loadedFileBadge = document.getElementById('loadedFileBadge');
     const appArea = document.getElementById('appArea');
@@ -1508,7 +1495,7 @@
       });
     });
 
-    // Wire up hardcoded checkboxes
+    // Wire up checkboxes
     document.querySelectorAll('.cb-list input[type=checkbox]').forEach(cb => {
       const key = cb.dataset.key;
       const val = cb.dataset.val;
@@ -1524,89 +1511,43 @@
       });
     });
 
-    // Drop / file
-    ['dragenter', 'dragover'].forEach(evt => {
-      dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.add('drag'); });
+    // Auto-load preloaded rows injected from python
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.preloadedRows && window.preloadedRows.length > 0) {
+        allRows = window.preloadedRows.map((r, i) => ({
+          _rid: 'r' + i,
+          id: r.id || '',
+          title: r.title || 'Untitled model',
+          price: parseFloat(r.price) || 0,
+          image_url: r.image_url || '',
+          processor: r.processor || '',
+          graphics: r.graphics || '',
+          memory: r.memory || '',
+          storage: r.storage || '',
+          display: r.display || '',
+          wifi: r.wifi || '',
+          battery: r.battery || '',
+          others: r.others || '',
+          series: r.series || 'Store Catalog',
+          url: (() => {
+            let u = r.url || '#';
+            if (u !== '#' && u.includes('lenovo.com') && !u.includes('/my/en/')) {
+              u = u.replace('https://www.lenovo.com', 'https://www.lenovo.com/my/en');
+            }
+            return u;
+          })()
+        }));
+
+        populateStoreFilter();
+        if (dropzone) dropzone.style.display = 'none';
+        appArea.style.display = 'block';
+        sidebar.classList.add('visible');
+        ticker.style.display = 'flex';
+        fileToolbar.style.display = 'flex';
+        updateStats();
+        render();
+      }
     });
-    ['dragleave', 'drop'].forEach(evt => {
-      dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.remove('drag'); });
-    });
-    dropzone.addEventListener('drop', e => { const f = e.dataTransfer.files[0]; if (f) parseFile(f); });
-    fileInput.addEventListener('change', e => { const f = e.target.files[0]; if (f) parseFile(f); });
-    updateFileInput.addEventListener('change', e => { const f = e.target.files[0]; if (f) parseFile(f); });
-    removeFileBtn.addEventListener('click', unloadFile);
-
-    function parseFile(file) {
-      loadedFileBadge.textContent = '📄 ' + file.name;
-      Papa.parse(file, {
-        header: true,
-        skipEmptyLines: true,
-        complete: res => {
-          allRows = res.data.map((r, i) => ({
-            _rid: 'r' + i,
-            id: r.id || '',
-            title: r.title || 'Untitled model',
-            price: parseFloat(r.price) || 0,
-            image_url: r.image_url || '',
-            processor: r.processor || '',
-            graphics: r.graphics || '',
-            memory: r.memory || '',
-            storage: r.storage || '',
-            display: r.display || '',
-            wifi: r.wifi || '',
-            battery: r.battery || '',
-            others: r.others || '',
-            series: r.series || 'Store Catalog',
-            url: (() => {
-              let u = r.url || '#';
-              if (u !== '#' && u.includes('lenovo.com') && !u.includes('/my/en/')) {
-                u = u.replace('https://www.lenovo.com', 'https://www.lenovo.com/my/en');
-              }
-              return u;
-            })()
-          }));
-
-          populateStoreFilter();
-          dropzone.style.display = 'none';
-          appArea.style.display = 'block';
-          sidebar.classList.add('visible');
-          ticker.style.display = 'flex';
-          fileToolbar.style.display = 'flex';
-          updateStats();
-          render();
-        }
-      });
-    }
-
-    function unloadFile() {
-      allRows = [];
-      selectedIds.clear();
-      activeFilters.store.clear();
-      activeFilters.cpu.clear();
-      activeFilters.gpu.clear();
-      activeFilters.mem.clear();
-      activeFilters.sto.clear();
-      activeFilters.disp.clear();
-
-      fileInput.value = '';
-      updateFileInput.value = '';
-      searchInput.value = '';
-      minPrice.value = '';
-      maxPrice.value = '';
-
-      document.querySelectorAll('.cb-list input[type=checkbox]').forEach(cb => cb.checked = false);
-      document.querySelectorAll('.filter-group-header').forEach(h => h.classList.remove('has-active'));
-
-      dropzone.style.display = 'block';
-      appArea.style.display = 'none';
-      sidebar.classList.remove('visible');
-      ticker.style.display = 'none';
-      fileToolbar.style.display = 'none';
-
-      renderTray();
-    }
-
-    // No dynamic population needed — checkboxes are hardcoded in HTML
 
     function updateStats() {
       const prices = allRows.map(r => r.price).filter(p => p > 0);
@@ -1643,8 +1584,6 @@
       });
     }
 
-    // Helper: extract leading inch number from a display string
-    // Handles: 15.3" (ASCII), 14” (U+201D right double quote), 16″ (U+2033 double prime)
     function dispInchPrefix(displayStr) {
       const m = displayStr.match(/^(\d{2}(?:\.\d)?)[\."\u201c\u201d\u2033\u2032\u0022\u0027\s]/);
       return m ? m[1] : null;
@@ -1661,20 +1600,16 @@
         if (!isNaN(min) && r.price < min) return false;
         if (!isNaN(max) && r.price > max) return false;
 
-        // Store / Source filter (OR logic)
         if (activeFilters.store.size) {
           if (!activeFilters.store.has(r.series)) return false;
         }
 
-        // CPU: strip trademark/registered symbols then do substring match (OR logic)
         if (activeFilters.cpu.size) {
-          // Normalise: remove ® ™ © and extra spaces so "Core™ 7" matches "Core 7"
           const proc = r.processor.replace(/[®™©]/g, '').replace(/\s+/g, ' ').toLowerCase();
           const match = [...activeFilters.cpu].some(v => proc.includes(v.toLowerCase()));
           if (!match) return false;
         }
 
-        // GPU: longer pattern first to avoid RTX 5070 matching RTX 5070 Ti entries (OR logic)
         if (activeFilters.gpu.size) {
           const gfx = r.graphics.replace(/[®™©]/g, '').toLowerCase();
           const sorted = [...activeFilters.gpu].sort((a, b) => b.length - a.length);
@@ -1682,25 +1617,21 @@
           if (!match) return false;
         }
 
-        // Memory: match GB token (OR logic)
         if (activeFilters.mem.size) {
           const mem = r.memory.toLowerCase();
           const match = [...activeFilters.mem].some(v => mem.includes(v.toLowerCase()));
           if (!match) return false;
         }
 
-        // Storage: match TB/GB token (OR logic)
         if (activeFilters.sto.size) {
           const sto = r.storage.toLowerCase();
           const match = [...activeFilters.sto].some(v => sto.includes(v.toLowerCase()));
           if (!match) return false;
         }
 
-        // Display size: extract leading inch number and compare (OR logic)
         if (activeFilters.disp.size) {
           const prefix = dispInchPrefix(r.display);
           if (!prefix) return false;
-          // Trim decimal for whole-inch comparisons: "15.3" treated as "15"
           const prefixInt = prefix.split('.')[0];
           const match = [...activeFilters.disp].some(v => v === prefix || v === prefixInt);
           if (!match) return false;
@@ -1728,21 +1659,8 @@
       return 'RM ' + n.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
-    // ── Smart spec extractors ─────────────────────────────────────────────────
-    // All extractors return [{label, detail}] arrays.
-    //   label  = short display string (e.g. "RTX 5050")
-    //   detail = the specific text slice for that option (tooltip on hover)
-    // Single-option fields return a 1-item array.
-
-    // ── Helpers ──────────────────────────────────────────────────────────────
-    function stripSymbols(s) {
-      return s.replace(/[\u00ae\u2122\u00a9]/g, '').replace(/\s+/g, ' ');
-    }
-
-    // Split raw string into segments at each occurrence of a marker regex.
-    // Returns [{markerText, segment}] where segment runs from one marker to the next.
     function splitAtMarkers(raw, markerRe) {
-      const s = stripSymbols(raw);
+      const s = raw.replace(/[\u00ae\u2122\u00a9]/g, '').replace(/\s+/g, ' ');
       const hits = [];
       let m;
       const re = new RegExp(markerRe.source, 'gi');
@@ -1754,16 +1672,7 @@
       }));
     }
 
-    // ── CPU ───────────────────────────────────────────────────────────────────
-    const CPU_TIERS = [
-      'Core i3', 'Core i5', 'Core i7', 'Core i9',
-      'Core 3', 'Core 5', 'Core 7', 'Core 9',
-      'Core Ultra 5', 'Core Ultra 7', 'Core Ultra 9',
-      'Ryzen 3', 'Ryzen 5', 'Ryzen 7', 'Ryzen 9',
-      'Ryzen AI 5', 'Ryzen AI 7', 'Ryzen AI 9',
-      'Snapdragon'
-    ];
-
+    const CPU_TIERS = ['Core i3', 'Core i5', 'Core i7', 'Core i9', 'Core 3', 'Core 5', 'Core 7', 'Core 9', 'Core Ultra 5', 'Core Ultra 7', 'Core Ultra 9', 'Ryzen 3', 'Ryzen 5', 'Ryzen 7', 'Ryzen 9', 'Ryzen AI 5', 'Ryzen AI 7', 'Ryzen AI 9', 'Snapdragon'];
     function cpuTierIdx(label) {
       const i = CPU_TIERS.findIndex(t => label.toLowerCase().includes(t.toLowerCase()));
       return i === -1 ? 999 : i;
@@ -1774,31 +1683,20 @@
       const cpuRe = /Core\s+Ultra\s+\d|Core\s+i\d|Core\s+\d|Ryzen\s+AI\s+\d|Ryzen\s+\d|Snapdragon[\w\s]{0,12}/i;
       const segs = splitAtMarkers(raw, cpuRe);
       if (!segs.length) return [];
-
       const seen = new Set();
       const results = [];
       segs.forEach(({ markerText, segment }) => {
-        // Clean up label: strip trailing noise words
         let label = markerText.replace(/\s+(processor|cpu|up|with|and|to|series)$/i, '').trim();
         if (label.length < 3 || seen.has(label.toLowerCase())) return;
         seen.add(label.toLowerCase());
-        // Specific detail: first 110 chars of this segment, cleaned up
         const detail = segment.replace(/\s+(processor|cpu)\b/gi, '').replace(/\s+/g, ' ').slice(0, 110).trim();
         results.push({ label, detail });
       });
-
       results.sort((a, b) => cpuTierIdx(a.label) - cpuTierIdx(b.label));
       return results;
     }
 
-    // ── GPU ───────────────────────────────────────────────────────────────────
-    const GPU_TIERS = [
-      'Iris Xe', 'Integrated', 'Qualcomm', 'Radeon', 'Arc',
-      'RTX 3050', 'RTX 3060', 'RTX 3070', 'RTX 3080', 'RTX 3090',
-      'RTX 4050', 'RTX 4060', 'RTX 4070', 'RTX 4080', 'RTX 4090',
-      'RTX 5050', 'RTX 5060', 'RTX 5070', 'RTX 5070 Ti', 'RTX 5080', 'RTX 5090'
-    ];
-
+    const GPU_TIERS = ['Iris Xe', 'Integrated', 'Qualcomm', 'Radeon', 'Arc', 'RTX 3050', 'RTX 3060', 'RTX 3070', 'RTX 3080', 'RTX 3090', 'RTX 4050', 'RTX 4060', 'RTX 4070', 'RTX 4080', 'RTX 4090', 'RTX 5050', 'RTX 5060', 'RTX 5070', 'RTX 5070 Ti', 'RTX 5080', 'RTX 5090'];
     function gpuTierIdx(label) {
       const i = GPU_TIERS.findIndex(t => label.toLowerCase().includes(t.toLowerCase()));
       return i === -1 ? 999 : i;
@@ -1806,19 +1704,15 @@
 
     function extractGpuOptions(raw) {
       if (!raw) return [];
-      // Match the start of each GPU model block
       const gpuRe = /(?:GeForce\s+)?(?:RTX|GTX)\s+\d{4}(?:\s+Ti)?|Radeon(?:\s+\w+){0,3}|Iris\s+Xe\w*|Arc\b[^\n,]{0,20}|Integrated(?:\s+Graphics)?|Qualcomm(?:\s+\w+)?/i;
       const segs = splitAtMarkers(raw, gpuRe);
       if (!segs.length) return [];
-
       const seen = new Set();
       const results = [];
       segs.forEach(({ markerText, segment }) => {
-        // Normalize label: drop "GeForce " prefix, trim
         let label = markerText.replace(/^GeForce\s+/i, '').replace(/Laptop\s+GPU/i, '').trim();
         if (label.length < 2 || seen.has(label.toLowerCase())) return;
         seen.add(label.toLowerCase());
-        // Extract key specs from this segment: VRAM, power, clock, AI TOPS
         let detail = label;
         const vram = segment.match(/(\d+GB\s+GDDR\w+)/i);
         const power = segment.match(/(\d+W)\s*(?:TGP|incl|max|\()/i);
@@ -1830,22 +1724,18 @@
         if (tops) detail += ', ' + tops[1] + ' AI TOPS';
         results.push({ label, detail });
       });
-
       results.sort((a, b) => gpuTierIdx(a.label) - gpuTierIdx(b.label));
       return results;
     }
 
-    // ── RAM ───────────────────────────────────────────────────────────────────
     function extractMemOptions(raw) {
       if (!raw) return [];
-      // Remove parenthetical "(2 x 16GB)" to avoid false split markers
       const stripped = raw.replace(/\([^)]*\)/g, '   ');
       const sizeRe = /\b(\d+)\s*GB\b/gi;
       const hits = [];
       let m;
       while ((m = sizeRe.exec(stripped)) !== null) hits.push({ index: m.index, gb: parseInt(m[1]) });
       if (!hits.length) return [];
-
       const seen = new Set();
       const results = [];
       hits.forEach((h, i) => {
@@ -1854,7 +1744,6 @@
         if (seen.has(label)) return;
         seen.add(label);
         const segment = raw.slice(h.index, endIdx).replace(/\s+/g, ' ').trim();
-        // Detail: keep size, type (DDR5/LPDDR5X), speed, channel
         const memType = segment.match(/(LPDDR\w+|DDR\w+)/i);
         const speed = segment.match(/([\d,]+)\s*MT\/s/i);
         const chan = segment.match(/\b(dual|single)\s*channel/i);
@@ -1864,12 +1753,10 @@
         if (chan) detail += ', ' + chan[1] + '-channel';
         results.push({ label, detail });
       });
-
       results.sort((a, b) => parseInt(a.label) - parseInt(b.label));
       return results;
     }
 
-    // ── Storage ───────────────────────────────────────────────────────────────
     function extractStorageOptions(raw) {
       if (!raw) return [];
       const stripped = raw.replace(/\([^)]*\)/g, '   ');
@@ -1880,7 +1767,6 @@
         hits.push({ index: m.index, label: m[1] + m[2].toUpperCase(), bytes: m[2].toUpperCase() === 'TB' ? parseFloat(m[1]) * 1e12 : parseFloat(m[1]) * 1e9 });
       }
       if (!hits.length) return [];
-
       const seen = new Set();
       const results = [];
       hits.forEach((h, i) => {
@@ -1894,12 +1780,10 @@
         else detail += ' SSD';
         results.push({ label: h.label, detail, bytes: h.bytes });
       });
-
-      results.sort((a, b) => a.bytes - b.bytes); // smallest first = base
+      results.sort((a, b) => a.bytes - b.bytes);
       return results;
     }
 
-    // ── Display ───────────────────────────────────────────────────────────────
     function extractDisplayOptions(raw) {
       if (!raw) return [];
       const s = raw.replace(/[\u201c\u201d\u2033\u2032]/g, '"');
@@ -1908,37 +1792,24 @@
       const panel = s.match(/\b(OLED|IPS|TN|VA|AMOLED)\b/i);
       const hz = s.match(/(\d{2,3})\s*Hz/i);
       const nits = s.match(/(\d{3,4})\s*nits/i);
-      const ratio = s.match(/(\d+:\d+)\s*aspect/i);
-
       let label = '';
       if (size) label += size[1] + '"';
-      if (res && (!panel || res[1].toLowerCase() !== (panel[1] || '').toLowerCase())) label += ' ' + res[1].toUpperCase();
+      if (res) label += ' ' + res[1].toUpperCase();
       if (panel) label += ' ' + panel[1].toUpperCase();
       if (hz) label += ' ' + hz[1] + 'Hz';
-
-      let detail = label;
-      if (nits) detail += ', ' + nits[1] + 'nits';
-      if (ratio) detail += ', ' + ratio[1];
-
-      return [{ label: label.trim() || s.slice(0, 40), detail: detail.trim() }];
+      return [{ label: label.trim() || s.slice(0, 40), detail: label.trim() }];
     }
 
-    // ── Battery ───────────────────────────────────────────────────────────────
     function extractBatteryOptions(raw) {
       if (!raw) return [];
       const whr = raw.match(/(\d+(?:\.\d+)?)\s*Wh?r?\b/i);
-      const rapid = /rapid\s*charge/i.test(raw);
       let label = whr ? whr[1] + 'Wh' : raw.slice(0, 20);
-      let detail = label;
-      if (rapid) detail += ', Rapid Charge';
-      return [{ label, detail }];
+      return [{ label, detail: label }];
     }
 
-    // ── specRow: renders label + upgrade-hint; each with its own tooltip ───────
     function specRow(label, raw) {
       if (!raw) return '';
-
-      let options; // [{label, detail}]
+      let options;
       switch (label) {
         case 'cpu': options = extractCpuOptions(raw); break;
         case 'gpu': options = extractGpuOptions(raw); break;
@@ -1948,25 +1819,20 @@
         case 'batt': options = extractBatteryOptions(raw); break;
         default: options = [{ label: raw.replace(/\s+/g, ' ').slice(0, 60), detail: raw.replace(/\s+/g, ' ').trim() }];
       }
-
       if (!options.length) {
         const fb = raw.replace(/\s+/g, ' ').trim();
         return '<li><span class="k">' + label + '</span><span class="v spec-val" title="' + fb.replace(/"/g, '&quot;') + '">' + escapeHtml(fb.slice(0, 60)) + '</span></li>';
       }
-
       const base = options[0];
       const top = options.length > 1 ? options[options.length - 1] : null;
-
       let html = '<li><span class="k">' + label + '</span><span class="v">'
         + '<span class="spec-val" title="' + base.detail.replace(/"/g, '&quot;') + '">' + escapeHtml(base.label) + '</span>';
-
       if (top) {
         html += ' <span class="upgrade-hint" title="' + top.detail.replace(/"/g, '&quot;') + '">up to ' + escapeHtml(top.label) + '</span>';
       }
       html += '</span></li>';
       return html;
     }
-
 
     function escapeHtml(s) {
       const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
@@ -1981,7 +1847,6 @@
         return;
       }
 
-      // Build title frequency map to detect variants
       const titleCount = {};
       rows.forEach(r => { titleCount[r.title] = (titleCount[r.title] || 0) + 1; });
 
@@ -2024,7 +1889,6 @@
           + '</div>';
       }).join('');
 
-      // Ticket compare checkboxes
       grid.querySelectorAll('.compare-check').forEach(el => {
         el.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -2038,7 +1902,6 @@
         });
       });
 
-      // Ticket detail modal triggers
       grid.querySelectorAll('.detail-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const rid = btn.dataset.rid;
@@ -2048,13 +1911,10 @@
       });
     }
 
-    // ── Laptop Visual Render (Real API Photo or Fallback Vector) ──────────────
     function renderLaptopSvg(r) {
       let rawUrl = (r.image_url || '').trim();
       if (rawUrl.startsWith('//')) rawUrl = 'https:' + rawUrl;
       else if (rawUrl.startsWith('/')) rawUrl = 'https://p3-ofp.static.pub' + rawUrl;
-
-      // Clean double slashes in URL path (e.g. static.pub//fes -> static.pub/fes)
       rawUrl = rawUrl.replace(/([^:])\/{2,}/g, '$1/');
 
       if (rawUrl.length > 5) {
@@ -2077,7 +1937,6 @@
         + '</svg>';
     }
 
-    // ── Single Model Detail Modal Handler ──────────────────────────────────────
     const detailModalOverlay = document.getElementById('detailModalOverlay');
     const closeDetailModal = document.getElementById('closeDetailModal');
     const detailModalBody = document.getElementById('detailModalBody');
@@ -2093,7 +1952,6 @@
       const bLabel = brand === 'intel' ? 'Intel' : (brand === 'amd' ? 'AMD' : 'Other');
       const priceStr = r.price ? 'RM ' + r.price.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'Unpriced / Inquiry';
 
-      // Search allRows for vendor offers of this model / family
       const titleClean = r.title.toLowerCase().replace(/\[.*?\]/g, '').replace(/gaming|laptop|notebook/g, '').trim();
       const titleWords = titleClean.split(/\s+/).filter(w => w.length > 2).slice(0, 3).join(' ');
 
@@ -2102,7 +1960,6 @@
         return (row.id && r.id && row.id.toLowerCase() === r.id.toLowerCase()) || (titleWords && t.includes(titleWords));
       });
 
-      // Deduplicate vendor offers by store series
       const seenStores = new Set();
       const uniqueOffers = [];
       vendorOffers.forEach(o => {
@@ -2137,7 +1994,6 @@
         vendorTableHtml += '</tbody></table></div>';
       }
 
-      // Build Detail Modal Content
       detailModalBody.innerHTML = ''
         + '<div class="detail-hero">'
         + '  <div class="detail-img-box">' + renderLaptopSvg(r) + '</div>'
