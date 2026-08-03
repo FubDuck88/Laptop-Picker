@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="referrer" content="no-referrer" />
-  <title>Laptop Picker Mobile | Deals & Specs Comparison</title>
+  <title>Laptop Picker Mobile | Compare Specs & Deals</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -31,7 +31,10 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    body {
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden !important;
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', sans-serif;
@@ -50,6 +53,7 @@
       border-bottom: 1px solid var(--border);
       padding: 12px 14px;
       z-index: 100;
+      width: 100%;
     }
 
     .m-brand-row {
@@ -61,10 +65,10 @@
 
     .m-brand {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--accent);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
     }
 
     .m-switch-link {
@@ -79,6 +83,7 @@
 
     .m-search-box {
       position: relative;
+      width: 100%;
     }
 
     .m-search-input {
@@ -100,7 +105,7 @@
       color: var(--text-faint);
     }
 
-    /* Mobile Quick Filter Chips */
+    /* Quick Preset Chips Bar */
     .m-chip-bar {
       display: flex;
       gap: 8px;
@@ -108,6 +113,8 @@
       overflow-x: auto;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
     }
 
     .m-chip-bar::-webkit-scrollbar {
@@ -127,6 +134,7 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      flex-shrink: 0;
     }
 
     .m-chip.active {
@@ -135,13 +143,25 @@
       border-color: var(--accent-2);
     }
 
-    /* Mobile Controls Bar */
+    /* Active Filter Banner */
+    .m-banner {
+      background: linear-gradient(90deg, rgba(87,217,198,0.12) 0%, rgba(255,176,32,0.12) 100%);
+      border-bottom: 1px solid var(--accent-2);
+      padding: 8px 14px;
+      font-size: 11.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Controls Bar */
     .m-controls {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px 14px;
       background: var(--bg);
+      width: 100%;
     }
 
     .m-count {
@@ -157,6 +177,7 @@
       color: var(--text);
       padding: 6px 10px;
       font-size: 11.5px;
+      max-width: 190px;
     }
 
     /* Mobile Product Cards Grid */
@@ -165,6 +186,7 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
+      width: 100%;
     }
 
     .m-card {
@@ -175,6 +197,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      width: 100%;
     }
 
     .m-card-title {
@@ -182,6 +205,7 @@
       font-weight: 700;
       color: var(--text);
       line-height: 1.35;
+      word-break: break-word;
     }
 
     .m-part {
@@ -230,7 +254,7 @@
       font-size: 11px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 5px;
       color: var(--text-dim);
     }
 
@@ -246,7 +270,7 @@
 
     .m-btn {
       flex: 1;
-      padding: 9px;
+      padding: 10px;
       border-radius: 8px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11.5px;
@@ -281,6 +305,7 @@
       align-items: center;
       justify-content: space-around;
       z-index: 200;
+      width: 100%;
     }
 
     .m-nav-item {
@@ -294,6 +319,7 @@
       font-size: 10px;
       font-weight: 600;
       cursor: pointer;
+      flex: 1;
     }
 
     .m-nav-item.active {
@@ -304,14 +330,16 @@
       font-size: 18px;
     }
 
-    /* Mobile Modals / Bottom Sheets */
+    /* Full Mobile Filter Bottom Sheet */
     .m-sheet-overlay {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(3px);
       z-index: 300;
       display: none;
       align-items: flex-end;
+      width: 100%;
     }
 
     .m-sheet-overlay.show {
@@ -321,9 +349,9 @@
     .m-sheet {
       width: 100%;
       background: var(--surface);
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-      max-height: 85vh;
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+      max-height: 88vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -336,6 +364,7 @@
       justify-content: space-between;
       padding: 14px 16px;
       border-bottom: 1px solid var(--border);
+      background: var(--surface-raised);
     }
 
     .m-sheet-title {
@@ -349,12 +378,97 @@
       background: none;
       border: none;
       color: var(--text-dim);
-      font-size: 18px;
+      font-size: 20px;
+      padding: 4px;
     }
 
     .m-sheet-body {
       padding: 16px;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Accordion Filter Group in Mobile Sheet */
+    .m-filter-group {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .m-fg-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .m-fg-hdr.has-active {
+      color: var(--accent);
+    }
+
+    .m-fg-body {
+      display: none;
+      padding: 10px 14px 14px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .m-fg-body.open {
+      display: block;
+    }
+
+    .m-cb-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .m-cb-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    .m-cb-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent);
+    }
+
+    .m-price-inputs {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .m-price-inputs input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 8px;
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .table-scroll-box {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
   </style>
 </head>
@@ -365,26 +479,32 @@
   <header class="m-header">
     <div class="m-brand-row">
       <span class="m-brand">📱 LAPTOP PICKER MOBILE</span>
-      <a href="index.html" class="m-switch-link">🖥️ Desktop Version</a>
+      <a href="index.html?desktop=1" class="m-switch-link">🖥️ Desktop Version</a>
     </div>
     <div class="m-search-box">
       <span class="m-search-icon">🔍</span>
-      <input type="text" id="mSearchInput" class="m-search-input" placeholder="Search laptops by model, CPU, GPU..." />
+      <input type="text" id="mSearchInput" class="m-search-input" placeholder="Search by model, CPU, GPU, or store..." />
     </div>
   </header>
 
-  <!-- Quick Filter Chips -->
+  <!-- Quick Preset Chips Bar -->
   <div class="m-chip-bar">
-    <button class="m-chip active" id="chipAll">All Models</button>
-    <button class="m-chip" id="chipSteam">🎮 Steam Specs (July '26)</button>
+    <button class="m-chip active" id="chipAll">All Laptops</button>
+    <button class="m-chip" id="chipSteam">🎮 Steam Specs Preset</button>
     <button class="m-chip" id="chipDeals">🏷️ Multi-Vendor Deals</button>
     <button class="m-chip" id="chipNvidia">🟢 RTX Gaming</button>
     <button class="m-chip" id="chip16Gb">🧠 16GB+ RAM</button>
   </div>
 
+  <!-- Active Steam Banner -->
+  <div class="m-banner" id="mSteamBanner" style="display:none;">
+    <span>🎮 <strong>July 2026 Steam Specs Active</strong></span>
+    <button id="mClearSteam" style="background:none;border:none;color:var(--accent);font-weight:700;font-size:11px;cursor:pointer;">Clear</button>
+  </div>
+
   <!-- Controls Bar -->
   <div class="m-controls">
-    <span class="m-count" id="mCount">Loading laptops...</span>
+    <span class="m-count" id="mCount">Loading catalog...</span>
     <select id="mSortSelect" class="m-sort-select">
       <option value="recommended">⭐ Recommended</option>
       <option value="popular">🔥 Most Popular</option>
@@ -397,7 +517,7 @@
   <!-- Product Grid -->
   <main class="m-grid" id="mGrid"></main>
 
-  <!-- Bottom Navigation -->
+  <!-- Bottom Navigation Bar -->
   <nav class="m-bottom-nav">
     <button class="m-nav-item active" id="navHome">
       <span class="m-nav-icon">🏠</span>
@@ -406,7 +526,7 @@
 
     <button class="m-nav-item" id="navFilterSheet">
       <span class="m-nav-icon">🎛️</span>
-      <span>Filters</span>
+      <span>Filters (<span id="mActiveFilterCount">0</span>)</span>
     </button>
 
     <button class="m-nav-item" id="navSteamSheet">
@@ -415,39 +535,204 @@
     </button>
   </nav>
 
+  <!-- Mobile Full Filters Sheet -->
+  <div class="m-sheet-overlay" id="mFilterOverlay">
+    <div class="m-sheet">
+      <div class="m-sheet-head">
+        <span class="m-sheet-title">🎛️ Mobile Filter Catalog</span>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button id="mResetFiltersBtn" style="background:none;border:1px solid var(--accent);color:var(--accent);padding:3px 8px;border-radius:4px;font-size:10px;font-weight:700;">Reset</button>
+          <button class="m-sheet-close" id="closeFilterSheet">✕</button>
+        </div>
+      </div>
+      <div class="m-sheet-body">
+
+        <!-- Steam Spec Preset Banner in Sheet -->
+        <div class="m-filter-group" style="background:linear-gradient(135deg, rgba(87,217,198,0.1) 0%, rgba(255,176,32,0.1) 100%);">
+          <div style="padding:12px 14px;">
+            <div style="font-size:12px;font-weight:700;color:var(--accent-2);margin-bottom:6px;">🎮 Steam Hardware Survey (July 2026)</div>
+            <div style="font-size:11px;color:var(--text-dim);margin-bottom:8px;">Filters to 16GB+ RAM, RTX 3060/4060+ GPU & 6+ Core CPU.</div>
+            <button class="m-btn secondary" id="mSteamPresetToggle" style="width:100%;padding:8px;font-size:11px;border-color:var(--accent-2);color:var(--accent-2);">
+              🎯 Toggle Steam July 2026 Specs
+            </button>
+          </div>
+        </div>
+
+        <!-- Price Range -->
+        <div class="m-filter-group">
+          <div class="m-fg-hdr" data-target="mfg-price">
+            <span>Price Range (MYR)</span>
+            <span>▼</span>
+          </div>
+          <div class="m-fg-body open" id="mfg-price">
+            <div class="m-price-inputs">
+              <input type="number" id="mMinPrice" placeholder="Min MYR" />
+              <span style="color:var(--text-faint)">–</span>
+              <input type="number" id="mMaxPrice" placeholder="Max MYR" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Store / Vendor Filter -->
+        <div class="m-filter-group" id="mfg-store-wrap" style="display:none;">
+          <div class="m-fg-hdr" data-target="mfg-store">
+            <span>Store / Vendor</span>
+            <span>▼</span>
+          </div>
+          <div class="m-fg-body" id="mfg-store">
+            <ul class="m-cb-list" id="mcblist-store"></ul>
+          </div>
+        </div>
+
+        <!-- Processor (CPU) -->
+        <div class="m-filter-group">
+          <div class="m-fg-hdr" data-target="mfg-cpu">
+            <span>Processor (CPU)</span>
+            <span>▼</span>
+          </div>
+          <div class="m-fg-body" id="mfg-cpu">
+            <ul class="m-cb-list">
+              <li class="m-cb-item"><input type="checkbox" id="mcpu-u9" data-key="cpu" data-val="Ultra 9" /><label for="mcpu-u9">Core Ultra 9</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mcpu-u7" data-key="cpu" data-val="Ultra 7" /><label for="mcpu-u7">Core Ultra 7</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mcpu-u5" data-key="cpu" data-val="Ultra 5" /><label for="mcpu-u5">Core Ultra 5</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mcpu-i9" data-key="cpu" data-val="Core i9" /><label for="mcpu-i9">Core i9</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mcpu-i7" data-key="cpu" data-val="Core i7" /><label for="mcpu-i7">Core i7</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mcpu-i5" data-key="cpu" data-val="Core i5" /><label for="mcpu-i5">Core i5</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mcpu-r9" data-key="cpu" data-val="Ryzen 9" /><label for="mcpu-r9">AMD Ryzen 9</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mcpu-r7" data-key="cpu" data-val="Ryzen 7" /><label for="mcpu-r7">AMD Ryzen 7</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mcpu-r5" data-key="cpu" data-val="Ryzen 5" /><label for="mcpu-r5">AMD Ryzen 5</label></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Graphics (GPU) -->
+        <div class="m-filter-group">
+          <div class="m-fg-hdr" data-target="mfg-gpu">
+            <span>Graphics Card (GPU)</span>
+            <span>▼</span>
+          </div>
+          <div class="m-fg-body" id="mfg-gpu">
+            <ul class="m-cb-list">
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-5090" data-key="gpu" data-val="RTX 5090" /><label for="mgpu-5090">RTX 5090</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-5080" data-key="gpu" data-val="RTX 5080" /><label for="mgpu-5080">RTX 5080</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-5070" data-key="gpu" data-val="RTX 5070" /><label for="mgpu-5070">RTX 5070 / Ti</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-5060" data-key="gpu" data-val="RTX 5060" /><label for="mgpu-5060">RTX 5060</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-5050" data-key="gpu" data-val="RTX 5050" /><label for="mgpu-5050">RTX 5050</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-4090" data-key="gpu" data-val="RTX 4090" /><label for="mgpu-4090">RTX 4090</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-4080" data-key="gpu" data-val="RTX 4080" /><label for="mgpu-4080">RTX 4080</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-4070" data-key="gpu" data-val="RTX 4070" /><label for="mgpu-4070">RTX 4070</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-4060" data-key="gpu" data-val="RTX 4060" /><label for="mgpu-4060">RTX 4060</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-4050" data-key="gpu" data-val="RTX 4050" /><label for="mgpu-4050">RTX 4050</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-3050" data-key="gpu" data-val="RTX 3050" /><label for="mgpu-3050">RTX 3050</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-igpu" data-key="gpu" data-val="Iris" /><label for="mgpu-igpu">Integrated (Iris / Arc / Radeon)</label></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RAM -->
+        <div class="m-filter-group">
+          <div class="m-fg-hdr" data-target="mfg-mem">
+            <span>Memory (RAM)</span>
+            <span>▼</span>
+          </div>
+          <div class="m-fg-body" id="mfg-mem">
+            <ul class="m-cb-list">
+              <li class="m-cb-item"><input type="checkbox" id="mmem-64" data-key="mem" data-val="64GB" /><label for="mmem-64">64 GB+</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mmem-32" data-key="mem" data-val="32GB" /><label for="mmem-32">32 GB</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mmem-24" data-key="mem" data-val="24GB" /><label for="mmem-24">24 GB</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mmem-16" data-key="mem" data-val="16GB" /><label for="mmem-16">16 GB</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mmem-8" data-key="mem" data-val="8GB" /><label for="mmem-8">8 GB</label></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Storage -->
+        <div class="m-filter-group">
+          <div class="m-fg-hdr" data-target="mfg-sto">
+            <span>Storage (SSD)</span>
+            <span>▼</span>
+          </div>
+          <div class="m-fg-body" id="mfg-sto">
+            <ul class="m-cb-list">
+              <li class="m-cb-item"><input type="checkbox" id="msto-2tb" data-key="sto" data-val="2TB" /><label for="msto-2tb">2 TB</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="msto-1tb" data-key="sto" data-val="1TB" /><label for="msto-1tb">1 TB</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="msto-512" data-key="sto" data-val="512GB" /><label for="msto-512">512 GB</label></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Display Size -->
+        <div class="m-filter-group">
+          <div class="m-fg-hdr" data-target="mfg-disp">
+            <span>Display Size</span>
+            <span>▼</span>
+          </div>
+          <div class="m-fg-body" id="mfg-disp">
+            <ul class="m-cb-list">
+              <li class="m-cb-item"><input type="checkbox" id="mdisp-18" data-key="disp" data-val="18" /><label for="mdisp-18">18-inch</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mdisp-17" data-key="disp" data-val="17" /><label for="mdisp-17">17-inch / 17.3-inch</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mdisp-16" data-key="disp" data-val="16" /><label for="mdisp-16">16-inch / 16.1-inch</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mdisp-15" data-key="disp" data-val="15" /><label for="mdisp-15">15.6-inch / 15.1-inch</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mdisp-14" data-key="disp" data-val="14" /><label for="mdisp-14">14-inch / 14.5-inch</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mdisp-13" data-key="disp" data-val="13" /><label for="mdisp-13">13.3-inch / 13.4-inch</label></li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top:8px;">
+          <button class="m-btn primary" id="applyMobileFilterBtn" style="width:100%;padding:12px;">Apply Selected Filters</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- Detail Specs & Deals Mobile Sheet -->
   <div class="m-sheet-overlay" id="mDetailOverlay">
     <div class="m-sheet">
       <div class="m-sheet-head">
-        <span class="m-sheet-title">/// Laptop Specifications & Deals</span>
+        <span class="m-sheet-title">/// Specs & Vendor Deals</span>
         <button class="m-sheet-close" id="closeDetailSheet">✕</button>
       </div>
       <div class="m-sheet-body" id="mDetailBody"></div>
     </div>
   </div>
 
-  <!-- Mobile Filters Sheet -->
-  <div class="m-sheet-overlay" id="mFilterOverlay">
+  <!-- Steam Survey Info Mobile Sheet -->
+  <div class="m-sheet-overlay" id="mSteamOverlay">
     <div class="m-sheet">
       <div class="m-sheet-head">
-        <span class="m-sheet-title">🎛️ Filter Mobile Catalog</span>
-        <button class="m-sheet-close" id="closeFilterSheet">✕</button>
+        <span class="m-sheet-title">🎮 Steam Survey Benchmark (July 2026)</span>
+        <button class="m-sheet-close" id="closeSteamSheet">✕</button>
       </div>
-      <div class="m-sheet-body">
-        <div style="margin-bottom:14px;">
-          <label style="font-size:11px;font-weight:700;color:var(--accent-2);display:block;margin-bottom:6px;">MAX PRICE (MYR)</label>
-          <input type="number" id="mPriceMax" placeholder="e.g. 5000" style="width:100%;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:monospace;" />
+      <div class="m-sheet-body" style="font-size:12px;line-height:1.5;">
+        <div class="table-scroll-box">
+          <table style="width:100%;border-collapse:collapse;margin-bottom:12px;background:var(--bg);border-radius:8px;overflow:hidden;">
+            <tr style="background:var(--surface-raised);text-align:left;"><th style="padding:8px;">Component</th><th style="padding:8px;">Steam Top Spec</th><th style="padding:8px;">Share</th></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;">GPU</td><td style="padding:8px;">NVIDIA RTX 3060 / 4060+</td><td style="padding:8px;color:var(--accent-2);">72.72%</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;">RAM</td><td style="padding:8px;">16 GB System RAM</td><td style="padding:8px;color:var(--accent-2);">40.97%</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;">CPU</td><td style="padding:8px;">8 Cores (27.8%) & 6 Cores (27.5%)</td><td style="padding:8px;color:var(--accent-2);">55.37%</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;">Display</td><td style="padding:8px;">1920 x 1080 Full HD</td><td style="padding:8px;color:var(--accent-2);">51.10%</td></tr>
+            <tr><td style="padding:8px;">Storage</td><td style="padding:8px;">Above 1 TB Storage</td><td style="padding:8px;color:var(--accent-2);">49.33%</td></tr>
+          </table>
         </div>
-        <div style="text-align:right;">
-          <button class="m-btn primary" id="applyMobileFilterBtn" style="padding:10px 20px;">Apply Filters</button>
-        </div>
+        <button class="m-btn primary" id="applySteamFromSheet" style="width:100%;padding:10px;">Apply Steam Preset Filter</button>
       </div>
     </div>
   </div>
 
   <script>
     let allRows = [];
-    let activeFilter = 'all';
+    let isSteamActive = false;
+
+    const activeFilters = {
+      store: new Set(),
+      cpu: new Set(),
+      gpu: new Set(),
+      mem: new Set(),
+      sto: new Set(),
+      disp: new Set()
+    };
 
     Papa.parse("master_laptops.csv", {
       download: true,
@@ -469,11 +754,63 @@
           memory: r.memory || '',
           storage: r.storage || '',
           display: r.display || '',
+          series: r.series || 'Store Catalog',
           url: r.url || '#'
         }));
+        populateStoreFilter();
+        bindCheckboxEvents();
         renderMobile();
       }
     });
+
+    function populateStoreFilter() {
+      const storeList = document.getElementById('mcblist-store');
+      const storeWrap = document.getElementById('mfg-store-wrap');
+      if (!storeList || !storeWrap) return;
+
+      const storeSet = new Set();
+      allRows.forEach(r => {
+        const deals = parseVendorDeals(r);
+        deals.forEach(d => { if (d.vendor) storeSet.add(d.vendor); });
+        if (r.series) storeSet.add(r.series);
+      });
+
+      const stores = [...storeSet].sort();
+      if (stores.length === 0) return;
+
+      storeWrap.style.display = 'block';
+      storeList.innerHTML = stores.map(store => {
+        const id = 'mcb-store-' + store.toLowerCase().replace(/[^a-z0-9]/g, '');
+        return '<li class="m-cb-item">'
+          + '<input type="checkbox" id="' + id + '" data-key="store" data-val="' + escapeHtml(store) + '" />'
+          + '<label for="' + id + '">' + escapeHtml(store) + '</label>'
+          + '</li>';
+      }).join('');
+
+      bindCheckboxEvents();
+    }
+
+    function bindCheckboxEvents() {
+      document.querySelectorAll('.m-sheet input[type="checkbox"]').forEach(cb => {
+        cb.onchange = () => {
+          const key = cb.dataset.key;
+          const val = cb.dataset.val;
+          if (!key || !val) return;
+          if (cb.checked) activeFilters[key].add(val);
+          else activeFilters[key].delete(val);
+          updateActiveFilterCount();
+        };
+      });
+    }
+
+    function updateActiveFilterCount() {
+      let count = 0;
+      Object.values(activeFilters).forEach(s => count += s.size);
+      if (document.getElementById('mMinPrice').value) count++;
+      if (document.getElementById('mMaxPrice').value) count++;
+      if (isSteamActive) count++;
+      document.getElementById('mActiveFilterCount').textContent = count;
+    }
 
     function parseVendorDeals(r) {
       if (!r.vendor_prices) {
@@ -502,6 +839,20 @@
       return deals;
     }
 
+    function matchesSteamSpecs(r) {
+      const mem = (r.memory || r.title || '').toLowerCase();
+      const memMatch = mem.match(/(\d+)\s*gb/i);
+      let ramGb = memMatch ? parseInt(memMatch[1]) : 0;
+      if (ramGb > 0 && ramGb < 16) return false;
+
+      const gfx = (r.graphics || r.title || '').toLowerCase();
+      if (!/rtx\s*(30|40|50)\d{2}/i.test(gfx) && !/geforce\s+rtx/i.test(gfx)) return false;
+
+      const cpu = (r.processor || r.title || '').toLowerCase();
+      if (!/i5|i7|i9|ultra\s*[579]|ryzen\s*[579]/i.test(cpu)) return false;
+      return true;
+    }
+
     function calcRecScore(r) {
       let pts = 0;
       const gfx = (r.graphics || r.title || '').toLowerCase();
@@ -523,43 +874,103 @@
       return pts;
     }
 
+    function dispInchPrefix(displayStr) {
+      const m = (displayStr || '').match(/^(\d{2}(?:\.\d)?)[\."\u201c\u201d\u2033\u2032\u0022\u0027\s]/);
+      return m ? m[1] : null;
+    }
+
     function getMobileFiltered() {
       const q = document.getElementById('mSearchInput').value.trim().toLowerCase();
-      const maxP = parseFloat(document.getElementById('mPriceMax').value);
+      const minP = parseFloat(document.getElementById('mMinPrice').value);
+      const maxP = parseFloat(document.getElementById('mMaxPrice').value);
 
       let rows = allRows.filter(r => {
         if (!r.title || !r.id || r.title.toLowerCase() === 'untitled') return false;
+        
+        if (isSteamActive && !matchesSteamSpecs(r)) return false;
+
         if (q && !r.title.toLowerCase().includes(q) && !r.id.toLowerCase().includes(q) && !r.processor.toLowerCase().includes(q) && !r.graphics.toLowerCase().includes(q)) return false;
+        
+        if (!isNaN(minP) && r.price < minP) return false;
         if (!isNaN(maxP) && r.price > maxP) return false;
 
-        if (activeFilter === 'steam') {
-          const mem = (r.memory || r.title).toLowerCase();
-          const gfx = (r.graphics || r.title).toLowerCase();
-          if (!mem.includes('16gb') && !mem.includes('32gb')) return false;
-          if (!gfx.includes('rtx')) return false;
-        } else if (activeFilter === 'deals') {
-          if (r.vendor_count <= 1) return false;
-        } else if (activeFilter === 'nvidia') {
-          if (!r.graphics.toLowerCase().includes('rtx')) return false;
-        } else if (activeFilter === '16gb') {
-          if (!r.memory.toLowerCase().includes('16gb') && !r.memory.toLowerCase().includes('32gb')) return false;
+        if (activeFilters.store.size) {
+          const deals = parseVendorDeals(r);
+          const match = deals.some(d => activeFilters.store.has(d.vendor)) || activeFilters.store.has(r.series);
+          if (!match) return false;
         }
+        if (activeFilters.cpu.size) {
+          const proc = (r.processor || r.title || '').toLowerCase();
+          const match = [...activeFilters.cpu].some(v => proc.includes(v.toLowerCase()));
+          if (!match) return false;
+        }
+        if (activeFilters.gpu.size) {
+          const gfx = (r.graphics || r.title || '').toLowerCase();
+          const match = [...activeFilters.gpu].some(v => gfx.includes(v.toLowerCase()));
+          if (!match) return false;
+        }
+        if (activeFilters.mem.size) {
+          const mem = (r.memory || r.title || '').toLowerCase();
+          const match = [...activeFilters.mem].some(v => mem.includes(v.toLowerCase()));
+          if (!match) return false;
+        }
+        if (activeFilters.sto.size) {
+          const sto = (r.storage || r.title || '').toLowerCase();
+          const match = [...activeFilters.sto].some(v => sto.includes(v.toLowerCase()));
+          if (!match) return false;
+        }
+        if (activeFilters.disp.size) {
+          const prefix = dispInchPrefix(r.display || r.title);
+          if (!prefix) return false;
+          const prefixInt = prefix.split('.')[0];
+          const match = [...activeFilters.disp].some(v => v === prefix || v === prefixInt);
+          if (!match) return false;
+        }
+
         return true;
       });
 
       const s = document.getElementById('mSortSelect').value;
       if (s === 'recommended') {
-        rows.sort((a,b) => (b.price > 0 ? calcRecScore(b) : -1) - (a.price > 0 ? calcRecScore(a) : -1));
+        rows.sort((a,b) => {
+          const pA = a.price && a.price > 0 ? a.price : Infinity;
+          const pB = b.price && b.price > 0 ? b.price : Infinity;
+          if (pA === Infinity && pB === Infinity) return a.title.localeCompare(b.title);
+          if (pA === Infinity) return 1;
+          if (pB === Infinity) return -1;
+          return calcRecScore(b) - calcRecScore(a);
+        });
       } else if (s === 'popular') {
-        rows.sort((a,b) => (b.price > 0 ? calcPopScore(b) : -1) - (a.price > 0 ? calcPopScore(a) : -1));
+        rows.sort((a,b) => {
+          const pA = a.price && a.price > 0 ? a.price : Infinity;
+          const pB = b.price && b.price > 0 ? b.price : Infinity;
+          if (pA === Infinity && pB === Infinity) return a.title.localeCompare(b.title);
+          if (pA === Infinity) return 1;
+          if (pB === Infinity) return -1;
+          return calcPopScore(b) - calcPopScore(a);
+        });
       } else if (s === 'price-asc') {
-        rows.sort((a,b) => (a.price && a.price > 0 ? a.price : Infinity) - (b.price && b.price > 0 ? b.price : Infinity));
+        rows.sort((a,b) => {
+          const pA = a.price && a.price > 0 ? a.price : Infinity;
+          const pB = b.price && b.price > 0 ? b.price : Infinity;
+          if (pA === pB) return a.title.localeCompare(b.title);
+          return pA - pB;
+        });
       } else if (s === 'price-desc') {
-        rows.sort((a,b) => (b.price && b.price > 0 ? b.price : -1) - (a.price && a.price > 0 ? a.price : -1));
+        rows.sort((a,b) => {
+          const pA = a.price && a.price > 0 ? a.price : -1;
+          const pB = b.price && b.price > 0 ? b.price : -1;
+          if (pA === pB) return a.title.localeCompare(b.title);
+          return pB - pA;
+        });
       } else if (s === 'name-asc') {
         rows.sort((a,b) => a.title.localeCompare(b.title));
       }
       return rows;
+    }
+
+    function escapeHtml(s) {
+      const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
     }
 
     function renderMobile() {
@@ -579,24 +990,24 @@
 
         let badgeHtml = '';
         if (r.vendor_count > 1) {
-          badgeHtml = '<div class="m-deal-badge">🏷️ ' + r.vendor_count + ' Vendor Deals (Best at ' + bestVendor + ')</div>';
+          badgeHtml = '<div class="m-deal-badge">🏷️ ' + r.vendor_count + ' Vendor Deals (Best at ' + escapeHtml(bestVendor) + ')</div>';
         }
 
         return '<div class="m-card">'
           + '<div>'
-          + '<div class="m-card-title">' + r.title + '</div>'
-          + '<div class="m-part">MPN: ' + (r.id ? r.id.toUpperCase() : 'N/A') + '</div>'
+          + '<div class="m-card-title">' + escapeHtml(r.title) + '</div>'
+          + '<div class="m-part">MPN: ' + escapeHtml(r.id ? r.id.toUpperCase() : 'N/A') + '</div>'
           + badgeHtml
           + '</div>'
           + '<div class="m-price-tag"><span class="m-price-cur">MYR</span>' + priceStr + '</div>'
           + '<div class="m-specs">'
-          + '<div>⚡ <strong>CPU:</strong> ' + (r.processor || 'N/A') + '</div>'
-          + '<div>🎮 <strong>GPU:</strong> ' + (r.graphics || 'N/A') + '</div>'
-          + '<div>🧠 <strong>RAM:</strong> ' + (r.memory || 'N/A') + ' | 💾 <strong>SSD:</strong> ' + (r.storage || 'N/A') + '</div>'
+          + '<div>⚡ <strong>CPU:</strong> ' + escapeHtml(r.processor || 'N/A') + '</div>'
+          + '<div>🎮 <strong>GPU:</strong> ' + escapeHtml(r.graphics || 'N/A') + '</div>'
+          + '<div>🧠 <strong>RAM:</strong> ' + escapeHtml(r.memory || 'N/A') + ' | 💾 <strong>SSD:</strong> ' + escapeHtml(r.storage || 'N/A') + '</div>'
           + '</div>'
           + '<div class="m-actions">'
           + '<button class="m-btn secondary m-detail-btn" data-rid="' + r._rid + '">🔍 View Deals</button>'
-          + '<a href="' + r.url + '" target="_blank" rel="noopener" class="m-btn primary">Buy Deal ↗</a>'
+          + '<a href="' + escapeHtml(r.url) + '" target="_blank" rel="noopener" class="m-btn primary">Buy Deal ↗</a>'
           + '</div>'
           + '</div>';
       }).join('');
@@ -616,58 +1027,111 @@
       let tableHtml = '';
       if (deals.length > 0) {
         tableHtml = '<h4 style="font-size:12px;color:var(--accent-2);margin:12px 0 8px;">/// Multi-Vendor Price Deals (' + deals.length + ' Vendors)</h4>'
-          + '<table style="width:100%;border-collapse:collapse;font-size:11.5px;background:var(--bg);border-radius:8px;overflow:hidden;">'
+          + '<div class="table-scroll-box"><table style="width:100%;border-collapse:collapse;font-size:11.5px;background:var(--bg);border-radius:8px;overflow:hidden;">'
           + '<tr style="background:var(--surface-raised);text-align:left;"><th style="padding:6px 8px;">Vendor</th><th style="padding:6px 8px;">Price</th><th style="padding:6px 8px;">Link</th></tr>';
 
         deals.forEach(d => {
           const pStr = d.price ? 'RM ' + d.price.toLocaleString('en-MY', {minimumFractionDigits:2}) : 'Inquiry';
           const badge = d.isLowest ? ' <span style="color:var(--accent-2);font-weight:700;">★ BEST</span>' : '';
           tableHtml += '<tr style="border-bottom:1px solid var(--border);">'
-            + '<td style="padding:8px;">' + d.vendor + badge + '</td>'
+            + '<td style="padding:8px;">' + escapeHtml(d.vendor) + badge + '</td>'
             + '<td style="padding:8px;color:var(--accent);font-weight:700;">' + pStr + '</td>'
-            + '<td style="padding:8px;"><a href="' + d.url + '" target="_blank" style="color:var(--accent-2);text-decoration:none;font-weight:700;">Buy ↗</a></td>'
+            + '<td style="padding:8px;"><a href="' + escapeHtml(d.url) + '" target="_blank" style="color:var(--accent-2);text-decoration:none;font-weight:700;">Buy ↗</a></td>'
             + '</tr>';
         });
-        tableHtml += '</table>';
+        tableHtml += '</table></div>';
       }
 
       document.getElementById('mDetailBody').innerHTML = ''
-        + '<h3 style="font-size:15px;margin-bottom:6px;">' + r.title + '</h3>'
-        + '<div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">MPN: <strong style="color:var(--accent);">' + r.id.toUpperCase() + '</strong></div>'
+        + '<h3 style="font-size:15px;margin-bottom:6px;">' + escapeHtml(r.title) + '</h3>'
+        + '<div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">MPN: <strong style="color:var(--accent);">' + escapeHtml(r.id.toUpperCase()) + '</strong></div>'
         + '<div style="font-size:20px;font-weight:700;color:var(--accent);margin-bottom:12px;">' + priceStr + '</div>'
         + tableHtml
         + '<h4 style="font-size:12px;color:var(--accent-2);margin:16px 0 8px;">/// Specifications</h4>'
         + '<div style="font-size:12px;line-height:1.6;background:var(--bg);padding:10px;border-radius:8px;border:1px solid var(--border);">'
-        + '<div>⚡ <strong>CPU:</strong> ' + (r.processor || 'N/A') + '</div>'
-        + '<div>🎮 <strong>GPU:</strong> ' + (r.graphics || 'N/A') + '</div>'
-        + '<div>🧠 <strong>RAM:</strong> ' + (r.memory || 'N/A') + '</div>'
-        + '<div>💾 <strong>Storage:</strong> ' + (r.storage || 'N/A') + '</div>'
-        + '<div>🖥️ <strong>Display:</strong> ' + (r.display || 'N/A') + '</div>'
+        + '<div>⚡ <strong>CPU:</strong> ' + escapeHtml(r.processor || 'N/A') + '</div>'
+        + '<div>🎮 <strong>GPU:</strong> ' + escapeHtml(r.graphics || 'N/A') + '</div>'
+        + '<div>🧠 <strong>RAM:</strong> ' + escapeHtml(r.memory || 'N/A') + '</div>'
+        + '<div>💾 <strong>Storage:</strong> ' + escapeHtml(r.storage || 'N/A') + '</div>'
+        + '<div>🖥️ <strong>Display:</strong> ' + escapeHtml(r.display || 'N/A') + '</div>'
         + '</div>';
 
       document.getElementById('mDetailOverlay').classList.add('show');
     }
 
-    // Chip listeners
-    ['All', 'Steam', 'Deals', 'Nvidia', '16Gb'].forEach(name => {
-      const btn = document.getElementById('chip' + name);
-      if (btn) {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.m-chip').forEach(c => c.classList.remove('active'));
-          btn.classList.add('active');
-          activeFilter = name.toLowerCase();
-          renderMobile();
-        });
-      }
+    // Accordion headers in mobile sheet
+    document.querySelectorAll('.m-fg-hdr').forEach(hdr => {
+      hdr.addEventListener('click', () => {
+        const targetId = hdr.getAttribute('data-target');
+        const body = document.getElementById(targetId);
+        if (body) {
+          body.classList.toggle('open');
+        }
+      });
+    });
+
+    // Preset Chip Buttons
+    document.getElementById('chipAll').addEventListener('click', () => resetAllFilters());
+    document.getElementById('chipSteam').addEventListener('click', () => {
+      isSteamActive = true;
+      document.getElementById('mSteamBanner').style.display = 'flex';
+      renderMobile();
+    });
+    document.getElementById('chipDeals').addEventListener('click', () => {
+      activeFilters.store.clear();
+      document.getElementById('mSearchInput').value = '';
+      renderMobile();
+    });
+    document.getElementById('chipNvidia').addEventListener('click', () => {
+      activeFilters.gpu.add('RTX');
+      renderMobile();
+    });
+    document.getElementById('chip16Gb').addEventListener('click', () => {
+      activeFilters.mem.add('16GB');
+      renderMobile();
+    });
+
+    function resetAllFilters() {
+      document.getElementById('mSearchInput').value = '';
+      document.getElementById('mMinPrice').value = '';
+      document.getElementById('mMaxPrice').value = '';
+      isSteamActive = false;
+      document.getElementById('mSteamBanner').style.display = 'none';
+
+      Object.keys(activeFilters).forEach(k => activeFilters[k].clear());
+      document.querySelectorAll('.m-sheet input[type="checkbox"]').forEach(cb => cb.checked = false);
+
+      updateActiveFilterCount();
+      renderMobile();
+    }
+
+    document.getElementById('mResetFiltersBtn').addEventListener('click', resetAllFilters);
+    document.getElementById('mClearSteam').addEventListener('click', () => {
+      isSteamActive = false;
+      document.getElementById('mSteamBanner').style.display = 'none';
+      renderMobile();
+    });
+
+    document.getElementById('mSteamPresetToggle').addEventListener('click', () => {
+      isSteamActive = !isSteamActive;
+      document.getElementById('mSteamBanner').style.display = isSteamActive ? 'flex' : 'none';
+      updateActiveFilterCount();
+      renderMobile();
+    });
+
+    document.getElementById('applySteamFromSheet').addEventListener('click', () => {
+      isSteamActive = true;
+      document.getElementById('mSteamBanner').style.display = 'flex';
+      document.getElementById('mSteamOverlay').classList.remove('show');
+      renderMobile();
     });
 
     document.getElementById('mSearchInput').addEventListener('input', renderMobile);
+    document.getElementById('mMinPrice').addEventListener('input', () => { updateActiveFilterCount(); renderMobile(); });
+    document.getElementById('mMaxPrice').addEventListener('input', () => { updateActiveFilterCount(); renderMobile(); });
     document.getElementById('mSortSelect').addEventListener('change', renderMobile);
-    document.getElementById('closeDetailSheet').addEventListener('click', () => {
-      document.getElementById('mDetailOverlay').classList.remove('show');
-    });
 
-    // Navigation Sheets
+    // Sheet Triggers
     document.getElementById('navFilterSheet').addEventListener('click', () => {
       document.getElementById('mFilterOverlay').classList.add('show');
     });
@@ -678,14 +1142,19 @@
       document.getElementById('mFilterOverlay').classList.remove('show');
       renderMobile();
     });
+    document.getElementById('closeDetailSheet').addEventListener('click', () => {
+      document.getElementById('mDetailOverlay').classList.remove('show');
+    });
+    document.getElementById('navSteamSheet').addEventListener('click', () => {
+      document.getElementById('mSteamOverlay').classList.add('show');
+    });
+    document.getElementById('closeSteamSheet').addEventListener('click', () => {
+      document.getElementById('mSteamOverlay').classList.remove('show');
+    });
+
     document.getElementById('navHome').addEventListener('click', () => {
-      document.getElementById('mSearchInput').value = '';
-      document.getElementById('mPriceMax').value = '';
-      activeFilter = 'all';
-      document.querySelectorAll('.m-chip').forEach(c => c.classList.remove('active'));
-      document.getElementById('chipAll').classList.add('active');
+      resetAllFilters();
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      renderMobile();
     });
   </script>
 
