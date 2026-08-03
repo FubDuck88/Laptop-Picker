@@ -33,7 +33,7 @@ try:
     
     final_html = html_template.replace("</body>", injection_script)
 
-    st.components.v1.html(final_html, height=800, scrolling=False)
+    st.components.v1.html(final_html, height=1200, scrolling=True)
 
 except FileNotFoundError as e:
     st.error(f"⚠️ Missing file: {e}")
