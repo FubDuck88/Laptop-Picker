@@ -351,7 +351,8 @@
       background: var(--surface);
       border-top-left-radius: 18px;
       border-top-right-radius: 18px;
-      max-height: 88vh;
+      height: 85vh;
+      max-height: 85vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -365,6 +366,7 @@
       padding: 14px 16px;
       border-bottom: 1px solid var(--border);
       background: var(--surface-raised);
+      flex-shrink: 0;
     }
 
     .m-sheet-title {
@@ -383,11 +385,23 @@
     }
 
     .m-sheet-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: scroll !important;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
       padding: 16px;
-      overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 12px;
+    }
+
+    .m-sheet-foot {
+      padding: 12px 16px;
+      background: var(--surface-raised);
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
     }
 
     /* Accordion Filter Group in Mobile Sheet */
@@ -424,7 +438,7 @@
     }
 
     .m-fg-body.open {
-      display: block;
+      display: block !important;
     }
 
     .m-cb-list {
@@ -564,7 +578,7 @@
             <span>Price Range (MYR)</span>
             <span>▼</span>
           </div>
-          <div class="m-fg-body open" id="mfg-price">
+          <div class="m-fg-body" id="mfg-price">
             <div class="m-price-inputs">
               <input type="number" id="mMinPrice" placeholder="Min MYR" />
               <span style="color:var(--text-faint)">–</span>
@@ -679,10 +693,11 @@
           </div>
         </div>
 
-        <div style="margin-top:8px;">
-          <button class="m-btn primary" id="applyMobileFilterBtn" style="width:100%;padding:12px;">Apply Selected Filters</button>
-        </div>
+      </div>
 
+      <!-- Fixed Pinned Footer Button -->
+      <div class="m-sheet-foot">
+        <button class="m-btn primary" id="applyMobileFilterBtn" style="width:100%;padding:12px;">Apply Selected Filters</button>
       </div>
     </div>
   </div>
