@@ -14,7 +14,7 @@ import re
 import time
 from bs4 import BeautifulSoup
 
-OUTPUT_DIR = r"D:\User\docu\Python\Laptop Price Scapper"
+OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "acer_laptops.csv")
 
 # --- Acer Magento GraphQL (Primary) ---

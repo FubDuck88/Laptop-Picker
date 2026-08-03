@@ -12,7 +12,7 @@ import re
 import math
 import time
 
-OUTPUT_DIR = r"D:\User\docu\Python\Laptop Price Scapper"
+OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "pcimage_laptops.csv")
 
 BASE_URL = "https://store.pcimage.com.my"
@@ -198,9 +198,12 @@ def scrape_pcimage():
 
 
 def save_to_csv(rows):
-    """Saves scraped rows to CSV file."""
+    """Saves scraped rows to CSV file. Preserves existing file if 0 rows returned."""
     if not rows:
-        print("No rows to save.")
+        if os.path.exists(OUTPUT_FILE):
+            print(f"  No new rows scraped; preserving existing {OUTPUT_FILE}")
+        else:
+            print("  No rows to save.")
         return
     fieldnames = [
         "id", "title", "price", "url", "image_url", "series",

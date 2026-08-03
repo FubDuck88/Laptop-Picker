@@ -9,9 +9,14 @@ import re
 import csv
 import time
 from bs4 import BeautifulSoup
-import undetected_chromedriver as uc
 
-OUTPUT_DIR = r"D:\User\docu\Python\Laptop Price Scapper"
+try:
+    import undetected_chromedriver as uc
+    HAS_UC = True
+except ImportError:
+    HAS_UC = False
+
+OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "techhypermart_laptops.csv")
 
 BASE_URL = "https://www.techhypermart.com"
@@ -142,15 +147,22 @@ def extract_products_from_page(html_content):
 
 def scrape_techhypermart(max_pages=20):
     """Scrapes laptops from TechHypermart using undetected_chromedriver."""
+    if not HAS_UC:
+        print("  undetected_chromedriver is not installed. Skipping TechHypermart live scrape.")
+        return []
+
     print("Scraping TechHypermart Notebooks (Cloudflare Bypassed)...")
     options = uc.ChromeOptions()
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
     try:
-        driver = uc.Chrome(options=options, version_main=150)
+        try:
+            driver = uc.Chrome(options=options, version_main=150)
+        except Exception:
+            driver = uc.Chrome(options=options)
     except Exception as e:
-        print(f"Error initializing undetected_chromedriver: {e}")
+        print(f"  Unable to launch Chrome driver (e.g. headless CI environment): {e}")
         return []
 
     all_products = []
@@ -163,10 +175,8 @@ def scrape_techhypermart(max_pages=20):
             print(f"  Fetching page {page}: {url}")
 
             driver.get(url)
-            # Wait for Cloudflare to clear on first page, or for content to render
             time.sleep(6 if page == 1 else 3)
 
-            # Check if Cloudflare turnstile is still stuck
             if "Just a moment..." in driver.title:
                 print("  Cloudflare challenge detected, waiting up to 10s...")
                 for _ in range(10):
@@ -199,7 +209,6 @@ def scrape_techhypermart(max_pages=20):
                 print("  No new products on this page. Stopping.")
                 break
 
-            # Check if next page exists in pagination
             next_a = soup.find("a", string=">") or soup.find("a", href=re.compile(r"page=" + str(page + 1)))
             if not next_a and page > 1:
                 print("  No next page link found. Stopping.")
@@ -218,10 +227,14 @@ def scrape_techhypermart(max_pages=20):
 
 
 def save_to_csv(rows):
-    """Saves scraped rows to CSV file."""
+    """Saves scraped rows to CSV file. Preserves existing CSV if 0 rows returned."""
     if not rows:
-        print("No rows to save.")
+        if os.path.exists(OUTPUT_FILE):
+            print(f"  No new rows scraped; preserving existing {OUTPUT_FILE}")
+        else:
+            print("  No rows to save.")
         return
+
     fieldnames = [
         "id", "title", "price", "url", "image_url", "series",
         "processor", "graphics", "memory", "storage",

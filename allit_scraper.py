@@ -15,7 +15,7 @@ import re
 import time
 from bs4 import BeautifulSoup
 
-OUTPUT_DIR = r"D:\User\docu\Python\Laptop Price Scapper"
+OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "allit_laptops.csv")
 
 BASE_URL = "https://www.allithypermarket.com.my"

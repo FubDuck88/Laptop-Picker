@@ -9,7 +9,7 @@ LISTING_URL = "https://openapi.lenovo.com/my/en/ofp/search/dlp/product/query/get
 SPECS_URL = "https://openapi.lenovo.com/my/en/online/product/getTechSpecs"
 SITE_DOMAIN = "https://www.lenovo.com"
 
-OUTPUT_DIR = r"D:\User\docu\Python\Laptop Price Scapper"
+OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 REQUEST_DELAY = 0.5
 MAX_CONSECUTIVE_ERRORS = 3
 

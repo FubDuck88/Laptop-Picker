@@ -6,7 +6,7 @@ import os
 import re
 from bs4 import BeautifulSoup
 
-OUTPUT_DIR = r"D:\User\docu\Python\Laptop Price Scapper"
+OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "asus_laptops.csv")
 
 BASE_API_URL = "https://odinapi.asus.com/recent-data/apiv2/SeriesFilterResult"

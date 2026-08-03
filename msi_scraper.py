@@ -5,12 +5,11 @@ import csv
 import re
 from bs4 import BeautifulSoup
 
-OUTPUT_DIR = r"D:\User\docu\Python\Laptop Price Scapper"
+OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "msi_laptops.csv")
 
 SEARCH_DIRS = [
-    OUTPUT_DIR,
-    r"C:\Users\jhoff\.gemini\antigravity-ide\brain\8df0cad1-e401-4b8f-b4c7-0f7ea621fb99\.system_generated\steps"
+    OUTPUT_DIR
 ]
 
 # Strict non-laptop exclusion rules
