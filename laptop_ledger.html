@@ -46,7 +46,7 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Sidebar */
+    /* Sidebar — Made fully scrollable */
     .sidebar {
       width: var(--sidebar-w);
       min-width: var(--sidebar-w);
@@ -59,6 +59,7 @@
       display: none;
       flex-direction: column;
       flex-shrink: 0;
+      padding-bottom: 60px; /* Extra breathing room at bottom so no categories get cut off */
     }
 
     .sidebar.visible {
@@ -402,33 +403,7 @@
     }
 
     .dropzone {
-      border: 1.5px dashed var(--border);
-      border-radius: 14px;
-      padding: 56px 24px;
-      text-align: center;
-      color: var(--text-dim);
-      transition: border-color .15s ease, background .15s ease;
-    }
-
-    .dropzone.drag {
-      border-color: var(--accent);
-      background: rgba(255, 176, 32, 0.05);
-    }
-
-    .dropzone h3 {
-      color: var(--text);
-      font-size: 17px;
-      margin: 0 0 8px;
-      font-weight: 600;
-    }
-
-    .dropzone p {
-      margin: 0 0 20px;
-      font-size: 14px;
-    }
-
-    .dropzone input[type=file] {
-      display: none;
+      display: none !important;
     }
 
     .btn {
@@ -500,34 +475,6 @@
       cursor: not-allowed;
     }
 
-    /* File Management Toolbar */
-    .file-toolbar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px dashed var(--border);
-    }
-
-    .file-toolbar input[type=file] {
-      display: none;
-    }
-
-    .loaded-file-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--accent);
-      background: rgba(255, 176, 32, 0.1);
-      border: 1px solid rgba(255, 176, 32, 0.25);
-      padding: 6px 12px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
     .result-count {
       margin-bottom: 14px;
       font-size: 13px;
@@ -583,7 +530,6 @@
       margin: 0;
     }
 
-    /* Part number tag below title */
     .part-tag {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
@@ -600,7 +546,6 @@
       display: inline-block;
     }
 
-    /* Variant badge: shown when 2+ cards share the same title */
     .variant-badge {
       display: inline-block;
       font-family: 'JetBrains Mono', monospace;
@@ -686,7 +631,6 @@
       line-height: 1.4;
     }
 
-    /* Hoverable spec value — native tooltip shows full raw text */
     .spec-val {
       cursor: help;
       border-bottom: 1px dotted var(--border);
@@ -698,7 +642,6 @@
       border-color: var(--accent-dim);
     }
 
-    /* Upgrade hint shown when a product has multiple CPU/GPU options */
     .upgrade-hint {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
@@ -831,7 +774,6 @@
       color: var(--danger);
     }
 
-    /* Modal Overlay System */
     .modal-overlay {
       position: fixed !important;
       top: 0 !important;
@@ -907,7 +849,6 @@
       background: var(--danger);
     }
 
-    /* Single Model Detail Modal Styles */
     .detail-modal-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -1398,21 +1339,10 @@
       <p class="eyebrow">/// spec ledger</p>
       <h1>Laptop Picker</h1>
       <p class="sub">Live scraped catalog, filtered by budget and specs, with side-by-side comparisons.</p>
-
-      <div class="file-toolbar" id="fileToolbar" style="display:none;">
-        <span class="loaded-file-badge" id="loadedFileBadge">📄 master_laptops.csv</span>
-      </div>
-
-      <div class="ticker" id="ticker" style="display:none;">
-        <div class="stat"><span class="num" id="statCount">0</span><span class="lbl">models loaded</span></div>
-        <div class="stat"><span class="num" id="statAvg">—</span><span class="lbl">avg price</span></div>
-        <div class="stat"><span class="num" id="statMin">—</span><span class="lbl">cheapest</span></div>
-        <div class="stat"><span class="num" id="statMax">—</span><span class="lbl">priciest</span></div>
-      </div>
     </header>
 
     <main>
-      <div class="dropzone" id="dropzone" style="display:none;">
+      <div class="dropzone" id="dropzone">
         <h3>Load your CSV</h3>
       </div>
 
@@ -1466,8 +1396,6 @@
     };
 
     const dropzone = document.getElementById('dropzone');
-    const fileToolbar = document.getElementById('fileToolbar');
-    const loadedFileBadge = document.getElementById('loadedFileBadge');
     const appArea = document.getElementById('appArea');
     const sidebar = document.getElementById('sidebar');
     const ticker = document.getElementById('ticker');
@@ -1542,23 +1470,9 @@
         if (dropzone) dropzone.style.display = 'none';
         appArea.style.display = 'block';
         sidebar.classList.add('visible');
-        ticker.style.display = 'flex';
-        fileToolbar.style.display = 'flex';
-        updateStats();
         render();
       }
     });
-
-    function updateStats() {
-      const prices = allRows.map(r => r.price).filter(p => p > 0);
-      document.getElementById('statCount').textContent = allRows.length;
-      if (prices.length) {
-        const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
-        document.getElementById('statAvg').textContent = 'RM ' + Math.round(avg).toLocaleString('en-MY');
-        document.getElementById('statMin').textContent = 'RM ' + Math.round(Math.min(...prices)).toLocaleString('en-MY');
-        document.getElementById('statMax').textContent = 'RM ' + Math.round(Math.max(...prices)).toLocaleString('en-MY');
-      }
-    }
 
     function populateStoreFilter() {
       const storeWrap = document.getElementById('fg-store-wrap');
@@ -1791,7 +1705,6 @@
       const res = s.match(/\b(FHD|QHD|WUXGA|WQXGA|4K|UHD|\d{3,4}\s*x\s*\d{3,4})\b/i);
       const panel = s.match(/\b(OLED|IPS|TN|VA|AMOLED)\b/i);
       const hz = s.match(/(\d{2,3})\s*Hz/i);
-      const nits = s.match(/(\d{3,4})\s*nits/i);
       let label = '';
       if (size) label += size[1] + '"';
       if (res) label += ' ' + res[1].toUpperCase();
