@@ -1,8 +1,10 @@
 import os
 import glob
 import csv
+import subprocess
 
-MASTER_DIR = r"D:\User\docu\Python\Laptop Price Scapper"
+# Use current working directory dynamically so it works on both Windows and GitHub Linux runners
+MASTER_DIR = os.path.dirname(os.path.abspath(__file__))
 MASTER_FILE = os.path.join(MASTER_DIR, "master_laptops.csv")
 
 FIELDNAMES = [
@@ -10,6 +12,22 @@ FIELDNAMES = [
     "processor", "graphics", "memory", "storage",
     "display", "wifi", "battery", "others"
 ]
+
+def run_scrapers():
+    """Runs all individual scraper scripts sequentially."""
+    scraper_scripts = ["acer_scraper.py", "asus_scraper.py", "lenovo_scraper.py", "msi_scraper.py"]
+    
+    for script in scraper_scripts:
+        script_path = os.path.join(MASTER_DIR, script)
+        if os.path.exists(script_path):
+            print(f"Running {script}...")
+            try:
+                subprocess.run(["python", script_path], check=True)
+                print(f"Finished {script}")
+            except subprocess.CalledProcessError as e:
+                print(f"Error executing {script}: {e}")
+        else:
+            print(f"Skipping {script} (file not found)")
 
 def combine_all_csvs():
     csv_files = glob.glob(os.path.join(MASTER_DIR, "*_laptops.csv"))
@@ -49,7 +67,8 @@ def combine_all_csvs():
         writer.writeheader()
         writer.writerows(master_rows)
 
-    print(f"\nSuccessfully combined {len(master_rows)} laptops from {len(csv_files)} files into master_laptops.csv!")
+    print(f"\nSuccessfully combined {len(master_rows)} laptops into master_laptops.csv!")
 
 if __name__ == "__main__":
+    run_scrapers()
     combine_all_csvs()
