@@ -15,7 +15,7 @@ FIELDNAMES = [
 
 def run_scrapers():
     """Runs all individual scraper scripts sequentially."""
-    scraper_scripts = ["acer_scraper.py", "asus_scraper.py", "lenovo_scraper.py", "msi_scraper.py"]
+    scraper_scripts = ["acer_scraper.py", "allit_scraper.py", "asus_scraper.py", "lenovo_scraper.py", "msi_scraper.py", "pcimage_scraper.py", "techhypermart_scraper.py"]
     
     for script in scraper_scripts:
         script_path = os.path.join(MASTER_DIR, script)
