@@ -46,7 +46,7 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Sidebar — Made fully scrollable */
+    /* Sidebar — Fully scrollable */
     .sidebar {
       width: var(--sidebar-w);
       min-width: var(--sidebar-w);
@@ -59,7 +59,7 @@
       display: none;
       flex-direction: column;
       flex-shrink: 0;
-      padding-bottom: 60px; /* Extra breathing room at bottom so no categories get cut off */
+      padding-bottom: 60px;
     }
 
     .sidebar.visible {
@@ -368,33 +368,6 @@
       margin: 0;
       max-width: 560px;
       line-height: 1.5;
-    }
-
-    .ticker {
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px dashed var(--border);
-    }
-
-    .ticker .stat {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .ticker .stat .num {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--accent);
-      display: block;
-    }
-
-    .ticker .stat .lbl {
-      font-size: 11px;
-      color: var(--text-faint);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
     }
 
     main {
@@ -1414,12 +1387,21 @@
     const closeModal = document.getElementById('closeModal');
     const compareTableWrap = document.getElementById('compareTableWrap');
 
-    // Accordion
+    // Dynamic iframe height resize helper for Streamlit
+    function triggerResize() {
+      const height = document.body.scrollHeight;
+      if (window.parent && window.parent.postMessage) {
+        window.parent.postMessage({isStreamlitMessage: true, type: 'streamlit:setFrameHeight', height: height}, '*');
+      }
+    }
+
+    // Accordion triggers that also adjust iframe height when expanded/collapsed
     document.querySelectorAll('.filter-group-header').forEach(hdr => {
       hdr.addEventListener('click', () => {
         const body = document.getElementById(hdr.dataset.target);
         hdr.classList.toggle('open');
         body.classList.toggle('open');
+        setTimeout(triggerResize, 200);
       });
     });
 
@@ -1757,6 +1739,7 @@
 
       if (rows.length === 0) {
         grid.innerHTML = '<div class="empty-results">No models match these filters.</div>';
+        setTimeout(triggerResize, 100);
         return;
       }
 
@@ -1822,6 +1805,9 @@
           if (row) openDetailModal(row);
         });
       });
+
+      // Recalculate frame height automatically after grid updates
+      setTimeout(triggerResize, 150);
     }
 
     function renderLaptopSvg(r) {
@@ -1855,7 +1841,10 @@
     const detailModalBody = document.getElementById('detailModalBody');
 
     if (closeDetailModal) {
-      closeDetailModal.addEventListener('click', () => detailModalOverlay.classList.remove('show'));
+      closeDetailModal.addEventListener('click', () => {
+        detailModalOverlay.classList.remove('show');
+        setTimeout(triggerResize, 150);
+      });
     }
 
     function openDetailModal(r) {
@@ -1931,6 +1920,7 @@
         + '</div></div>';
 
       detailModalOverlay.classList.add('show');
+      setTimeout(triggerResize, 150);
     }
 
     function renderTray() {
@@ -1970,15 +1960,16 @@
       html += '</tbody></table>';
       compareTableWrap.innerHTML = html;
       modalOverlay.classList.add('show');
+      setTimeout(triggerResize, 150);
     });
 
     function closeAllModals() {
       modalOverlay.classList.remove('show');
       detailModalOverlay.classList.remove('show');
+      setTimeout(triggerResize, 150);
     }
 
     if (closeModal) closeModal.addEventListener('click', closeAllModals);
-    if (closeDetailModal) closeDetailModal.addEventListener('click', closeAllModals);
 
     modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeAllModals(); });
     detailModalOverlay.addEventListener('click', e => { if (e.target === detailModalOverlay) closeAllModals(); });
