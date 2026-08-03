@@ -1371,7 +1371,6 @@
     const dropzone = document.getElementById('dropzone');
     const appArea = document.getElementById('appArea');
     const sidebar = document.getElementById('sidebar');
-    const ticker = document.getElementById('ticker');
     const grid = document.getElementById('grid');
     const resultCount = document.getElementById('resultCount');
     const searchInput = document.getElementById('searchInput');
@@ -1386,7 +1385,6 @@
     const modalOverlay = document.getElementById('modalOverlay');
     const closeModal = document.getElementById('closeModal');
     const compareTableWrap = document.getElementById('compareTableWrap');
-
 
     // Wire up checkboxes
     document.querySelectorAll('.cb-list input[type=checkbox]').forEach(cb => {
@@ -1404,13 +1402,11 @@
       });
     });
 
- // Auto-load preloaded rows or fetch CSV directly for GitHub Pages
+    // Auto-load preloaded rows or fetch CSV directly for GitHub Pages
     window.addEventListener('DOMContentLoaded', () => {
       if (window.preloadedRows && window.preloadedRows.length > 0) {
-        // Runs inside Streamlit iframe
         processRows(window.preloadedRows);
       } else {
-        // Runs on GitHub Pages (fetches master_laptops.csv automatically)
         Papa.parse("master_laptops.csv", {
           download: true,
           header: true,
@@ -1425,6 +1421,43 @@
         });
       }
     });
+
+    function populateStoreFilter() {
+      const storeList = document.getElementById('cblist-store');
+      const storeWrap = document.getElementById('fg-store-wrap');
+      if (!storeList || !storeWrap) return;
+
+      const stores = [...new Set(allRows.map(r => r.series).filter(Boolean))].sort();
+      if (stores.length === 0) {
+        storeWrap.style.display = 'none';
+        return;
+      }
+
+      storeWrap.style.display = 'block';
+      storeList.innerHTML = stores.map(store => {
+        const id = 'cb-store-' + store.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const checked = activeFilters.store.has(store) ? 'checked' : '';
+        return '<li class="cb-item">'
+          + '<input type="checkbox" id="' + id + '" data-key="store" data-val="' + escapeHtml(store) + '" ' + checked + ' />'
+          + '<label class="cb-label" for="' + id + '">' + escapeHtml(store) + '</label>'
+          + '</li>';
+      }).join('');
+
+      storeList.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        const key = cb.dataset.key;
+        const val = cb.dataset.val;
+        cb.addEventListener('change', () => {
+          if (cb.checked) activeFilters[key].add(val);
+          else activeFilters[key].delete(val);
+          const hdr = document.querySelector('[data-target="fg-store"]');
+          if (hdr) {
+            if (activeFilters[key].size > 0) hdr.classList.add('has-active');
+            else hdr.classList.remove('has-active');
+          }
+          render();
+        });
+      });
+    }
 
     function processRows(rawRows) {
       allRows = rawRows.map((r, i) => ({
@@ -1717,7 +1750,6 @@
 
       if (rows.length === 0) {
         grid.innerHTML = '<div class="empty-results">No models match these filters.</div>';
-        setTimeout(triggerResize, 100);
         return;
       }
 
@@ -1783,9 +1815,6 @@
           if (row) openDetailModal(row);
         });
       });
-
-      // Recalculate frame height automatically after grid updates
-      setTimeout(triggerResize, 150);
     }
 
     function renderLaptopSvg(r) {
@@ -1821,7 +1850,6 @@
     if (closeDetailModal) {
       closeDetailModal.addEventListener('click', () => {
         detailModalOverlay.classList.remove('show');
-        setTimeout(triggerResize, 150);
       });
     }
 
@@ -1898,7 +1926,6 @@
         + '</div></div>';
 
       detailModalOverlay.classList.add('show');
-      setTimeout(triggerResize, 150);
     }
 
     function renderTray() {
@@ -1938,13 +1965,11 @@
       html += '</tbody></table>';
       compareTableWrap.innerHTML = html;
       modalOverlay.classList.add('show');
-      setTimeout(triggerResize, 150);
     });
 
     function closeAllModals() {
       modalOverlay.classList.remove('show');
       detailModalOverlay.classList.remove('show');
-      setTimeout(triggerResize, 150);
     }
 
     if (closeModal) closeModal.addEventListener('click', closeAllModals);
