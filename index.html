@@ -25,13 +25,17 @@
       --accent-2: #57D9C6;
       --border: #2A2F38;
       --danger: #E2665C;
-      --sidebar-w: 256px;
+      --sidebar-w: 260px;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -207,7 +211,6 @@
       display: flex;
       gap: 8px;
       align-items: center;
-
     }
 
     .price-range-inputs input {
@@ -242,7 +245,6 @@
       min-height: 100vh;
       padding: 40px;
       text-align: center;
-
     }
 
     .dz-box {
@@ -254,7 +256,6 @@
       width: 100%;
       cursor: pointer;
       transition: border-color .15s ease, background .15s ease;
-
     }
 
     .dz-box:hover,
@@ -309,9 +310,39 @@
       z-index: 10;
     }
 
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      max-width: 520px;
+    }
+
+    .home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-raised);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s ease;
+      white-space: nowrap;
+    }
+
+    .home-btn:hover {
+      background: var(--border);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
     .search-wrap {
       flex: 1;
-      max-width: 440px;
       position: relative;
     }
 
@@ -365,6 +396,24 @@
     .sort-select:focus {
       outline: none;
       border-color: var(--accent);
+    }
+
+    /* Active Filter Banner */
+    .filter-banner {
+      background: linear-gradient(90deg, rgba(87,217,198,0.12) 0%, rgba(255,176,32,0.12) 100%);
+      border-bottom: 1px solid var(--accent-2);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .filter-banner-text {
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     /* Grid */
@@ -426,7 +475,6 @@
       align-items: center;
       gap: 6px;
       margin-top: 4px;
-
     }
 
     .part-tag .pid {
@@ -438,17 +486,6 @@
       padding: 2px 6px;
       border-radius: 4px;
       letter-spacing: 0.04em;
-    }
-
-    .variant-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--accent-2);
-      background: rgba(87, 217, 198, 0.1);
-      padding: 2px 5px;
-      border-radius: 4px;
-      text-transform: uppercase;
     }
 
     .badge {
@@ -544,7 +581,6 @@
       background: rgba(87, 217, 198, 0.1);
       padding: 1px 4px;
       border-radius: 3px;
-
     }
 
     .ticket-foot {
@@ -619,7 +655,6 @@
     .tray-chips {
       display: flex;
       gap: 8px;
-
     }
 
     .tray-chip {
@@ -650,6 +685,38 @@
 
     .tray-chip button:hover {
       color: var(--danger);
+    }
+
+    /* Back to Top Floating Button */
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--surface-raised);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 50px;
+      padding: 10px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      gap: 6px;
+      z-index: 90;
+      transition: opacity .2s ease, transform .2s ease, background .15s ease;
+    }
+
+    .back-to-top-btn.show {
+      display: flex;
+    }
+
+    .back-to-top-btn:hover {
+      background: var(--accent);
+      color: #1A1305;
+      transform: translateY(-2px);
     }
 
     /* Modal Overlay */
@@ -693,7 +760,6 @@
     .modal-title {
       font-size: 16px;
       font-weight: 700;
-
     }
 
     .modal-close {
@@ -707,7 +773,6 @@
     .modal-body {
       padding: 24px;
       overflow-y: auto;
-
     }
 
     .compare-table {
@@ -731,7 +796,6 @@
       font-weight: 700;
       color: var(--text-dim);
       text-transform: uppercase;
-
     }
 
     .compare-table .model-name {
@@ -905,6 +969,22 @@
       <button class="sb-clear" id="resetBtn">Reset All</button>
     </div>
 
+    <!-- Steam Hardware Survey Specs Filter Preset Section -->
+    <div class="filter-group" style="background:linear-gradient(135deg, rgba(87,217,198,0.08) 0%, rgba(255,176,32,0.08) 100%);">
+      <div style="padding:14px 16px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <span style="font-size:16px;">🎮</span>
+          <span class="filter-group-label" style="color:var(--accent-2);">Steam Hardware Survey</span>
+        </div>
+        <p style="font-size:11px;color:var(--text-dim);line-height:1.4;margin-bottom:10px;">
+          Filter models matching Steam gamer averages: <strong>16GB+ RAM</strong>, <strong>RTX Dedicated GPU</strong>, <strong>6+ Core CPU</strong>.
+        </p>
+        <button id="steamSpecBtn" class="btn secondary sm" style="width:100%;padding:8px;font-size:11px;border-color:var(--accent-2);color:var(--accent-2);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s ease;">
+          <span>🎯</span> <span id="steamBtnText">Filter Steam Gamer Specs</span>
+        </button>
+      </div>
+    </div>
+
     <!-- Price Range -->
     <div class="filter-group">
       <div class="filter-group-header open" data-target="fg-price">
@@ -1041,9 +1121,14 @@
 
     <div id="appArea" style="display:none;">
       <div class="topbar">
-        <div class="search-wrap">
-          <span class="search-icon">🔍</span>
-          <input type="text" class="search-input" id="searchInput" placeholder="Search by model, part #, CPU, GPU, or vendor..." />
+        <div class="topbar-left">
+          <button class="home-btn" id="homeBtn" title="Reset all filters & return to Home view">
+            <span>🏠</span> <span>Home</span>
+          </button>
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search by model, part #, CPU, GPU, or vendor..." />
+          </div>
         </div>
         <div class="topbar-controls">
           <span class="result-count" id="resultCount">Loading models...</span>
@@ -1055,11 +1140,25 @@
         </div>
       </div>
 
+      <!-- Active Filter Banner (shows when Steam Spec preset is active) -->
+      <div class="filter-banner" id="steamBanner" style="display:none;">
+        <div class="filter-banner-text">
+          <span style="font-size:16px;">🎮</span>
+          <span><strong>Steam Hardware Survey Preset Active:</strong> Showing gaming laptops with 16GB+ RAM, RTX Dedicated GPU & 6+ Core CPU.</span>
+        </div>
+        <button class="sb-clear" id="clearSteamBanner">Clear Preset</button>
+      </div>
+
       <div class="content-wrap">
         <div class="grid" id="grid"></div>
       </div>
     </div>
   </div>
+
+  <!-- Floating Back to Top Button -->
+  <button id="backToTopBtn" class="back-to-top-btn" title="Back to top">
+    <span>⬆</span> <span>Top</span>
+  </button>
 
   <!-- Floating Comparison Tray -->
   <div class="compare-tray" id="tray">
@@ -1094,6 +1193,7 @@
   <script>
     let allRows = [];
     const selectedIds = new Set();
+    let isSteamSpecActive = false;
 
     const activeFilters = {
       store: new Set(),
@@ -1109,6 +1209,13 @@
     const fileInput = document.getElementById('fileInput');
     const appArea = document.getElementById('appArea');
     const sidebar = document.getElementById('sidebar');
+
+    const homeBtn = document.getElementById('homeBtn');
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    const steamSpecBtn = document.getElementById('steamSpecBtn');
+    const steamBtnText = document.getElementById('steamBtnText');
+    const steamBanner = document.getElementById('steamBanner');
+    const clearSteamBanner = document.getElementById('clearSteamBanner');
 
     const searchInput = document.getElementById('searchInput');
     const minPrice = document.getElementById('minPrice');
@@ -1145,6 +1252,102 @@
         skipEmptyLines: true,
         complete: results => processRows(results.data),
         error: err => alert('CSV Error: ' + err.message)
+      });
+    }
+
+    // Scroll Back to Top functionality
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('show');
+      } else {
+        backToTopBtn.classList.remove('show');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Home Button resets view
+    function resetAllFilters() {
+      searchInput.value = ''; minPrice.value = ''; maxPrice.value = '';
+      sortSelect.value = 'price-asc';
+      isSteamSpecActive = false;
+      updateSteamUI();
+
+      activeFilters.store.clear();
+      activeFilters.cpu.clear();
+      activeFilters.gpu.clear();
+      activeFilters.mem.clear();
+      activeFilters.sto.clear();
+      activeFilters.disp.clear();
+
+      document.querySelectorAll('.sidebar input[type=checkbox]').forEach(cb => cb.checked = false);
+      document.querySelectorAll('.filter-group-header').forEach(h => h.classList.remove('has-active'));
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      render();
+    }
+
+    if (homeBtn) homeBtn.addEventListener('click', resetAllFilters);
+    if (resetBtn) resetBtn.addEventListener('click', resetAllFilters);
+
+    // Steam Spec Preset Toggle
+    function updateSteamUI() {
+      if (isSteamSpecActive) {
+        steamSpecBtn.style.background = 'var(--accent-2)';
+        steamSpecBtn.style.color = '#1A1305';
+        steamBtnText.textContent = 'Steam Spec Filter ON ✓';
+        steamBanner.style.display = 'flex';
+      } else {
+        steamSpecBtn.style.background = 'transparent';
+        steamSpecBtn.style.color = 'var(--accent-2)';
+        steamBtnText.textContent = 'Filter Steam Gamer Specs';
+        steamBanner.style.display = 'none';
+      }
+    }
+
+    if (steamSpecBtn) {
+      steamSpecBtn.addEventListener('click', () => {
+        isSteamSpecActive = !isSteamSpecActive;
+        updateSteamUI();
+        render();
+      });
+    }
+
+    if (clearSteamBanner) {
+      clearSteamBanner.addEventListener('click', () => {
+        isSteamSpecActive = false;
+        updateSteamUI();
+        render();
+      });
+    }
+
+    // Attach listener to ALL sidebar checkboxes dynamically
+    function bindCheckboxEvents() {
+      document.querySelectorAll('.sidebar input[type="checkbox"]').forEach(cb => {
+        cb.onchange = () => {
+          const key = cb.dataset.key;
+          const val = cb.dataset.val;
+          if (!key || !val) return;
+
+          if (cb.checked) {
+            activeFilters[key].add(val);
+          } else {
+            activeFilters[key].delete(val);
+          }
+
+          const groupBody = cb.closest('.filter-group-body');
+          if (groupBody) {
+            const targetId = groupBody.id;
+            const hdr = document.querySelector('[data-target="' + targetId + '"]');
+            if (hdr) {
+              if (activeFilters[key].size > 0) hdr.classList.add('has-active');
+              else hdr.classList.remove('has-active');
+            }
+          }
+          render();
+        };
       });
     }
 
@@ -1213,6 +1416,8 @@
       }));
 
       populateStoreFilter();
+      bindCheckboxEvents();
+
       if (dropzone) dropzone.style.display = 'none';
       appArea.style.display = 'block';
       sidebar.classList.add('visible');
@@ -1247,25 +1452,32 @@
           + '</li>';
       }).join('');
 
-      storeList.querySelectorAll('input[type=checkbox]').forEach(cb => {
-        const key = cb.dataset.key;
-        const val = cb.dataset.val;
-        cb.addEventListener('change', () => {
-          if (cb.checked) activeFilters[key].add(val);
-          else activeFilters[key].delete(val);
-          const hdr = document.querySelector('[data-target="fg-store"]');
-          if (hdr) {
-            if (activeFilters[key].size > 0) hdr.classList.add('has-active');
-            else hdr.classList.remove('has-active');
-          }
-          render();
-        });
-      });
+      bindCheckboxEvents();
     }
 
     function dispInchPrefix(displayStr) {
       const m = displayStr.match(/^(\d{2}(?:\.\d)?)[\."\u201c\u201d\u2033\u2032\u0022\u0027\s]/);
       return m ? m[1] : null;
+    }
+
+    function matchesSteamSpecs(r) {
+      // 1. RAM: Must be 16GB or higher
+      const memStr = (r.memory || '').toLowerCase();
+      const memMatch = memStr.match(/(\d+)\s*gb/i);
+      let ramGb = memMatch ? parseInt(memMatch[1]) : 0;
+      if (ramGb > 0 && ramGb < 16) return false;
+
+      // 2. GPU: Must have dedicated RTX graphics (RTX 3050, 3060, 4050, 4060, 4070, 5060, etc.)
+      const gfxStr = (r.graphics || r.title || '').toLowerCase();
+      const hasRtxGpu = /rtx\s*(30|40|50)\d{2}/i.test(gfxStr) || /geforce\s+rtx/i.test(gfxStr);
+      if (!hasRtxGpu) return false;
+
+      // 3. CPU: Must be Core i5/i7/i9/Ultra or Ryzen 5/7/9
+      const cpuStr = (r.processor || r.title || '').toLowerCase();
+      const hasSteamCpu = /i5|i7|i9|ultra\s*[579]|ryzen\s*[579]/i.test(cpuStr);
+      if (!hasSteamCpu) return false;
+
+      return true;
     }
 
     function getFiltered() {
@@ -1276,49 +1488,64 @@
       let rows = allRows.filter(r => {
         if (!r.title || !r.id || r.title.toLowerCase() === 'untitled model') return false;
         
+        // Steam Specs Preset Filter
+        if (isSteamSpecActive && !matchesSteamSpecs(r)) {
+          return false;
+        }
+
+        // Search bar query
         if (q) {
           const matchTitle = r.title.toLowerCase().includes(q);
           const matchId = r.id.toLowerCase().includes(q);
           const matchVendor = (r.vendor_prices || r.series || '').toLowerCase().includes(q);
-          if (!matchTitle && !matchId && !matchVendor) return false;
+          const matchCpu = (r.processor || '').toLowerCase().includes(q);
+          const matchGpu = (r.graphics || '').toLowerCase().includes(q);
+          if (!matchTitle && !matchId && !matchVendor && !matchCpu && !matchGpu) return false;
         }
 
+        // Price range
         if (!isNaN(min) && r.price < min) return false;
         if (!isNaN(max) && r.price > max) return false;
 
+        // Store / Vendor Filter
         if (activeFilters.store.size) {
           const deals = parseVendorDeals(r);
           const hasMatch = deals.some(d => activeFilters.store.has(d.vendor)) || activeFilters.store.has(r.series);
           if (!hasMatch) return false;
         }
 
+        // CPU Filter
         if (activeFilters.cpu.size) {
-          const proc = r.processor.replace(/[®™©]/g, '').replace(/\s+/g, ' ').toLowerCase();
+          const proc = (r.processor || r.title || '').replace(/[®™©]/g, '').replace(/\s+/g, ' ').toLowerCase();
           const match = [...activeFilters.cpu].some(v => proc.includes(v.toLowerCase()));
           if (!match) return false;
         }
 
+        // GPU Filter
         if (activeFilters.gpu.size) {
-          const gfx = r.graphics.replace(/[®™©]/g, '').toLowerCase();
+          const gfx = (r.graphics || r.title || '').replace(/[®™©]/g, '').toLowerCase();
           const sorted = [...activeFilters.gpu].sort((a, b) => b.length - a.length);
           const match = sorted.some(v => gfx.includes(v.toLowerCase()));
           if (!match) return false;
         }
 
+        // RAM Filter
         if (activeFilters.mem.size) {
-          const mem = r.memory.toLowerCase();
+          const mem = (r.memory || r.title || '').toLowerCase();
           const match = [...activeFilters.mem].some(v => mem.includes(v.toLowerCase()));
           if (!match) return false;
         }
 
+        // Storage Filter
         if (activeFilters.sto.size) {
-          const sto = r.storage.toLowerCase();
+          const sto = (r.storage || r.title || '').toLowerCase();
           const match = [...activeFilters.sto].some(v => sto.includes(v.toLowerCase()));
           if (!match) return false;
         }
 
+        // Display Filter
         if (activeFilters.disp.size) {
-          const prefix = dispInchPrefix(r.display);
+          const prefix = dispInchPrefix(r.display || r.title);
           if (!prefix) return false;
           const prefixInt = prefix.split('.')[0];
           const match = [...activeFilters.disp].some(v => v === prefix || v === prefixInt);
@@ -1749,20 +1976,6 @@
 
     [searchInput, minPrice, maxPrice].forEach(el => el.addEventListener('input', render));
     sortSelect.addEventListener('change', render);
-
-    resetBtn.addEventListener('click', () => {
-      searchInput.value = ''; minPrice.value = ''; maxPrice.value = '';
-      sortSelect.value = 'price-asc';
-      activeFilters.store.clear();
-      activeFilters.cpu.clear();
-      activeFilters.gpu.clear();
-      activeFilters.mem.clear();
-      activeFilters.sto.clear();
-      activeFilters.disp.clear();
-      document.querySelectorAll('.cb-list input[type=checkbox]').forEach(cb => cb.checked = false);
-      document.querySelectorAll('.filter-group-header').forEach(h => h.classList.remove('has-active'));
-      render();
-    });
 
     document.querySelectorAll('.filter-group-header').forEach(header => {
       header.addEventListener('click', () => {
