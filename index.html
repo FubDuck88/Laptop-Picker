@@ -1995,6 +1995,17 @@
       document.querySelectorAll('.filter-group-header').forEach(h => h.classList.remove('has-active'));
       render();
     });
+    // Make filter group headers expandable/collapsible
+    document.querySelectorAll('.filter-group-header').forEach(header => {
+      header.addEventListener('click', () => {
+        header.classList.toggle('open');
+        const targetId = header.getAttribute('data-target');
+        const body = document.getElementById(targetId);
+        if (body) {
+          body.classList.toggle('open');
+        }
+      });
+    });
   </script>
 
 </body>
