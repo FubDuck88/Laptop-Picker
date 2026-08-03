@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Laptop Picker Mobile | Deals & Specs Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <style>
+    :root {
+      --bg: #12151A;
+      --surface: #191D24;
+      --surface-raised: #202630;
+      --text: #ECE9E2;
+      --text-dim: #8C94A0;
+      --text-faint: #5C6370;
+      --accent: #FFB020;
+      --accent-2: #57D9C6;
+      --border: #292E38;
+      --danger: #E2665C;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      padding-bottom: 72px;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Mobile Header */
+    .m-header {
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 14px;
+      z-index: 100;
+    }
+
+    .m-brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .m-brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+
+    .m-switch-link {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-decoration: none;
+      background: var(--surface-raised);
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .m-search-box {
+      position: relative;
+    }
+
+    .m-search-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      padding: 10px 12px 10px 36px;
+      font-size: 13px;
+    }
+
+    .m-search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--text-faint);
+    }
+
+    /* Mobile Quick Filter Chips */
+    .m-chip-bar {
+      display: flex;
+      gap: 8px;
+      padding: 10px 14px;
+      overflow-x: auto;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .m-chip-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .m-chip {
+      white-space: nowrap;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .m-chip.active {
+      background: var(--accent-2);
+      color: #12151A;
+      border-color: var(--accent-2);
+    }
+
+    /* Mobile Controls Bar */
+    .m-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--bg);
+    }
+
+    .m-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .m-sort-select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 6px 10px;
+      font-size: 11.5px;
+    }
+
+    /* Mobile Product Cards Grid */
+    .m-grid {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .m-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .m-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .m-part {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      background: rgba(255,176,32,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .m-deal-badge {
+      background: #1B3830;
+      color: var(--accent-2);
+      border: 1px solid #2B5E52;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    .m-price-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .m-price-cur {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .m-specs {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: var(--text-dim);
+    }
+
+    .m-specs strong {
+      color: var(--text);
+    }
+
+    .m-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .m-btn {
+      flex: 1;
+      padding: 9px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .m-btn.primary {
+      background: var(--accent);
+      color: #12151A;
+    }
+
+    .m-btn.secondary {
+      background: var(--surface-raised);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* Bottom Navigation Bar */
+    .m-bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 200;
+    }
+
+    .m-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .m-nav-item.active {
+      color: var(--accent-2);
+    }
+
+    .m-nav-icon {
+      font-size: 18px;
+    }
+
+    /* Mobile Modals / Bottom Sheets */
+    .m-sheet-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 300;
+      display: none;
+      align-items: flex-end;
+    }
+
+    .m-sheet-overlay.show {
+      display: flex;
+    }
+
+    .m-sheet {
+      width: 100%;
+      background: var(--surface);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+    }
+
+    .m-sheet-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .m-sheet-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-2);
+    }
+
+    .m-sheet-close {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-size: 18px;
+    }
+
+    .m-sheet-body {
+      padding: 16px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Mobile Header -->
+  <header class="m-header">
+    <div class="m-brand-row">
+      <span class="m-brand">📱 LAPTOP PICKER MOBILE</span>
+      <a href="index.html" class="m-switch-link">🖥️ Desktop Version</a>
+    </div>
+    <div class="m-search-box">
+      <span class="m-search-icon">🔍</span>
+      <input type="text" id="mSearchInput" class="m-search-input" placeholder="Search laptops by model, CPU, GPU..." />
+    </div>
+  </header>
+
+  <!-- Quick Filter Chips -->
+  <div class="m-chip-bar">
+    <button class="m-chip active" id="chipAll">All Models</button>
+    <button class="m-chip" id="chipSteam">🎮 Steam Specs (July '26)</button>
+    <button class="m-chip" id="chipDeals">🏷️ Multi-Vendor Deals</button>
+    <button class="m-chip" id="chipNvidia">🟢 RTX Gaming</button>
+    <button class="m-chip" id="chip16Gb">🧠 16GB+ RAM</button>
+  </div>
+
+  <!-- Controls Bar -->
+  <div class="m-controls">
+    <span class="m-count" id="mCount">Loading laptops...</span>
+    <select id="mSortSelect" class="m-sort-select">
+      <option value="recommended">⭐ Recommended</option>
+      <option value="popular">🔥 Most Popular</option>
+      <option value="price-asc">Price: Low to High</option>
+      <option value="price-desc">Price: High to Low</option>
+      <option value="name-asc">Name: A to Z</option>
+    </select>
+  </div>
+
+  <!-- Product Grid -->
+  <main class="m-grid" id="mGrid"></main>
+
+  <!-- Bottom Navigation -->
+  <nav class="m-bottom-nav">
+    <button class="m-nav-item active" id="navHome">
+      <span class="m-nav-icon">🏠</span>
+      <span>Home</span>
+    </button>
+
+    <button class="m-nav-item" id="navFilterSheet">
+      <span class="m-nav-icon">🎛️</span>
+      <span>Filters</span>
+    </button>
+
+    <button class="m-nav-item" id="navSteamSheet">
+      <span class="m-nav-icon">🎮</span>
+      <span>Steam Survey</span>
+    </button>
+  </nav>
+
+  <!-- Detail Specs & Deals Mobile Sheet -->
+  <div class="m-sheet-overlay" id="mDetailOverlay">
+    <div class="m-sheet">
+      <div class="m-sheet-head">
+        <span class="m-sheet-title">/// Laptop Specifications & Deals</span>
+        <button class="m-sheet-close" id="closeDetailSheet">✕</button>
+      </div>
+      <div class="m-sheet-body" id="mDetailBody"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Filters Sheet -->
+  <div class="m-sheet-overlay" id="mFilterOverlay">
+    <div class="m-sheet">
+      <div class="m-sheet-head">
+        <span class="m-sheet-title">🎛️ Filter Mobile Catalog</span>
+        <button class="m-sheet-close" id="closeFilterSheet">✕</button>
+      </div>
+      <div class="m-sheet-body">
+        <div style="margin-bottom:14px;">
+          <label style="font-size:11px;font-weight:700;color:var(--accent-2);display:block;margin-bottom:6px;">MAX PRICE (MYR)</label>
+          <input type="number" id="mPriceMax" placeholder="e.g. 5000" style="width:100%;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:monospace;" />
+        </div>
+        <div style="text-align:right;">
+          <button class="m-btn primary" id="applyMobileFilterBtn" style="padding:10px 20px;">Apply Filters</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allRows = [];
+    let activeFilter = 'all';
+
+    Papa.parse("master_laptops.csv", {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: res => {
+        allRows = res.data.map((r, i) => ({
+          _rid: 'm' + i,
+          id: r.id || '',
+          title: r.title || 'Untitled',
+          price: parseFloat(r.price) || 0,
+          best_vendor: r.best_vendor || '',
+          vendor_prices: r.vendor_prices || '',
+          vendor_count: parseInt(r.vendor_count) || 1,
+          vendor_urls: r.vendor_urls || '',
+          image_url: r.image_url || '',
+          processor: r.processor || '',
+          graphics: r.graphics || '',
+          memory: r.memory || '',
+          storage: r.storage || '',
+          display: r.display || '',
+          url: r.url || '#'
+        }));
+        renderMobile();
+      }
+    });
+
+    function parseVendorDeals(r) {
+      if (!r.vendor_prices) {
+        return [{ vendor: r.best_vendor ? r.best_vendor.split(' (')[0] : 'Store Deal', price: r.price, url: r.url, isLowest: true }];
+      }
+      const parts = r.vendor_prices.split(' | ');
+      const urlMap = {};
+      if (r.vendor_urls) {
+        r.vendor_urls.split(' | ').forEach(p => {
+          const idx = p.indexOf(': ');
+          if (idx !== -1) urlMap[p.slice(0, idx).trim()] = p.slice(idx + 2).trim();
+        });
+      }
+      const deals = parts.map(p => {
+        const idx = p.indexOf(': RM ');
+        if (idx !== -1) {
+          const v = p.slice(0, idx).trim();
+          const num = parseFloat(p.slice(idx + 5).replace(/,/g, '')) || 0;
+          return { vendor: v, price: num, url: urlMap[v] || r.url };
+        }
+        return { vendor: p, price: r.price, url: r.url };
+      });
+      deals.sort((a,b) => (a.price || 999999) - (b.price || 999999));
+      const minP = deals[0] ? deals[0].price : r.price;
+      deals.forEach(d => { d.isLowest = (d.price > 0 && d.price === minP); });
+      return deals;
+    }
+
+    function calcRecScore(r) {
+      let pts = 0;
+      const gfx = (r.graphics || r.title || '').toLowerCase();
+      if (gfx.includes('5090') || gfx.includes('4090')) pts += 100;
+      else if (gfx.includes('4070') || gfx.includes('5070')) pts += 70;
+      else if (gfx.includes('4060') || gfx.includes('5060')) pts += 55;
+      else pts += 30;
+      if (r.vendor_count > 1) pts += 25;
+      const p = r.price && r.price > 0 ? r.price : 999999;
+      return pts / (p / 1000);
+    }
+
+    function calcPopScore(r) {
+      let pts = (r.vendor_count || 1) * 20;
+      const gfx = (r.graphics || r.title || '').toLowerCase();
+      if (gfx.includes('4060') || gfx.includes('3060')) pts += 50;
+      const mem = (r.memory || r.title || '').toLowerCase();
+      if (mem.includes('16gb')) pts += 40;
+      return pts;
+    }
+
+    function getMobileFiltered() {
+      const q = document.getElementById('mSearchInput').value.trim().toLowerCase();
+      const maxP = parseFloat(document.getElementById('mPriceMax').value);
+
+      let rows = allRows.filter(r => {
+        if (!r.title || !r.id || r.title.toLowerCase() === 'untitled') return false;
+        if (q && !r.title.toLowerCase().includes(q) && !r.id.toLowerCase().includes(q) && !r.processor.toLowerCase().includes(q) && !r.graphics.toLowerCase().includes(q)) return false;
+        if (!isNaN(maxP) && r.price > maxP) return false;
+
+        if (activeFilter === 'steam') {
+          const mem = (r.memory || r.title).toLowerCase();
+          const gfx = (r.graphics || r.title).toLowerCase();
+          if (!mem.includes('16gb') && !mem.includes('32gb')) return false;
+          if (!gfx.includes('rtx')) return false;
+        } else if (activeFilter === 'deals') {
+          if (r.vendor_count <= 1) return false;
+        } else if (activeFilter === 'nvidia') {
+          if (!r.graphics.toLowerCase().includes('rtx')) return false;
+        } else if (activeFilter === '16gb') {
+          if (!r.memory.toLowerCase().includes('16gb') && !r.memory.toLowerCase().includes('32gb')) return false;
+        }
+        return true;
+      });
+
+      const s = document.getElementById('mSortSelect').value;
+      if (s === 'recommended') {
+        rows.sort((a,b) => (b.price > 0 ? calcRecScore(b) : -1) - (a.price > 0 ? calcRecScore(a) : -1));
+      } else if (s === 'popular') {
+        rows.sort((a,b) => (b.price > 0 ? calcPopScore(b) : -1) - (a.price > 0 ? calcPopScore(a) : -1));
+      } else if (s === 'price-asc') {
+        rows.sort((a,b) => (a.price && a.price > 0 ? a.price : Infinity) - (b.price && b.price > 0 ? b.price : Infinity));
+      } else if (s === 'price-desc') {
+        rows.sort((a,b) => (b.price && b.price > 0 ? b.price : -1) - (a.price && a.price > 0 ? a.price : -1));
+      } else if (s === 'name-asc') {
+        rows.sort((a,b) => a.title.localeCompare(b.title));
+      }
+      return rows;
+    }
+
+    function renderMobile() {
+      const rows = getMobileFiltered();
+      document.getElementById('mCount').textContent = rows.length + ' laptops match';
+      const grid = document.getElementById('mGrid');
+
+      if (!rows.length) {
+        grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-dim);">No models match mobile filters.</div>';
+        return;
+      }
+
+      grid.innerHTML = rows.map(r => {
+        const deals = parseVendorDeals(r);
+        const bestVendor = deals[0] ? deals[0].vendor : (r.best_vendor || r.series);
+        const priceStr = r.price ? 'RM ' + r.price.toLocaleString('en-MY', {minimumFractionDigits:2, maximumFractionDigits:2}) : 'Unpriced / Inquiry';
+
+        let badgeHtml = '';
+        if (r.vendor_count > 1) {
+          badgeHtml = '<div class="m-deal-badge">🏷️ ' + r.vendor_count + ' Vendor Deals (Best at ' + bestVendor + ')</div>';
+        }
+
+        return '<div class="m-card">'
+          + '<div>'
+          + '<div class="m-card-title">' + r.title + '</div>'
+          + '<div class="m-part">MPN: ' + (r.id ? r.id.toUpperCase() : 'N/A') + '</div>'
+          + badgeHtml
+          + '</div>'
+          + '<div class="m-price-tag"><span class="m-price-cur">MYR</span>' + priceStr + '</div>'
+          + '<div class="m-specs">'
+          + '<div>⚡ <strong>CPU:</strong> ' + (r.processor || 'N/A') + '</div>'
+          + '<div>🎮 <strong>GPU:</strong> ' + (r.graphics || 'N/A') + '</div>'
+          + '<div>🧠 <strong>RAM:</strong> ' + (r.memory || 'N/A') + ' | 💾 <strong>SSD:</strong> ' + (r.storage || 'N/A') + '</div>'
+          + '</div>'
+          + '<div class="m-actions">'
+          + '<button class="m-btn secondary m-detail-btn" data-rid="' + r._rid + '">🔍 View Deals</button>'
+          + '<a href="' + r.url + '" target="_blank" rel="noopener" class="m-btn primary">Buy Deal ↗</a>'
+          + '</div>'
+          + '</div>';
+      }).join('');
+
+      document.querySelectorAll('.m-detail-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const row = allRows.find(r => r._rid === btn.dataset.rid);
+          if (row) openMobileDetail(row);
+        });
+      });
+    }
+
+    function openMobileDetail(r) {
+      const deals = parseVendorDeals(r);
+      const priceStr = r.price ? 'RM ' + r.price.toLocaleString('en-MY', {minimumFractionDigits:2}) : 'Inquiry';
+
+      let tableHtml = '';
+      if (deals.length > 0) {
+        tableHtml = '<h4 style="font-size:12px;color:var(--accent-2);margin:12px 0 8px;">/// Multi-Vendor Price Deals (' + deals.length + ' Vendors)</h4>'
+          + '<table style="width:100%;border-collapse:collapse;font-size:11.5px;background:var(--bg);border-radius:8px;overflow:hidden;">'
+          + '<tr style="background:var(--surface-raised);text-align:left;"><th style="padding:6px 8px;">Vendor</th><th style="padding:6px 8px;">Price</th><th style="padding:6px 8px;">Link</th></tr>';
+
+        deals.forEach(d => {
+          const pStr = d.price ? 'RM ' + d.price.toLocaleString('en-MY', {minimumFractionDigits:2}) : 'Inquiry';
+          const badge = d.isLowest ? ' <span style="color:var(--accent-2);font-weight:700;">★ BEST</span>' : '';
+          tableHtml += '<tr style="border-bottom:1px solid var(--border);">'
+            + '<td style="padding:8px;">' + d.vendor + badge + '</td>'
+            + '<td style="padding:8px;color:var(--accent);font-weight:700;">' + pStr + '</td>'
+            + '<td style="padding:8px;"><a href="' + d.url + '" target="_blank" style="color:var(--accent-2);text-decoration:none;font-weight:700;">Buy ↗</a></td>'
+            + '</tr>';
+        });
+        tableHtml += '</table>';
+      }
+
+      document.getElementById('mDetailBody').innerHTML = ''
+        + '<h3 style="font-size:15px;margin-bottom:6px;">' + r.title + '</h3>'
+        + '<div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">MPN: <strong style="color:var(--accent);">' + r.id.toUpperCase() + '</strong></div>'
+        + '<div style="font-size:20px;font-weight:700;color:var(--accent);margin-bottom:12px;">' + priceStr + '</div>'
+        + tableHtml
+        + '<h4 style="font-size:12px;color:var(--accent-2);margin:16px 0 8px;">/// Specifications</h4>'
+        + '<div style="font-size:12px;line-height:1.6;background:var(--bg);padding:10px;border-radius:8px;border:1px solid var(--border);">'
+        + '<div>⚡ <strong>CPU:</strong> ' + (r.processor || 'N/A') + '</div>'
+        + '<div>🎮 <strong>GPU:</strong> ' + (r.graphics || 'N/A') + '</div>'
+        + '<div>🧠 <strong>RAM:</strong> ' + (r.memory || 'N/A') + '</div>'
+        + '<div>💾 <strong>Storage:</strong> ' + (r.storage || 'N/A') + '</div>'
+        + '<div>🖥️ <strong>Display:</strong> ' + (r.display || 'N/A') + '</div>'
+        + '</div>';
+
+      document.getElementById('mDetailOverlay').classList.add('show');
+    }
+
+    // Chip listeners
+    ['All', 'Steam', 'Deals', 'Nvidia', '16Gb'].forEach(name => {
+      const btn = document.getElementById('chip' + name);
+      if (btn) {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.m-chip').forEach(c => c.classList.remove('active'));
+          btn.classList.add('active');
+          activeFilter = name.toLowerCase();
+          renderMobile();
+        });
+      }
+    });
+
+    document.getElementById('mSearchInput').addEventListener('input', renderMobile);
+    document.getElementById('mSortSelect').addEventListener('change', renderMobile);
+    document.getElementById('closeDetailSheet').addEventListener('click', () => {
+      document.getElementById('mDetailOverlay').classList.remove('show');
+    });
+
+    // Navigation Sheets
+    document.getElementById('navFilterSheet').addEventListener('click', () => {
+      document.getElementById('mFilterOverlay').classList.add('show');
+    });
+    document.getElementById('closeFilterSheet').addEventListener('click', () => {
+      document.getElementById('mFilterOverlay').classList.remove('show');
+    });
+    document.getElementById('applyMobileFilterBtn').addEventListener('click', () => {
+      document.getElementById('mFilterOverlay').classList.remove('show');
+      renderMobile();
+    });
+    document.getElementById('navHome').addEventListener('click', () => {
+      document.getElementById('mSearchInput').value = '';
+      document.getElementById('mPriceMax').value = '';
+      activeFilter = 'all';
+      document.querySelectorAll('.m-chip').forEach(c => c.classList.remove('active'));
+      document.getElementById('chipAll').classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      renderMobile();
+    });
+  </script>
+
+</body>
+
+</html>

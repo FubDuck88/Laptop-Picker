@@ -2,8 +2,13 @@
 <html lang="en">
 
 <head>
+  <script>
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768 && !window.location.search.includes('desktop=1'))) {
+      window.location.replace("mobile.html");
+    }
+  </script>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="referrer" content="no-referrer" />
   <title>Laptop Picker | Compare Laptop Specs & Vendor Deals</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -400,7 +405,7 @@
 
     /* Active Filter Banner */
     .filter-banner {
-      background: linear-gradient(90deg, rgba(87,217,198,0.12) 0%, rgba(255,176,32,0.12) 100%);
+      background: linear-gradient(90deg, rgba(87, 217, 198, 0.12) 0%, rgba(255, 176, 32, 0.12) 100%);
       border-bottom: 1px solid var(--accent-2);
       padding: 10px 24px;
       display: flex;
@@ -864,7 +869,8 @@
       margin-bottom: 24px;
     }
 
-    .vendor-sec h3, .spec-sec h3 {
+    .vendor-sec h3,
+    .spec-sec h3 {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       font-weight: 700;
@@ -884,7 +890,8 @@
       border: 1px solid var(--border);
     }
 
-    .vendor-table th, .vendor-table td {
+    .vendor-table th,
+    .vendor-table td {
       padding: 10px 14px;
       border-bottom: 1px solid var(--border);
       text-align: left;
@@ -946,9 +953,20 @@
       transition: background .12s ease;
     }
 
-    .btn.primary { background: var(--accent); color: #1A1305; }
-    .btn.secondary { background: var(--surface-raised); color: var(--text); border: 1px solid var(--border); }
-    .btn.secondary:hover { background: var(--border); }
+    .btn.primary {
+      background: var(--accent);
+      color: #1A1305;
+    }
+
+    .btn.secondary {
+      background: var(--surface-raised);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn.secondary:hover {
+      background: var(--border);
+    }
 
     .empty-results {
       padding: 40px;
@@ -967,9 +985,11 @@
       padding: 3px 0;
       border-bottom: 1px dashed var(--border);
     }
+
     .steam-stat-row:last-child {
       border-bottom: none;
     }
+
     .steam-stat-val {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
@@ -988,25 +1008,33 @@
     </div>
 
     <!-- Steam Hardware Survey Specs Filter Preset Section (July 2026 Survey) -->
-    <div class="filter-group" style="background:linear-gradient(135deg, rgba(87,217,198,0.08) 0%, rgba(255,176,32,0.08) 100%);">
+    <div class="filter-group"
+      style="background:linear-gradient(135deg, rgba(87,217,198,0.08) 0%, rgba(255,176,32,0.08) 100%);">
       <div style="padding:14px 16px;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
           <div style="display:flex;align-items:center;gap:6px;">
             <span style="font-size:16px;">🎮</span>
-            <span class="filter-group-label" style="color:var(--accent-2);font-size:10.5px;">Steam Survey (July 2026)</span>
+            <span class="filter-group-label" style="color:var(--accent-2);font-size:10.5px;">Steam Survey (July
+              2026)</span>
           </div>
-          <button id="steamInfoBtn" style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:11px;" title="View July 2026 Steam Survey Breakdown">ℹ️ Info</button>
+          <button id="steamInfoBtn"
+            style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:11px;"
+            title="View July 2026 Steam Survey Breakdown">ℹ️ Info</button>
         </div>
 
-        <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin-bottom:10px;">
-          <div class="steam-stat-row"><span>GPU:</span><span class="steam-stat-val">RTX 3060 / 4060+ (72.7% NV)</span></div>
-          <div class="steam-stat-row"><span>RAM:</span><span class="steam-stat-val">16 GB (41.0% Most Popular)</span></div>
+        <div
+          style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin-bottom:10px;">
+          <div class="steam-stat-row"><span>GPU:</span><span class="steam-stat-val">RTX 3060 / 4060+ (72.7% NV)</span>
+          </div>
+          <div class="steam-stat-row"><span>RAM:</span><span class="steam-stat-val">16 GB (41.0% Most Popular)</span>
+          </div>
           <div class="steam-stat-row"><span>CPU:</span><span class="steam-stat-val">8 & 6 Cores (55.4%)</span></div>
           <div class="steam-stat-row"><span>Storage:</span><span class="steam-stat-val">Above 1 TB (49.3%)</span></div>
           <div class="steam-stat-row"><span>Display:</span><span class="steam-stat-val">1920 x 1080 (51.1%)</span></div>
         </div>
 
-        <button id="steamSpecBtn" class="btn secondary sm" style="width:100%;padding:8px;font-size:11px;border-color:var(--accent-2);color:var(--accent-2);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s ease;">
+        <button id="steamSpecBtn" class="btn secondary sm"
+          style="width:100%;padding:8px;font-size:11px;border-color:var(--accent-2);color:var(--accent-2);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s ease;">
           <span>🎯</span> <span id="steamBtnText">Filter Steam July 2026 Specs</span>
         </button>
       </div>
@@ -1046,15 +1074,24 @@
       </div>
       <div class="filter-group-body" id="fg-cpu">
         <ul class="cb-list">
-          <li class="cb-item"><input type="checkbox" id="cpu-u9" data-key="cpu" data-val="Ultra 9" /><label class="cb-label" for="cpu-u9">Core Ultra 9</label></li>
-          <li class="cb-item"><input type="checkbox" id="cpu-u7" data-key="cpu" data-val="Ultra 7" /><label class="cb-label" for="cpu-u7">Core Ultra 7</label></li>
-          <li class="cb-item"><input type="checkbox" id="cpu-u5" data-key="cpu" data-val="Ultra 5" /><label class="cb-label" for="cpu-u5">Core Ultra 5</label></li>
-          <li class="cb-item"><input type="checkbox" id="cpu-i9" data-key="cpu" data-val="Core i9" /><label class="cb-label" for="cpu-i9">Core i9</label></li>
-          <li class="cb-item"><input type="checkbox" id="cpu-i7" data-key="cpu" data-val="Core i7" /><label class="cb-label" for="cpu-i7">Core i7</label></li>
-          <li class="cb-item"><input type="checkbox" id="cpu-i5" data-key="cpu" data-val="Core i5" /><label class="cb-label" for="cpu-i5">Core i5</label></li>
-          <li class="cb-item"><input type="checkbox" id="cpu-r9" data-key="cpu" data-val="Ryzen 9" /><label class="cb-label" for="cpu-r9">AMD Ryzen 9</label></li>
-          <li class="cb-item"><input type="checkbox" id="cpu-r7" data-key="cpu" data-val="Ryzen 7" /><label class="cb-label" for="cpu-r7">AMD Ryzen 7</label></li>
-          <li class="cb-item"><input type="checkbox" id="cpu-r5" data-key="cpu" data-val="Ryzen 5" /><label class="cb-label" for="cpu-r5">AMD Ryzen 5</label></li>
+          <li class="cb-item"><input type="checkbox" id="cpu-u9" data-key="cpu" data-val="Ultra 9" /><label
+              class="cb-label" for="cpu-u9">Core Ultra 9</label></li>
+          <li class="cb-item"><input type="checkbox" id="cpu-u7" data-key="cpu" data-val="Ultra 7" /><label
+              class="cb-label" for="cpu-u7">Core Ultra 7</label></li>
+          <li class="cb-item"><input type="checkbox" id="cpu-u5" data-key="cpu" data-val="Ultra 5" /><label
+              class="cb-label" for="cpu-u5">Core Ultra 5</label></li>
+          <li class="cb-item"><input type="checkbox" id="cpu-i9" data-key="cpu" data-val="Core i9" /><label
+              class="cb-label" for="cpu-i9">Core i9</label></li>
+          <li class="cb-item"><input type="checkbox" id="cpu-i7" data-key="cpu" data-val="Core i7" /><label
+              class="cb-label" for="cpu-i7">Core i7</label></li>
+          <li class="cb-item"><input type="checkbox" id="cpu-i5" data-key="cpu" data-val="Core i5" /><label
+              class="cb-label" for="cpu-i5">Core i5</label></li>
+          <li class="cb-item"><input type="checkbox" id="cpu-r9" data-key="cpu" data-val="Ryzen 9" /><label
+              class="cb-label" for="cpu-r9">AMD Ryzen 9</label></li>
+          <li class="cb-item"><input type="checkbox" id="cpu-r7" data-key="cpu" data-val="Ryzen 7" /><label
+              class="cb-label" for="cpu-r7">AMD Ryzen 7</label></li>
+          <li class="cb-item"><input type="checkbox" id="cpu-r5" data-key="cpu" data-val="Ryzen 5" /><label
+              class="cb-label" for="cpu-r5">AMD Ryzen 5</label></li>
         </ul>
       </div>
     </div>
@@ -1067,18 +1104,30 @@
       </div>
       <div class="filter-group-body" id="fg-gpu">
         <ul class="cb-list">
-          <li class="cb-item"><input type="checkbox" id="gpu-5090" data-key="gpu" data-val="RTX 5090" /><label class="cb-label" for="gpu-5090">RTX 5090</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-5080" data-key="gpu" data-val="RTX 5080" /><label class="cb-label" for="gpu-5080">RTX 5080</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-5070" data-key="gpu" data-val="RTX 5070" /><label class="cb-label" for="gpu-5070">RTX 5070 / Ti</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-5060" data-key="gpu" data-val="RTX 5060" /><label class="cb-label" for="gpu-5060">RTX 5060</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-5050" data-key="gpu" data-val="RTX 5050" /><label class="cb-label" for="gpu-5050">RTX 5050</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-4090" data-key="gpu" data-val="RTX 4090" /><label class="cb-label" for="gpu-4090">RTX 4090</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-4080" data-key="gpu" data-val="RTX 4080" /><label class="cb-label" for="gpu-4080">RTX 4080</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-4070" data-key="gpu" data-val="RTX 4070" /><label class="cb-label" for="gpu-4070">RTX 4070</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-4060" data-key="gpu" data-val="RTX 4060" /><label class="cb-label" for="gpu-4060">RTX 4060</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-4050" data-key="gpu" data-val="RTX 4050" /><label class="cb-label" for="gpu-4050">RTX 4050</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-3050" data-key="gpu" data-val="RTX 3050" /><label class="cb-label" for="gpu-3050">RTX 3050</label></li>
-          <li class="cb-item"><input type="checkbox" id="gpu-igpu" data-key="gpu" data-val="Iris" /><label class="cb-label" for="gpu-igpu">Integrated (Iris / Arc / Radeon)</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-5090" data-key="gpu" data-val="RTX 5090" /><label
+              class="cb-label" for="gpu-5090">RTX 5090</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-5080" data-key="gpu" data-val="RTX 5080" /><label
+              class="cb-label" for="gpu-5080">RTX 5080</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-5070" data-key="gpu" data-val="RTX 5070" /><label
+              class="cb-label" for="gpu-5070">RTX 5070 / Ti</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-5060" data-key="gpu" data-val="RTX 5060" /><label
+              class="cb-label" for="gpu-5060">RTX 5060</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-5050" data-key="gpu" data-val="RTX 5050" /><label
+              class="cb-label" for="gpu-5050">RTX 5050</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-4090" data-key="gpu" data-val="RTX 4090" /><label
+              class="cb-label" for="gpu-4090">RTX 4090</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-4080" data-key="gpu" data-val="RTX 4080" /><label
+              class="cb-label" for="gpu-4080">RTX 4080</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-4070" data-key="gpu" data-val="RTX 4070" /><label
+              class="cb-label" for="gpu-4070">RTX 4070</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-4060" data-key="gpu" data-val="RTX 4060" /><label
+              class="cb-label" for="gpu-4060">RTX 4060</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-4050" data-key="gpu" data-val="RTX 4050" /><label
+              class="cb-label" for="gpu-4050">RTX 4050</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-3050" data-key="gpu" data-val="RTX 3050" /><label
+              class="cb-label" for="gpu-3050">RTX 3050</label></li>
+          <li class="cb-item"><input type="checkbox" id="gpu-igpu" data-key="gpu" data-val="Iris" /><label
+              class="cb-label" for="gpu-igpu">Integrated (Iris / Arc / Radeon)</label></li>
         </ul>
       </div>
     </div>
@@ -1091,11 +1140,16 @@
       </div>
       <div class="filter-group-body" id="fg-mem">
         <ul class="cb-list">
-          <li class="cb-item"><input type="checkbox" id="mem-64" data-key="mem" data-val="64GB" /><label class="cb-label" for="mem-64">64 GB+</label></li>
-          <li class="cb-item"><input type="checkbox" id="mem-32" data-key="mem" data-val="32GB" /><label class="cb-label" for="mem-32">32 GB</label></li>
-          <li class="cb-item"><input type="checkbox" id="mem-24" data-key="mem" data-val="24GB" /><label class="cb-label" for="mem-24">24 GB</label></li>
-          <li class="cb-item"><input type="checkbox" id="mem-16" data-key="mem" data-val="16GB" /><label class="cb-label" for="mem-16">16 GB</label></li>
-          <li class="cb-item"><input type="checkbox" id="mem-8" data-key="mem" data-val="8GB" /><label class="cb-label" for="mem-8">8 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="mem-64" data-key="mem" data-val="64GB" /><label
+              class="cb-label" for="mem-64">64 GB+</label></li>
+          <li class="cb-item"><input type="checkbox" id="mem-32" data-key="mem" data-val="32GB" /><label
+              class="cb-label" for="mem-32">32 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="mem-24" data-key="mem" data-val="24GB" /><label
+              class="cb-label" for="mem-24">24 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="mem-16" data-key="mem" data-val="16GB" /><label
+              class="cb-label" for="mem-16">16 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="mem-8" data-key="mem" data-val="8GB" /><label class="cb-label"
+              for="mem-8">8 GB</label></li>
         </ul>
       </div>
     </div>
@@ -1108,9 +1162,12 @@
       </div>
       <div class="filter-group-body" id="fg-sto">
         <ul class="cb-list">
-          <li class="cb-item"><input type="checkbox" id="sto-2tb" data-key="sto" data-val="2TB" /><label class="cb-label" for="sto-2tb">2 TB</label></li>
-          <li class="cb-item"><input type="checkbox" id="sto-1tb" data-key="sto" data-val="1TB" /><label class="cb-label" for="sto-1tb">1 TB</label></li>
-          <li class="cb-item"><input type="checkbox" id="sto-512" data-key="sto" data-val="512GB" /><label class="cb-label" for="sto-512">512 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="sto-2tb" data-key="sto" data-val="2TB" /><label
+              class="cb-label" for="sto-2tb">2 TB</label></li>
+          <li class="cb-item"><input type="checkbox" id="sto-1tb" data-key="sto" data-val="1TB" /><label
+              class="cb-label" for="sto-1tb">1 TB</label></li>
+          <li class="cb-item"><input type="checkbox" id="sto-512" data-key="sto" data-val="512GB" /><label
+              class="cb-label" for="sto-512">512 GB</label></li>
         </ul>
       </div>
     </div>
@@ -1123,12 +1180,18 @@
       </div>
       <div class="filter-group-body" id="fg-disp">
         <ul class="cb-list">
-          <li class="cb-item"><input type="checkbox" id="disp-18" data-key="disp" data-val="18" /><label class="cb-label" for="disp-18">18-inch</label></li>
-          <li class="cb-item"><input type="checkbox" id="disp-17" data-key="disp" data-val="17" /><label class="cb-label" for="disp-17">17-inch / 17.3-inch</label></li>
-          <li class="cb-item"><input type="checkbox" id="disp-16" data-key="disp" data-val="16" /><label class="cb-label" for="disp-16">16-inch / 16.1-inch</label></li>
-          <li class="cb-item"><input type="checkbox" id="disp-15" data-key="disp" data-val="15" /><label class="cb-label" for="disp-15">15.6-inch / 15.1-inch</label></li>
-          <li class="cb-item"><input type="checkbox" id="disp-14" data-key="disp" data-val="14" /><label class="cb-label" for="disp-14">14-inch / 14.5-inch</label></li>
-          <li class="cb-item"><input type="checkbox" id="disp-13" data-key="disp" data-val="13" /><label class="cb-label" for="disp-13">13.3-inch / 13.4-inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="disp-18" data-key="disp" data-val="18" /><label
+              class="cb-label" for="disp-18">18-inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="disp-17" data-key="disp" data-val="17" /><label
+              class="cb-label" for="disp-17">17-inch / 17.3-inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="disp-16" data-key="disp" data-val="16" /><label
+              class="cb-label" for="disp-16">16-inch / 16.1-inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="disp-15" data-key="disp" data-val="15" /><label
+              class="cb-label" for="disp-15">15.6-inch / 15.1-inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="disp-14" data-key="disp" data-val="14" /><label
+              class="cb-label" for="disp-14">14-inch / 14.5-inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="disp-13" data-key="disp" data-val="13" /><label
+              class="cb-label" for="disp-13">13.3-inch / 13.4-inch</label></li>
         </ul>
       </div>
     </div>
@@ -1140,7 +1203,8 @@
       <div class="dz-box" id="dzBox">
         <div class="dz-icon">💻</div>
         <div class="dz-title">Load Master Laptop Database</div>
-        <div class="dz-sub">Drag and drop your <strong>master_laptops.csv</strong> file here, or click to choose from your computer.</div>
+        <div class="dz-sub">Drag and drop your <strong>master_laptops.csv</strong> file here, or click to choose from
+          your computer.</div>
         <button class="dz-btn">Select CSV File</button>
         <input type="file" id="fileInput" accept=".csv" style="display:none;" />
       </div>
@@ -1154,7 +1218,8 @@
           </button>
           <div class="search-wrap">
             <span class="search-icon">🔍</span>
-            <input type="text" class="search-input" id="searchInput" placeholder="Search by model, part #, CPU, GPU, or vendor..." />
+            <input type="text" class="search-input" id="searchInput"
+              placeholder="Search by model, part #, CPU, GPU, or vendor..." />
           </div>
         </div>
         <div class="topbar-controls">
@@ -1173,7 +1238,8 @@
       <div class="filter-banner" id="steamBanner" style="display:none;">
         <div class="filter-banner-text">
           <span style="font-size:16px;">🎮</span>
-          <span><strong>July 2026 Steam Hardware Survey Preset Active:</strong> 16GB+ RAM, RTX 3060/4060+ GPU, 6-8+ Core CPU & 1080p Display.</span>
+          <span><strong>July 2026 Steam Hardware Survey Preset Active:</strong> 16GB+ RAM, RTX 3060/4060+ GPU, 6-8+ Core
+            CPU & 1080p Display.</span>
         </div>
         <button class="sb-clear" id="clearSteamBanner">Clear Preset</button>
       </div>
@@ -1232,20 +1298,53 @@
         </p>
         <table class="vendor-table" style="margin-bottom:16px;">
           <thead>
-            <tr><th>Hardware Component</th><th>July 2026 Steam Most Popular</th><th>Market Share</th></tr>
+            <tr>
+              <th>Hardware Component</th>
+              <th>July 2026 Steam Most Popular</th>
+              <th>Market Share</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td><strong>Video Card (GPU)</strong></td><td>NVIDIA GeForce RTX 3060 / 4060+</td><td><span class="best-deal-badge">72.72% NVIDIA</span></td></tr>
-            <tr><td><strong>System RAM</strong></td><td>16 GB RAM (40.97%) & 32 GB RAM</td><td><span class="best-deal-badge">40.97% Share</span></td></tr>
-            <tr><td><strong>Processor Cores (CPU)</strong></td><td>8 CPUs (27.85%) & 6 CPUs (27.52%)</td><td><span class="best-deal-badge">55.37% Combined</span></td></tr>
-            <tr><td><strong>Processor Brand</strong></td><td>Intel 53.76% / AMD 46.24%</td><td><span class="best-deal-badge">Intel / AMD</span></td></tr>
-            <tr><td><strong>Primary Resolution</strong></td><td>1920 x 1080 Full HD (FHD)</td><td><span class="best-deal-badge">51.10% Share</span></td></tr>
-            <tr><td><strong>Total Storage Space</strong></td><td>Above 1 TB Hard Drive / SSD Space</td><td><span class="best-deal-badge">49.33% Share</span></td></tr>
-            <tr><td><strong>Operating System</strong></td><td>Windows 11 64-bit</td><td><span class="best-deal-badge">70.26% Share</span></td></tr>
+            <tr>
+              <td><strong>Video Card (GPU)</strong></td>
+              <td>NVIDIA GeForce RTX 3060 / 4060+</td>
+              <td><span class="best-deal-badge">72.72% NVIDIA</span></td>
+            </tr>
+            <tr>
+              <td><strong>System RAM</strong></td>
+              <td>16 GB RAM (40.97%) & 32 GB RAM</td>
+              <td><span class="best-deal-badge">40.97% Share</span></td>
+            </tr>
+            <tr>
+              <td><strong>Processor Cores (CPU)</strong></td>
+              <td>8 CPUs (27.85%) & 6 CPUs (27.52%)</td>
+              <td><span class="best-deal-badge">55.37% Combined</span></td>
+            </tr>
+            <tr>
+              <td><strong>Processor Brand</strong></td>
+              <td>Intel 53.76% / AMD 46.24%</td>
+              <td><span class="best-deal-badge">Intel / AMD</span></td>
+            </tr>
+            <tr>
+              <td><strong>Primary Resolution</strong></td>
+              <td>1920 x 1080 Full HD (FHD)</td>
+              <td><span class="best-deal-badge">51.10% Share</span></td>
+            </tr>
+            <tr>
+              <td><strong>Total Storage Space</strong></td>
+              <td>Above 1 TB Hard Drive / SSD Space</td>
+              <td><span class="best-deal-badge">49.33% Share</span></td>
+            </tr>
+            <tr>
+              <td><strong>Operating System</strong></td>
+              <td>Windows 11 64-bit</td>
+              <td><span class="best-deal-badge">70.26% Share</span></td>
+            </tr>
           </tbody>
         </table>
         <div style="text-align:right;">
-          <button class="btn primary sm" id="applySteamFromModal" style="padding:8px 16px;font-size:12px;">Apply Steam July 2026 Filter</button>
+          <button class="btn primary sm" id="applySteamFromModal" style="padding:8px 16px;font-size:12px;">Apply Steam
+            July 2026 Filter</button>
         </div>
       </div>
     </div>
@@ -1348,7 +1447,7 @@
       activeFilters.disp.clear();
 
       document.querySelectorAll('.sidebar input[type=checkbox]').forEach(cb => cb.checked = false);
-      
+
       // Close all filter groups except Price Range
       document.querySelectorAll('.filter-group-header').forEach(h => {
         if (h.getAttribute('data-target') === 'fg-price') {
@@ -1363,7 +1462,7 @@
           if (body) body.classList.remove('open');
         }
       });
-      
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
       render();
     }
@@ -1614,7 +1713,7 @@
     // Popularity Score: Retail Demand + Steam Survey Hardware Alignment
     function calcPopularityScore(r) {
       let score = 0;
-      
+
       // 1. Retail availability across multiple stores (PC Image, ALL IT, TechHypermart)
       score += (r.vendor_count || 1) * 25;
 
@@ -1647,7 +1746,7 @@
 
       let rows = allRows.filter(r => {
         if (!r.title || !r.id || r.title.toLowerCase() === 'untitled model') return false;
-        
+
         // Steam Specs Preset Filter (July 2026 Survey)
         if (isSteamSpecActive && !matchesSteamSpecs(r)) {
           return false;
@@ -2190,10 +2289,10 @@
           download: true,
           header: true,
           skipEmptyLines: true,
-          complete: function(results) {
+          complete: function (results) {
             processRows(results.data);
           },
-          error: function(err) {
+          error: function (err) {
             console.error("Error loading CSV:", err);
             grid.innerHTML = '<div class="empty-results">⚠️ Could not load master_laptops.csv. Make sure the file exists in your repository root.</div>';
           }
