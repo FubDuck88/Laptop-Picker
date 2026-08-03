@@ -25,7 +25,7 @@
       --accent-2: #57D9C6;
       --border: #2A2F38;
       --danger: #E2665C;
-      --sidebar-w: 260px;
+      --sidebar-w: 265px;
     }
 
     * {
@@ -315,7 +315,7 @@
       align-items: center;
       gap: 12px;
       flex: 1;
-      max-width: 520px;
+      max-width: 540px;
     }
 
     .home-btn {
@@ -957,6 +957,24 @@
       font-size: 14px;
       grid-column: 1 / -1;
     }
+
+    /* Steam Survey Card styling */
+    .steam-stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      padding: 3px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    .steam-stat-row:last-child {
+      border-bottom: none;
+    }
+    .steam-stat-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: var(--accent-2);
+    }
   </style>
 </head>
 
@@ -969,23 +987,32 @@
       <button class="sb-clear" id="resetBtn">Reset All</button>
     </div>
 
-    <!-- Steam Hardware Survey Specs Filter Preset Section -->
+    <!-- Steam Hardware Survey Specs Filter Preset Section (July 2026 Survey) -->
     <div class="filter-group" style="background:linear-gradient(135deg, rgba(87,217,198,0.08) 0%, rgba(255,176,32,0.08) 100%);">
       <div style="padding:14px 16px;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-          <span style="font-size:16px;">🎮</span>
-          <span class="filter-group-label" style="color:var(--accent-2);">Steam Hardware Survey</span>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span style="font-size:16px;">🎮</span>
+            <span class="filter-group-label" style="color:var(--accent-2);font-size:10.5px;">Steam Survey (July 2026)</span>
+          </div>
+          <button id="steamInfoBtn" style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:11px;" title="View July 2026 Steam Survey Breakdown">ℹ️ Info</button>
         </div>
-        <p style="font-size:11px;color:var(--text-dim);line-height:1.4;margin-bottom:10px;">
-          Filter models matching Steam gamer averages: <strong>16GB+ RAM</strong>, <strong>RTX Dedicated GPU</strong>, <strong>6+ Core CPU</strong>.
-        </p>
+
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;margin-bottom:10px;">
+          <div class="steam-stat-row"><span>GPU:</span><span class="steam-stat-val">RTX 3060 / 4060+ (72.7% NV)</span></div>
+          <div class="steam-stat-row"><span>RAM:</span><span class="steam-stat-val">16 GB (41.0% Most Popular)</span></div>
+          <div class="steam-stat-row"><span>CPU:</span><span class="steam-stat-val">8 & 6 Cores (55.4%)</span></div>
+          <div class="steam-stat-row"><span>Storage:</span><span class="steam-stat-val">Above 1 TB (49.3%)</span></div>
+          <div class="steam-stat-row"><span>Display:</span><span class="steam-stat-val">1920 x 1080 (51.1%)</span></div>
+        </div>
+
         <button id="steamSpecBtn" class="btn secondary sm" style="width:100%;padding:8px;font-size:11px;border-color:var(--accent-2);color:var(--accent-2);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s ease;">
-          <span>🎯</span> <span id="steamBtnText">Filter Steam Gamer Specs</span>
+          <span>🎯</span> <span id="steamBtnText">Filter Steam July 2026 Specs</span>
         </button>
       </div>
     </div>
 
-    <!-- Price Range -->
+    <!-- Price Range (OPEN BY DEFAULT) -->
     <div class="filter-group">
       <div class="filter-group-header open" data-target="fg-price">
         <span class="filter-group-label">Price Range (MYR)</span>
@@ -1000,24 +1027,24 @@
       </div>
     </div>
 
-    <!-- Store / Vendor Filter -->
+    <!-- Store / Vendor Filter (COLLAPSED BY DEFAULT) -->
     <div class="filter-group" id="fg-store-wrap" style="display:none;">
-      <div class="filter-group-header open" data-target="fg-store">
+      <div class="filter-group-header" data-target="fg-store">
         <span class="filter-group-label">Store / Vendor</span>
         <span class="filter-group-icon">▼</span>
       </div>
-      <div class="filter-group-body open" id="fg-store">
+      <div class="filter-group-body" id="fg-store">
         <ul class="cb-list" id="cblist-store"></ul>
       </div>
     </div>
 
-    <!-- Processor (CPU) -->
+    <!-- Processor (CPU) (COLLAPSED BY DEFAULT) -->
     <div class="filter-group">
-      <div class="filter-group-header open" data-target="fg-cpu">
+      <div class="filter-group-header" data-target="fg-cpu">
         <span class="filter-group-label">Processor</span>
         <span class="filter-group-icon">▼</span>
       </div>
-      <div class="filter-group-body open" id="fg-cpu">
+      <div class="filter-group-body" id="fg-cpu">
         <ul class="cb-list">
           <li class="cb-item"><input type="checkbox" id="cpu-u9" data-key="cpu" data-val="Ultra 9" /><label class="cb-label" for="cpu-u9">Core Ultra 9</label></li>
           <li class="cb-item"><input type="checkbox" id="cpu-u7" data-key="cpu" data-val="Ultra 7" /><label class="cb-label" for="cpu-u7">Core Ultra 7</label></li>
@@ -1032,13 +1059,13 @@
       </div>
     </div>
 
-    <!-- Graphics (GPU) -->
+    <!-- Graphics (GPU) (COLLAPSED BY DEFAULT) -->
     <div class="filter-group">
-      <div class="filter-group-header open" data-target="fg-gpu">
+      <div class="filter-group-header" data-target="fg-gpu">
         <span class="filter-group-label">Graphics Card</span>
         <span class="filter-group-icon">▼</span>
       </div>
-      <div class="filter-group-body open" id="fg-gpu">
+      <div class="filter-group-body" id="fg-gpu">
         <ul class="cb-list">
           <li class="cb-item"><input type="checkbox" id="gpu-5090" data-key="gpu" data-val="RTX 5090" /><label class="cb-label" for="gpu-5090">RTX 5090</label></li>
           <li class="cb-item"><input type="checkbox" id="gpu-5080" data-key="gpu" data-val="RTX 5080" /><label class="cb-label" for="gpu-5080">RTX 5080</label></li>
@@ -1056,13 +1083,13 @@
       </div>
     </div>
 
-    <!-- RAM -->
+    <!-- RAM (COLLAPSED BY DEFAULT) -->
     <div class="filter-group">
-      <div class="filter-group-header open" data-target="fg-mem">
+      <div class="filter-group-header" data-target="fg-mem">
         <span class="filter-group-label">Memory (RAM)</span>
         <span class="filter-group-icon">▼</span>
       </div>
-      <div class="filter-group-body open" id="fg-mem">
+      <div class="filter-group-body" id="fg-mem">
         <ul class="cb-list">
           <li class="cb-item"><input type="checkbox" id="mem-64" data-key="mem" data-val="64GB" /><label class="cb-label" for="mem-64">64 GB+</label></li>
           <li class="cb-item"><input type="checkbox" id="mem-32" data-key="mem" data-val="32GB" /><label class="cb-label" for="mem-32">32 GB</label></li>
@@ -1073,13 +1100,13 @@
       </div>
     </div>
 
-    <!-- Storage -->
+    <!-- Storage (COLLAPSED BY DEFAULT) -->
     <div class="filter-group">
-      <div class="filter-group-header open" data-target="fg-sto">
+      <div class="filter-group-header" data-target="fg-sto">
         <span class="filter-group-label">Storage (SSD)</span>
         <span class="filter-group-icon">▼</span>
       </div>
-      <div class="filter-group-body open" id="fg-sto">
+      <div class="filter-group-body" id="fg-sto">
         <ul class="cb-list">
           <li class="cb-item"><input type="checkbox" id="sto-2tb" data-key="sto" data-val="2TB" /><label class="cb-label" for="sto-2tb">2 TB</label></li>
           <li class="cb-item"><input type="checkbox" id="sto-1tb" data-key="sto" data-val="1TB" /><label class="cb-label" for="sto-1tb">1 TB</label></li>
@@ -1088,13 +1115,13 @@
       </div>
     </div>
 
-    <!-- Display Size -->
+    <!-- Display Size (COLLAPSED BY DEFAULT) -->
     <div class="filter-group">
-      <div class="filter-group-header open" data-target="fg-disp">
+      <div class="filter-group-header" data-target="fg-disp">
         <span class="filter-group-label">Display Size</span>
         <span class="filter-group-icon">▼</span>
       </div>
-      <div class="filter-group-body open" id="fg-disp">
+      <div class="filter-group-body" id="fg-disp">
         <ul class="cb-list">
           <li class="cb-item"><input type="checkbox" id="disp-18" data-key="disp" data-val="18" /><label class="cb-label" for="disp-18">18-inch</label></li>
           <li class="cb-item"><input type="checkbox" id="disp-17" data-key="disp" data-val="17" /><label class="cb-label" for="disp-17">17-inch / 17.3-inch</label></li>
@@ -1144,7 +1171,7 @@
       <div class="filter-banner" id="steamBanner" style="display:none;">
         <div class="filter-banner-text">
           <span style="font-size:16px;">🎮</span>
-          <span><strong>Steam Hardware Survey Preset Active:</strong> Showing gaming laptops with 16GB+ RAM, RTX Dedicated GPU & 6+ Core CPU.</span>
+          <span><strong>July 2026 Steam Hardware Survey Preset Active:</strong> 16GB+ RAM, RTX 3060/4060+ GPU, 6-8+ Core CPU & 1080p Display.</span>
         </div>
         <button class="sb-clear" id="clearSteamBanner">Clear Preset</button>
       </div>
@@ -1190,6 +1217,38 @@
     </div>
   </div>
 
+  <!-- Steam July 2026 Survey Info Modal -->
+  <div class="modal-overlay" id="steamInfoModalOverlay">
+    <div class="modal-card" style="max-width:680px;">
+      <div class="modal-head">
+        <span class="modal-title mono">🎮 Steam Hardware & Software Survey: July 2026 Benchmark</span>
+        <button class="modal-close" id="closeSteamInfoModal">&times;</button>
+      </div>
+      <div class="modal-body" style="font-size:13px;line-height:1.6;color:var(--text);">
+        <p style="margin-bottom:14px;color:var(--text-dim);">
+          Official Steam hardware benchmark stats collected from active Steam gamers (July 2026 survey):
+        </p>
+        <table class="vendor-table" style="margin-bottom:16px;">
+          <thead>
+            <tr><th>Hardware Component</th><th>July 2026 Steam Most Popular</th><th>Market Share</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Video Card (GPU)</strong></td><td>NVIDIA GeForce RTX 3060 / 4060+</td><td><span class="best-deal-badge">72.72% NVIDIA</span></td></tr>
+            <tr><td><strong>System RAM</strong></td><td>16 GB RAM (40.97%) & 32 GB RAM</td><td><span class="best-deal-badge">40.97% Share</span></td></tr>
+            <tr><td><strong>Processor Cores (CPU)</strong></td><td>8 CPUs (27.85%) & 6 CPUs (27.52%)</td><td><span class="best-deal-badge">55.37% Combined</span></td></tr>
+            <tr><td><strong>Processor Brand</strong></td><td>Intel 53.76% / AMD 46.24%</td><td><span class="best-deal-badge">Intel / AMD</span></td></tr>
+            <tr><td><strong>Primary Resolution</strong></td><td>1920 x 1080 Full HD (FHD)</td><td><span class="best-deal-badge">51.10% Share</span></td></tr>
+            <tr><td><strong>Total Storage Space</strong></td><td>Above 1 TB Hard Drive / SSD Space</td><td><span class="best-deal-badge">49.33% Share</span></td></tr>
+            <tr><td><strong>Operating System</strong></td><td>Windows 11 64-bit</td><td><span class="best-deal-badge">70.26% Share</span></td></tr>
+          </tbody>
+        </table>
+        <div style="text-align:right;">
+          <button class="btn primary sm" id="applySteamFromModal" style="padding:8px 16px;font-size:12px;">Apply Steam July 2026 Filter</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     let allRows = [];
     const selectedIds = new Set();
@@ -1216,6 +1275,10 @@
     const steamBtnText = document.getElementById('steamBtnText');
     const steamBanner = document.getElementById('steamBanner');
     const clearSteamBanner = document.getElementById('clearSteamBanner');
+    const steamInfoBtn = document.getElementById('steamInfoBtn');
+    const steamInfoModalOverlay = document.getElementById('steamInfoModalOverlay');
+    const closeSteamInfoModal = document.getElementById('closeSteamInfoModal');
+    const applySteamFromModal = document.getElementById('applySteamFromModal');
 
     const searchInput = document.getElementById('searchInput');
     const minPrice = document.getElementById('minPrice');
@@ -1283,7 +1346,21 @@
       activeFilters.disp.clear();
 
       document.querySelectorAll('.sidebar input[type=checkbox]').forEach(cb => cb.checked = false);
-      document.querySelectorAll('.filter-group-header').forEach(h => h.classList.remove('has-active'));
+      
+      // Close all filter groups except Price Range
+      document.querySelectorAll('.filter-group-header').forEach(h => {
+        if (h.getAttribute('data-target') === 'fg-price') {
+          h.classList.add('open');
+          const body = document.getElementById('fg-price');
+          if (body) body.classList.add('open');
+        } else {
+          h.classList.remove('open');
+          h.classList.remove('has-active');
+          const bodyId = h.getAttribute('data-target');
+          const body = document.getElementById(bodyId);
+          if (body) body.classList.remove('open');
+        }
+      });
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
       render();
@@ -1297,12 +1374,12 @@
       if (isSteamSpecActive) {
         steamSpecBtn.style.background = 'var(--accent-2)';
         steamSpecBtn.style.color = '#1A1305';
-        steamBtnText.textContent = 'Steam Spec Filter ON ✓';
+        steamBtnText.textContent = 'Steam July 2026 Filter ON ✓';
         steamBanner.style.display = 'flex';
       } else {
         steamSpecBtn.style.background = 'transparent';
         steamSpecBtn.style.color = 'var(--accent-2)';
-        steamBtnText.textContent = 'Filter Steam Gamer Specs';
+        steamBtnText.textContent = 'Filter Steam July 2026 Specs';
         steamBanner.style.display = 'none';
       }
     }
@@ -1318,6 +1395,25 @@
     if (clearSteamBanner) {
       clearSteamBanner.addEventListener('click', () => {
         isSteamSpecActive = false;
+        updateSteamUI();
+        render();
+      });
+    }
+
+    if (steamInfoBtn) {
+      steamInfoBtn.addEventListener('click', () => {
+        steamInfoModalOverlay.classList.add('show');
+      });
+    }
+    if (closeSteamInfoModal) {
+      closeSteamInfoModal.addEventListener('click', () => {
+        steamInfoModalOverlay.classList.remove('show');
+      });
+    }
+    if (applySteamFromModal) {
+      applySteamFromModal.addEventListener('click', () => {
+        steamInfoModalOverlay.classList.remove('show');
+        isSteamSpecActive = true;
         updateSteamUI();
         render();
       });
@@ -1461,18 +1557,19 @@
     }
 
     function matchesSteamSpecs(r) {
-      // 1. RAM: Must be 16GB or higher
-      const memStr = (r.memory || '').toLowerCase();
+      // July 2026 Steam Survey Benchmarks:
+      // 1. System RAM: 16 GB or higher (40.97% Steam Share)
+      const memStr = (r.memory || r.title || '').toLowerCase();
       const memMatch = memStr.match(/(\d+)\s*gb/i);
       let ramGb = memMatch ? parseInt(memMatch[1]) : 0;
       if (ramGb > 0 && ramGb < 16) return false;
 
-      // 2. GPU: Must have dedicated RTX graphics (RTX 3050, 3060, 4050, 4060, 4070, 5060, etc.)
+      // 2. Video Card: NVIDIA GeForce RTX Series (72.72% NVIDIA Market Share, RTX 3060/4060/5060 standard)
       const gfxStr = (r.graphics || r.title || '').toLowerCase();
       const hasRtxGpu = /rtx\s*(30|40|50)\d{2}/i.test(gfxStr) || /geforce\s+rtx/i.test(gfxStr);
       if (!hasRtxGpu) return false;
 
-      // 3. CPU: Must be Core i5/i7/i9/Ultra or Ryzen 5/7/9
+      // 3. Physical CPUs: 6 to 8+ Core Processor (55.37% Steam Combined Share)
       const cpuStr = (r.processor || r.title || '').toLowerCase();
       const hasSteamCpu = /i5|i7|i9|ultra\s*[579]|ryzen\s*[579]/i.test(cpuStr);
       if (!hasSteamCpu) return false;
@@ -1488,7 +1585,7 @@
       let rows = allRows.filter(r => {
         if (!r.title || !r.id || r.title.toLowerCase() === 'untitled model') return false;
         
-        // Steam Specs Preset Filter
+        // Steam Specs Preset Filter (July 2026 Survey)
         if (isSteamSpecActive && !matchesSteamSpecs(r)) {
           return false;
         }
@@ -1965,12 +2062,14 @@
     function closeAllModals() {
       modalOverlay.classList.remove('show');
       detailModalOverlay.classList.remove('show');
+      steamInfoModalOverlay.classList.remove('show');
     }
 
     if (closeModal) closeModal.addEventListener('click', closeAllModals);
 
     modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeAllModals(); });
     detailModalOverlay.addEventListener('click', e => { if (e.target === detailModalOverlay) closeAllModals(); });
+    steamInfoModalOverlay.addEventListener('click', e => { if (e.target === steamInfoModalOverlay) closeAllModals(); });
 
     window.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllModals(); });
 
