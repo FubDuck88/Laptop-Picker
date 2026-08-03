@@ -1160,6 +1160,8 @@
         <div class="topbar-controls">
           <span class="result-count" id="resultCount">Loading models...</span>
           <select class="sort-select" id="sortSelect">
+            <option value="recommended">⭐ Sort by Recommended (Best Value)</option>
+            <option value="popular">🔥 Sort by Popular (Steam & Retail Trends)</option>
             <option value="price-asc">Price: Low to High</option>
             <option value="price-desc">Price: High to Low</option>
             <option value="name-asc">Name: A to Z</option>
@@ -1334,7 +1336,7 @@
     // Home Button resets view
     function resetAllFilters() {
       searchInput.value = ''; minPrice.value = ''; maxPrice.value = '';
-      sortSelect.value = 'price-asc';
+      sortSelect.value = 'recommended';
       isSteamSpecActive = false;
       updateSteamUI();
 
@@ -1577,6 +1579,67 @@
       return true;
     }
 
+    // Recommendation Score: Spec-to-Price value ratio + multi-vendor price comparison advantage
+    function calcRecommendedScore(r) {
+      let specPoints = 0;
+
+      // GPU Tier Points
+      const gfx = (r.graphics || r.title || '').toLowerCase();
+      if (gfx.includes('5090') || gfx.includes('4090')) specPoints += 100;
+      else if (gfx.includes('5080') || gfx.includes('4080')) specPoints += 85;
+      else if (gfx.includes('5070') || gfx.includes('4070')) specPoints += 70;
+      else if (gfx.includes('5060') || gfx.includes('4060')) specPoints += 55;
+      else if (gfx.includes('5050') || gfx.includes('4050') || gfx.includes('3060') || gfx.includes('3050')) specPoints += 40;
+      else specPoints += 15;
+
+      // RAM Points
+      const mem = (r.memory || r.title || '').toLowerCase();
+      if (mem.includes('64gb')) specPoints += 40;
+      else if (mem.includes('32gb')) specPoints += 30;
+      else if (mem.includes('16gb')) specPoints += 20;
+
+      // CPU Points
+      const cpu = (r.processor || r.title || '').toLowerCase();
+      if (cpu.includes('ultra 9') || cpu.includes('i9') || cpu.includes('ryzen 9')) specPoints += 30;
+      else if (cpu.includes('ultra 7') || cpu.includes('i7') || cpu.includes('ryzen 7')) specPoints += 20;
+      else if (cpu.includes('ultra 5') || cpu.includes('i5') || cpu.includes('ryzen 5')) specPoints += 10;
+
+      // Multi-Vendor Price Deal Advantage
+      if (r.vendor_count > 1) specPoints += 25;
+
+      const price = r.price && r.price > 0 ? r.price : 999999;
+      return specPoints / (price / 1000);
+    }
+
+    // Popularity Score: Retail Demand + Steam Survey Hardware Alignment
+    function calcPopularityScore(r) {
+      let score = 0;
+      
+      // 1. Retail availability across multiple stores (PC Image, ALL IT, TechHypermart)
+      score += (r.vendor_count || 1) * 25;
+
+      // 2. High Demand GPUs (Steam Survey #1 & #2: RTX 4060, RTX 3060, RTX 5060)
+      const gfx = (r.graphics || r.title || '').toLowerCase();
+      if (gfx.includes('4060')) score += 50;
+      else if (gfx.includes('3060')) score += 45;
+      else if (gfx.includes('5060')) score += 40;
+      else if (gfx.includes('4050') || gfx.includes('3050')) score += 35;
+      else if (gfx.includes('4070') || gfx.includes('5070')) score += 30;
+
+      // 3. Most Popular RAM (16GB #1 at 41%, 32GB #2)
+      const mem = (r.memory || r.title || '').toLowerCase();
+      if (mem.includes('16gb') || mem.includes('16 gb')) score += 40;
+      else if (mem.includes('32gb') || mem.includes('32 gb')) score += 30;
+
+      // 4. Most Popular CPU Tiers (Intel Core i7 / Ultra 7 / Ryzen 7 & Core i5 / Ultra 5 / Ryzen 5)
+      const cpu = (r.processor || r.title || '').toLowerCase();
+      if (cpu.includes('i7') || cpu.includes('ultra 7') || cpu.includes('ryzen 7')) score += 35;
+      else if (cpu.includes('i5') || cpu.includes('ultra 5') || cpu.includes('ryzen 5')) score += 30;
+      else if (cpu.includes('i9') || cpu.includes('ultra 9') || cpu.includes('ryzen 9')) score += 25;
+
+      return score;
+    }
+
     function getFiltered() {
       const q = searchInput.value.trim().toLowerCase();
       const min = parseFloat(minPrice.value);
@@ -1653,7 +1716,25 @@
       });
 
       const sort = sortSelect.value;
-      if (sort === 'price-asc') {
+      if (sort === 'recommended') {
+        rows.sort((a, b) => {
+          const pA = a.price && a.price > 0 ? a.price : Infinity;
+          const pB = b.price && b.price > 0 ? b.price : Infinity;
+          if (pA === Infinity && pB === Infinity) return a.title.localeCompare(b.title);
+          if (pA === Infinity) return 1;
+          if (pB === Infinity) return -1;
+          return calcRecommendedScore(b) - calcRecommendedScore(a);
+        });
+      } else if (sort === 'popular') {
+        rows.sort((a, b) => {
+          const pA = a.price && a.price > 0 ? a.price : Infinity;
+          const pB = b.price && b.price > 0 ? b.price : Infinity;
+          if (pA === Infinity && pB === Infinity) return a.title.localeCompare(b.title);
+          if (pA === Infinity) return 1;
+          if (pB === Infinity) return -1;
+          return calcPopularityScore(b) - calcPopularityScore(a);
+        });
+      } else if (sort === 'price-asc') {
         rows.sort((a, b) => {
           const pA = a.price && a.price > 0 ? a.price : Infinity;
           const pB = b.price && b.price > 0 ? b.price : Infinity;
