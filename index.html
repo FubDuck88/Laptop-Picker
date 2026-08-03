@@ -1653,9 +1653,23 @@
       });
 
       const sort = sortSelect.value;
-      if (sort === 'price-asc') rows.sort((a, b) => a.price - b.price);
-      else if (sort === 'price-desc') rows.sort((a, b) => b.price - a.price);
-      else if (sort === 'name-asc') rows.sort((a, b) => a.title.localeCompare(b.title));
+      if (sort === 'price-asc') {
+        rows.sort((a, b) => {
+          const pA = a.price && a.price > 0 ? a.price : Infinity;
+          const pB = b.price && b.price > 0 ? b.price : Infinity;
+          if (pA === pB) return a.title.localeCompare(b.title);
+          return pA - pB;
+        });
+      } else if (sort === 'price-desc') {
+        rows.sort((a, b) => {
+          const pA = a.price && a.price > 0 ? a.price : -1;
+          const pB = b.price && b.price > 0 ? b.price : -1;
+          if (pA === pB) return a.title.localeCompare(b.title);
+          return pB - pA;
+        });
+      } else if (sort === 'name-asc') {
+        rows.sort((a, b) => a.title.localeCompare(b.title));
+      }
       return rows;
     }
 
