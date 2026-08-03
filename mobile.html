@@ -988,6 +988,22 @@
       const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
     }
 
+    function formatImgUrl(raw, vendorStr) {
+      if (!raw) return '';
+      let u = raw.trim();
+      if (u.startsWith('//')) return 'https:' + u;
+      if (u.startsWith('http://') || u.startsWith('https://')) return u.replace(/([^:])\/{2,}/g, '$1/');
+      if (u.startsWith('/')) {
+        const v = (vendorStr || '').toLowerCase();
+        if (v.includes('techhypermart')) return 'https://www.techhypermart.com' + u;
+        if (v.includes('pcimage') || v.includes('pc image')) return 'https://store.pcimage.com.my' + u;
+        if (v.includes('all it') || v.includes('allit')) return 'https://www.allithypermarket.com.my' + u;
+        if (v.includes('acer')) return 'https://store.acer.com' + u;
+        return 'https://p3-ofp.static.pub' + u;
+      }
+      return u;
+    }
+
     function renderMobile() {
       const rows = getMobileFiltered();
       document.getElementById('mCount').textContent = rows.length + ' laptops match';
@@ -1008,12 +1024,20 @@
           badgeHtml = '<div class="m-deal-badge">🏷️ ' + r.vendor_count + ' Vendor Deals (Best at ' + escapeHtml(bestVendor) + ')</div>';
         }
 
+        let rawImg = formatImgUrl(r.image_url, r.series || r.best_vendor);
+        let imgHtml = '';
+        if (rawImg.length > 5) {
+          imgHtml = '<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px;text-align:center;margin:4px 0;height:100px;display:flex;align-items:center;justify-content:center;">'
+            + '<img src="' + escapeHtml(rawImg) + '" alt="' + escapeHtml(r.title) + '" referrerpolicy="no-referrer" style="max-height:88px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));" onerror="this.parentElement.style.display=\'none\';" /></div>';
+        }
+
         return '<div class="m-card">'
           + '<div>'
           + '<div class="m-card-title">' + escapeHtml(r.title) + '</div>'
           + '<div class="m-part">MPN: ' + escapeHtml(r.id ? r.id.toUpperCase() : 'N/A') + '</div>'
           + badgeHtml
           + '</div>'
+          + imgHtml
           + '<div class="m-price-tag"><span class="m-price-cur">MYR</span>' + priceStr + '</div>'
           + '<div class="m-specs">'
           + '<div>⚡ <strong>CPU:</strong> ' + escapeHtml(r.processor || 'N/A') + '</div>'
@@ -1057,7 +1081,16 @@
         tableHtml += '</table></div>';
       }
 
+      let rawImg = formatImgUrl(r.image_url, r.series || r.best_vendor);
+      let imgBox = '';
+      if (rawImg.length > 5) {
+        imgBox = '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;margin-bottom:12px;">'
+          + '<img src="' + escapeHtml(rawImg) + '" alt="' + escapeHtml(r.title) + '" referrerpolicy="no-referrer" style="max-height:130px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.4));" onerror="this.parentElement.style.display=\'none\';" />'
+          + '</div>';
+      }
+
       document.getElementById('mDetailBody').innerHTML = ''
+        + imgBox
         + '<h3 style="font-size:15px;margin-bottom:6px;">' + escapeHtml(r.title) + '</h3>'
         + '<div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">MPN: <strong style="color:var(--accent);">' + escapeHtml(r.id.toUpperCase()) + '</strong></div>'
         + '<div style="font-size:20px;font-weight:700;color:var(--accent);margin-bottom:12px;">' + priceStr + '</div>'

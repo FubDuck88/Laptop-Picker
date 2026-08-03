@@ -2066,10 +2066,7 @@
         const isMultiVendor = deals.length > 1;
         const bestVendorName = deals[0] ? deals[0].vendor : (r.best_vendor || r.series);
 
-        let rawUrl = (r.image_url || '').trim();
-        if (rawUrl.startsWith('//')) rawUrl = 'https:' + rawUrl;
-        else if (rawUrl.startsWith('/')) rawUrl = 'https://p3-ofp.static.pub' + rawUrl;
-        rawUrl = rawUrl.replace(/([^:])\/{2,}/g, '$1/');
+        let rawUrl = formatImgUrl(r.image_url, r.series || r.best_vendor);
 
         let imgHtml = '';
         if (rawUrl.length > 5) {
@@ -2125,11 +2122,24 @@
       });
     }
 
+    function formatImgUrl(raw, vendorStr) {
+      if (!raw) return '';
+      let u = raw.trim();
+      if (u.startsWith('//')) return 'https:' + u;
+      if (u.startsWith('http://') || u.startsWith('https://')) return u.replace(/([^:])\/{2,}/g, '$1/');
+      if (u.startsWith('/')) {
+        const v = (vendorStr || '').toLowerCase();
+        if (v.includes('techhypermart')) return 'https://www.techhypermart.com' + u;
+        if (v.includes('pcimage') || v.includes('pc image')) return 'https://store.pcimage.com.my' + u;
+        if (v.includes('all it') || v.includes('allit')) return 'https://www.allithypermarket.com.my' + u;
+        if (v.includes('acer')) return 'https://store.acer.com' + u;
+        return 'https://p3-ofp.static.pub' + u;
+      }
+      return u;
+    }
+
     function renderLaptopSvg(r) {
-      let rawUrl = (r.image_url || '').trim();
-      if (rawUrl.startsWith('//')) rawUrl = 'https:' + rawUrl;
-      else if (rawUrl.startsWith('/')) rawUrl = 'https://p3-ofp.static.pub' + rawUrl;
-      rawUrl = rawUrl.replace(/([^:])\/{2,}/g, '$1/');
+      let rawUrl = formatImgUrl(r.image_url, r.series || r.best_vendor);
 
       if (rawUrl.length > 5) {
         return '<img src="' + escapeHtml(rawUrl) + '" alt="' + escapeHtml(r.title) + '" referrerpolicy="no-referrer" style="max-height:160px;max-width:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.5));display:block;margin:0 auto;" onerror="this.style.display=\'none\';if(this.nextElementSibling)this.nextElementSibling.style.display=\'block\';" />'
