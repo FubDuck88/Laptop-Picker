@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Laptop Ledger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #14171C;
+      --surface: #1B1F26;
+      --surface-raised: #20252D;
+      --text: #ECE9E2;
+      --text-dim: #8B93A1;
+      --text-faint: #5B626F;
+      --accent: #FFB020;
+      --accent-dim: #B98226;
+      --accent-2: #57D9C6;
+      --border: #2A2F38;
+      --danger: #E2665C;
+      --sidebar-w: 256px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-w);
+      min-width: var(--sidebar-w);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+      display: none;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar.visible {
+      display: flex;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .sb-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 16px 14px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--surface);
+      z-index: 2;
+    }
+
+    .sb-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .sb-clear {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 5px;
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      cursor: pointer;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background .12s ease, color .12s ease;
+    }
+
+    .sb-clear:hover {
+      background: var(--accent);
+      color: #221803;
+    }
+
+    .filter-group {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-group-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 16px;
+      cursor: pointer;
+      user-select: none;
+      transition: background .1s ease;
+    }
+
+    .filter-group-header:hover {
+      background: var(--surface-raised);
+    }
+
+    .filter-group-header.open {
+      background: var(--surface-raised);
+    }
+
+    .filter-group-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .filter-group-header.has-active .filter-group-label {
+      color: var(--accent);
+    }
+
+    .filter-arrow {
+      font-size: 14px;
+      color: var(--text-faint);
+      transition: transform .18s ease, color .12s ease;
+      line-height: 1;
+    }
+
+    .filter-group-header.open .filter-arrow {
+      transform: rotate(90deg);
+      color: var(--accent);
+    }
+
+    .filter-group-header.has-active .filter-arrow {
+      color: var(--accent);
+    }
+
+    .filter-body {
+      display: none;
+      background: var(--surface-raised);
+      padding: 4px 0 10px;
+    }
+
+    .filter-body.open {
+      display: block;
+    }
+
+    .sb-field {
+      padding: 8px 14px 2px;
+    }
+
+    .sb-field input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+    }
+
+    .sb-field input:focus {
+      outline: none;
+      border-color: var(--accent-dim);
+    }
+
+    .sb-price {
+      padding: 8px 14px 2px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .price-row span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-faint);
+    }
+
+    .price-row input {
+      flex: 1;
+      min-width: 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 8px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+    }
+
+    .price-row input:focus {
+      outline: none;
+      border-color: var(--accent-dim);
+    }
+
+    .cb-list {
+      list-style: none;
+      padding: 2px 0;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .cb-list::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .cb-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .cb-list::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .cb-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 16px;
+      cursor: pointer;
+      transition: background .1s ease;
+    }
+
+    .cb-item:hover {
+      background: rgba(255, 176, 32, 0.05);
+    }
+
+    .cb-item input[type=checkbox] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      background: var(--bg);
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      transition: border-color .12s, background .12s;
+    }
+
+    .cb-item input[type=checkbox]:checked {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .cb-item input[type=checkbox]:checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 9px;
+      color: #221803;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .cb-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      cursor: pointer;
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .cb-item:has(input:checked) .cb-label {
+      color: var(--accent);
+    }
+
+    .sb-sort {
+      padding: 8px 14px 2px;
+    }
+
+    .sb-sort select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+    }
+
+    .sb-sort select:focus {
+      outline: none;
+      border-color: var(--accent-dim);
+    }
+
+    /* Content */
+    .content-wrapper {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header.top {
+      padding: 48px 40px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    header.top .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 10px;
+    }
+
+    header.top h1 {
+      font-size: 34px;
+      font-weight: 700;
+      margin: 0 0 6px;
+      letter-spacing: -0.01em;
+    }
+
+    header.top p.sub {
+      color: var(--text-dim);
+      font-size: 15px;
+      margin: 0;
+      max-width: 560px;
+      line-height: 1.5;
+    }
+
+    .ticker {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .ticker .stat {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .ticker .stat .num {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+
+    .ticker .stat .lbl {
+      font-size: 11px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    main {
+      padding: 32px 40px 140px;
+      flex: 1;
+    }
+
+    .dropzone {
+      border: 1.5px dashed var(--border);
+      border-radius: 14px;
+      padding: 56px 24px;
+      text-align: center;
+      color: var(--text-dim);
+      transition: border-color .15s ease, background .15s ease;
+    }
+
+    .dropzone.drag {
+      border-color: var(--accent);
+      background: rgba(255, 176, 32, 0.05);
+    }
+
+    .dropzone h3 {
+      color: var(--text);
+      font-size: 17px;
+      margin: 0 0 8px;
+      font-weight: 600;
+    }
+
+    .dropzone p {
+      margin: 0 0 20px;
+      font-size: 14px;
+    }
+
+    .dropzone input[type=file] {
+      display: none;
+    }
+
+    .btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface-raised);
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color .15s, background .15s, transform .05s;
+    }
+
+    .btn:hover {
+      border-color: var(--accent-dim);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: #221803;
+      border-color: var(--accent);
+    }
+
+    .btn.primary:hover {
+      background: #FFC04D;
+    }
+
+    .btn.secondary {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn.secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn.danger {
+      background: rgba(255, 95, 87, 0.12);
+      color: #ff5f57;
+      border-color: rgba(255, 95, 87, 0.3);
+    }
+
+    .btn.danger:hover {
+      background: rgba(255, 95, 87, 0.22);
+      border-color: #ff5f57;
+    }
+
+    .btn.ghost {
+      background: transparent;
+    }
+
+    .btn.small,
+    .btn.sm {
+      padding: 6px 14px;
+      font-size: 12px;
+      border-radius: 6px;
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* File Management Toolbar */
+    .file-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .file-toolbar input[type=file] {
+      display: none;
+    }
+
+    .loaded-file-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      background: rgba(255, 176, 32, 0.1);
+      border: 1px solid rgba(255, 176, 32, 0.25);
+      padding: 6px 12px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .result-count {
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: var(--text-faint);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+      gap: 20px;
+    }
+
+    .ticket {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ticket::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 16px;
+      right: 16px;
+      height: 1px;
+      background-image: radial-gradient(circle, var(--bg) 3px, transparent 3.5px);
+      background-size: 14px 14px;
+      background-position: 0 -6px;
+    }
+
+    .ticket-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .ticket-title-wrap {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ticket-title {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    /* Part number tag below title */
+    .part-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+    }
+
+    .part-tag .pid {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      display: inline-block;
+    }
+
+    /* Variant badge: shown when 2+ cards share the same title */
+    .variant-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(255, 176, 32, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(255, 176, 32, 0.25);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 4px;
+      vertical-align: middle;
+    }
+
+    .compare-check {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .compare-check.checked {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #221803;
+    }
+
+    .price-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .price-tag .cur {
+      font-size: 13px;
+      color: var(--text-faint);
+      margin-right: 4px;
+      font-weight: 500;
+    }
+
+    .spec-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12.5px;
+      color: var(--text-dim);
+      border-top: 1px dashed var(--border);
+      padding-top: 12px;
+    }
+
+    .spec-list li {
+      display: flex;
+      gap: 8px;
+    }
+
+    .spec-list .k {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-faint);
+      width: 76px;
+      flex-shrink: 0;
+      text-transform: uppercase;
+      font-size: 10.5px;
+      letter-spacing: 0.04em;
+      padding-top: 1px;
+    }
+
+    .spec-list .v {
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* Hoverable spec value — native tooltip shows full raw text */
+    .spec-val {
+      cursor: help;
+      border-bottom: 1px dotted var(--border);
+      transition: border-color .12s ease, color .12s ease;
+    }
+
+    .spec-val:hover {
+      color: var(--accent);
+      border-color: var(--accent-dim);
+    }
+
+    /* Upgrade hint shown when a product has multiple CPU/GPU options */
+    .upgrade-hint {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-faint);
+      background: rgba(255, 176, 32, 0.07);
+      border: 1px dashed rgba(255, 176, 32, 0.3);
+      border-radius: 4px;
+      padding: 1px 6px;
+      white-space: nowrap;
+    }
+
+    .upgrade-hint::before {
+      content: '↑ ';
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .badge.intel {
+      background: rgba(87, 217, 198, 0.12);
+      color: var(--accent-2);
+    }
+
+    .badge.amd {
+      background: rgba(226, 102, 92, 0.12);
+      color: var(--danger);
+    }
+
+    .badge.other {
+      background: rgba(139, 147, 161, 0.12);
+      color: var(--text-dim);
+    }
+
+    .ticket-foot {
+      margin-top: auto;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .view-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .view-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .empty-results {
+      padding: 60px 0;
+      text-align: center;
+      color: var(--text-faint);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+
+    .tray {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surface-raised);
+      border-top: 1px solid var(--border);
+      padding: 14px 32px;
+      display: none;
+      align-items: center;
+      gap: 16px;
+      z-index: 50;
+    }
+
+    .tray.show {
+      display: flex;
+    }
+
+    .tray-chips {
+      flex: 1;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tray-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 220px;
+    }
+
+    .tray-chip span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tray-chip button {
+      background: none;
+      border: none;
+      color: var(--text-faint);
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .tray-chip button:hover {
+      color: var(--danger);
+    }
+
+    /* Modal Overlay System */
+    .modal-overlay {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      background: rgba(10, 12, 15, 0.85) !important;
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px;
+      z-index: 1000 !important;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.show {
+      display: flex !important;
+    }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 960px;
+      width: 100%;
+      padding: 28px 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      position: relative;
+      max-height: 88vh;
+      overflow-y: auto;
+      margin: auto;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-head h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-bright);
+    }
+
+    .close-btn {
+      background: var(--surface-raised);
+      border: 1px solid var(--border);
+      color: var(--text-bright);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+      line-height: 1;
+    }
+
+    .close-btn:hover {
+      border-color: var(--danger);
+      color: #fff;
+      background: var(--danger);
+    }
+
+    /* Single Model Detail Modal Styles */
+    .detail-modal-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 920px;
+      width: 100%;
+      padding: 32px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .detail-hero {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+
+    @media(max-width:700px) {
+      .detail-hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .detail-img-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      min-height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-img-box svg {
+      width: 100%;
+      max-height: 140px;
+      height: auto;
+    }
+
+    .detail-meta h2 {
+      margin: 0 0 8px 0;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text-bright);
+    }
+
+    .detail-meta .part-tag {
+      margin-bottom: 12px;
+    }
+
+    .detail-price-box {
+      background: rgba(255, 176, 32, 0.06);
+      border: 1px solid rgba(255, 176, 32, 0.25);
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .detail-price-box .price-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .detail-price-box .price-cur {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+
+    .vendor-sec {
+      margin-bottom: 24px;
+    }
+
+    .vendor-sec h3,
+    .spec-sec h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      letter-spacing: 0.08em;
+      margin: 0 0 12px 0;
+    }
+
+    .vendor-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 8px;
+    }
+
+    .vendor-table th,
+    .vendor-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .vendor-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .vendor-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .best-deal-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-2);
+      background: rgba(87, 217, 198, 0.12);
+      border: 1px solid rgba(87, 217, 198, 0.3);
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .spec-grid-detail {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    @media(max-width:640px) {
+      .spec-grid-detail {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .spec-detail-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .spec-detail-card .spec-d-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .spec-detail-card .spec-d-val {
+      font-size: 13px;
+      color: var(--text-bright);
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    table.compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    table.compare-table th,
+    table.compare-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    table.compare-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      letter-spacing: 0.05em;
+      width: 100px;
+    }
+
+    table.compare-table td.model-name {
+      font-weight: 600;
+      font-size: 13.5px;
+    }
+
+    table.compare-table td.price-cell {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    table.compare-table a.mini-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    table.compare-table a.mini-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    @media(max-width:700px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-width: unset;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      header.top {
+        padding: 28px 18px 20px;
+      }
+
+      main {
+        padding: 20px 18px 140px;
+      }
+
+      header.top h1 {
+        font-size: 26px;
+      }
+
+      .tray {
+        padding: 12px 18px;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-header">
+      <span class="sb-title">Filter</span>
+      <button class="sb-clear" id="resetBtn">✕ Clear</button>
+    </div>
+
+    <!-- Search -->
+    <div class="filter-group">
+      <div class="filter-group-header open" data-target="fg-search">
+        <span class="filter-group-label">Search</span>
+        <span class="filter-arrow">›</span>
+      </div>
+      <div class="filter-body open" id="fg-search">
+        <div class="sb-field">
+          <input type="text" id="searchInput" placeholder="Model name…" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="filter-group">
+      <div class="filter-group-header open" data-target="fg-price">
+        <span class="filter-group-label">Price (RM)</span>
+        <span class="filter-arrow">›</span>
+      </div>
+      <div class="filter-body open" id="fg-price">
+        <div class="sb-price">
+          <div class="price-row">
+            <input type="number" id="minPrice" placeholder="Min" />
+            <span>–</span>
+            <input type="number" id="maxPrice" placeholder="Max" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Store / Source (populated dynamically if multiple stores exist) -->
+    <div class="filter-group" id="fg-store-wrap" style="display:none;">
+      <div class="filter-group-header open" data-target="fg-store">
+        <span class="filter-group-label">Store / Source</span>
+        <span class="filter-arrow">›</span>
+      </div>
+      <div class="filter-body open" id="fg-store">
+        <ul class="cb-list" id="cblist-store"></ul>
+      </div>
+    </div>
+
+    <!-- CPU Series — matched against data from actual CSV -->
+    <div class="filter-group">
+      <div class="filter-group-header" data-target="fg-cpu">
+        <span class="filter-group-label">CPU Series</span>
+        <span class="filter-arrow">›</span>
+      </div>
+      <div class="filter-body" id="fg-cpu">
+        <ul class="cb-list" id="cblist-cpu">
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-c5" data-key="cpu" data-val="Core 5" /><label
+              class="cb-label" for="cb-cpu-c5">Intel Core 5</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-c7" data-key="cpu" data-val="Core 7" /><label
+              class="cb-label" for="cb-cpu-c7">Intel Core 7</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-c9" data-key="cpu" data-val="Core 9" /><label
+              class="cb-label" for="cb-cpu-c9">Intel Core 9</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-u5" data-key="cpu" data-val="Core Ultra 5" /><label
+              class="cb-label" for="cb-cpu-u5">Intel Core Ultra 5</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-u7" data-key="cpu" data-val="Core Ultra 7" /><label
+              class="cb-label" for="cb-cpu-u7">Intel Core Ultra 7</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-u9" data-key="cpu" data-val="Core Ultra 9" /><label
+              class="cb-label" for="cb-cpu-u9">Intel Core Ultra 9</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-i5" data-key="cpu" data-val="Core i5" /><label
+              class="cb-label" for="cb-cpu-i5">Intel Core i5</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-i7" data-key="cpu" data-val="Core i7" /><label
+              class="cb-label" for="cb-cpu-i7">Intel Core i7</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-i9" data-key="cpu" data-val="Core i9" /><label
+              class="cb-label" for="cb-cpu-i9">Intel Core i9</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-r5" data-key="cpu" data-val="Ryzen 5" /><label
+              class="cb-label" for="cb-cpu-r5">AMD Ryzen 5</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-r7" data-key="cpu" data-val="Ryzen 7" /><label
+              class="cb-label" for="cb-cpu-r7">AMD Ryzen 7</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-r9" data-key="cpu" data-val="Ryzen 9" /><label
+              class="cb-label" for="cb-cpu-r9">AMD Ryzen 9</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-rai5" data-key="cpu" data-val="Ryzen AI 5" /><label
+              class="cb-label" for="cb-cpu-rai5">AMD Ryzen AI 5</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-rai7" data-key="cpu" data-val="Ryzen AI 7" /><label
+              class="cb-label" for="cb-cpu-rai7">AMD Ryzen AI 7</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-rai9" data-key="cpu" data-val="Ryzen AI 9" /><label
+              class="cb-label" for="cb-cpu-rai9">AMD Ryzen AI 9</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-cpu-snap" data-key="cpu" data-val="Snapdragon" /><label
+              class="cb-label" for="cb-cpu-snap">Qualcomm Snapdragon</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- GPU Model — all GPUs present in multi-store database -->
+    <div class="filter-group">
+      <div class="filter-group-header" data-target="fg-gpu">
+        <span class="filter-group-label">GPU Model</span>
+        <span class="filter-arrow">›</span>
+      </div>
+      <div class="filter-body" id="fg-gpu">
+        <ul class="cb-list" id="cblist-gpu">
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-arc" data-key="gpu" data-val="Arc" /><label
+              class="cb-label" for="cb-gpu-arc">Intel Arc</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-iris" data-key="gpu" data-val="Iris Xe" /><label
+              class="cb-label" for="cb-gpu-iris">Intel Iris Xe</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-rdna" data-key="gpu" data-val="Radeon" /><label
+              class="cb-label" for="cb-gpu-rdna">AMD Radeon</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-adreno" data-key="gpu" data-val="Adreno" /><label
+              class="cb-label" for="cb-gpu-adreno">Qualcomm Adreno</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-5090" data-key="gpu" data-val="RTX 5090" /><label
+              class="cb-label" for="cb-gpu-5090">NVIDIA RTX 5090</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-5080" data-key="gpu" data-val="RTX 5080" /><label
+              class="cb-label" for="cb-gpu-5080">NVIDIA RTX 5080</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-5070t" data-key="gpu" data-val="RTX 5070 Ti" /><label
+              class="cb-label" for="cb-gpu-5070t">NVIDIA RTX 5070 Ti</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-5070" data-key="gpu" data-val="RTX 5070" /><label
+              class="cb-label" for="cb-gpu-5070">NVIDIA RTX 5070</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-5060" data-key="gpu" data-val="RTX 5060" /><label
+              class="cb-label" for="cb-gpu-5060">NVIDIA RTX 5060</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-5050" data-key="gpu" data-val="RTX 5050" /><label
+              class="cb-label" for="cb-gpu-5050">NVIDIA RTX 5050</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-4090" data-key="gpu" data-val="RTX 4090" /><label
+              class="cb-label" for="cb-gpu-4090">NVIDIA RTX 4090</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-4080" data-key="gpu" data-val="RTX 4080" /><label
+              class="cb-label" for="cb-gpu-4080">NVIDIA RTX 4080</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-4070" data-key="gpu" data-val="RTX 4070" /><label
+              class="cb-label" for="cb-gpu-4070">NVIDIA RTX 4070</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-4060" data-key="gpu" data-val="RTX 4060" /><label
+              class="cb-label" for="cb-gpu-4060">NVIDIA RTX 4060</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-4050" data-key="gpu" data-val="RTX 4050" /><label
+              class="cb-label" for="cb-gpu-4050">NVIDIA RTX 4050</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-3070" data-key="gpu" data-val="RTX 3070" /><label
+              class="cb-label" for="cb-gpu-3070">NVIDIA RTX 3070</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-gpu-3050" data-key="gpu" data-val="RTX 3050" /><label
+              class="cb-label" for="cb-gpu-3050">NVIDIA RTX 3050</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Memory — sizes present in actual data -->
+    <div class="filter-group">
+      <div class="filter-group-header" data-target="fg-mem">
+        <span class="filter-group-label">Memory</span>
+        <span class="filter-arrow">›</span>
+      </div>
+      <div class="filter-body" id="fg-mem">
+        <ul class="cb-list" id="cblist-mem">
+          <li class="cb-item"><input type="checkbox" id="cb-mem-8" data-key="mem" data-val="8GB" /><label
+              class="cb-label" for="cb-mem-8">8 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-mem-16" data-key="mem" data-val="16GB" /><label
+              class="cb-label" for="cb-mem-16">16 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-mem-24" data-key="mem" data-val="24GB" /><label
+              class="cb-label" for="cb-mem-24">24 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-mem-32" data-key="mem" data-val="32GB" /><label
+              class="cb-label" for="cb-mem-32">32 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-mem-48" data-key="mem" data-val="48GB" /><label
+              class="cb-label" for="cb-mem-48">48 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-mem-64" data-key="mem" data-val="64GB" /><label
+              class="cb-label" for="cb-mem-64">64 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-mem-96" data-key="mem" data-val="96GB" /><label
+              class="cb-label" for="cb-mem-96">96 GB</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-mem-128" data-key="mem" data-val="128GB" /><label
+              class="cb-label" for="cb-mem-128">128 GB</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Storage — sizes present in actual data -->
+    <div class="filter-group">
+      <div class="filter-group-header" data-target="fg-sto">
+        <span class="filter-group-label">Storage</span>
+        <span class="filter-arrow">›</span>
+      </div>
+      <div class="filter-body" id="fg-sto">
+        <ul class="cb-list" id="cblist-sto">
+          <li class="cb-item"><input type="checkbox" id="cb-sto-256" data-key="sto" data-val="256GB" /><label
+              class="cb-label" for="cb-sto-256">256 GB SSD</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-sto-512" data-key="sto" data-val="512GB" /><label
+              class="cb-label" for="cb-sto-512">512 GB SSD</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-sto-1tb" data-key="sto" data-val="1TB" /><label
+              class="cb-label" for="cb-sto-1tb">1 TB SSD</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-sto-2tb" data-key="sto" data-val="2TB" /><label
+              class="cb-label" for="cb-sto-2tb">2 TB SSD</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-sto-4tb" data-key="sto" data-val="4TB" /><label
+              class="cb-label" for="cb-sto-4tb">4 TB SSD</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Display Size -->
+    <div class="filter-group">
+      <div class="filter-group-header" data-target="fg-disp">
+        <span class="filter-group-label">Display Size</span>
+        <span class="filter-arrow">›</span>
+      </div>
+      <div class="filter-body" id="fg-disp">
+        <ul class="cb-list" id="cblist-disp">
+          <li class="cb-item"><input type="checkbox" id="cb-disp-8" data-key="disp" data-val="8" /><label
+              class="cb-label" for="cb-disp-8">8 inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-disp-13" data-key="disp" data-val="13" /><label
+              class="cb-label" for="cb-disp-13">13 inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-disp-14" data-key="disp" data-val="14" /><label
+              class="cb-label" for="cb-disp-14">14 inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-disp-15" data-key="disp" data-val="15" /><label
+              class="cb-label" for="cb-disp-15">15 inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-disp-16" data-key="disp" data-val="16" /><label
+              class="cb-label" for="cb-disp-16">16 inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-disp-17" data-key="disp" data-val="17" /><label
+              class="cb-label" for="cb-disp-17">17 inch</label></li>
+          <li class="cb-item"><input type="checkbox" id="cb-disp-18" data-key="disp" data-val="18" /><label
+              class="cb-label" for="cb-disp-18">18 inch</label></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sort -->
+    <div class="filter-group">
+      <div class="filter-group-header open" data-target="fg-sort">
+        <span class="filter-group-label">Sort By</span>
+        <span class="filter-arrow">›</span>
+      </div>
+      <div class="filter-body open" id="fg-sort">
+        <div class="sb-sort">
+          <select id="sortSelect">
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="name-asc">Name: A–Z</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="content-wrapper">
+    <header class="top">
+      <p class="eyebrow">/// spec ledger</p>
+      <h1>Laptop Ledger</h1>
+      <p class="sub">Load your scraped catalog, filter by budget and specs, and pull up a side-by-side comparison for
+        anything you are weighing.</p>
+
+      <div class="file-toolbar" id="fileToolbar" style="display:none;">
+        <span class="loaded-file-badge" id="loadedFileBadge">📄 master_laptops.csv</span>
+        <label class="btn secondary sm" for="updateFileInput">↻ Update / Change CSV</label>
+        <input type="file" id="updateFileInput" accept=".csv" />
+        <button class="btn danger sm" id="removeFileBtn">✕ Unload CSV</button>
+      </div>
+
+      <div class="ticker" id="ticker" style="display:none;">
+        <div class="stat"><span class="num" id="statCount">0</span><span class="lbl">models loaded</span></div>
+        <div class="stat"><span class="num" id="statAvg">—</span><span class="lbl">avg price</span></div>
+        <div class="stat"><span class="num" id="statMin">—</span><span class="lbl">cheapest</span></div>
+        <div class="stat"><span class="num" id="statMax">—</span><span class="lbl">priciest</span></div>
+      </div>
+    </header>
+
+    <main>
+      <div class="dropzone" id="dropzone">
+        <h3>Load your CSV</h3>
+        <p>Drop the file exported by the scraper, or browse for it. Expected columns: id, title, price, url, processor,
+          graphics, memory, storage, display, wifi, battery, others.</p>
+        <label class="btn primary" for="fileInput">Choose CSV file</label>
+        <input type="file" id="fileInput" accept=".csv" />
+      </div>
+
+      <div id="appArea" style="display:none;">
+        <div class="result-count" id="resultCount"></div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </main>
+  </div>
+
+  <div class="tray" id="tray">
+    <div class="tray-chips" id="trayChips"></div>
+    <button class="btn ghost small" id="clearCompare">Clear</button>
+    <button class="btn primary small" id="openCompare">Compare selected</button>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>Side by side comparison</h2>
+        <button class="close-btn" id="closeModal">✕</button>
+      </div>
+      <div id="compareTableWrap"></div>
+    </div>
+  </div>
+
+  <!-- Single Model Full Spec & Multi-Vendor Modal -->
+  <div class="modal-overlay" id="detailModalOverlay">
+    <div class="modal detail-modal-card">
+      <div class="modal-head">
+        <h2
+          style="font-size:14px;font-family:'JetBrains Mono',monospace;color:var(--text-faint);text-transform:uppercase;margin:0;">
+          /// PRODUCT SPECIFICATIONS & VENDOR DEALS</h2>
+        <button class="close-btn" id="closeDetailModal">✕</button>
+      </div>
+      <div id="detailModalBody"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script>
+    let allRows = [];
+    let selectedIds = new Set();
+
+    // Hardcoded filter sets — values matched with includes() against CSV fields
+    const activeFilters = {
+      store: new Set(),
+      cpu: new Set(),
+      gpu: new Set(),
+      mem: new Set(),
+      sto: new Set(),
+      disp: new Set()
+    };
+
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+    const updateFileInput = document.getElementById('updateFileInput');
+    const removeFileBtn = document.getElementById('removeFileBtn');
+    const fileToolbar = document.getElementById('fileToolbar');
+    const loadedFileBadge = document.getElementById('loadedFileBadge');
+    const appArea = document.getElementById('appArea');
+    const sidebar = document.getElementById('sidebar');
+    const ticker = document.getElementById('ticker');
+    const grid = document.getElementById('grid');
+    const resultCount = document.getElementById('resultCount');
+    const searchInput = document.getElementById('searchInput');
+    const minPrice = document.getElementById('minPrice');
+    const maxPrice = document.getElementById('maxPrice');
+    const sortSelect = document.getElementById('sortSelect');
+    const resetBtn = document.getElementById('resetBtn');
+    const tray = document.getElementById('tray');
+    const trayChips = document.getElementById('trayChips');
+    const clearCompare = document.getElementById('clearCompare');
+    const openCompare = document.getElementById('openCompare');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const closeModal = document.getElementById('closeModal');
+    const compareTableWrap = document.getElementById('compareTableWrap');
+
+    // Accordion
+    document.querySelectorAll('.filter-group-header').forEach(hdr => {
+      hdr.addEventListener('click', () => {
+        const body = document.getElementById(hdr.dataset.target);
+        hdr.classList.toggle('open');
+        body.classList.toggle('open');
+      });
+    });
+
+    // Wire up hardcoded checkboxes
+    document.querySelectorAll('.cb-list input[type=checkbox]').forEach(cb => {
+      const key = cb.dataset.key;
+      const val = cb.dataset.val;
+      cb.addEventListener('change', () => {
+        if (cb.checked) activeFilters[key].add(val);
+        else activeFilters[key].delete(val);
+        const hdr = document.querySelector('[data-target="fg-' + key + '"]');
+        if (hdr) {
+          if (activeFilters[key].size > 0) hdr.classList.add('has-active');
+          else hdr.classList.remove('has-active');
+        }
+        render();
+      });
+    });
+
+    // Drop / file
+    ['dragenter', 'dragover'].forEach(evt => {
+      dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.add('drag'); });
+    });
+    ['dragleave', 'drop'].forEach(evt => {
+      dropzone.addEventListener(evt, e => { e.preventDefault(); dropzone.classList.remove('drag'); });
+    });
+    dropzone.addEventListener('drop', e => { const f = e.dataTransfer.files[0]; if (f) parseFile(f); });
+    fileInput.addEventListener('change', e => { const f = e.target.files[0]; if (f) parseFile(f); });
+    updateFileInput.addEventListener('change', e => { const f = e.target.files[0]; if (f) parseFile(f); });
+    removeFileBtn.addEventListener('click', unloadFile);
+
+    function parseFile(file) {
+      loadedFileBadge.textContent = '📄 ' + file.name;
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: res => {
+          allRows = res.data.map((r, i) => ({
+            _rid: 'r' + i,
+            id: r.id || '',
+            title: r.title || 'Untitled model',
+            price: parseFloat(r.price) || 0,
+            image_url: r.image_url || '',
+            processor: r.processor || '',
+            graphics: r.graphics || '',
+            memory: r.memory || '',
+            storage: r.storage || '',
+            display: r.display || '',
+            wifi: r.wifi || '',
+            battery: r.battery || '',
+            others: r.others || '',
+            series: r.series || 'Store Catalog',
+            url: (() => {
+              let u = r.url || '#';
+              if (u !== '#' && u.includes('lenovo.com') && !u.includes('/my/en/')) {
+                u = u.replace('https://www.lenovo.com', 'https://www.lenovo.com/my/en');
+              }
+              return u;
+            })()
+          }));
+
+          populateStoreFilter();
+          dropzone.style.display = 'none';
+          appArea.style.display = 'block';
+          sidebar.classList.add('visible');
+          ticker.style.display = 'flex';
+          fileToolbar.style.display = 'flex';
+          updateStats();
+          render();
+        }
+      });
+    }
+
+    function unloadFile() {
+      allRows = [];
+      selectedIds.clear();
+      activeFilters.store.clear();
+      activeFilters.cpu.clear();
+      activeFilters.gpu.clear();
+      activeFilters.mem.clear();
+      activeFilters.sto.clear();
+      activeFilters.disp.clear();
+
+      fileInput.value = '';
+      updateFileInput.value = '';
+      searchInput.value = '';
+      minPrice.value = '';
+      maxPrice.value = '';
+
+      document.querySelectorAll('.cb-list input[type=checkbox]').forEach(cb => cb.checked = false);
+      document.querySelectorAll('.filter-group-header').forEach(h => h.classList.remove('has-active'));
+
+      dropzone.style.display = 'block';
+      appArea.style.display = 'none';
+      sidebar.classList.remove('visible');
+      ticker.style.display = 'none';
+      fileToolbar.style.display = 'none';
+
+      renderTray();
+    }
+
+    // No dynamic population needed — checkboxes are hardcoded in HTML
+
+    function updateStats() {
+      const prices = allRows.map(r => r.price).filter(p => p > 0);
+      document.getElementById('statCount').textContent = allRows.length;
+      if (prices.length) {
+        const avg = prices.reduce((a, b) => a + b, 0) / prices.length;
+        document.getElementById('statAvg').textContent = 'RM ' + Math.round(avg).toLocaleString('en-MY');
+        document.getElementById('statMin').textContent = 'RM ' + Math.round(Math.min(...prices)).toLocaleString('en-MY');
+        document.getElementById('statMax').textContent = 'RM ' + Math.round(Math.max(...prices)).toLocaleString('en-MY');
+      }
+    }
+
+    function populateStoreFilter() {
+      const storeWrap = document.getElementById('fg-store-wrap');
+      const storeList = document.getElementById('cblist-store');
+      const stores = [...new Set(allRows.map(r => r.series).filter(Boolean))];
+      if (stores.length <= 1) {
+        storeWrap.style.display = 'none';
+        return;
+      }
+      storeWrap.style.display = 'block';
+      storeList.innerHTML = stores.map((s, i) => {
+        const safeId = 'cb-store-' + i;
+        return '<li class="cb-item"><input type="checkbox" id="' + safeId + '" data-key="store" data-val="' + escapeHtml(s) + '" /><label class="cb-label" for="' + safeId + '">' + escapeHtml(s) + '</label></li>';
+      }).join('');
+
+      storeList.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        cb.addEventListener('change', () => {
+          const val = cb.dataset.val;
+          if (cb.checked) activeFilters.store.add(val);
+          else activeFilters.store.delete(val);
+          render();
+        });
+      });
+    }
+
+    // Helper: extract leading inch number from a display string
+    // Handles: 15.3" (ASCII), 14” (U+201D right double quote), 16″ (U+2033 double prime)
+    function dispInchPrefix(displayStr) {
+      const m = displayStr.match(/^(\d{2}(?:\.\d)?)[\."\u201c\u201d\u2033\u2032\u0022\u0027\s]/);
+      return m ? m[1] : null;
+    }
+
+    function getFiltered() {
+      const q = searchInput.value.trim().toLowerCase();
+      const min = parseFloat(minPrice.value);
+      const max = parseFloat(maxPrice.value);
+
+      let rows = allRows.filter(r => {
+        if (!r.title || !r.id || r.title.toLowerCase() === 'untitled model') return false;
+        if (q && !r.title.toLowerCase().includes(q)) return false;
+        if (!isNaN(min) && r.price < min) return false;
+        if (!isNaN(max) && r.price > max) return false;
+
+        // Store / Source filter (OR logic)
+        if (activeFilters.store.size) {
+          if (!activeFilters.store.has(r.series)) return false;
+        }
+
+        // CPU: strip trademark/registered symbols then do substring match (OR logic)
+        if (activeFilters.cpu.size) {
+          // Normalise: remove ® ™ © and extra spaces so "Core™ 7" matches "Core 7"
+          const proc = r.processor.replace(/[®™©]/g, '').replace(/\s+/g, ' ').toLowerCase();
+          const match = [...activeFilters.cpu].some(v => proc.includes(v.toLowerCase()));
+          if (!match) return false;
+        }
+
+        // GPU: longer pattern first to avoid RTX 5070 matching RTX 5070 Ti entries (OR logic)
+        if (activeFilters.gpu.size) {
+          const gfx = r.graphics.replace(/[®™©]/g, '').toLowerCase();
+          const sorted = [...activeFilters.gpu].sort((a, b) => b.length - a.length);
+          const match = sorted.some(v => gfx.includes(v.toLowerCase()));
+          if (!match) return false;
+        }
+
+        // Memory: match GB token (OR logic)
+        if (activeFilters.mem.size) {
+          const mem = r.memory.toLowerCase();
+          const match = [...activeFilters.mem].some(v => mem.includes(v.toLowerCase()));
+          if (!match) return false;
+        }
+
+        // Storage: match TB/GB token (OR logic)
+        if (activeFilters.sto.size) {
+          const sto = r.storage.toLowerCase();
+          const match = [...activeFilters.sto].some(v => sto.includes(v.toLowerCase()));
+          if (!match) return false;
+        }
+
+        // Display size: extract leading inch number and compare (OR logic)
+        if (activeFilters.disp.size) {
+          const prefix = dispInchPrefix(r.display);
+          if (!prefix) return false;
+          // Trim decimal for whole-inch comparisons: "15.3" treated as "15"
+          const prefixInt = prefix.split('.')[0];
+          const match = [...activeFilters.disp].some(v => v === prefix || v === prefixInt);
+          if (!match) return false;
+        }
+
+        return true;
+      });
+
+      const sort = sortSelect.value;
+      if (sort === 'price-asc') rows.sort((a, b) => a.price - b.price);
+      else if (sort === 'price-desc') rows.sort((a, b) => b.price - a.price);
+      else if (sort === 'name-asc') rows.sort((a, b) => a.title.localeCompare(b.title));
+      return rows;
+    }
+
+    function detectBrand(proc) {
+      const t = (proc || '').toLowerCase();
+      if (t.includes('intel')) return 'intel';
+      if (t.includes('amd') || t.includes('ryzen')) return 'amd';
+      return 'other';
+    }
+
+    function fmtPrice(n) {
+      if (!n) return 'RM -';
+      return 'RM ' + n.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // ── Smart spec extractors ─────────────────────────────────────────────────
+    // All extractors return [{label, detail}] arrays.
+    //   label  = short display string (e.g. "RTX 5050")
+    //   detail = the specific text slice for that option (tooltip on hover)
+    // Single-option fields return a 1-item array.
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+    function stripSymbols(s) {
+      return s.replace(/[\u00ae\u2122\u00a9]/g, '').replace(/\s+/g, ' ');
+    }
+
+    // Split raw string into segments at each occurrence of a marker regex.
+    // Returns [{markerText, segment}] where segment runs from one marker to the next.
+    function splitAtMarkers(raw, markerRe) {
+      const s = stripSymbols(raw);
+      const hits = [];
+      let m;
+      const re = new RegExp(markerRe.source, 'gi');
+      while ((m = re.exec(s)) !== null) hits.push({ index: m.index, text: m[0] });
+      if (!hits.length) return [];
+      return hits.map((h, i) => ({
+        markerText: h.text.trim(),
+        segment: s.slice(h.index, i + 1 < hits.length ? hits[i + 1].index : s.length).replace(/\s+/g, ' ').trim()
+      }));
+    }
+
+    // ── CPU ───────────────────────────────────────────────────────────────────
+    const CPU_TIERS = [
+      'Core i3', 'Core i5', 'Core i7', 'Core i9',
+      'Core 3', 'Core 5', 'Core 7', 'Core 9',
+      'Core Ultra 5', 'Core Ultra 7', 'Core Ultra 9',
+      'Ryzen 3', 'Ryzen 5', 'Ryzen 7', 'Ryzen 9',
+      'Ryzen AI 5', 'Ryzen AI 7', 'Ryzen AI 9',
+      'Snapdragon'
+    ];
+
+    function cpuTierIdx(label) {
+      const i = CPU_TIERS.findIndex(t => label.toLowerCase().includes(t.toLowerCase()));
+      return i === -1 ? 999 : i;
+    }
+
+    function extractCpuOptions(raw) {
+      if (!raw) return [];
+      const cpuRe = /Core\s+Ultra\s+\d|Core\s+i\d|Core\s+\d|Ryzen\s+AI\s+\d|Ryzen\s+\d|Snapdragon[\w\s]{0,12}/i;
+      const segs = splitAtMarkers(raw, cpuRe);
+      if (!segs.length) return [];
+
+      const seen = new Set();
+      const results = [];
+      segs.forEach(({ markerText, segment }) => {
+        // Clean up label: strip trailing noise words
+        let label = markerText.replace(/\s+(processor|cpu|up|with|and|to|series)$/i, '').trim();
+        if (label.length < 3 || seen.has(label.toLowerCase())) return;
+        seen.add(label.toLowerCase());
+        // Specific detail: first 110 chars of this segment, cleaned up
+        const detail = segment.replace(/\s+(processor|cpu)\b/gi, '').replace(/\s+/g, ' ').slice(0, 110).trim();
+        results.push({ label, detail });
+      });
+
+      results.sort((a, b) => cpuTierIdx(a.label) - cpuTierIdx(b.label));
+      return results;
+    }
+
+    // ── GPU ───────────────────────────────────────────────────────────────────
+    const GPU_TIERS = [
+      'Iris Xe', 'Integrated', 'Qualcomm', 'Radeon', 'Arc',
+      'RTX 3050', 'RTX 3060', 'RTX 3070', 'RTX 3080', 'RTX 3090',
+      'RTX 4050', 'RTX 4060', 'RTX 4070', 'RTX 4080', 'RTX 4090',
+      'RTX 5050', 'RTX 5060', 'RTX 5070', 'RTX 5070 Ti', 'RTX 5080', 'RTX 5090'
+    ];
+
+    function gpuTierIdx(label) {
+      const i = GPU_TIERS.findIndex(t => label.toLowerCase().includes(t.toLowerCase()));
+      return i === -1 ? 999 : i;
+    }
+
+    function extractGpuOptions(raw) {
+      if (!raw) return [];
+      // Match the start of each GPU model block
+      const gpuRe = /(?:GeForce\s+)?(?:RTX|GTX)\s+\d{4}(?:\s+Ti)?|Radeon(?:\s+\w+){0,3}|Iris\s+Xe\w*|Arc\b[^\n,]{0,20}|Integrated(?:\s+Graphics)?|Qualcomm(?:\s+\w+)?/i;
+      const segs = splitAtMarkers(raw, gpuRe);
+      if (!segs.length) return [];
+
+      const seen = new Set();
+      const results = [];
+      segs.forEach(({ markerText, segment }) => {
+        // Normalize label: drop "GeForce " prefix, trim
+        let label = markerText.replace(/^GeForce\s+/i, '').replace(/Laptop\s+GPU/i, '').trim();
+        if (label.length < 2 || seen.has(label.toLowerCase())) return;
+        seen.add(label.toLowerCase());
+        // Extract key specs from this segment: VRAM, power, clock, AI TOPS
+        let detail = label;
+        const vram = segment.match(/(\d+GB\s+GDDR\w+)/i);
+        const power = segment.match(/(\d+W)\s*(?:TGP|incl|max|\()/i);
+        const tops = segment.match(/([\d,]+)\s*(?:AI\s*)?TOPS/i);
+        const clock = segment.match(/([\d,]+)\s*MHz\s*Boost/i);
+        if (vram) detail += ', ' + vram[1];
+        if (power) detail += ', ' + power[1];
+        if (clock) detail += ', ' + clock[1].replace(',', '.') + 'MHz';
+        if (tops) detail += ', ' + tops[1] + ' AI TOPS';
+        results.push({ label, detail });
+      });
+
+      results.sort((a, b) => gpuTierIdx(a.label) - gpuTierIdx(b.label));
+      return results;
+    }
+
+    // ── RAM ───────────────────────────────────────────────────────────────────
+    function extractMemOptions(raw) {
+      if (!raw) return [];
+      // Remove parenthetical "(2 x 16GB)" to avoid false split markers
+      const stripped = raw.replace(/\([^)]*\)/g, '   ');
+      const sizeRe = /\b(\d+)\s*GB\b/gi;
+      const hits = [];
+      let m;
+      while ((m = sizeRe.exec(stripped)) !== null) hits.push({ index: m.index, gb: parseInt(m[1]) });
+      if (!hits.length) return [];
+
+      const seen = new Set();
+      const results = [];
+      hits.forEach((h, i) => {
+        const endIdx = i + 1 < hits.length ? hits[i + 1].index : raw.length;
+        const label = h.gb + 'GB';
+        if (seen.has(label)) return;
+        seen.add(label);
+        const segment = raw.slice(h.index, endIdx).replace(/\s+/g, ' ').trim();
+        // Detail: keep size, type (DDR5/LPDDR5X), speed, channel
+        const memType = segment.match(/(LPDDR\w+|DDR\w+)/i);
+        const speed = segment.match(/([\d,]+)\s*MT\/s/i);
+        const chan = segment.match(/\b(dual|single)\s*channel/i);
+        let detail = label;
+        if (memType) detail += ' ' + memType[1];
+        if (speed) detail += ' ' + speed[1].replace(',', '.') + ' MT/s';
+        if (chan) detail += ', ' + chan[1] + '-channel';
+        results.push({ label, detail });
+      });
+
+      results.sort((a, b) => parseInt(a.label) - parseInt(b.label));
+      return results;
+    }
+
+    // ── Storage ───────────────────────────────────────────────────────────────
+    function extractStorageOptions(raw) {
+      if (!raw) return [];
+      const stripped = raw.replace(/\([^)]*\)/g, '   ');
+      const sizeRe = /\b(\d+(?:\.\d+)?)\s*(TB|GB)\b/gi;
+      const hits = [];
+      let m;
+      while ((m = sizeRe.exec(stripped)) !== null) {
+        hits.push({ index: m.index, label: m[1] + m[2].toUpperCase(), bytes: m[2].toUpperCase() === 'TB' ? parseFloat(m[1]) * 1e12 : parseFloat(m[1]) * 1e9 });
+      }
+      if (!hits.length) return [];
+
+      const seen = new Set();
+      const results = [];
+      hits.forEach((h, i) => {
+        if (seen.has(h.label)) return;
+        seen.add(h.label);
+        const endIdx = i + 1 < hits.length ? hits[i + 1].index : raw.length;
+        const segment = raw.slice(h.index, endIdx).replace(/\s+/g, ' ').trim();
+        const form = segment.match(/\b(M\.2|NVMe|PCIe(?:\s+Gen\d)?|SSD|HDD)\b/i);
+        let detail = h.label;
+        if (form) detail += ' ' + form[1];
+        else detail += ' SSD';
+        results.push({ label: h.label, detail, bytes: h.bytes });
+      });
+
+      results.sort((a, b) => a.bytes - b.bytes); // smallest first = base
+      return results;
+    }
+
+    // ── Display ───────────────────────────────────────────────────────────────
+    function extractDisplayOptions(raw) {
+      if (!raw) return [];
+      const s = raw.replace(/[\u201c\u201d\u2033\u2032]/g, '"');
+      const size = s.match(/^(\d{2}(?:\.\d)?)["\s]/);
+      const res = s.match(/\b(FHD|QHD|WUXGA|WQXGA|4K|UHD|\d{3,4}\s*x\s*\d{3,4})\b/i);
+      const panel = s.match(/\b(OLED|IPS|TN|VA|AMOLED)\b/i);
+      const hz = s.match(/(\d{2,3})\s*Hz/i);
+      const nits = s.match(/(\d{3,4})\s*nits/i);
+      const ratio = s.match(/(\d+:\d+)\s*aspect/i);
+
+      let label = '';
+      if (size) label += size[1] + '"';
+      if (res && (!panel || res[1].toLowerCase() !== (panel[1] || '').toLowerCase())) label += ' ' + res[1].toUpperCase();
+      if (panel) label += ' ' + panel[1].toUpperCase();
+      if (hz) label += ' ' + hz[1] + 'Hz';
+
+      let detail = label;
+      if (nits) detail += ', ' + nits[1] + 'nits';
+      if (ratio) detail += ', ' + ratio[1];
+
+      return [{ label: label.trim() || s.slice(0, 40), detail: detail.trim() }];
+    }
+
+    // ── Battery ───────────────────────────────────────────────────────────────
+    function extractBatteryOptions(raw) {
+      if (!raw) return [];
+      const whr = raw.match(/(\d+(?:\.\d+)?)\s*Wh?r?\b/i);
+      const rapid = /rapid\s*charge/i.test(raw);
+      let label = whr ? whr[1] + 'Wh' : raw.slice(0, 20);
+      let detail = label;
+      if (rapid) detail += ', Rapid Charge';
+      return [{ label, detail }];
+    }
+
+    // ── specRow: renders label + upgrade-hint; each with its own tooltip ───────
+    function specRow(label, raw) {
+      if (!raw) return '';
+
+      let options; // [{label, detail}]
+      switch (label) {
+        case 'cpu': options = extractCpuOptions(raw); break;
+        case 'gpu': options = extractGpuOptions(raw); break;
+        case 'ram': options = extractMemOptions(raw); break;
+        case 'disk': options = extractStorageOptions(raw); break;
+        case 'screen': options = extractDisplayOptions(raw); break;
+        case 'batt': options = extractBatteryOptions(raw); break;
+        default: options = [{ label: raw.replace(/\s+/g, ' ').slice(0, 60), detail: raw.replace(/\s+/g, ' ').trim() }];
+      }
+
+      if (!options.length) {
+        const fb = raw.replace(/\s+/g, ' ').trim();
+        return '<li><span class="k">' + label + '</span><span class="v spec-val" title="' + fb.replace(/"/g, '&quot;') + '">' + escapeHtml(fb.slice(0, 60)) + '</span></li>';
+      }
+
+      const base = options[0];
+      const top = options.length > 1 ? options[options.length - 1] : null;
+
+      let html = '<li><span class="k">' + label + '</span><span class="v">'
+        + '<span class="spec-val" title="' + base.detail.replace(/"/g, '&quot;') + '">' + escapeHtml(base.label) + '</span>';
+
+      if (top) {
+        html += ' <span class="upgrade-hint" title="' + top.detail.replace(/"/g, '&quot;') + '">up to ' + escapeHtml(top.label) + '</span>';
+      }
+      html += '</span></li>';
+      return html;
+    }
+
+
+    function escapeHtml(s) {
+      const d = document.createElement('div'); d.textContent = s; return d.innerHTML;
+    }
+
+    function render() {
+      const rows = getFiltered();
+      resultCount.textContent = rows.length + (rows.length === 1 ? ' model matches' : ' models match');
+
+      if (rows.length === 0) {
+        grid.innerHTML = '<div class="empty-results">No models match these filters.</div>';
+        return;
+      }
+
+      // Build title frequency map to detect variants
+      const titleCount = {};
+      rows.forEach(r => { titleCount[r.title] = (titleCount[r.title] || 0) + 1; });
+
+      grid.innerHTML = rows.map(r => {
+        const brand = detectBrand(r.processor);
+        const bClass = brand === 'intel' ? 'intel' : (brand === 'amd' ? 'amd' : 'other');
+        const bLabel = brand === 'intel' ? 'Intel' : (brand === 'amd' ? 'AMD' : 'Other');
+        const checked = selectedIds.has(r._rid);
+        const isVariant = titleCount[r.title] > 1;
+        const partId = r.id ? r.id.toUpperCase() : '';
+
+        let rawUrl = (r.image_url || '').trim();
+        if (rawUrl.startsWith('//')) rawUrl = 'https:' + rawUrl;
+        else if (rawUrl.startsWith('/')) rawUrl = 'https://p3-ofp.static.pub' + rawUrl;
+        rawUrl = rawUrl.replace(/([^:])\/{2,}/g, '$1/');
+
+        let imgHtml = '';
+        if (rawUrl.length > 5) {
+          imgHtml = '<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;margin:10px 0;height:110px;display:flex;align-items:center;justify-content:center;">'
+            + '<img src="' + escapeHtml(rawUrl) + '" alt="' + escapeHtml(r.title) + '" referrerpolicy="no-referrer" style="max-height:95px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));" onerror="this.parentElement.style.display=\'none\';" /></div>';
+        }
+
+        return '<div class="ticket">'
+          + '<div class="ticket-head"><div class="ticket-title-wrap">'
+          + '<p class="ticket-title">' + escapeHtml(r.title) + '</p>'
+          + (partId ? '<div class="part-tag"><span class="pid">' + escapeHtml(partId) + '</span>' + (isVariant ? ' <span class="variant-badge">variant</span>' : '') + '</div>' : '')
+          + '</div>'
+          + '<div class="compare-check ' + (checked ? 'checked' : '') + '" data-rid="' + r._rid + '">' + (checked ? '&#10003;' : '') + '</div></div>'
+          + '<div><span class="badge ' + bClass + '">' + bLabel + '</span></div>'
+          + imgHtml
+          + '<div class="price-tag"><span class="cur">MYR</span>' + (r.price ? r.price.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—') + '</div>'
+          + '<ul class="spec-list">'
+          + specRow('cpu', r.processor) + specRow('gpu', r.graphics) + specRow('ram', r.memory)
+          + specRow('disk', r.storage) + specRow('screen', r.display) + specRow('wifi', r.wifi) + specRow('batt', r.battery)
+          + '</ul>'
+          + '<div class="ticket-foot">'
+          + '<button class="btn secondary sm detail-btn" data-rid="' + r._rid + '" style="font-size:11.5px;padding:6px 10px;">🔍 Specs & Deals</button>'
+          + '<a class="view-link" href="' + escapeHtml(r.url) + '" target="_blank" rel="noopener">View listing &#8599;</a>'
+          + '</div>'
+          + '</div>';
+      }).join('');
+
+      // Ticket compare checkboxes
+      grid.querySelectorAll('.compare-check').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const rid = el.dataset.rid;
+          if (selectedIds.has(rid)) selectedIds.delete(rid);
+          else {
+            if (selectedIds.size >= 4) { alert('You can compare up to 4 models at a time.'); return; }
+            selectedIds.add(rid);
+          }
+          render(); renderTray();
+        });
+      });
+
+      // Ticket detail modal triggers
+      grid.querySelectorAll('.detail-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const rid = btn.dataset.rid;
+          const row = allRows.find(r => r._rid === rid);
+          if (row) openDetailModal(row);
+        });
+      });
+    }
+
+    // ── Laptop Visual Render (Real API Photo or Fallback Vector) ──────────────
+    function renderLaptopSvg(r) {
+      let rawUrl = (r.image_url || '').trim();
+      if (rawUrl.startsWith('//')) rawUrl = 'https:' + rawUrl;
+      else if (rawUrl.startsWith('/')) rawUrl = 'https://p3-ofp.static.pub' + rawUrl;
+
+      // Clean double slashes in URL path (e.g. static.pub//fes -> static.pub/fes)
+      rawUrl = rawUrl.replace(/([^:])\/{2,}/g, '$1/');
+
+      if (rawUrl.length > 5) {
+        return '<img src="' + escapeHtml(rawUrl) + '" alt="' + escapeHtml(r.title) + '" referrerpolicy="no-referrer" style="max-height:160px;max-width:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.5));display:block;margin:0 auto;" onerror="this.style.display=\'none\';if(this.nextElementSibling)this.nextElementSibling.style.display=\'block\';" />'
+          + '<div style="display:none;">' + renderLaptopFallbackSvg(r) + '</div>';
+      }
+      return renderLaptopFallbackSvg(r);
+    }
+
+    function renderLaptopFallbackSvg(r) {
+      const brand = detectBrand(r.processor || '');
+      const accentColor = brand === 'intel' ? '#57D9C6' : (brand === 'amd' ? '#E2665C' : '#FFB020');
+      return '<svg viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg">'
+        + '<rect x="40" y="20" width="220" height="120" rx="10" fill="#1B1F26" stroke="#2D3545" stroke-width="2"/>'
+        + '<rect x="48" y="28" width="204" height="104" rx="6" fill="#14171C"/>'
+        + '<path d="M56 124 L244 124" stroke="' + accentColor + '" stroke-width="2" stroke-linecap="round"/>'
+        + '<circle cx="150" cy="24" r="3" fill="#57D9C6"/>'
+        + '<path d="M20 148 L280 148 C285 148 288 152 285 156 L275 165 C273 167 270 168 266 168 L34 168 C30 168 27 167 25 165 L15 156 C12 152 15 148 20 148 Z" fill="#252A34" stroke="#2D3545" stroke-width="2"/>'
+        + '<rect x="120" y="152" width="60" height="4" rx="2" fill="#3A4354"/>'
+        + '</svg>';
+    }
+
+    // ── Single Model Detail Modal Handler ──────────────────────────────────────
+    const detailModalOverlay = document.getElementById('detailModalOverlay');
+    const closeDetailModal = document.getElementById('closeDetailModal');
+    const detailModalBody = document.getElementById('detailModalBody');
+
+    if (closeDetailModal) {
+      closeDetailModal.addEventListener('click', () => detailModalOverlay.classList.remove('show'));
+    }
+
+    function openDetailModal(r) {
+      const partId = r.id ? r.id.toUpperCase() : 'N/A';
+      const brand = detectBrand(r.processor);
+      const bClass = brand === 'intel' ? 'intel' : (brand === 'amd' ? 'amd' : 'other');
+      const bLabel = brand === 'intel' ? 'Intel' : (brand === 'amd' ? 'AMD' : 'Other');
+      const priceStr = r.price ? 'RM ' + r.price.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'Unpriced / Inquiry';
+
+      // Search allRows for vendor offers of this model / family
+      const titleClean = r.title.toLowerCase().replace(/\[.*?\]/g, '').replace(/gaming|laptop|notebook/g, '').trim();
+      const titleWords = titleClean.split(/\s+/).filter(w => w.length > 2).slice(0, 3).join(' ');
+
+      const vendorOffers = allRows.filter(row => {
+        const t = row.title.toLowerCase();
+        return (row.id && r.id && row.id.toLowerCase() === r.id.toLowerCase()) || (titleWords && t.includes(titleWords));
+      });
+
+      // Deduplicate vendor offers by store series
+      const seenStores = new Set();
+      const uniqueOffers = [];
+      vendorOffers.forEach(o => {
+        const s = o.series || 'Direct Vendor';
+        if (!seenStores.has(s)) {
+          seenStores.add(s);
+          uniqueOffers.push(o);
+        }
+      });
+
+      uniqueOffers.sort((a, b) => (a.price || 999999) - (b.price || 999999));
+      const lowestPrice = uniqueOffers.length ? uniqueOffers[0].price : r.price;
+
+      let vendorTableHtml = '';
+      if (uniqueOffers.length > 0) {
+        vendorTableHtml = '<div class="vendor-sec"><h3>/// Multi-Vendor Price Comparison (' + uniqueOffers.length + ' Deals)</h3>'
+          + '<table class="vendor-table"><thead><tr><th>Store / Vendor</th><th>Model Variant</th><th>Price (MYR)</th><th>Deal Status</th><th>Action</th></tr></thead><tbody>';
+
+        uniqueOffers.forEach(o => {
+          const isLowest = o.price && o.price === lowestPrice;
+          const oPriceStr = o.price ? 'RM ' + o.price.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'Contact Store';
+          const dealBadge = isLowest && o.price ? '<span class="best-deal-badge">★ BEST PRICE</span>' : '<span style="color:var(--text-faint);font-size:11px;">Standard</span>';
+
+          vendorTableHtml += '<tr>'
+            + '<td><strong style="color:var(--text-bright);">' + escapeHtml(o.series || 'Official Store') + '</strong></td>'
+            + '<td>' + escapeHtml(o.title) + '</td>'
+            + '<td><strong style="color:var(--accent);">' + oPriceStr + '</strong></td>'
+            + '<td>' + dealBadge + '</td>'
+            + '<td><a class="view-link" href="' + escapeHtml(o.url) + '" target="_blank" rel="noopener" style="padding:4px 10px;font-size:11px;">Buy Deal &#8599;</a></td>'
+            + '</tr>';
+        });
+        vendorTableHtml += '</tbody></table></div>';
+      }
+
+      // Build Detail Modal Content
+      detailModalBody.innerHTML = ''
+        + '<div class="detail-hero">'
+        + '  <div class="detail-img-box">' + renderLaptopSvg(r) + '</div>'
+        + '  <div class="detail-meta">'
+        + '    <h2>' + escapeHtml(r.title) + '</h2>'
+        + '    <div class="part-tag"><span class="pid">PART #: ' + escapeHtml(partId) + '</span> <span class="badge ' + bClass + '">' + bLabel + '</span></div>'
+        + '    <div class="detail-price-box"><span class="price-num">' + priceStr + '</span><span class="price-cur">OFFICIAL MYR</span></div>'
+        + '    <div><a class="view-link" href="' + escapeHtml(r.url) + '" target="_blank" rel="noopener" style="padding:8px 16px;">View Direct Store Page &#8599;</a></div>'
+        + '  </div>'
+        + '</div>'
+        + vendorTableHtml
+        + '<div class="spec-sec"><h3>/// Full Technical Specifications</h3>'
+        + '<div class="spec-grid-detail">'
+        + '  <div class="spec-detail-card"><div class="spec-d-label">⚡ PROCESSOR (CPU)</div><div class="spec-d-val">' + escapeHtml(r.processor || 'N/A') + '</div></div>'
+        + '  <div class="spec-detail-card"><div class="spec-d-label">🎮 GRAPHICS (GPU)</div><div class="spec-d-val">' + escapeHtml(r.graphics || 'N/A') + '</div></div>'
+        + '  <div class="spec-detail-card"><div class="spec-d-label">🧠 MEMORY (RAM)</div><div class="spec-d-val">' + escapeHtml(r.memory || 'N/A') + '</div></div>'
+        + '  <div class="spec-detail-card"><div class="spec-d-label">💾 STORAGE (SSD)</div><div class="spec-d-val">' + escapeHtml(r.storage || 'N/A') + '</div></div>'
+        + '  <div class="spec-detail-card"><div class="spec-d-label">🖥️ DISPLAY PANEL</div><div class="spec-d-val">' + escapeHtml(r.display || 'N/A') + '</div></div>'
+        + '  <div class="spec-detail-card"><div class="spec-d-label">📡 WI-FI & BLUETOOTH</div><div class="spec-d-val">' + escapeHtml(r.wifi || 'Standard WLAN') + '</div></div>'
+        + '  <div class="spec-detail-card"><div class="spec-d-label">🔋 BATTERY & CHARGER</div><div class="spec-d-val">' + escapeHtml(r.battery || 'Integrated Battery') + '</div></div>'
+        + '  <div class="spec-detail-card"><div class="spec-d-label">⚙️ OS, WARRANTY & OTHER DETAILS</div><div class="spec-d-val">' + escapeHtml(r.others || 'N/A') + '</div></div>'
+        + '</div></div>';
+
+      detailModalOverlay.classList.add('show');
+    }
+
+    function renderTray() {
+      if (selectedIds.size === 0) { tray.classList.remove('show'); return; }
+      tray.classList.add('show');
+      const items = allRows.filter(r => selectedIds.has(r._rid));
+      trayChips.innerHTML = items.map(r => '<div class="tray-chip"><span>' + escapeHtml(r.title) + '</span><button data-rid="' + r._rid + '">&#10005;</button></div>').join('');
+      trayChips.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => { selectedIds.delete(btn.dataset.rid); render(); renderTray(); });
+      });
+    }
+
+    clearCompare.addEventListener('click', () => { selectedIds.clear(); render(); renderTray(); });
+
+    openCompare.addEventListener('click', () => {
+      const items = allRows.filter(r => selectedIds.has(r._rid));
+      if (!items.length) return;
+      const fields = [
+        ['Price', r => '<span class="price-cell">' + fmtPrice(r.price) + '</span>'],
+        ['Processor', r => escapeHtml(r.processor) || '—'],
+        ['Graphics', r => escapeHtml(r.graphics) || '—'],
+        ['Memory', r => escapeHtml(r.memory) || '—'],
+        ['Storage', r => escapeHtml(r.storage) || '—'],
+        ['Display', r => escapeHtml(r.display) || '—'],
+        ['WiFi', r => escapeHtml(r.wifi) || '—'],
+        ['Battery', r => escapeHtml(r.battery) || '—'],
+        ['Listing', r => '<a class="mini-link" href="' + escapeHtml(r.url) + '" target="_blank" rel="noopener">Open &#8599;</a>'],
+      ];
+      let html = '<table class="compare-table"><thead><tr><th></th>';
+      items.forEach(r => { html += '<td class="model-name">' + escapeHtml(r.title) + '</td>'; });
+      html += '</tr></thead><tbody>';
+      fields.forEach(([label, fn]) => {
+        html += '<tr><th>' + label + '</th>';
+        items.forEach(r => { html += '<td>' + fn(r) + '</td>'; });
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      compareTableWrap.innerHTML = html;
+      modalOverlay.classList.add('show');
+    });
+
+    function closeAllModals() {
+      modalOverlay.classList.remove('show');
+      detailModalOverlay.classList.remove('show');
+    }
+
+    if (closeModal) closeModal.addEventListener('click', closeAllModals);
+    if (closeDetailModal) closeDetailModal.addEventListener('click', closeAllModals);
+
+    modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeAllModals(); });
+    detailModalOverlay.addEventListener('click', e => { if (e.target === detailModalOverlay) closeAllModals(); });
+
+    window.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllModals(); });
+
+    [searchInput, minPrice, maxPrice].forEach(el => el.addEventListener('input', render));
+    sortSelect.addEventListener('change', render);
+
+    resetBtn.addEventListener('click', () => {
+      searchInput.value = ''; minPrice.value = ''; maxPrice.value = '';
+      sortSelect.value = 'price-asc';
+      activeFilters.store.clear();
+      activeFilters.cpu.clear();
+      activeFilters.gpu.clear();
+      activeFilters.mem.clear();
+      activeFilters.sto.clear();
+      activeFilters.disp.clear();
+      document.querySelectorAll('.cb-list input[type=checkbox]').forEach(cb => cb.checked = false);
+      document.querySelectorAll('.filter-group-header').forEach(h => h.classList.remove('has-active'));
+      render();
+    });
+  </script>
+
+</body>
+
+</html>
