@@ -1404,63 +1404,58 @@
       });
     });
 
-    // Auto-load preloaded rows injected from python
+ // Auto-load preloaded rows or fetch CSV directly for GitHub Pages
     window.addEventListener('DOMContentLoaded', () => {
       if (window.preloadedRows && window.preloadedRows.length > 0) {
-        allRows = window.preloadedRows.map((r, i) => ({
-          _rid: 'r' + i,
-          id: r.id || '',
-          title: r.title || 'Untitled model',
-          price: parseFloat(r.price) || 0,
-          image_url: r.image_url || '',
-          processor: r.processor || '',
-          graphics: r.graphics || '',
-          memory: r.memory || '',
-          storage: r.storage || '',
-          display: r.display || '',
-          wifi: r.wifi || '',
-          battery: r.battery || '',
-          others: r.others || '',
-          series: r.series || 'Store Catalog',
-          url: (() => {
-            let u = r.url || '#';
-            if (u !== '#' && u.includes('lenovo.com') && !u.includes('/my/en/')) {
-              u = u.replace('https://www.lenovo.com', 'https://www.lenovo.com/my/en');
-            }
-            return u;
-          })()
-        }));
-
-        populateStoreFilter();
-        if (dropzone) dropzone.style.display = 'none';
-        appArea.style.display = 'block';
-        sidebar.classList.add('visible');
-        render();
+        // Runs inside Streamlit iframe
+        processRows(window.preloadedRows);
+      } else {
+        // Runs on GitHub Pages (fetches master_laptops.csv automatically)
+        Papa.parse("master_laptops.csv", {
+          download: true,
+          header: true,
+          skipEmptyLines: true,
+          complete: function(results) {
+            processRows(results.data);
+          },
+          error: function(err) {
+            console.error("Error loading CSV:", err);
+            grid.innerHTML = '<div class="empty-results">⚠️ Could not load master_laptops.csv. Make sure the file exists in your repository root.</div>';
+          }
+        });
       }
     });
 
-    function populateStoreFilter() {
-      const storeWrap = document.getElementById('fg-store-wrap');
-      const storeList = document.getElementById('cblist-store');
-      const stores = [...new Set(allRows.map(r => r.series).filter(Boolean))];
-      if (stores.length <= 1) {
-        storeWrap.style.display = 'none';
-        return;
-      }
-      storeWrap.style.display = 'block';
-      storeList.innerHTML = stores.map((s, i) => {
-        const safeId = 'cb-store-' + i;
-        return '<li class="cb-item"><input type="checkbox" id="' + safeId + '" data-key="store" data-val="' + escapeHtml(s) + '" /><label class="cb-label" for="' + safeId + '">' + escapeHtml(s) + '</label></li>';
-      }).join('');
+    function processRows(rawRows) {
+      allRows = rawRows.map((r, i) => ({
+        _rid: 'r' + i,
+        id: r.id || '',
+        title: r.title || 'Untitled model',
+        price: parseFloat(r.price) || 0,
+        image_url: r.image_url || '',
+        processor: r.processor || '',
+        graphics: r.graphics || '',
+        memory: r.memory || '',
+        storage: r.storage || '',
+        display: r.display || '',
+        wifi: r.wifi || '',
+        battery: r.battery || '',
+        others: r.others || '',
+        series: r.series || 'Store Catalog',
+        url: (() => {
+          let u = r.url || '#';
+          if (u !== '#' && u.includes('lenovo.com') && !u.includes('/my/en/')) {
+            u = u.replace('https://www.lenovo.com', 'https://www.lenovo.com/my/en');
+          }
+          return u;
+        })()
+      }));
 
-      storeList.querySelectorAll('input[type=checkbox]').forEach(cb => {
-        cb.addEventListener('change', () => {
-          const val = cb.dataset.val;
-          if (cb.checked) activeFilters.store.add(val);
-          else activeFilters.store.delete(val);
-          render();
-        });
-      });
+      populateStoreFilter();
+      if (dropzone) dropzone.style.display = 'none';
+      appArea.style.display = 'block';
+      sidebar.classList.add('visible');
+      render();
     }
 
     function dispInchPrefix(displayStr) {
