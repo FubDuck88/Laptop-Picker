@@ -97,7 +97,19 @@ def scrape_acer():
             "variables": {"currentPage": page, "pageSize": 30}
         }
         try:
-            r = requests.post(GRAPHQL_URL, json=payload, headers=HEADERS, timeout=10)
+            # Increased timeout to 30s and added full browser headers to avoid getting blocked
+            r = requests.post(
+                GRAPHQL_URL, 
+                json=payload, 
+                headers={
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+                    "Accept": "application/json, text/plain, */*",
+                    "Accept-Language": "en-US,en;q=0.9",
+                    "Referer": "https://store.acer.com/en-my/",
+                    "Content-Type": "application/json"
+                }, 
+                timeout=30
+            )
             if r.status_code != 200:
                 print(f"  Page {page} status: {r.status_code}")
                 break
