@@ -1387,23 +1387,6 @@
     const closeModal = document.getElementById('closeModal');
     const compareTableWrap = document.getElementById('compareTableWrap');
 
-    // Dynamic iframe height resize helper for Streamlit
-    function triggerResize() {
-      const height = document.body.scrollHeight;
-      if (window.parent && window.parent.postMessage) {
-        window.parent.postMessage({isStreamlitMessage: true, type: 'streamlit:setFrameHeight', height: height}, '*');
-      }
-    }
-
-    // Accordion triggers that also adjust iframe height when expanded/collapsed
-    document.querySelectorAll('.filter-group-header').forEach(hdr => {
-      hdr.addEventListener('click', () => {
-        const body = document.getElementById(hdr.dataset.target);
-        hdr.classList.toggle('open');
-        body.classList.toggle('open');
-        setTimeout(triggerResize, 200);
-      });
-    });
 
     // Wire up checkboxes
     document.querySelectorAll('.cb-list input[type=checkbox]').forEach(cb => {
