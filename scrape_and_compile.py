@@ -1,71 +1,58 @@
+"""
+Laptop Price Scraper & Master Compiler Launcher Tool
+Runs all scrapers, compiles master catalog (CSV + JSON), and opens index.html in the default browser.
+"""
+
 import os
 import sys
 import time
-import csv
+import webbrowser
 import traceback
+
+import run_all
+
 
 def main():
     print("=" * 70)
     print("        LAPTOP PRICE SCRAPER & MASTER COMPILER TOOL")
     print("=" * 70)
-    print(" Starting catalog scrapers for Lenovo, MSI, and ASUS...\n")
+    print(" Starting catalog scrapers for all vendors...\n")
 
     start_time = time.time()
 
-    # 1. Scrape Lenovo
-    print(" [1/3] Running Lenovo Scraper...")
+    # 1. Run all vendor scrapers
     try:
-        import lenovo_scraper
-        lenovo_data = lenovo_scraper.fetch_all_products("47af9ba7-cab2-4e61-9b10-2283ac14c87c")
-        lenovo_scraper.save_to_csv(lenovo_data)
-        print(f"   --> Lenovo complete: {len(lenovo_data)} laptops scraped.")
+        run_all.run_scrapers()
     except Exception as e:
-        print(f"   [!] Error scraping Lenovo: {e}")
-        traceback.print_exc()
-
-    print("\n" + "-" * 70 + "\n")
-
-    # 2. Scrape MSI
-    print(" [2/3] Running MSI Scraper...")
-    try:
-        import msi_scraper
-        msi_data = msi_scraper.scrape_msi()
-        msi_scraper.save_to_csv(msi_data)
-        print(f"   --> MSI complete: {len(msi_data)} laptops scraped.")
-    except Exception as e:
-        print(f"   [!] Error scraping MSI: {e}")
-        traceback.print_exc()
-
-    print("\n" + "-" * 70 + "\n")
-
-    # 3. Scrape ASUS
-    print(" [3/3] Running ASUS Scraper...")
-    try:
-        import asus_scraper
-        asus_data = asus_scraper.fetch_asus_laptops()
-        asus_scraper.save_to_csv(asus_data)
-        print(f"   --> ASUS complete: {len(asus_data)} laptops scraped.")
-    except Exception as e:
-        print(f"   [!] Error scraping ASUS: {e}")
+        print(f" [!] Error during scraping run: {e}")
         traceback.print_exc()
 
     print("\n" + "=" * 70)
-    print(" [COMPILING] Merging all store CSV files into master_laptops.csv...")
+    print(" [COMPILING] Merging store CSVs into master_laptops.csv & laptops.json...")
     print("=" * 70)
 
+    # 2. Combine CSVs and export JSON
     try:
-        import run_all
         run_all.combine_all_csvs()
     except Exception as e:
-        print(f"   [!] Error combining CSV files: {e}")
+        print(f" [!] Error combining catalog files: {e}")
         traceback.print_exc()
 
     elapsed = time.time() - start_time
-    print(f"\n All tasks finished in {elapsed:.1f} seconds!")
-    print(f" Output file: master_laptops.csv in {os.getcwd()}")
+    print(f"\n All scraping and compilation tasks finished in {elapsed:.1f} seconds!")
+
+    # 3. Open index.html in default browser with JSON/CSV ready
+    html_path = os.path.abspath(os.path.join(run_all.MASTER_DIR, "index.html"))
+    if os.path.exists(html_path):
+        url = "file:///" + html_path.replace("\\", "/")
+        print(f" Launching web application: {url}")
+        webbrowser.open(url)
+    else:
+        print(" [!] index.html not found in working directory.")
+
     print("=" * 70)
-    
     input("\n Press ENTER to exit...")
+
 
 if __name__ == "__main__":
     main()

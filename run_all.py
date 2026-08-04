@@ -209,9 +209,34 @@ def combine_all_csvs():
         writer.writeheader()
         writer.writerows(master_rows)
 
+    # Also export as compact JSON for faster frontend loading
+    export_json(master_rows)
+
     multi_count = sum(1 for r in master_rows if r["vendor_count"] > 1)
     print(f"\nSuccessfully combined {len(master_rows)} unique laptops into master_laptops.csv!")
     print(f"  ({multi_count} laptops are available from multiple vendors with price comparisons)")
+
+
+def export_json(master_rows):
+    """Exports master data as compact JSON for the frontend (smaller than CSV)."""
+    import json
+    json_file = os.path.join(MASTER_DIR, "laptops.json")
+    json_rows = []
+    for row in master_rows:
+        jr = {}
+        for field in FIELDNAMES:
+            val = row.get(field, "")
+            if val is None:
+                val = ""
+            jr[field] = val
+        json_rows.append(jr)
+
+    with open(json_file, "w", encoding="utf-8") as f:
+        json.dump(json_rows, f, separators=(",", ":"), ensure_ascii=False)
+
+    csv_size = os.path.getsize(MASTER_FILE)
+    json_size = os.path.getsize(json_file)
+    print(f"  Exported laptops.json ({json_size/1024:.0f}KB vs CSV {csv_size/1024:.0f}KB — {100-json_size/csv_size*100:.0f}% smaller)")
 
 
 if __name__ == "__main__":
