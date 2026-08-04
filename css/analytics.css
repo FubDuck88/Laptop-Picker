@@ -199,10 +199,20 @@ body.analytics-page {
 }
 
 .chart-bar-fill {
-  width: 100%;
-  background: linear-gradient(180deg, var(--accent-1) 0%, #2563eb 100%);
+  width: 100% !important;
+  min-height: 4px;
+  /* keeps tiny brackets (e.g. 0.2%) visible */
+  background: linear-gradient(180deg, #38bdf8 0%, #2563eb 100%) !important;
+  opacity: 0.65;
+  /* dimmer by default, but always visible */
   border-radius: 6px 6px 0 0;
-  transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.chart-bar-col.active .chart-bar-fill {
+  opacity: 1;
+  /* full brightness only when selected */
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
 }
 
 .chart-bar-label {
@@ -303,4 +313,214 @@ body.analytics-page {
 .btn-detail-sm:hover {
   background: var(--accent-1);
   color: #000;
+}
+
+.chart-body {
+  display: flex;
+  gap: 8px;
+}
+
+.chart-yaxis {
+  flex-shrink: 0;
+  width: 40px;
+  height: 280px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.bar-chart-wrapper.histogram-mode {
+  overflow: hidden;
+  height: 280px;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.hist-bar-col {
+  flex: 1 1 0;
+  min-width: 1px;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+}
+
+.hist-bar-fill {
+  width: 100%;
+  min-height: 0;
+  background: linear-gradient(180deg, #38bdf8 0%, #2563eb 100%);
+  opacity: 0.6;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+.hist-bar-col:hover .hist-bar-fill {
+  opacity: 1;
+}
+
+.hist-bar-col.active .hist-bar-fill {
+  opacity: 1;
+  background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+}
+
+.hist-bar-col.overflow-bin .hist-bar-fill {
+  background: linear-gradient(180deg, #a78bfa 0%, #7c3aed 100%);
+}
+
+.chart-plot {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bar-chart-wrapper.histogram-mode {
+  width: 100%;
+  height: 280px;
+  gap: 1px;
+  overflow: hidden;
+}
+
+.chart-xaxis {
+  display: flex;
+  gap: 1px;
+  margin-top: 6px;
+  height: 14px;
+}
+
+.xlabel-cell {
+  flex: 1 1 0;
+  min-width: 0;
+  position: relative;
+  text-align: center;
+}
+
+.xlabel-cell span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+/* Spec detail modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 12, 15, 0.72);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 60px 24px;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+.spec-modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  max-width: 560px;
+  width: 100%;
+  padding: 28px;
+  position: relative;
+}
+
+.spec-modal .close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.spec-modal .close-btn:hover {
+  border-color: #f87171;
+  color: #f87171;
+}
+
+.spec-modal-head {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-right: 30px;
+}
+
+.spec-modal-img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.spec-modal-head h3 {
+  font-size: 17px;
+  margin: 0 0 4px;
+  color: var(--text);
+}
+
+.spec-modal-vendor {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.spec-modal-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-1);
+}
+
+.spec-modal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.spec-modal-table th {
+  text-align: left;
+  color: var(--text-muted);
+  font-weight: 600;
+  width: 110px;
+  padding: 8px 0;
+  vertical-align: top;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.spec-modal-table td {
+  padding: 8px 0;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+.spec-modal-table .muted {
+  color: var(--text-muted);
 }

@@ -108,59 +108,118 @@ function initAnalytics(rawRows) {
     trendEl.className = 'kpi-trend ' + (isUp ? 'up' : 'down');
   }
 
-  // 2. Build Price Distribution Brackets
-  const brackets = [
-    { label: '< RM 2,000', min: 0, max: 2000, count: 0, items: [] },
-    { label: 'RM 2k - 3.5k', min: 2000, max: 3500, count: 0, items: [] },
-    { label: 'RM 3.5k - 5k', min: 3500, max: 5000, count: 0, items: [] },
-    { label: 'RM 5k - 7.5k', min: 5000, max: 7500, count: 0, items: [] },
-    { label: 'RM 7.5k - 10k', min: 7500, max: 10000, count: 0, items: [] },
-    { label: '> RM 10,000', min: 10000, max: Infinity, count: 0, items: [] }
-  ];
-
-  validLaptops.forEach(r => {
-    for (let b of brackets) {
-      if (r.numericPrice >= b.min && r.numericPrice < b.max) {
-        b.count++;
-        b.items.push(r);
-        break;
-      }
-    }
-  });
-
-  renderPriceBarChart(brackets, count);
+  // 2. Build Price Distribution Per 100 Laptops
+  renderPriceHistogram(validLaptops, 100);
   renderLaptopTable(validLaptops);
 }
 
-function renderPriceBarChart(brackets, totalCount) {
+function renderPriceHistogram(laptops, binSize = 100) {
   const chartContainer = document.getElementById('priceBarChart');
+  const yAxis = document.getElementById('chartYAxis');
+  const xAxis = document.getElementById('chartXAxis');
   if (!chartContainer) return;
 
-  const maxBucketCount = Math.max(...brackets.map(b => b.count), 1);
+  const minPrice = laptops[0].numericPrice;
+  const maxPrice = laptops[laptops.length - 1].numericPrice;
+
+  const cutoffIdx = Math.floor(0.97 * (laptops.length - 1));
+  const percentileCap = laptops[cutoffIdx].numericPrice;
+  const cappedMax = Math.ceil(percentileCap / binSize) * binSize;
+
+  const startBin = Math.floor(minPrice / binSize) * binSize;
+
+  const bins = [];
+  for (let b = startBin; b < cappedMax; b += binSize) {
+    bins.push({ min: b, max: b + binSize, count: 0, items: [], overflow: false });
+  }
+
+  const overflowLaptops = laptops.filter(r => r.numericPrice >= cappedMax);
+  if (overflowLaptops.length > 0) {
+    bins.push({
+      min: cappedMax,
+      max: maxPrice + 1,
+      count: overflowLaptops.length,
+      items: overflowLaptops,
+      overflow: true
+    });
+  }
+
+  laptops.forEach(r => {
+    if (r.numericPrice >= cappedMax) return;
+    let idx = Math.floor((r.numericPrice - startBin) / binSize);
+    if (idx < 0) idx = 0;
+    if (idx >= bins.length) idx = bins.length - 1;
+    bins[idx].count++;
+    bins[idx].items.push(r);
+  });
+
+  const maxCount = Math.max(...bins.map(b => b.count), 1);
+
+  chartContainer.classList.add('histogram-mode');
   chartContainer.innerHTML = '';
 
-  brackets.forEach((b, idx) => {
-    const pct = ((b.count / maxBucketCount) * 100).toFixed(1);
-    const sharePct = ((b.count / totalCount) * 100).toFixed(1);
-
+  bins.forEach(bin => {
+    const pct = ((bin.count / maxCount) * 100).toFixed(1);
     const barCol = document.createElement('div');
-    barCol.className = 'chart-bar-col';
-    barCol.innerHTML = `
-      <div class="chart-bar-value">${b.count} (${sharePct}%)</div>
-      <div class="chart-bar-track">
-        <div class="chart-bar-fill" style="height: ${pct}%; animation-delay: ${idx * 100}ms;" title="${b.label}: ${b.count} laptops"></div>
-      </div>
-      <div class="chart-bar-label">${b.label}</div>
-    `;
+    barCol.className = 'hist-bar-col' + (bin.overflow ? ' overflow-bin' : '');
+    barCol.title = bin.overflow
+      ? `RM ${bin.min.toLocaleString()}+: ${bin.count} laptop${bin.count === 1 ? '' : 's'}`
+      : `RM ${bin.min.toLocaleString()} – RM ${(bin.max - 1).toLocaleString()}: ${bin.count} laptop${bin.count === 1 ? '' : 's'}`;
+    barCol.innerHTML = `<div class="hist-bar-fill" style="height:${pct}%;"></div>`;
 
-    barCol.addEventListener('click', () => {
-      document.querySelectorAll('.chart-bar-col').forEach(c => c.classList.remove('active'));
-      barCol.classList.add('active');
-      renderLaptopTable(b.items, `Laptops in price range: ${b.label}`);
-    });
+    if (bin.count > 0) {
+      barCol.addEventListener('click', () => {
+        const alreadyActive = barCol.classList.contains('active');
+        document.querySelectorAll('.hist-bar-col').forEach(c => c.classList.remove('active'));
+        if (alreadyActive) {
+          renderLaptopTable(laptops, 'All Laptops Price Directory');
+        } else {
+          barCol.classList.add('active');
+          const label = bin.overflow
+            ? `RM ${bin.min.toLocaleString()}+`
+            : `RM ${bin.min.toLocaleString()} – RM ${(bin.max - 1).toLocaleString()}`;
+          renderLaptopTable(bin.items, label);
+        }
+      });
+    }
 
     chartContainer.appendChild(barCol);
   });
+
+  if (yAxis) {
+    yAxis.innerHTML = '';
+    const steps = 4;
+    for (let i = steps; i >= 0; i--) {
+      const val = Math.round((maxCount / steps) * i);
+      const lbl = document.createElement('div');
+      lbl.textContent = val;
+      yAxis.appendChild(lbl);
+    }
+  }
+
+  if (xAxis) {
+    xAxis.innerHTML = '';
+    const labelEvery = Math.max(1, Math.round(bins.length / 8));
+    bins.forEach((bin, i) => {
+      const cell = document.createElement('div');
+      cell.className = 'xlabel-cell';
+      const isFirst = i === 0;
+      const isOnGrid = i % labelEvery === 0;
+      if (isFirst || bin.overflow || isOnGrid) {
+        const text = bin.overflow ? `${(bin.min / 1000).toFixed(1)}k+` : `${(bin.min / 1000).toFixed(1)}k`;
+        cell.innerHTML = `<span>${text}</span>`;
+      }
+      xAxis.appendChild(cell);
+    });
+  }
+
+  const rangeLabel = document.getElementById('priceChartRange');
+  if (rangeLabel) {
+    const tailNote = overflowLaptops.length > 0
+      ? ` (+${overflowLaptops.length} above RM${cappedMax.toLocaleString()})`
+      : '';
+    rangeLabel.textContent = `RM ${minPrice.toLocaleString()} – RM ${cappedMax.toLocaleString()} · ${bins.length} bars · ${laptops.length} laptops total${tailNote}`;
+  }
 }
 
 function renderLaptopTable(items, titleFilter = 'All Laptops Price Directory') {
@@ -178,13 +237,14 @@ function renderLaptopTable(items, titleFilter = 'All Laptops Price Directory') {
 
   items.slice(0, 150).forEach((r, idx) => {
     const tr = document.createElement('tr');
+    tr.className = 'clickable-row';
     tr.innerHTML = `
       <td>#${idx + 1}</td>
       <td>
         <div class="table-laptop-cell">
           <img src="${typeof formatImgUrl === 'function' ? formatImgUrl(r.image_url, r.series) : (r.image_url || 'https://via.placeholder.com/40')}" alt="" class="table-laptop-img" loading="lazy">
           <div>
-            <a href="${r.url}" target="_blank" rel="noopener" class="table-laptop-title">${escapeHtml(r.title)}</a>
+            <a href="${r.url}" target="_blank" rel="noopener" class="table-laptop-title" data-noexpand="1">${escapeHtml(r.title)}</a>
             <div class="table-laptop-vendor">${escapeHtml(r.best_vendor || r.series || 'Retailer')} ${r.vendor_count > 1 ? `<span class="badge-multi">${r.vendor_count} Stores</span>` : ''}</div>
           </div>
         </div>
@@ -193,9 +253,64 @@ function renderLaptopTable(items, titleFilter = 'All Laptops Price Directory') {
       <td><span class="spec-tag">${escapeHtml(r.processor || 'N/A')}</span></td>
       <td><span class="spec-tag">${escapeHtml(r.graphics || 'N/A')}</span></td>
       <td>
-        <a href="${r.url}" target="_blank" rel="noopener" class="btn-detail-sm" style="text-decoration:none;">View Deal ↗</a>
+        <a href="${r.url}" target="_blank" rel="noopener" class="btn-detail-sm" style="text-decoration:none;" data-noexpand="1">View Deal ↗</a>
       </td>
     `;
+    tr.addEventListener('click', (e) => {
+      if (e.target.closest('[data-noexpand]')) return;
+      openLaptopModal(r);
+    });
     tableBody.appendChild(tr);
   });
 }
+function openLaptopModal(laptop) {
+  const overlay = document.getElementById('specModalOverlay');
+  const body = document.getElementById('specModalBody');
+  if (!overlay || !body) return;
+
+  const img = typeof formatImgUrl === 'function'
+    ? formatImgUrl(laptop.image_url, laptop.series)
+    : (laptop.image_url || 'https://via.placeholder.com/120');
+
+  const specRows = [
+    ['Processor', laptop.processor],
+    ['Graphics', laptop.graphics],
+    ['Memory', laptop.memory],
+    ['Storage', laptop.storage],
+    ['Display', laptop.display],
+    ['WiFi', laptop.wifi],
+    ['Battery', laptop.battery],
+    ['Other specs', laptop.others],
+  ];
+
+  body.innerHTML = `
+    <div class="spec-modal-head">
+      <img src="${img}" alt="" class="spec-modal-img">
+      <div>
+        <h3>${escapeHtml(laptop.title)}</h3>
+        <div class="spec-modal-vendor">${escapeHtml(laptop.best_vendor || laptop.series || 'Retailer')}</div>
+        <div class="spec-modal-price">${fmtPrice(laptop.numericPrice || laptop.price)}</div>
+      </div>
+    </div>
+    <table class="spec-modal-table">
+      ${specRows.map(([label, val]) => `
+        <tr>
+          <th>${label}</th>
+          <td>${val ? escapeHtml(val) : '<span class="muted">—</span>'}</td>
+        </tr>
+      `).join('')}
+    </table>
+    <a href="${laptop.url}" target="_blank" rel="noopener" class="btn primary" style="text-decoration:none;display:inline-block;margin-top:16px;">Open Store Listing ↗</a>
+  `;
+
+  overlay.classList.add('show');
+}
+
+function closeLaptopModal() {
+  const overlay = document.getElementById('specModalOverlay');
+  if (overlay) overlay.classList.remove('show');
+}
+
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'specModalOverlay') closeLaptopModal();
+});
