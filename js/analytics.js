@@ -190,7 +190,14 @@ function populateAnalyticsFilterDropdowns(rows) {
       { val: 'ryzen 3', label: 'Ryzen 3' },
       { val: 'ryzen 5', label: 'Ryzen 5' },
       { val: 'ryzen 7', label: 'Ryzen 7' },
-      { val: 'ryzen 9', label: 'Ryzen 9' }
+      { val: 'ryzen 9', label: 'Ryzen 9' },
+      { val: 'r5', label: 'Ryzen 5 (R5)' },
+      { val: 'r7', label: 'Ryzen 7 (R7)' },
+      { val: 'r9', label: 'Ryzen 9 (R9)' },
+      { val: 'c5', label: 'Core 5 / C5' },
+      { val: 'cu5', label: 'Core Ultra 5 (CU5)' },
+      { val: 'c7', label: 'Core 7 / C7' },
+      { val: 'cu7', label: 'Core Ultra 7 (CU7)' }
     ];
 
     knownCpus.forEach(c => {

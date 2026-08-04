@@ -24,6 +24,9 @@ function formatImgUrl(raw, vendorStr) {
     if (v.includes('acer')) return 'https://store.acer.com' + u;
     return 'https://p3-ofp.static.pub' + u;
   }
+  if (u.startsWith('image/')) {
+    return 'https://www.techhypermart.com/' + u;
+  }
   return u;
 }
 
@@ -216,10 +219,19 @@ function dispInchPrefix(displayStr) {
   return m ? m[1] : null;
 }
 
-function detectBrand(proc) {
-  const t = (proc || '').toLowerCase();
-  if (t.includes('intel')) return 'intel';
-  if (t.includes('amd') || t.includes('ryzen')) return 'amd';
+function detectBrand(proc, fullRow) {
+  const text = `${proc || ''} ${fullRow ? (fullRow.title || '') + ' ' + (fullRow.others || '') : ''}`.toLowerCase();
+
+  // 1. AMD CPUs
+  if (/amd|ryzen|\br[3579]\b|\br3-|\br5-|\br7-|\br9-|athlon|threadripper|7\d{3}hs|8\d{3}hs|5\d{3}u|7\d{3}u/i.test(text)) {
+    return 'amd';
+  }
+
+  // 2. Intel CPUs
+  if (/intel|core\s*i[3579]|\bi[3579][-\s]\d|ultra\s*[3579]|core\s*ultra|celeron|pentium|\bc[57][-\s]\d|\bcu[57][-\s]\d/i.test(text)) {
+    return 'intel';
+  }
+
   return 'other';
 }
 
