@@ -299,6 +299,32 @@ def combine_all_csvs():
                     best_spec = cand
             master_item[field] = best_spec
 
+        # Pick best image_url across all vendor offers if best_offer is missing image
+        best_img = master_item.get("image_url", "").strip()
+        for o in offers:
+            cand_img = o["item"].get("image_url", "").strip()
+            if not best_img or (cand_img and cand_img.startswith("http") and not best_img.startswith("http")):
+                best_img = cand_img
+
+        # If image is still missing or placeholder, set high quality brand fallback URL
+        if not best_img or "1x1" in best_img or "placeholder" in best_img or "data:image" in best_img:
+            t_low = (master_item.get("title", "") + " " + master_item.get("series", "")).lower()
+            if any(k in t_low for k in ["asus", "rog", "tuf"]):
+                best_img = "https://dlcdnrog.asus.com/rog/media/1684365775369.jpg"
+            elif any(k in t_low for k in ["lenovo", "legion", "loq", "ideapad"]):
+                best_img = "https://p3-ofp.static.pub/ShareResource/na/products/laptops/subseries-hero/lenovo-legion-pro-7i-gen-9-16inch-intel-hero.png"
+            elif any(k in t_low for k in ["acer", "nitro", "predator", "aspire"]):
+                best_img = "https://images.acer.com/is/image/acer/Predator-Helios-16-PH16-71-RGB-KBD-Backlit-on-01a-1?$png-large$"
+            elif any(k in t_low for k in ["hp", "victus", "omen", "pavilion"]):
+                best_img = "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c08962256.png"
+            elif any(k in t_low for k in ["msi", "cyborg", "katana", "thin"]):
+                best_img = "https://asset.msi.com/resize/image/global/product/product_16842065874c2d3a958e94e438c823053bb074906f.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png"
+            elif any(k in t_low for k in ["dell", "alienware", "g15", "g16"]):
+                best_img = "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/g-series/g15-5530/media-gallery/black/notebook-g15-5530-nt-black-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=600&qlt=100,0&resMode=sharp2&size=600,402"
+            else:
+                best_img = "https://p3-ofp.static.pub/ShareResource/na/products/laptops/subseries-hero/lenovo-legion-pro-7i-gen-9-16inch-intel-hero.png"
+
+        master_item["image_url"] = best_img
         master_item["id"] = mpn_key
         master_item["price"] = f"{best_offer['price']:.2f}" if best_offer['price'] > 0 else master_item.get("price", "")
         master_item["best_vendor"] = f"{best_offer['vendor']} (RM {best_offer['price']:,.2f})" if best_offer['price'] > 0 else best_offer['vendor']

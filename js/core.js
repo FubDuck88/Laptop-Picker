@@ -11,22 +11,46 @@ function escapeHtml(s) {
   return d.innerHTML;
 }
 
-function formatImgUrl(raw, vendorStr) {
-  if (!raw) return '';
-  let u = raw.trim();
-  if (u.startsWith('//')) return 'https:' + u;
-  if (u.startsWith('http://') || u.startsWith('https://')) return u.replace(/([^:])\/{2,}/g, '$1/');
-  if (u.startsWith('/')) {
+function formatImgUrl(raw, vendorStr, titleStr) {
+  let u = (raw || '').trim();
+  if (u.startsWith('//')) u = 'https:' + u;
+  else if (u.startsWith('http://') || u.startsWith('https://')) u = u.replace(/([^:])\/{2,}/g, '$1/');
+  else if (u.startsWith('/')) {
     const v = (vendorStr || '').toLowerCase();
-    if (v.includes('techhypermart')) return 'https://www.techhypermart.com' + u;
-    if (v.includes('pcimage') || v.includes('pc image')) return 'https://store.pcimage.com.my' + u;
-    if (v.includes('all it') || v.includes('allit')) return 'https://www.allithypermarket.com.my' + u;
-    if (v.includes('acer')) return 'https://store.acer.com' + u;
-    return 'https://p3-ofp.static.pub' + u;
+    if (v.includes('techhypermart')) u = 'https://www.techhypermart.com' + u;
+    else if (v.includes('pcimage') || v.includes('pc image')) u = 'https://store.pcimage.com.my' + u;
+    else if (v.includes('all it') || v.includes('allit')) u = 'https://www.allithypermarket.com.my' + u;
+    else if (v.includes('acer')) u = 'https://store.acer.com' + u;
+    else if (v.includes('gloo')) u = 'https://www.gloo.com.my' + u;
+    else u = 'https://p3-ofp.static.pub' + u;
+  } else if (u.startsWith('image/')) {
+    u = 'https://www.techhypermart.com/' + u;
   }
-  if (u.startsWith('image/')) {
-    return 'https://www.techhypermart.com/' + u;
+
+  // Fallback high-res brand image if URL is missing or placeholder
+  if (!u || u.includes('1x1') || u.includes('placeholder') || u.includes('data:image')) {
+    const t = `${vendorStr || ''} ${titleStr || ''}`.toLowerCase();
+    if (t.includes('asus') || t.includes('rog') || t.includes('tuf')) {
+      return 'https://dlcdnrog.asus.com/rog/media/1684365775369.jpg';
+    }
+    if (t.includes('lenovo') || t.includes('legion') || t.includes('loq') || t.includes('ideapad')) {
+      return 'https://p3-ofp.static.pub/ShareResource/na/products/laptops/subseries-hero/lenovo-legion-pro-7i-gen-9-16inch-intel-hero.png';
+    }
+    if (t.includes('acer') || t.includes('nitro') || t.includes('predator') || t.includes('aspire')) {
+      return 'https://images.acer.com/is/image/acer/Predator-Helios-16-PH16-71-RGB-KBD-Backlit-on-01a-1?$png-large$';
+    }
+    if (t.includes('hp') || t.includes('victus') || t.includes('omen') || t.includes('pavilion')) {
+      return 'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c08962256.png';
+    }
+    if (t.includes('msi') || t.includes('cyborg') || t.includes('katana') || t.includes('thin')) {
+      return 'https://asset.msi.com/resize/image/global/product/product_16842065874c2d3a958e94e438c823053bb074906f.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png';
+    }
+    if (t.includes('dell') || t.includes('alienware') || t.includes('g15') || t.includes('g16')) {
+      return 'https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/g-series/g15-5530/media-gallery/black/notebook-g15-5530-nt-black-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=600&qlt=100,0&resMode=sharp2&size=600,402';
+    }
+    return 'https://p3-ofp.static.pub/ShareResource/na/products/laptops/subseries-hero/lenovo-legion-pro-7i-gen-9-16inch-intel-hero.png';
   }
+
   return u;
 }
 

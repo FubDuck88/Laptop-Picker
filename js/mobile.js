@@ -158,11 +158,11 @@ function buildMobileCardHtml(r) {
     badgeHtml = '<div class="m-deal-badge">🏷️ ' + r.vendor_count + ' Vendor Deals (Best at ' + escapeHtml(bestVendor) + ')</div>';
   }
 
-  let rawImg = formatImgUrl(r.image_url, r.series || r.best_vendor);
+  let rawImg = formatImgUrl(r.image_url, r.series || r.best_vendor, r.title);
   let imgHtml = '';
   if (rawImg.length > 5) {
     imgHtml = '<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px;text-align:center;margin:4px 0;height:100px;display:flex;align-items:center;justify-content:center;">'
-      + '<img src="' + escapeHtml(rawImg) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:88px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));" onerror="this.parentElement.style.display=\'none\';" /></div>';
+      + '<img src="' + escapeHtml(rawImg) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:88px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));" /></div>';
   }
 
   return '<div class="m-card">'
@@ -209,11 +209,11 @@ function openMobileDetail(r) {
     tableHtml += '</table></div>';
   }
 
-  let rawImg = formatImgUrl(r.image_url, r.series || r.best_vendor);
+  let rawImg = formatImgUrl(r.image_url, r.series || r.best_vendor, r.title);
   let imgBox = '';
   if (rawImg.length > 5) {
     imgBox = '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;margin-bottom:12px;">'
-      + '<img src="' + escapeHtml(rawImg) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:130px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.4));" onerror="this.parentElement.style.display=\'none\';" />'
+      + '<img src="' + escapeHtml(rawImg) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:130px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.4));" />'
       + '</div>';
   }
 

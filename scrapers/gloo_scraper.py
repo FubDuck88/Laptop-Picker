@@ -85,11 +85,13 @@ def scrape_gloo():
                 p_match = re.search(r"RM\s*([\d,]+(?:\.\d{2})?)", p_text)
                 if p_match:
                     price = p_match.group(1).replace(",", "")
-                img_el = parent.find("img", src=True)
+                img_el = parent.find("img", src=True) or parent.find("img")
                 if img_el:
-                    img_url = img_el["src"]
+                    img_url = (img_el.get("data-src") or img_el.get("data-srcset") or img_el.get("srcset") or img_el.get("src") or "").strip()
                     if img_url.startswith("//"):
                         img_url = "https:" + img_url
+                    elif img_url.startswith("/"):
+                        img_url = "https://www.gloo.com.my" + img_url
 
             if not href.startswith("http"):
                 href = "https://www.gloo.com.my" + href

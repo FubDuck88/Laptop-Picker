@@ -905,7 +905,7 @@ function renderLaptopTable(items, titleFilter = 'All Laptops Price Directory') {
       <td>#${idx + 1}</td>
       <td>
         <div class="table-laptop-cell">
-          <img src="${typeof formatImgUrl === 'function' ? formatImgUrl(r.image_url, r.series) : (r.image_url || 'https://via.placeholder.com/40')}" alt="" class="table-laptop-img" loading="lazy">
+          <img src="${typeof formatImgUrl === 'function' ? formatImgUrl(r.image_url, r.series, r.title) : (r.image_url || 'https://p3-ofp.static.pub/ShareResource/na/products/laptops/subseries-hero/lenovo-legion-pro-7i-gen-9-16inch-intel-hero.png')}" alt="" class="table-laptop-img" loading="lazy">
           <div>
             <a href="${r.url}" target="_blank" rel="noopener" class="table-laptop-title" data-noexpand="1">${escapeHtml(r.title)}</a>
             <div class="table-laptop-vendor">
@@ -939,7 +939,7 @@ function openLaptopModal(laptop) {
   if (!overlay || !body) return;
 
   const img = typeof formatImgUrl === 'function'
-    ? formatImgUrl(laptop.image_url, laptop.series)
+    ? formatImgUrl(laptop.image_url, laptop.series, laptop.title)
     : (laptop.image_url || 'https://via.placeholder.com/120');
 
   const specRows = [

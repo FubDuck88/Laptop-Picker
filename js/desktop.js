@@ -529,12 +529,12 @@ function buildCardHtml(r) {
   const isMultiVendor = deals.length > 1;
   const bestVendorName = deals[0] ? deals[0].vendor : (r.best_vendor || r.series);
 
-  let rawUrl = formatImgUrl(r.image_url, r.series || r.best_vendor);
+  let rawUrl = formatImgUrl(r.image_url, r.series || r.best_vendor, r.title);
 
   let imgHtml = '';
   if (rawUrl.length > 5) {
     imgHtml = '<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;margin:10px 0;height:110px;display:flex;align-items:center;justify-content:center;">'
-      + '<img src="' + escapeHtml(rawUrl) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:95px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));" onerror="this.parentElement.style.display=\'none\';" /></div>';
+      + '<img src="' + escapeHtml(rawUrl) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:95px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));" /></div>';
   }
 
   let dealBadgeHtml = '';
@@ -566,7 +566,7 @@ function buildCardHtml(r) {
 // ── Image Rendering ──────────────────────────────────────────────────────────
 
 function renderLaptopSvg(r) {
-  let rawUrl = formatImgUrl(r.image_url, r.series || r.best_vendor);
+  let rawUrl = formatImgUrl(r.image_url, r.series || r.best_vendor, r.title);
 
   if (rawUrl.length > 5) {
     return '<img src="' + escapeHtml(rawUrl) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:160px;max-width:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.5));display:block;margin:0 auto;" onerror="this.style.display=\'none\';if(this.nextElementSibling)this.nextElementSibling.style.display=\'block\';" />'
