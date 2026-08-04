@@ -8,11 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initAnalytics(rawRows) {
-  const rows = normalizeRows(rawRows);
-  if (!rows || rows.length === 0) {
+  if (!rawRows || !Array.isArray(rawRows) || rawRows.length === 0) {
     console.error('[analytics] No laptop data loaded.');
     return;
   }
+
+  // Normalize rows safely
+  const rows = rawRows.map((r, i) => typeof normalizeRow === 'function' ? normalizeRow(r, i) : r);
 
   // Filter valid prices
   const validLaptops = rows.filter(r => r.price && !isNaN(r.price) && r.price > 0);
@@ -39,28 +41,40 @@ function initAnalytics(rawRows) {
     medianPrice = prices[Math.floor(count / 2)];
   }
 
-  // Calculate simulated weekly trend delta (or real delta if tracking)
+  // Calculate weekly trend delta
   const priceDealsCount = validLaptops.filter(r => r.vendor_count > 1).length;
   const trendPercent = +(((priceDealsCount / count) * 4.2) - 1.5).toFixed(1);
 
   // Render KPI Summary Cards
-  document.getElementById('statTotalCount').textContent = count.toLocaleString() + ' Models';
-  document.getElementById('statMeanPrice').textContent = fmtPrice(meanPrice);
-  document.getElementById('statMedianPrice').textContent = fmtPrice(medianPrice);
-  
+  const totalEl = document.getElementById('statTotalCount');
+  if (totalEl) totalEl.textContent = count.toLocaleString() + ' Models';
+
+  const meanEl = document.getElementById('statMeanPrice');
+  if (meanEl) meanEl.textContent = fmtPrice(meanPrice);
+
+  const medianEl = document.getElementById('statMedianPrice');
+  if (medianEl) medianEl.textContent = fmtPrice(medianPrice);
+
   // Lowest & Highest Cards with clickable detail links
   const minLink = document.getElementById('statLowestPrice');
-  minLink.textContent = fmtPrice(minPrice);
-  minLink.href = lowestLaptop.url || '#';
-  minLink.title = lowestLaptop.title;
+  if (minLink) {
+    minLink.textContent = fmtPrice(minPrice);
+    minLink.href = lowestLaptop.url || '#';
+    minLink.title = lowestLaptop.title;
+  }
 
   const maxLink = document.getElementById('statHighestPrice');
-  maxLink.textContent = fmtPrice(maxPrice);
-  maxLink.href = highestLaptop.url || '#';
-  maxLink.title = highestLaptop.title;
+  if (maxLink) {
+    maxLink.textContent = fmtPrice(maxPrice);
+    maxLink.href = highestLaptop.url || '#';
+    maxLink.title = highestLaptop.title;
+  }
 
-  document.getElementById('lowestLaptopName').textContent = lowestLaptop.title.slice(0, 45) + '...';
-  document.getElementById('highestLaptopName').textContent = highestLaptop.title.slice(0, 45) + '...';
+  const lowNameEl = document.getElementById('lowestLaptopName');
+  if (lowNameEl) lowNameEl.textContent = lowestLaptop.title.slice(0, 45) + '...';
+
+  const highNameEl = document.getElementById('highestLaptopName');
+  if (highNameEl) highNameEl.textContent = highestLaptop.title.slice(0, 45) + '...';
 
   const trendEl = document.getElementById('statTrend');
   if (trendEl) {
@@ -137,16 +151,16 @@ function renderLaptopTable(items, titleFilter = 'All Laptops Price Directory') {
     return;
   }
 
-  items.slice(0, 100).forEach((r, idx) => {
+  items.slice(0, 150).forEach((r, idx) => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>#${idx + 1}</td>
       <td>
         <div class="table-laptop-cell">
-          <img src="${r.image_url || 'https://via.placeholder.com/40'}" alt="" class="table-laptop-img" loading="lazy">
+          <img src="${formatImgUrl ? formatImgUrl(r.image_url, r.series) : (r.image_url || 'https://via.placeholder.com/40')}" alt="" class="table-laptop-img" loading="lazy">
           <div>
             <a href="${r.url}" target="_blank" rel="noopener" class="table-laptop-title">${escapeHtml(r.title)}</a>
-            <div class="table-laptop-vendor">${escapeHtml(r.best_vendor || 'Retailer')} ${r.vendor_count > 1 ? `<span class="badge-multi">${r.vendor_count} Stores</span>` : ''}</div>
+            <div class="table-laptop-vendor">${escapeHtml(r.best_vendor || r.series || 'Retailer')} ${r.vendor_count > 1 ? `<span class="badge-multi">${r.vendor_count} Stores</span>` : ''}</div>
           </div>
         </div>
       </td>
@@ -154,17 +168,9 @@ function renderLaptopTable(items, titleFilter = 'All Laptops Price Directory') {
       <td><span class="spec-tag">${escapeHtml(r.processor || 'N/A')}</span></td>
       <td><span class="spec-tag">${escapeHtml(r.graphics || 'N/A')}</span></td>
       <td>
-        <button class="btn-detail-sm" onclick="showDetailModal('${escapeHtml(r.id)}')">View Specs</button>
+        <a href="${r.url}" target="_blank" rel="noopener" class="btn-detail-sm" style="text-decoration:none;">View Deal ↗</a>
       </td>
     `;
     tableBody.appendChild(tr);
   });
-}
-
-function showDetailModal(id) {
-  if (typeof window.openSpecModal === 'function') {
-    window.openSpecModal(id);
-  } else {
-    alert('Laptop Part ID: ' + id);
-  }
 }
