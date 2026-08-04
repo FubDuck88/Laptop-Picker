@@ -11,8 +11,15 @@ import re
 import subprocess
 from collections import defaultdict
 
-# Use current working directory dynamically so it works on both Windows and GitHub Linux runners
-MASTER_DIR = os.path.dirname(os.path.abspath(__file__))
+import sys
+import importlib
+
+def get_base_dir():
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)
+    return os.path.dirname(os.path.abspath(__file__))
+
+MASTER_DIR = get_base_dir()
 MASTER_FILE = os.path.join(MASTER_DIR, "master_laptops.csv")
 
 FIELDNAMES = [
@@ -80,24 +87,31 @@ def clean_vendor_name(series_str, source_file):
 
 
 def run_scrapers():
-    """Runs all individual scraper scripts sequentially."""
-    scraper_scripts = [
-        "acer_scraper.py", "allit_scraper.py", "asus_scraper.py", 
-        "lenovo_scraper.py", "msi_scraper.py", "pcimage_scraper.py", 
-        "techhypermart_scraper.py"
+    """Runs all individual scraper scripts sequentially in Python."""
+    scrapers = [
+        ("Acer", "acer_scraper", lambda m: m.scrape_acer() if hasattr(m, 'scrape_acer') else None),
+        ("ALL IT", "allit_scraper", lambda m: m.scrape_allit() if hasattr(m, 'scrape_allit') else None),
+        ("ASUS", "asus_scraper", lambda m: m.fetch_asus_laptops() if hasattr(m, 'fetch_asus_laptops') else None),
+        ("Lenovo", "lenovo_scraper", lambda m: m.fetch_all_products("47af9ba7-cab2-4e61-9b10-2283ac14c87c") if hasattr(m, 'fetch_all_products') else None),
+        ("MSI", "msi_scraper", lambda m: m.scrape_msi() if hasattr(m, 'scrape_msi') else None),
+        ("PC Image", "pcimage_scraper", lambda m: m.scrape_pcimage() if hasattr(m, 'scrape_pcimage') else None),
+        ("TechHypermart", "techhypermart_scraper", lambda m: m.scrape_techhypermart() if hasattr(m, 'scrape_techhypermart') else None),
     ]
 
-    for script in scraper_scripts:
-        script_path = os.path.join(MASTER_DIR, script)
-        if os.path.exists(script_path):
-            print(f"Running {script}...")
-            try:
-                subprocess.run(["python", script_path], check=True)
-                print(f"Finished {script}")
-            except subprocess.CalledProcessError as e:
-                print(f"Error executing {script}: {e}")
-        else:
-            print(f"Skipping {script} (file not found)")
+    for name, module_name, runner in scrapers:
+        print(f"Running {name} Scraper ({module_name})...")
+        try:
+            mod = importlib.import_module(module_name)
+            if hasattr(mod, 'OUTPUT_DIR'):
+                mod.OUTPUT_DIR = MASTER_DIR
+                if hasattr(mod, 'OUTPUT_FILE'):
+                    mod.OUTPUT_FILE = os.path.join(MASTER_DIR, os.path.basename(mod.OUTPUT_FILE))
+            res = runner(mod)
+            if isinstance(res, list) and hasattr(mod, 'save_to_csv'):
+                mod.save_to_csv(res)
+            print(f"Finished {name} Scraper")
+        except Exception as e:
+            print(f"Error executing {name} Scraper ({module_name}): {e}")
 
 
 def combine_all_csvs():
