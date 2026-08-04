@@ -3,11 +3,25 @@
  * Computes mean, median, min, max, price distribution brackets, and renders interactive charts.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+function parsePriceVal(p) {
+  if (typeof p === 'number') return p;
+  if (!p) return 0;
+  const cleaned = String(p).replace(/[^0-9.]/g, '');
+  return parseFloat(cleaned) || 0;
+}
+
+function runAnalytics() {
   loadData(initAnalytics);
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', runAnalytics);
+} else {
+  runAnalytics();
+}
 
 function initAnalytics(rawRows) {
+  console.log('[analytics] Initializing analytics with rows:', rawRows ? rawRows.length : 0);
   if (!rawRows || !Array.isArray(rawRows) || rawRows.length === 0) {
     console.error('[analytics] No laptop data loaded.');
     return;
@@ -16,13 +30,24 @@ function initAnalytics(rawRows) {
   // Normalize rows safely
   const rows = rawRows.map((r, i) => typeof normalizeRow === 'function' ? normalizeRow(r, i) : r);
 
-  // Filter valid prices
-  const validLaptops = rows.filter(r => r.price && !isNaN(r.price) && r.price > 0);
-  validLaptops.sort((a, b) => a.price - b.price);
+  // Filter valid numeric prices using parsePriceVal
+  const validLaptops = [];
+  rows.forEach(r => {
+    const pVal = parsePriceVal(r.price);
+    if (pVal > 0) {
+      validLaptops.push({
+        ...r,
+        numericPrice: pVal
+      });
+    }
+  });
 
-  const prices = validLaptops.map(r => r.price);
+  validLaptops.sort((a, b) => a.numericPrice - b.numericPrice);
+
+  const prices = validLaptops.map(r => r.numericPrice);
   const count = prices.length;
 
+  console.log(`[analytics] Valid priced laptops: ${count}`);
   if (count === 0) return;
 
   // 1. Calculate Metrics
@@ -95,7 +120,7 @@ function initAnalytics(rawRows) {
 
   validLaptops.forEach(r => {
     for (let b of brackets) {
-      if (r.price >= b.min && r.price < b.max) {
+      if (r.numericPrice >= b.min && r.numericPrice < b.max) {
         b.count++;
         b.items.push(r);
         break;
@@ -157,14 +182,14 @@ function renderLaptopTable(items, titleFilter = 'All Laptops Price Directory') {
       <td>#${idx + 1}</td>
       <td>
         <div class="table-laptop-cell">
-          <img src="${formatImgUrl ? formatImgUrl(r.image_url, r.series) : (r.image_url || 'https://via.placeholder.com/40')}" alt="" class="table-laptop-img" loading="lazy">
+          <img src="${typeof formatImgUrl === 'function' ? formatImgUrl(r.image_url, r.series) : (r.image_url || 'https://via.placeholder.com/40')}" alt="" class="table-laptop-img" loading="lazy">
           <div>
             <a href="${r.url}" target="_blank" rel="noopener" class="table-laptop-title">${escapeHtml(r.title)}</a>
             <div class="table-laptop-vendor">${escapeHtml(r.best_vendor || r.series || 'Retailer')} ${r.vendor_count > 1 ? `<span class="badge-multi">${r.vendor_count} Stores</span>` : ''}</div>
           </div>
         </div>
       </td>
-      <td><strong style="color:var(--accent-1);">${fmtPrice(r.price)}</strong></td>
+      <td><strong style="color:var(--accent-1);">${fmtPrice(r.numericPrice || r.price)}</strong></td>
       <td><span class="spec-tag">${escapeHtml(r.processor || 'N/A')}</span></td>
       <td><span class="spec-tag">${escapeHtml(r.graphics || 'N/A')}</span></td>
       <td>
