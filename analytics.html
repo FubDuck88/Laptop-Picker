@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Laptop Price Analytics & Market Statistics | Laptop Picker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/analytics.css">
+</head>
+
+<body>
+
+  <!-- Global Header Navigation -->
+  <header style="background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="index.html" style="font-size: 18px; font-weight: 700; color: var(--accent-1); text-decoration: none; display: flex; align-items: center; gap: 8px;">
+        <span>💻</span> LAPTOP PICKER
+      </a>
+      <span style="font-size: 11px; background: rgba(56, 189, 248, 0.15); color: var(--accent-1); padding: 2px 8px; border-radius: 4px; font-weight: 600;">MARKET ANALYTICS</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="index.html" class="btn primary sm" style="text-decoration: none; padding: 6px 14px; font-size: 12px;">🖥️ Main Directory</a>
+      <a href="mobile.html" class="btn secondary sm" style="text-decoration: none; padding: 6px 14px; font-size: 12px;">📱 Mobile View</a>
+    </div>
+  </header>
+
+  <!-- Main Analytics Container -->
+  <div class="analytics-container">
+
+    <div class="analytics-header">
+      <div class="analytics-title-group">
+        <h1>📊 Malaysian Laptop Market Price Analytics</h1>
+        <div class="analytics-subtitle">Real-time statistical breakdown across 10 official Malaysian stores & distributors</div>
+      </div>
+      <div id="statTrend" class="kpi-trend up">+2.4% vs last week</div>
+    </div>
+
+    <!-- 1. KPI Metric Summary Cards -->
+    <div class="kpi-grid">
+
+      <!-- Total Laptops -->
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Total Tracked</span>
+          <span class="kpi-icon">📦</span>
+        </div>
+        <div class="kpi-value" id="statTotalCount">-</div>
+        <div class="kpi-subtext">Across 10 Malaysian Retailers</div>
+      </div>
+
+      <!-- Mean Price -->
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Mean (Average) Price</span>
+          <span class="kpi-icon">📈</span>
+        </div>
+        <div class="kpi-value" id="statMeanPrice">RM -</div>
+        <div class="kpi-subtext">Marketwide Weighted Average</div>
+      </div>
+
+      <!-- Median Price -->
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Median Price</span>
+          <span class="kpi-icon">🎯</span>
+        </div>
+        <div class="kpi-value" id="statMedianPrice">RM -</div>
+        <div class="kpi-subtext">Midpoint Market Benchmark</div>
+      </div>
+
+      <!-- Lowest Price (Clickable) -->
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Lowest Price</span>
+          <span class="kpi-icon">🏷️</span>
+        </div>
+        <a id="statLowestPrice" href="#" target="_blank" class="kpi-value kpi-value-link">RM -</a>
+        <div class="kpi-subtext" id="lowestLaptopName">Click to open store deal</div>
+      </div>
+
+      <!-- Highest Price (Clickable) -->
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Highest Price</span>
+          <span class="kpi-icon">👑</span>
+        </div>
+        <a id="statHighestPrice" href="#" target="_blank" class="kpi-value kpi-value-link">RM -</a>
+        <div class="kpi-subtext" id="highestLaptopName">Click to open flagship model</div>
+      </div>
+
+    </div>
+
+    <!-- 2. Interactive Price Distribution Bar Chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">📊 Price Range Distribution (Histogram)</div>
+        <div class="chart-hint">Click any bar to filter the laptop spec table below</div>
+      </div>
+
+      <div class="bar-chart-wrapper" id="priceBarChart">
+        <!-- Bars dynamically populated by analytics.js -->
+      </div>
+    </div>
+
+    <!-- 3. Interactive Spec & Price Table -->
+    <div class="analytics-table-card">
+      <div class="analytics-table-header">
+        <h3 id="analyticsTableTitle" style="font-size: 15px; font-weight: 600;">All Laptops Price Directory</h3>
+        <span style="font-size: 12px; color: var(--text-muted);">Sorted by Price (Lowest to Highest)</span>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="analytics-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">Rank</th>
+              <th>Laptop Model & Vendor Store</th>
+              <th>Price</th>
+              <th>Processor</th>
+              <th>Graphics</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="analyticsTableBody">
+            <!-- Dynamically populated by analytics.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Shared Data & Analytics Scripts -->
+  <script src="data/data.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/desktop.js"></script>
+  <script src="js/analytics.js"></script>
+
+</body>
+
+</html>
