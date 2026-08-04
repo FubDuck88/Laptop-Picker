@@ -69,6 +69,57 @@ def extract_part_number(title, rid):
     return None
 
 
+def extract_specs_from_title(title, existing_item):
+    """
+    Intelligently extracts missing CPU, GPU, RAM, Storage, and Display specs 
+    from product title or description text if fields were left empty by scrapers.
+    """
+    text = (title + " " + (existing_item.get("others") or "")).strip()
+    
+    # 1. Processor (CPU)
+    proc = existing_item.get("processor", "").strip()
+    if not proc or len(proc) < 3:
+        m = re.search(r'\b(Intel®?\s*Core™?\s*(?:Ultra\s*)?[iI\d][\w\d-]+\s*(?:processor)?|AMD\s*Ryzen™?\s*\d[\w\d-]+|Core\s*Ultra\s*\d\s*\d+[\w\d]*|[iI][3579][-\s]\d{4,5}[\w\d]*|Athlon[\w\d\s-]*|C5-\d+[\w\d]*|CU5-\d+[\w\d]*)\b', text, re.IGNORECASE)
+        if m:
+            proc = m.group(1).strip()
+
+    # 2. Graphics (GPU)
+    gfx = existing_item.get("graphics", "").strip()
+    if not gfx or len(gfx) < 3:
+        m = re.search(r'\b(NVIDIA®?\s*GeForce\s*RTX™?\s*\d{4}\b[\w\d\s]*|RTX\s*\d{4}\b[\w\d\s]*|GTX\s*\d{4}\b[\w\d\s]*|AMD\s*Radeon™?\s*[\w\d\s]*|Intel®?\s*(?:Arc|Graphics|Iris\s*Xe)\b[\w\d\s]*)\b', text, re.IGNORECASE)
+        if m:
+            gfx = m.group(1).strip()
+
+    # 3. Memory (RAM)
+    mem = existing_item.get("memory", "").strip()
+    if not mem or len(mem) < 2:
+        m = re.search(r'\b(\d{1,2}\s*GB\s*(?:DDR[45]|LPDDR[45]X?|RAM)?)\b', text, re.IGNORECASE)
+        if m:
+            mem = m.group(1).strip()
+
+    # 4. Storage (SSD/HDD)
+    sto = existing_item.get("storage", "").strip()
+    if not sto or len(sto) < 2:
+        m = re.search(r'\b((?:\d{3,4}\s*GB|\d\s*TB)\s*(?:PCIe|NVMe|Gen\d|SSD)?)\b', text, re.IGNORECASE)
+        if m:
+            sto = m.group(1).strip()
+
+    # 5. Display
+    disp = existing_item.get("display", "").strip()
+    if not disp or len(disp) < 3:
+        m = re.search(r'\b(1[34567]\.?[0-6]?"?\s*(?:diagonal)?\s*(?:FHD|WUXGA|QHD\+?|4K|2\.5K|OLED|IPS|144Hz|165Hz|240Hz)?)\b', text, re.IGNORECASE)
+        if m:
+            disp = m.group(1).strip()
+
+    return {
+        "processor": proc,
+        "graphics": gfx,
+        "memory": mem,
+        "storage": sto,
+        "display": disp
+    }
+
+
 def clean_vendor_name(series_str, source_file):
     """Normalizes vendor name for deal comparison strings."""
     if "allit" in source_file:
@@ -159,19 +210,32 @@ def combine_all_csvs():
         except Exception as e:
             print(f"  Error reading {filename}: {e}")
 
-    # Group items by Part Number (MPN) or unique ID
+    # Group items by Part Number (MPN) or unique hardware signature
     groups = defaultdict(list)
     for item in all_items:
         title = (item.get("title") or "").strip()
         rid = (item.get("id") or "").strip()
-        if not title or not rid or title.lower() == "untitled model":
+        if not title or not rid or title.lower() in ["untitled model", "untitled"]:
             continue
+
+        # Fill missing specs from title text
+        parsed_specs = extract_specs_from_title(title, item)
+        for k, v in parsed_specs.items():
+            if v and not item.get(k):
+                item[k] = v
 
         mpn = extract_part_number(title, rid)
         if mpn:
             key = mpn
         else:
-            key = f"{item.get('series', '')}_{rid}"
+            # Build unique hardware signature for models sharing base names
+            cpu_sig = re.sub(r'\s+', '', (item.get("processor") or "").lower())[:12]
+            gpu_sig = re.sub(r'\s+', '', (item.get("graphics") or "").lower())[:10]
+            ram_sig = re.sub(r'\s+', '', (item.get("memory") or "").lower())[:6]
+            sto_sig = re.sub(r'\s+', '', (item.get("storage") or "").lower())[:6]
+            title_clean = re.sub(r'[^a-zA-Z0-9]', '', title.lower())[:25]
+            
+            key = f"{title_clean}_{cpu_sig}_{gpu_sig}_{ram_sig}_{sto_sig}"
 
         groups[key].append(item)
 

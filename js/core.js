@@ -337,22 +337,47 @@ function matchesFilters(r, activeFilters, isSteamActive, searchQuery, minPrice, 
 
 // ── Row Normalization ────────────────────────────────────────────────────────
 
+function extractTitleSpecs(title, others) {
+  const text = (title + ' ' + (others || '')).trim();
+  let proc = '', gfx = '', mem = '', sto = '', disp = '';
+
+  const mCpu = text.match(/\b(Intel®?\s*Core™?\s*(?:Ultra\s*)?[iI\d][\w\d-]+\s*(?:processor)?|AMD\s*Ryzen™?\s*\d[\w\d-]+|Core\s*Ultra\s*\d\s*\d+[\w\d]*|[iI][3579][-\s]\d{4,5}[\w\d]*|Athlon[\w\d\s-]*|C5-\d+[\w\d]*|CU5-\d+[\w\d]*)\b/i);
+  if (mCpu) proc = mCpu[1].trim();
+
+  const mGpu = text.match(/\b(NVIDIA®?\s*GeForce\s*RTX™?\s*\d{4}\b[\w\d\s]*|RTX\s*\d{4}\b[\w\d\s]*|GTX\s*\d{4}\b[\w\d\s]*|AMD\s*Radeon™?\s*[\w\d\s]*|Intel®?\s*(?:Arc|Graphics|Iris\s*Xe)\b[\w\d\s]*)\b/i);
+  if (mGpu) gfx = mGpu[1].trim();
+
+  const mRam = text.match(/\b(\d{1,2}\s*GB\s*(?:DDR[45]|LPDDR[45]X?|RAM)?)\b/i);
+  if (mRam) mem = mRam[1].trim();
+
+  const mSto = text.match(/\b((?:\d{3,4}\s*GB|\d\s*TB)\s*(?:PCIe|NVMe|Gen\d|SSD)?)\b/i);
+  if (mSto) sto = mSto[1].trim();
+
+  const mDisp = text.match(/\b(1[34567]\.?[0-6]?"?\s*(?:diagonal)?\s*(?:FHD|WUXGA|QHD\+?|4K|2\.5K|OLED|IPS|144Hz|165Hz|240Hz)?)\b/i);
+  if (mDisp) disp = mDisp[1].trim();
+
+  return { proc, gfx, mem, sto, disp };
+}
+
 function normalizeRow(r, i, idPrefix) {
+  const title = r.title || 'Untitled model';
+  const parsed = extractTitleSpecs(title, r.others);
+
   return {
     _rid: (idPrefix || 'r') + i,
     id: r.id || '',
-    title: r.title || 'Untitled model',
+    title: title,
     price: parseFloat(r.price) || 0,
     best_vendor: r.best_vendor || '',
     vendor_prices: r.vendor_prices || '',
     vendor_count: parseInt(r.vendor_count) || 1,
     vendor_urls: r.vendor_urls || '',
     image_url: r.image_url || '',
-    processor: r.processor || '',
-    graphics: r.graphics || '',
-    memory: r.memory || '',
-    storage: r.storage || '',
-    display: r.display || '',
+    processor: r.processor && r.processor.length >= 3 ? r.processor : (parsed.proc || r.processor || ''),
+    graphics: r.graphics && r.graphics.length >= 3 ? r.graphics : (parsed.gfx || r.graphics || ''),
+    memory: r.memory && r.memory.length >= 2 ? r.memory : (parsed.mem || r.memory || ''),
+    storage: r.storage && r.storage.length >= 2 ? r.storage : (parsed.sto || r.storage || ''),
+    display: r.display && r.display.length >= 3 ? r.display : (parsed.disp || r.display || ''),
     wifi: r.wifi || '',
     battery: r.battery || '',
     others: r.others || '',
