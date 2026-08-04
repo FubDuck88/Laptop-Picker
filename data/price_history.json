@@ -1,0 +1,33 @@
+{
+  "weekly_market_trends": [
+    { "label": "Jun 16", "mean": 7480, "median": 6450 },
+    { "label": "Jun 23", "mean": 7420, "median": 6390 },
+    { "label": "Jun 30", "mean": 7380, "median": 6350 },
+    { "label": "Jul 07", "mean": 7340, "median": 6320 },
+    { "label": "Jul 14", "mean": 7290, "median": 6300 },
+    { "label": "Jul 21", "mean": 7260, "median": 6290 },
+    { "label": "Jul 28", "mean": 7250, "median": 6280 },
+    { "label": "Aug 04", "mean": 7243, "median": 6271 }
+  ],
+  "monthly_market_trends": [
+    { "label": "Mar 2026", "mean": 7850, "median": 6790 },
+    { "label": "Apr 2026", "mean": 7690, "median": 6650 },
+    { "label": "May 2026", "mean": 7540, "median": 6520 },
+    { "label": "Jun 2026", "mean": 7410, "median": 6380 },
+    { "label": "Jul 2026", "mean": 7280, "median": 6290 },
+    { "label": "Aug 2026", "mean": 7243, "median": 6271 }
+  ],
+  "yearly_market_trends": [
+    { "label": "2024", "mean": 8450, "median": 7200 },
+    { "label": "2025", "mean": 7890, "median": 6750 },
+    { "label": "2026 YTD", "mean": 7243, "median": 6271 }
+  ],
+  "alltime_market_trends": [
+    { "label": "Q1 2024", "mean": 8600, "median": 7350 },
+    { "label": "Q3 2024", "mean": 8300, "median": 7100 },
+    { "label": "Q1 2025", "mean": 8050, "median": 6900 },
+    { "label": "Q3 2025", "mean": 7750, "median": 6600 },
+    { "label": "Q1 2026", "mean": 7500, "median": 6450 },
+    { "label": "Q3 2026 (Now)", "mean": 7243, "median": 6271 }
+  ]
+}

@@ -524,3 +524,285 @@ body.analytics-page {
 .spec-modal-table .muted {
   color: var(--text-muted);
 }
+
+/* Shading & Highlighting for Histogram & Directory Table */
+.hist-bar-col.shaded-bin {
+  opacity: 0.15 !important;
+  filter: grayscale(100%) brightness(0.3) !important;
+}
+
+.hist-bar-col.has-matches .hist-bar-fill {
+  background: rgba(255, 255, 255, 0.1) !important;
+  opacity: 1 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.hist-bar-match-fill {
+  width: 100% !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  background: linear-gradient(180deg, #38bdf8 0%, #2563eb 100%) !important;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.6) !important;
+  border-radius: 2px 2px 0 0 !important;
+  transition: height 0.4s ease !important;
+}
+
+.analytics-table tr.row-shaded {
+  opacity: 0.25 !important;
+  filter: grayscale(90%) brightness(0.4) !important;
+  transition: opacity 0.2s ease, filter 0.2s ease !important;
+}
+
+.analytics-table tr.row-shaded:hover {
+  opacity: 0.9 !important;
+  filter: grayscale(0%) brightness(1) !important;
+}
+
+.analytics-table tr.row-matched {
+  background: rgba(56, 189, 248, 0.08) !important;
+  border-left: 4px solid #38bdf8 !important;
+}
+
+.badge-steam-match {
+  display: inline-block !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #0369a1 !important;
+  background: #7dd3fc !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  margin-left: 6px !important;
+}
+
+.price-diff-badge {
+  display: inline-block !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+  margin-top: 2px !important;
+}
+
+.price-diff-badge.below {
+  background: rgba(34, 197, 94, 0.18) !important;
+  color: #4ade80 !important;
+  border: 1px solid rgba(34, 197, 94, 0.3) !important;
+}
+
+.price-diff-badge.above {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-muted) !important;
+}
+
+.badge-deal-diff {
+  display: inline-block !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  background: rgba(251, 191, 36, 0.15) !important;
+  color: #fbbf24 !important;
+  padding: 1px 6px !important;
+  border-radius: 4px !important;
+  margin-top: 2px !important;
+}
+
+/* Vertical Dashed Lines for Mean, Median, and Mode */
+.chart-card, .chart-body, .chart-plot, .bar-chart-wrapper {
+  overflow: visible !important;
+}
+
+.chart-header {
+  margin-bottom: 24px !important;
+}
+
+.bar-chart-wrapper {
+  position: relative !important;
+  padding-top: 75px !important;
+}
+
+.chart-stat-line {
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 12px !important;
+  margin-left: -6px !important;
+  z-index: 90 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  opacity: 0.35 !important;
+  transition: opacity 0.25s ease, z-index 0.1s ease !important;
+}
+
+.chart-stat-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 5px;
+  width: 0;
+  border-left: 2px dashed currentColor;
+  transition: all 0.2s ease;
+}
+
+.chart-stat-line.chart-line-median {
+  color: #38bdf8 !important;
+}
+
+.chart-stat-line.chart-line-mean {
+  color: #f59e0b !important;
+}
+
+.chart-stat-line.chart-line-mode {
+  color: #c084fc !important;
+}
+
+/* Active / Filtered Clicked Line */
+.chart-stat-line.active {
+  opacity: 1 !important;
+  z-index: 170 !important;
+}
+
+.chart-stat-line.active::before {
+  border-left-style: solid !important;
+  border-left-width: 3px !important;
+  box-shadow: 0 0 16px currentColor !important;
+}
+
+/* Hover State for Line */
+.chart-stat-line:hover {
+  opacity: 1 !important;
+  z-index: 160 !important;
+}
+
+.chart-stat-line.chart-line-median:hover::before {
+  border-left: 2.5px solid #38bdf8 !important;
+  box-shadow: 0 0 14px #38bdf8 !important;
+}
+
+.chart-stat-line.chart-line-mean:hover::before {
+  border-left: 2.5px solid #f59e0b !important;
+  box-shadow: 0 0 14px #f59e0b !important;
+}
+
+.chart-stat-line.chart-line-mode:hover::before {
+  border-left: 2.5px solid #c084fc !important;
+  box-shadow: 0 0 14px #c084fc !important;
+}
+
+/* Badge Tags (Positioned cleanly inside top reserved space) */
+.chart-stat-tag {
+  position: absolute !important;
+  transform: translateX(-50%) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  padding: 2px 8px !important;
+  border-radius: 6px !important;
+  white-space: nowrap !important;
+  background: rgba(15, 23, 42, 0.95) !important;
+  border: 1px solid currentColor !important;
+  opacity: 0.55 !important;
+  backdrop-filter: blur(4px) !important;
+  z-index: 95 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.chart-stat-tag.tag-median {
+  top: 8px !important;
+  color: #38bdf8 !important;
+}
+
+.chart-stat-tag.tag-mean {
+  top: 28px !important;
+  color: #f59e0b !important;
+}
+
+.chart-stat-tag.tag-mode {
+  top: 48px !important;
+  color: #c084fc !important;
+}
+
+/* Hover State for Tags */
+.chart-stat-line.chart-line-median:hover .chart-stat-tag,
+.chart-stat-tag.tag-median:hover,
+.chart-stat-line.chart-line-median.active .chart-stat-tag {
+  opacity: 1 !important;
+  background: #38bdf8 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 1) !important;
+}
+
+.chart-stat-line.chart-line-mean:hover .chart-stat-tag,
+.chart-stat-tag.tag-mean:hover,
+.chart-stat-line.chart-line-mean.active .chart-stat-tag {
+  opacity: 1 !important;
+  background: #f59e0b !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 1) !important;
+}
+
+.chart-stat-line.chart-line-mode:hover .chart-stat-tag,
+.chart-stat-tag.tag-mode:hover,
+.chart-stat-line.chart-line-mode.active .chart-stat-tag {
+  opacity: 1 !important;
+  background: #c084fc !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: 0 0 16px rgba(192, 132, 252, 1) !important;
+}
+
+/* Tooltip Hover Popup (Opens Downward Inside Chart Box Below Badges) */
+.chart-stat-tooltip {
+  position: absolute !important;
+  top: 72px !important;
+  bottom: auto !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateY(0) !important;
+  width: 260px !important;
+  background: #0f172a !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(56, 189, 248, 0.3) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+  z-index: 300 !important;
+}
+
+.chart-stat-line:hover .chart-stat-tooltip {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateX(-50%) translateY(6px) !important;
+}
+
+.stat-tooltip-header {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  margin-bottom: 4px !important;
+  color: #ffffff !important;
+}
+
+.stat-tooltip-desc {
+  font-size: 11px !important;
+  color: #94a3b8 !important;
+  line-height: 1.4 !important;
+}
+
+/* Trend Line Graph SVG Nodes */
+.trend-line-container circle {
+  transition: all 0.2s ease;
+}
+
+.trend-line-container circle:hover {
+  r: 7.5px !important;
+  filter: drop-shadow(0 0 10px #ffffff) !important;
+}

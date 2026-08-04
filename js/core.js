@@ -120,21 +120,30 @@ function parseVendorDeals(r) {
 // ── Steam Hardware Survey Matching (July 2026) ──────────────────────────────
 
 function matchesSteamSpecs(r) {
-  // 1. System RAM: 16 GB or higher (40.97% Steam Share)
-  const memStr = (r.memory || r.title || '').toLowerCase();
-  const memMatch = memStr.match(/(\d+)\s*gb/i);
-  let ramGb = memMatch ? parseInt(memMatch[1]) : 0;
-  if (ramGb > 0 && ramGb < 16) return false;
+  const fullText = `${r.processor || ''} ${r.graphics || ''} ${r.memory || ''} ${r.title || ''} ${r.others || ''}`.toLowerCase();
 
-  // 2. Video Card: NVIDIA GeForce RTX (72.72% NVIDIA Market Share)
-  const gfxStr = (r.graphics || r.title || '').toLowerCase();
-  const hasRtxGpu = /rtx\s*(30|40|50)\d{2}/i.test(gfxStr) || /geforce\s+rtx/i.test(gfxStr);
-  if (!hasRtxGpu) return false;
+  // 1. Realistic Price Cap for Steam Survey Laptops (under RM 10,000)
+  const pVal = typeof r.price === 'number' ? r.price : (parseFloat(r.price) || 0);
+  if (pVal > 10000) return false;
 
-  // 3. Physical CPUs: 6 to 8+ Core Processor (55.37% Combined)
-  const cpuStr = (r.processor || r.title || '').toLowerCase();
-  const hasSteamCpu = /i5|i7|i9|ultra\s*[579]|ryzen\s*[579]/i.test(cpuStr);
-  if (!hasSteamCpu) return false;
+  // 2. Realistic RAM Spec: 16GB to 32GB (Steam #1 & #2 Share)
+  const memMatch = fullText.match(/(\d+)\s*gb/i);
+  let ramGb = memMatch ? parseInt(memMatch[1], 10) : 0;
+  if (ramGb === 0 && /16\s*gb|32\s*gb|16gb|32gb/i.test(fullText)) {
+    ramGb = 16;
+  }
+  if (ramGb > 0 && (ramGb < 16 || ramGb > 32)) return false;
+
+  // 3. Realistic GPU Spec: Steam sweet-spot gaming GPUs (RTX 3050, 3060, 3070, 4050, 4060, 4070, 5050, 5060, 5070, GTX 1650/1660)
+  // Exclude extreme workstation / ultra-flagships (RTX 4080, 4090, 5080, 5090, Quadro)
+  if (/4080|4090|5080|5090|quadro|workstation|rtx\s*a\d{4}/i.test(fullText)) return false;
+
+  const hasRealisticGpu = /(3050|3060|3070|4050|4060|4070|5050|5060|5070|gtx\s*1650|gtx\s*1660)/i.test(fullText);
+  if (!hasRealisticGpu) return false;
+
+  // 4. Realistic CPU Spec: 6 to 8+ Core Mainstream CPUs (i5, i7, Ultra 5, Ultra 7, Ryzen 5, Ryzen 7)
+  const hasRealisticCpu = /i5|i7|ultra\s*[57]|ryzen\s*[57]/i.test(fullText) || /\b(6|8|10|12|14|16)\s*core[s]?\b/i.test(fullText);
+  if (!hasRealisticCpu) return false;
 
   return true;
 }
