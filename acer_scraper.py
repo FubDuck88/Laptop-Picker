@@ -273,28 +273,40 @@ def scrape_acer_graphql():
 
 # ===== FALLBACK: ALL IT Hypermarket (Acer products only) =====
 
-def fetch_json_with_retry(session, url, max_retries=5, initial_wait=5):
-    """Fetches JSON from URL with exponential backoff for rate limiting."""
+def fetch_json_with_retry(session, url, max_retries=2, initial_wait=2):
+    """Fetches JSON from URL with rate-limit protection and fast fail on non-JSON response."""
     for attempt in range(max_retries):
         try:
-            r = session.get(url, timeout=30)
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+                "Accept": "application/json, text/plain, */*"
+            }
+            r = requests.get(url, headers=headers, timeout=15)
+
             if r.status_code == 429:
-                retry_after = int(r.headers.get("Retry-After", initial_wait))
-                wait_time = max(retry_after, initial_wait * (attempt + 1))
+                wait_time = initial_wait * (attempt + 1)
                 print(f"    Rate limited (429). Waiting {wait_time}s... (attempt {attempt + 1}/{max_retries})")
                 time.sleep(wait_time)
                 continue
+
             if r.status_code != 200:
                 print(f"    HTTP {r.status_code}")
                 return None
-            return r.json()
+
+            text = r.text.strip()
+            if not text.startswith("{") and not text.startswith("["):
+                print(f"    Non-JSON response received (starts with '{text[:30]}'). Skipping.")
+                return None
+
+            return json.loads(text)
+
         except Exception as e:
             print(f"    Error (attempt {attempt + 1}): {e}")
             if attempt < max_retries - 1:
-                time.sleep(initial_wait * (attempt + 1))
+                time.sleep(initial_wait)
                 continue
             return None
-    print(f"    Exhausted all {max_retries} retries.")
+
     return None
 
 

@@ -232,9 +232,11 @@ def combine_all_csvs():
 
 
 def export_json(master_rows):
-    """Exports master data as compact JSON for the frontend (smaller than CSV)."""
+    """Exports master data as compact JSON and data.js for zero-CORS local file:// browser compatibility."""
     import json
     json_file = os.path.join(MASTER_DIR, "laptops.json")
+    js_file = os.path.join(MASTER_DIR, "data.js")
+    
     json_rows = []
     for row in master_rows:
         jr = {}
@@ -247,6 +249,15 @@ def export_json(master_rows):
 
     with open(json_file, "w", encoding="utf-8") as f:
         json.dump(json_rows, f, separators=(",", ":"), ensure_ascii=False)
+
+    with open(js_file, "w", encoding="utf-8") as f:
+        f.write("window.preloadedRows = ")
+        json.dump(json_rows, f, separators=(",", ":"), ensure_ascii=False)
+        f.write(";")
+
+    csv_size = os.path.getsize(MASTER_FILE)
+    json_size = os.path.getsize(json_file)
+    print(f"  Exported laptops.json ({json_size/1024:.0f}KB) and data.js ({os.path.getsize(js_file)/1024:.0f}KB)")
 
     csv_size = os.path.getsize(MASTER_FILE)
     json_size = os.path.getsize(json_file)
