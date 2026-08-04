@@ -347,11 +347,20 @@ function extractTitleSpecs(title, others) {
   const mGpu = text.match(/\b(NVIDIA®?\s*GeForce\s*RTX™?\s*\d{4}\b[\w\d\s]*|RTX\s*\d{4}\b[\w\d\s]*|GTX\s*\d{4}\b[\w\d\s]*|AMD\s*Radeon™?\s*[\w\d\s]*|Intel®?\s*(?:Arc|Graphics|Iris\s*Xe)\b[\w\d\s]*)\b/i);
   if (mGpu) gfx = mGpu[1].trim();
 
-  const mRam = text.match(/\b(\d{1,2}\s*GB\s*(?:DDR[45]|LPDDR[45]X?|RAM)?)\b/i);
+  const mRam = text.match(/\b([8|12|16|24|32|64]{1,2}\s*GB(?:\s*(?:D5|D4|DDR[45]\w*|LPDDR[45]X?|RAM))?)\b/i);
   if (mRam) mem = mRam[1].trim();
 
-  const mSto = text.match(/\b((?:\d{3,4}\s*GB|\d\s*TB)\s*(?:PCIe|NVMe|Gen\d|SSD)?)\b/i);
+  const mSto = text.match(/\b((?:128|256|512|1024)\s*GB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?|\d\s*TB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?)\b/i);
   if (mSto) sto = mSto[1].trim();
+
+  // Disambiguate if storage matched RAM value (e.g. storage = '16GB D5')
+  if (sto && mem && (sto.toLowerCase() === mem.toLowerCase() || (/^\d{1,2}\s*GB/i.test(sto) && !/SSD|NVMe|PCIe|Gen\d|G[345]|M\.2/i.test(sto)))) {
+    sto = '';
+    const mStoFallback = text.match(/\b((?:256|512|1024)\s*GB|\d\s*TB)\b/i);
+    if (mStoFallback && mStoFallback[1].toLowerCase() !== mem.toLowerCase()) {
+      sto = mStoFallback[1].trim();
+    }
+  }
 
   const mDisp = text.match(/\b(1[34567]\.?[0-6]?"?\s*(?:diagonal)?\s*(?:FHD|WUXGA|QHD\+?|4K|2\.5K|OLED|IPS|144Hz|165Hz|240Hz)?)\b/i);
   if (mDisp) disp = mDisp[1].trim();

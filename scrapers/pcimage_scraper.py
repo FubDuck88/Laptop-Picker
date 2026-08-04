@@ -59,14 +59,21 @@ def parse_specs_from_title(title):
             break
 
     # Memory (RAM)
-    m = re.search(r'(\d+GB\s*(?:D5|D4|DDR[45]\w*|LPDDR\w*|RAM)?[^\s/]*)', title, re.IGNORECASE)
-    if m:
-        specs["memory"] = m.group(1).strip()
+    m_ram = re.search(r'\b([8|12|16|24|32|64]{1,2}\s*GB(?:\s*(?:D5|D4|DDR[45]\w*|LPDDR[45]X?|RAM))?)\b', title, re.IGNORECASE)
+    if m_ram:
+        specs["memory"] = m_ram.group(1).strip()
 
-    # Storage
-    m = re.search(r'(\d+(?:GB|TB)\s*(?:G[34]|SSD|NVMe|PCIe)?[^\s/]*)', title, re.IGNORECASE)
-    if m:
-        specs["storage"] = m.group(1).strip()
+    # Storage (256GB, 512GB, 1TB, 2TB, SSD, NVMe, PCIe, G4, G3)
+    m_sto = re.search(r'\b((?:128|256|512|1024)\s*GB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?|\d\s*TB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?)\b', title, re.IGNORECASE)
+    if m_sto:
+        specs["storage"] = m_sto.group(1).strip()
+
+    # Fix case where storage matched RAM
+    if specs["storage"].lower() == specs["memory"].lower() or (re.search(r'^\d{1,2}\s*GB', specs["storage"], re.IGNORECASE) and not re.search(r'SSD|NVMe|PCIe|Gen\d|G[345]|M\.2', specs["storage"], re.IGNORECASE)):
+        specs["storage"] = ""
+        m_sto_fallback = re.search(r'\b((?:256|512|1024)\s*GB|\d\s*TB)\b', title, re.IGNORECASE)
+        if m_sto_fallback and m_sto_fallback.group(1).lower() != specs["memory"].lower():
+            specs["storage"] = m_sto_fallback.group(1).strip()
 
     # Display
     m = re.search(r'(\d+\.?\d*["\u201d]?\s*(?:FHD|QHD|WUXGA|WQXGA|UHD|HD|OLED)[^\s/]*(?:\s*\d+Hz)?)', title, re.IGNORECASE)

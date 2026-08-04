@@ -93,16 +93,23 @@ def extract_specs_from_title(title, existing_item):
     # 3. Memory (RAM)
     mem = existing_item.get("memory", "").strip()
     if not mem or len(mem) < 2:
-        m = re.search(r'\b(\d{1,2}\s*GB\s*(?:DDR[45]|LPDDR[45]X?|RAM)?)\b', text, re.IGNORECASE)
-        if m:
-            mem = m.group(1).strip()
+        m_ram = re.search(r'\b([8|12|16|24|32|64]{1,2}\s*GB(?:\s*(?:D5|D4|DDR[45]\w*|LPDDR[45]X?|RAM))?)\b', text, re.IGNORECASE)
+        if m_ram:
+            mem = m_ram.group(1).strip()
 
     # 4. Storage (SSD/HDD)
     sto = existing_item.get("storage", "").strip()
     if not sto or len(sto) < 2:
-        m = re.search(r'\b((?:\d{3,4}\s*GB|\d\s*TB)\s*(?:PCIe|NVMe|Gen\d|SSD)?)\b', text, re.IGNORECASE)
-        if m:
-            sto = m.group(1).strip()
+        m_sto = re.search(r'\b((?:128|256|512|1024)\s*GB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?|\d\s*TB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?)\b', text, re.IGNORECASE)
+        if m_sto:
+            sto = m_sto.group(1).strip()
+
+    # Disambiguate if storage was incorrectly populated with RAM value (e.g. storage = '16GB D5')
+    if sto and mem and (sto.lower() == mem.lower() or (re.search(r'^\d{1,2}\s*GB', sto, re.IGNORECASE) and not re.search(r'SSD|NVMe|PCIe|Gen\d|G[345]|M\.2', sto, re.IGNORECASE))):
+        sto = ""
+        m_sto_fallback = re.search(r'\b((?:256|512|1024)\s*GB|\d\s*TB)\b', text, re.IGNORECASE)
+        if m_sto_fallback and m_sto_fallback.group(1).lower() != mem.lower():
+            sto = m_sto_fallback.group(1).strip()
 
     # 5. Display
     disp = existing_item.get("display", "").strip()
