@@ -85,6 +85,16 @@ def clean_vendor_name(series_str, source_file):
         return "Lenovo Official"
     if "msi" in source_file:
         return "MSI Official"
+    if "hp" in source_file:
+        return "HP Official"
+    if "dell" in source_file:
+        return "Dell Official"
+    if "tmt" in source_file:
+        return "TMT"
+    if "gloo" in source_file:
+        return "Gloo"
+    if "shopee" in source_file:
+        return "Shopee Official"
     return series_str or "Retailer"
 
 
@@ -94,10 +104,15 @@ def run_scrapers():
         ("Acer", "scrapers.acer_scraper", lambda m: m.scrape_acer() if hasattr(m, 'scrape_acer') else None),
         ("ALL IT", "scrapers.allit_scraper", lambda m: m.scrape_allit() if hasattr(m, 'scrape_allit') else None),
         ("ASUS", "scrapers.asus_scraper", lambda m: m.fetch_asus_laptops() if hasattr(m, 'fetch_asus_laptops') else None),
+        ("Dell", "scrapers.dell_scraper", lambda m: m.scrape_dell() if hasattr(m, 'scrape_dell') else None),
+        ("Gloo", "scrapers.gloo_scraper", lambda m: m.scrape_gloo() if hasattr(m, 'scrape_gloo') else None),
+        ("HP", "scrapers.hp_scraper", lambda m: m.scrape_hp() if hasattr(m, 'scrape_hp') else None),
         ("Lenovo", "scrapers.lenovo_scraper", lambda m: m.fetch_all_products("47af9ba7-cab2-4e61-9b10-2283ac14c87c") if hasattr(m, 'fetch_all_products') else None),
         ("MSI", "scrapers.msi_scraper", lambda m: m.scrape_msi() if hasattr(m, 'scrape_msi') else None),
         ("PC Image", "scrapers.pcimage_scraper", lambda m: m.scrape_pcimage() if hasattr(m, 'scrape_pcimage') else None),
+        ("Shopee", "scrapers.shopee_scraper", lambda m: m.scrape_shopee() if hasattr(m, 'scrape_shopee') else None),
         ("TechHypermart", "scrapers.techhypermart_scraper", lambda m: m.scrape_techhypermart() if hasattr(m, 'scrape_techhypermart') else None),
+        ("TMT", "scrapers.tmt_scraper", lambda m: m.scrape_tmt() if hasattr(m, 'scrape_tmt') else None),
     ]
 
     for name, module_name, runner in scrapers:
