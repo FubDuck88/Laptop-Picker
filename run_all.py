@@ -257,11 +257,8 @@ def export_json(master_rows):
 
     csv_size = os.path.getsize(MASTER_FILE)
     json_size = os.path.getsize(json_file)
-    print(f"  Exported laptops.json ({json_size/1024:.0f}KB) and data.js ({os.path.getsize(js_file)/1024:.0f}KB)")
-
-    csv_size = os.path.getsize(MASTER_FILE)
-    json_size = os.path.getsize(json_file)
-    print(f"  Exported laptops.json ({json_size/1024:.0f}KB vs CSV {csv_size/1024:.0f}KB — {100-json_size/csv_size*100:.0f}% smaller)")
+    js_size = os.path.getsize(js_file)
+    print(f"  Exported laptops.json ({json_size/1024:.0f}KB) and data.js ({js_size/1024:.0f}KB) for zero-CORS browser loading")
 
 
 if __name__ == "__main__":
