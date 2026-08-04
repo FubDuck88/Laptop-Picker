@@ -20,7 +20,9 @@ def get_base_dir():
     return os.path.dirname(os.path.abspath(__file__))
 
 MASTER_DIR = get_base_dir()
-MASTER_FILE = os.path.join(MASTER_DIR, "master_laptops.csv")
+DATA_DIR = os.path.join(MASTER_DIR, "data")
+os.makedirs(DATA_DIR, exist_ok=True)
+MASTER_FILE = os.path.join(DATA_DIR, "master_laptops.csv")
 
 FIELDNAMES = [
     "id", "title", "price", "best_vendor", "vendor_prices", "vendor_count", 
@@ -89,13 +91,13 @@ def clean_vendor_name(series_str, source_file):
 def run_scrapers():
     """Runs all individual scraper scripts sequentially in Python."""
     scrapers = [
-        ("Acer", "acer_scraper", lambda m: m.scrape_acer() if hasattr(m, 'scrape_acer') else None),
-        ("ALL IT", "allit_scraper", lambda m: m.scrape_allit() if hasattr(m, 'scrape_allit') else None),
-        ("ASUS", "asus_scraper", lambda m: m.fetch_asus_laptops() if hasattr(m, 'fetch_asus_laptops') else None),
-        ("Lenovo", "lenovo_scraper", lambda m: m.fetch_all_products("47af9ba7-cab2-4e61-9b10-2283ac14c87c") if hasattr(m, 'fetch_all_products') else None),
-        ("MSI", "msi_scraper", lambda m: m.scrape_msi() if hasattr(m, 'scrape_msi') else None),
-        ("PC Image", "pcimage_scraper", lambda m: m.scrape_pcimage() if hasattr(m, 'scrape_pcimage') else None),
-        ("TechHypermart", "techhypermart_scraper", lambda m: m.scrape_techhypermart() if hasattr(m, 'scrape_techhypermart') else None),
+        ("Acer", "scrapers.acer_scraper", lambda m: m.scrape_acer() if hasattr(m, 'scrape_acer') else None),
+        ("ALL IT", "scrapers.allit_scraper", lambda m: m.scrape_allit() if hasattr(m, 'scrape_allit') else None),
+        ("ASUS", "scrapers.asus_scraper", lambda m: m.fetch_asus_laptops() if hasattr(m, 'fetch_asus_laptops') else None),
+        ("Lenovo", "scrapers.lenovo_scraper", lambda m: m.fetch_all_products("47af9ba7-cab2-4e61-9b10-2283ac14c87c") if hasattr(m, 'fetch_all_products') else None),
+        ("MSI", "scrapers.msi_scraper", lambda m: m.scrape_msi() if hasattr(m, 'scrape_msi') else None),
+        ("PC Image", "scrapers.pcimage_scraper", lambda m: m.scrape_pcimage() if hasattr(m, 'scrape_pcimage') else None),
+        ("TechHypermart", "scrapers.techhypermart_scraper", lambda m: m.scrape_techhypermart() if hasattr(m, 'scrape_techhypermart') else None),
     ]
 
     for name, module_name, runner in scrapers:
@@ -103,9 +105,9 @@ def run_scrapers():
         try:
             mod = importlib.import_module(module_name)
             if hasattr(mod, 'OUTPUT_DIR'):
-                mod.OUTPUT_DIR = MASTER_DIR
+                mod.OUTPUT_DIR = DATA_DIR
                 if hasattr(mod, 'OUTPUT_FILE'):
-                    mod.OUTPUT_FILE = os.path.join(MASTER_DIR, os.path.basename(mod.OUTPUT_FILE))
+                    mod.OUTPUT_FILE = os.path.join(DATA_DIR, os.path.basename(mod.OUTPUT_FILE))
             res = runner(mod)
             if isinstance(res, list) and hasattr(mod, 'save_to_csv'):
                 mod.save_to_csv(res)
@@ -116,7 +118,10 @@ def run_scrapers():
 
 def combine_all_csvs():
     """Combines all *_laptops.csv files into master_laptops.csv with vendor price comparison."""
-    csv_files = glob.glob(os.path.join(MASTER_DIR, "*_laptops.csv"))
+    csv_files = glob.glob(os.path.join(DATA_DIR, "*_laptops.csv"))
+    if not csv_files:
+        # Fallback check root if data folder empty
+        csv_files = glob.glob(os.path.join(MASTER_DIR, "*_laptops.csv"))
     if not csv_files:
         print("No individual scraper CSV files found (*_laptops.csv).")
         return
@@ -234,8 +239,8 @@ def combine_all_csvs():
 def export_json(master_rows):
     """Exports master data as compact JSON and data.js for zero-CORS local file:// browser compatibility."""
     import json
-    json_file = os.path.join(MASTER_DIR, "laptops.json")
-    js_file = os.path.join(MASTER_DIR, "data.js")
+    json_file = os.path.join(DATA_DIR, "laptops.json")
+    js_file = os.path.join(DATA_DIR, "data.js")
     
     json_rows = []
     for row in master_rows:
