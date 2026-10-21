@@ -8,12 +8,7 @@
     "source_commit": "fca90cc7f153f3b92c917808d212316792a546f3"
   },
   "public": null,
-  "active_attempt": {
-    "run_id": "39599444786",
-    "mode": "drill",
-    "started_at": "2026-10-21T12:25:44.803605+00:00",
-    "source_commit": "2d65e348f1e236db9163cdb48ff36c00a4b3abcc"
-  },
+  "active_attempt": null,
   "last_schedule": null,
   "notification": {
     "issue": 1,
@@ -21,9 +16,9 @@
   },
   "publication_inhibited": true,
   "last_operation": {
-    "run_id": "39598958048",
+    "run_id": "39599444786",
     "mode": "drill",
     "outcome": "drill-restored",
-    "recorded_at": "2026-10-21T12:22:42.791398+00:00"
+    "recorded_at": "2026-10-21T12:26:17.586877+00:00"
   }
 }
