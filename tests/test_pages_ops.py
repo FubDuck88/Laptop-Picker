@@ -7,7 +7,8 @@ import unittest
 from unittest.mock import Mock,patch
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
-from pages_ops import prepare,finish,receipt_seen,delivery_verified
+from pages_ops import prepare,finish,receipt_seen,delivery_verified,schedule_overdue
+from datetime import datetime
 
 
 def state():
@@ -73,3 +74,23 @@ class DeploymentGuardsTests(unittest.TestCase):
         github=self.github(value)
         with patch.dict(os.environ,{'GITHUB_RUN_ID':'new','OP_MODE':'drill'}):finish(github,'.','recovery-unproven')
         self.assertEqual(github.save.call_args.args[0]['active_attempt']['run_id'],'new')
+
+    def test_only_actual_schedule_event_creates_scheduled_proof(self):
+        for event in ['workflow_dispatch','schedule']:
+            value=state();value['active_attempt']['run_id']='new'
+            github=self.github(value)
+            with tempfile.TemporaryDirectory() as tmp:
+                Path(tmp,'public-pin.json').write_text(json.dumps({'release_sha256':'b'*64}))
+                with patch.dict(os.environ,{'GITHUB_RUN_ID':'new','OP_MODE':'daily','GITHUB_EVENT_NAME':event}):
+                    finish(github,tmp,'verified')
+            saved=github.save.call_args.args[0]
+            self.assertEqual(saved['last_schedule'] is not None,event=='schedule')
+
+    def test_watchdog_waits_for_first_actual_due_date_and_grace_period(self):
+        value=state();value['public']={'release_sha256':'b'*64}
+        value['cutover_at']='2026-10-21T12:00:00+00:00'
+        self.assertFalse(schedule_overdue(value,as_of=datetime.fromisoformat('2026-10-21T13:00:00+00:00')))
+        self.assertFalse(schedule_overdue(value,as_of=datetime.fromisoformat('2026-10-22T01:36:00+00:00')))
+        self.assertTrue(schedule_overdue(value,as_of=datetime.fromisoformat('2026-10-22T01:37:00+00:00')))
+        value['last_schedule']={'passed':True,'recorded_at':'2026-10-22T00:10:00+00:00'}
+        self.assertFalse(schedule_overdue(value,as_of=datetime.fromisoformat('2026-10-22T01:37:00+00:00')))

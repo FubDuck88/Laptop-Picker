@@ -172,6 +172,22 @@ def notify(github,outcome):
     print(f'https://github.com/{REPO}/issues/{issue}')
 
 
+def schedule_overdue(state,*,as_of=None):
+    from datetime import timedelta
+    if not state.get('public') or not state.get('cutover_at'):return False
+    zone=timezone(timedelta(hours=8))
+    current=(as_of or datetime.now(timezone.utc)).astimezone(zone)
+    cutover=datetime.fromisoformat(state['cutover_at']).astimezone(zone)
+    first=cutover.replace(hour=8,minute=0,second=0,microsecond=0)
+    if first<=cutover:first+=timedelta(days=1)
+    if current<first+timedelta(minutes=97):return False
+    if current<current.replace(hour=9,minute=37,second=0,microsecond=0):return False
+    last=state.get('last_schedule') or {}
+    if not last.get('passed') or not last.get('recorded_at'):return True
+    recorded=datetime.fromisoformat(last['recorded_at']).astimezone(zone)
+    return recorded>current or recorded.date()!=current.date()
+
+
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('command',choices=['prepare','publish','finish','notify','watchdog'])
@@ -185,11 +201,6 @@ if __name__=='__main__':
     elif a.command=='finish':finish(g,a.output,a.outcome)
     elif a.command=='notify':notify(g,a.outcome)
     else:
-        state,_=g.state();last=state.get('last_schedule') or {}
-        if not state.get('public'):
-            print('Maintenance remains intentional; no public schedule expected yet.');sys.exit(0)
-        from datetime import timedelta
-        today=datetime.now(timezone(timedelta(hours=8))).date().isoformat()
-        recorded=last.get('recorded_at','')
-        local_day=datetime.fromisoformat(recorded).astimezone(timezone(timedelta(hours=8))).date().isoformat() if recorded else ''
-        if local_day!=today or not last.get('passed'):notify(g,'scheduled publication missing or degraded')
+        state,_=g.state()
+        if schedule_overdue(state):notify(g,'scheduled publication missing or degraded')
+        else:print('No overdue scheduled publication.')
