@@ -2,7 +2,7 @@
 import hashlib
 import io
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import re
 import tarfile
 
@@ -26,7 +26,7 @@ def write_archive(files, folder, *, kind, release_sha=None, prefix=''):
     with tarfile.open(folder/'artifact.tar', 'w', format=tarfile.GNU_FORMAT) as tar:
         directories={'.'}
         for name in files:
-            directories.update(str(parent) for parent in Path(name).parents if str(parent)!='.')
+            directories.update(str(parent) for parent in PurePosixPath(name).parents if str(parent)!='.')
         for name in sorted(directories,key=lambda n:(len(n.split('/')),n)):
             entry=tarfile.TarInfo('.' if name=='.' else './'+name)
             entry.type=tarfile.DIRTYPE

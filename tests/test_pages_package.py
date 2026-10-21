@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 import tempfile
+import tarfile
 import unittest
 
 from pages_package import build,read_archive,write_archive
@@ -19,6 +20,9 @@ class PagesPackageTests(unittest.TestCase):
             public,candidate=build(ROOT,FIXTURE,tmp/'build','test-1',tmp/'recovery/artifact.tar',
                                   recovery['archive_sha256'],as_of=datetime(2026,10,21,tzinfo=timezone.utc))
             a=read_archive(tmp/'build/candidate/artifact.tar',candidate['archive_sha256'])
+            with tarfile.open(tmp/'build/candidate/artifact.tar') as archive:
+                self.assertTrue(any(m.isdir() for m in archive.getmembers()))
+                self.assertTrue(all('\\' not in m.name for m in archive.getmembers()))
             p=read_archive(tmp/'build/public/artifact.tar',public['archive_sha256'])
             self.assertEqual(a['index.html'],b'maintenance')
             self.assertNotIn('data/current.json',a)
