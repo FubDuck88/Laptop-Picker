@@ -1,0 +1,92 @@
+name: Deploy checked maintenance
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verified-laptop-publication
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    outputs:
+      release_tag: ${{ steps.identity.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Build and check the allowlisted archive
+        run: python -B tools/build_maintenance.py --output maintenance-archive
+      - name: Record immutable release identity
+        id: identity
+        run: echo "tag=maintenance-${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+      - name: Preserve exact archive and hashes as release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.identity.outputs.tag }}
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            mkdir saved
+            gh release download "$TAG" --dir saved --pattern artifact.tar --pattern archive.sha256 --pattern manifest.json
+            cmp maintenance-archive/artifact.tar saved/artifact.tar
+            cmp maintenance-archive/manifest.json saved/manifest.json
+            (cd saved && sha256sum --check archive.sha256)
+          else
+            gh release create "$TAG" maintenance-archive/artifact.tar maintenance-archive/archive.sha256 maintenance-archive/manifest.json --target "$GITHUB_SHA" --title "Verified maintenance archive" --notes "Allowlisted maintenance package. Archive and file hashes are recorded for exact-byte recovery; no catalog or diagnostics are included." --latest=false
+          fi
+          (cd maintenance-archive && sha256sum --check archive.sha256)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: github-pages-maintenance
+          path: maintenance-archive/artifact.tar
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: maintenance-manifest
+          path: maintenance-archive/manifest.json
+          if-no-files-found: error
+          retention-days: 14
+  deploy:
+    needs: package
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the exact checked archive
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-maintenance
+  verify:
+    needs: [package, deploy]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - uses: actions/download-artifact@v4
+        with:
+          name: maintenance-manifest
+          path: maintenance-archive
+      - name: Verify served bytes and exclusion paths
+        env:
+          PAGE_URL: ${{ needs.deploy.outputs.page_url }}
+        run: python -B tools/verify_maintenance.py --url "$PAGE_URL" --manifest maintenance-archive/manifest.json --attempts 12
