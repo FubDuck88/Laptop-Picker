@@ -81,6 +81,14 @@ def receipt_seen(github,state):
                for c in comments)
 
 
+def delivery_verified(state):
+    """A read-only authenticated recipient-inbox check proves actual delivery."""
+    proof=state['notification'].get('delivery_verified') or {}
+    return (proof.get('recipient')==OWNER and proof.get('issue')==state['notification'].get('issue')
+            and proof.get('method')=='authenticated_repository_notifications_api'
+            and bool(re.fullmatch('[a-f0-9]{64}',proof.get('evidence_sha256',''))))
+
+
 def prepare(github,mode,output,expected_run=None):
     if mode not in ('drill','cutover','daily','recover'):
         raise ValueError('Unknown publication mode')
@@ -88,8 +96,10 @@ def prepare(github,mode,output,expected_run=None):
     if mode=='daily' and state['publication_inhibited']:raise ValueError('Publication inhibited until approved cutover')
     if mode=='cutover':
         state['notification']['receipt_confirmed']=state['notification'].get('receipt_confirmed') or receipt_seen(github,state)
-        if not state['notification']['receipt_confirmed']:
+        if not state['notification']['receipt_confirmed'] and not delivery_verified(state):
             raise ValueError('Owner notification receipt is not yet confirmed')
+        if not (state.get('recovery_drill') or {}).get('passed'):
+            raise ValueError('Complete controlled recovery drill has not passed')
     if mode=='recover':
         if not expected_run or str((state.get('active_attempt') or {}).get('run_id'))!=str(expected_run):
             raise ValueError('Stale recovery event; refusing to overwrite newer deployment')
@@ -132,6 +142,9 @@ def finish(github,output,outcome):
     else:
         state['publication_inhibited']=state.get('public') is None or outcome not in ('drill-restored','degraded-retained')
         if outcome=='drill-restored' and state.get('public'):state['publication_inhibited']=False
+        if outcome=='drill-restored':
+            state['recovery_drill']={'passed':True,'run_id':run_id(),'recorded_at':now(),
+                                     'detected':['http','hash','frontend']}
     state['last_operation']={'run_id':run_id(),'mode':mode,'outcome':outcome,'recorded_at':now()}
     if outcome!='recovery-unproven':state['active_attempt']=None
     github.save(state,version)
@@ -148,8 +161,8 @@ def notify(github,outcome):
           'The controlled drill keeps maintenance visible and restores the stored archive. '
           'A real failed publication retains/restores the recorded known-good release. '
           'Check the run for recovery outcome; no successful recovery is implied by issue creation.\n\n'
-          'For the notification-delivery gate, please comment exactly **received** after this GitHub notification reaches you. '
-          'This confirms delivery only; it does not approve source data or design.')
+          'If delivery cannot be verified through the authenticated recipient inbox, comment exactly **received** '
+          'after this notification reaches you. Delivery proof does not approve source data or design.')
     if issue:
         github.api(f'/issues/{issue}/comments','POST',{'body':body})
     else:

@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import Mock,patch
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
-from pages_ops import prepare,finish,receipt_seen
+from pages_ops import prepare,finish,receipt_seen,delivery_verified
 
 
 def state():
@@ -35,6 +35,23 @@ class DeploymentGuardsTests(unittest.TestCase):
             github.api.return_value=[{'user':{'login':login},'body':body}]
             self.assertEqual(receipt_seen(github,state()),expected)
 
+    def test_notification_alone_cannot_unlock_cutover_without_recovery_proof(self):
+        value=state();value['notification']['receipt_confirmed']=True
+        github=self.github(value)
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(ValueError,'recovery drill'):prepare(github,'cutover',tmp)
+        github.save.assert_not_called()
+
+    def test_verified_recipient_delivery_is_distinct_from_issue_creation(self):
+        value=state()
+        self.assertFalse(delivery_verified(value))
+        proof={'recipient':'FubDuck88','issue':5,'method':'authenticated_repository_notifications_api',
+               'evidence_sha256':'a'*64}
+        value['notification']['delivery_verified']=proof
+        self.assertTrue(delivery_verified(value))
+        proof['recipient']='someone-else'
+        self.assertFalse(delivery_verified(value))
+
     def test_stale_completion_and_recovery_cannot_overwrite_current_state(self):
         github=self.github(state())
         with patch.dict(os.environ,{'GITHUB_RUN_ID':'new','OP_MODE':'drill'}):
@@ -49,6 +66,7 @@ class DeploymentGuardsTests(unittest.TestCase):
         saved=github.save.call_args.args[0]
         self.assertIsNone(saved['public']);self.assertIsNone(saved['last_schedule'])
         self.assertTrue(saved['publication_inhibited'])
+        self.assertTrue(saved['recovery_drill']['passed'])
 
     def test_unproven_recovery_keeps_guard_for_automatic_recovery_workflow(self):
         value=state();value['active_attempt']['run_id']='new'
