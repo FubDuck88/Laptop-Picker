@@ -1,0 +1,48 @@
+{
+  "fixture_manifest_version": 1,
+  "purpose": "Historical deterministic UI test input; not current shopping data or an operational receipt",
+  "source_release_sha256": "116059d4de1016c9ceba960b43fa8d827a598bdcd8d17a75caef1ddc45620268",
+  "source_release_path": "data/releases/116059d4de1016c9ceba960b43fa8d827a598bdcd8d17a75caef1ddc45620268.json",
+  "release_version": 1,
+  "catalog_schema_version": 2,
+  "catalog_schema_file": "catalog-v2.schema.json",
+  "catalog_schema_sha256": "e8ef64659c4c5f9687a192d5169be9f12722c0f4a5b9d36f6f8177cdd868a0ba",
+  "pointer_file": "current.json",
+  "clock_file": "clock.json",
+  "clock_sha256": "122098f31218888c1bdd9929f1f9d7cf904e5b99a9f26bfeaefd20f17ae244da",
+  "source_implementation_sha256": "7c93ab85245c8d5bbf4d82de779c16023d3fcba4a8475af13fdcc0968b0b9a47",
+  "configuration_count": 19,
+  "offer_count": 19,
+  "history_receipt_count": 57,
+  "scenarios": [
+    {
+      "name": "one_match",
+      "gpu_model": "NVIDIA GeForce RTX 4060",
+      "cpu_models": [],
+      "minimum_ram_gb": 16,
+      "minimum_storage_gb": 512,
+      "maximum_price_sen": 400000,
+      "expected_count": 1,
+      "expected_configuration_ids": [
+        "cfg_cb66d888c1dc497bca28112b"
+      ]
+    },
+    {
+      "name": "zero_match",
+      "gpu_model": "NVIDIA GeForce RTX 4060",
+      "cpu_models": [],
+      "minimum_ram_gb": 32,
+      "minimum_storage_gb": 512,
+      "maximum_price_sen": 400000,
+      "expected_count": 0,
+      "expected_configuration_ids": []
+    }
+  ],
+  "notes": [
+    "Scenario requirements are test inputs, not confirmed personal buying requirements.",
+    "No RM4500 default or fixture value is used.",
+    "Serve pointer/release through the normal verified reader; set the test clock before app scripts run.",
+    "Do not use this fixture as a Phase 6, 6R or 7F daily receipt.",
+    "Do not rewrite this historical payload during schema migration."
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "fixture_clock_version": 1,
+  "now_utc": "2026-10-20T16:00:00Z",
+  "display_timezone": "Asia/Kuala_Lumpur",
+  "preserve_observation_timestamps": true,
+  "live_network_required": false
+}

@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Laptop Picker catalog v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "generated_at", "configurations", "offers", "observations", "run_reports"],
+  "properties": {
+    "schema_version": {"const": 2},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "configurations": {"type": "array", "items": {"$ref": "#/$defs/configuration"}},
+    "offers": {"type": "array", "items": {"$ref": "#/$defs/offer"}},
+    "observations": {"type": "array", "items": {"$ref": "#/$defs/observation"}},
+    "run_reports": {"type": "array", "items": {"$ref": "#/$defs/run_report"}}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{0,95}$"},
+    "text": {"type": "string", "minLength": 1, "maxLength": 256, "pattern": "\\S"},
+    "optional_text": {"type": ["string", "null"], "minLength": 1, "maxLength": 256, "pattern": "\\S"},
+    "url": {"type": "string", "format": "uri", "pattern": "^https?://"},
+    "time": {"type": "string", "format": "date-time"},
+    "optional_time": {"type": ["string", "null"], "format": "date-time"},
+    "availability": {"enum": ["in_stock", "out_of_stock", "preorder", "unknown"]},
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_url", "observed_at", "method", "raw_value"],
+      "properties": {
+        "source_url": {"$ref": "#/$defs/url"},
+        "observed_at": {"$ref": "#/$defs/time"},
+        "method": {"enum": ["structured", "labeled", "title"]},
+        "raw_value": {"type": "string", "minLength": 1, "maxLength": 2048, "pattern": "\\S"}
+      }
+    },
+    "evidence_map": {"type": "object", "additionalProperties": {"$ref": "#/$defs/evidence"}},
+    "capacity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["capacity_gb", "label"],
+      "properties": {
+        "capacity_gb": {"type": ["integer", "null"], "minimum": 1},
+        "label": {"$ref": "#/$defs/optional_text"}
+      }
+    },
+    "display": {
+      "type": "object", "additionalProperties": false,
+      "required": ["diagonal_inches", "resolution_width", "resolution_height", "refresh_hz", "label"],
+      "properties": {
+        "diagonal_inches": {"type": ["number", "null"], "minimum": 5, "maximum": 30},
+        "resolution_width": {"type": ["integer", "null"], "minimum": 1},
+        "resolution_height": {"type": ["integer", "null"], "minimum": 1},
+        "refresh_hz": {"type": ["number", "null"], "minimum": 1},
+        "label": {"$ref": "#/$defs/optional_text"}
+      }
+    },
+    "configuration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "brand", "manufacturer_part_number", "title", "product_type", "identity_scope", "cpu_model", "gpu_model", "gpu_kind", "vram_gb", "memory", "storage", "display", "battery_wh", "weight_kg", "wifi", "ports", "warranty", "evidence"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "brand": {"$ref": "#/$defs/text"},
+        "manufacturer_part_number": {"type": "string", "maxLength": 96, "pattern": "^(?=.*[0-9])[A-Z0-9][A-Z0-9._#-]*$"},
+        "title": {"$ref": "#/$defs/text"},
+        "product_type": {"const": "laptop"},
+        "identity_scope": {"const": "exact_variant"},
+        "cpu_model": {"$ref": "#/$defs/optional_text"},
+        "gpu_model": {"$ref": "#/$defs/optional_text"},
+        "gpu_kind": {"enum": ["integrated", "discrete", "unknown"]},
+        "vram_gb": {"type": ["integer", "null"], "minimum": 1},
+        "memory": {"$ref": "#/$defs/capacity"},
+        "storage": {"$ref": "#/$defs/capacity"},
+        "display": {"$ref": "#/$defs/display"},
+        "battery_wh": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "weight_kg": {"type": ["number", "null"], "exclusiveMinimum": 0},
+        "wifi": {"$ref": "#/$defs/optional_text"},
+        "ports": {"type": ["array", "null"], "minItems": 1, "items": {"$ref": "#/$defs/text"}},
+        "warranty": {"$ref": "#/$defs/optional_text"},
+        "evidence": {"$ref": "#/$defs/evidence_map"}
+      }
+    },
+    "offer": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "configuration_id", "source_id", "source_product_id", "variant_id", "seller", "url", "currency", "price_sen", "price_basis", "condition", "availability", "observed_at", "evidence"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "configuration_id": {"$ref": "#/$defs/id"},
+        "source_id": {"$ref": "#/$defs/id"},
+        "source_product_id": {"$ref": "#/$defs/text"},
+        "variant_id": {"$ref": "#/$defs/text"},
+        "seller": {"$ref": "#/$defs/text"},
+        "url": {"$ref": "#/$defs/url"},
+        "currency": {"const": "MYR"},
+        "price_sen": {"type": "integer", "minimum": 1},
+        "price_basis": {"const": "public"},
+        "condition": {"const": "new"},
+        "image_url": {"anyOf": [{"$ref": "#/$defs/url"}, {"type": "null"}]},
+        "availability": {"$ref": "#/$defs/availability"},
+        "observed_at": {"$ref": "#/$defs/time"},
+        "evidence": {"$ref": "#/$defs/evidence_map"}
+      }
+    },
+    "observation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "offer_id", "configuration_id", "observed_at", "currency", "price_sen", "availability"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "offer_id": {"$ref": "#/$defs/id"},
+        "configuration_id": {"$ref": "#/$defs/id"},
+        "observed_at": {"$ref": "#/$defs/time"},
+        "currency": {"const": "MYR"},
+        "price_sen": {"type": "integer", "minimum": 1},
+        "availability": {"$ref": "#/$defs/availability"}
+      }
+    },
+    "issue": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_product_id", "field", "code", "message"],
+      "properties": {
+        "source_product_id": {"type": ["string", "null"]},
+        "field": {"type": "string"},
+        "code": {"$ref": "#/$defs/text"},
+        "message": {"type": "string", "minLength": 1}
+      }
+    },
+    "run_report": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_id", "mode", "status", "started_at", "finished_at", "record_count", "accepted_count", "rejected_count", "error", "issues"],
+      "properties": {
+        "source_id": {"$ref": "#/$defs/id"},
+        "mode": {"enum": ["live", "legacy_import", "deferred"]},
+        "status": {"enum": ["complete", "partial", "failed", "not_run"]},
+        "started_at": {"$ref": "#/$defs/optional_time"},
+        "finished_at": {"$ref": "#/$defs/optional_time"},
+        "record_count": {"type": "integer", "minimum": 0},
+        "accepted_count": {"type": "integer", "minimum": 0},
+        "rejected_count": {"type": "integer", "minimum": 0},
+        "error": {"type": ["string", "null"], "minLength": 1},
+        "issues": {"type": "array", "items": {"$ref": "#/$defs/issue"}}
+      }
+    }
+  }
+}
