@@ -159,6 +159,7 @@ def fetch_all_products(page_filter_id, page_size=50, session=None):
                     "battery": "",
                     "others": " | ".join(others_parts),
                 }
+                enrich_product(prod_dict, session=session)
                 page_products.append(prod_dict)
                 
         all_products.extend(page_products)
@@ -179,6 +180,24 @@ def fetch_tech_specs(product_number, session=None):
     )
     r.raise_for_status()
     return r.json()
+
+
+def enrich_product(product, session=None):
+    """Apply the same missing-field enrichment in every collection entry point."""
+    fields = {"Processor": "processor", "Graphics": "graphics", "Graphic Card": "graphics",
+              "Memory": "memory", "Storage": "storage", "Display": "display", "WIFI": "wifi", "Battery": "battery"}
+    if all(product.get(name) for name in ("processor", "graphics", "memory", "storage", "display")):
+        return product
+    try:
+        response = fetch_tech_specs(product["id"], session=session)
+        for group in response.get("data", {}).get("tables", []):
+            for item in group.get("specs", []):
+                name = fields.get((item.get("headline") or "").strip())
+                if name and not product.get(name):
+                    product[name] = BeautifulSoup(item.get("text") or "", "lxml").get_text(" ", strip=True)
+    except (requests.RequestException, ValueError, TypeError, KeyError) as error:
+        print(f"  Detailed specs unavailable for {product.get('id')}: {error}")
+    return product
 
 
 def save_to_csv(rows, filename="lenovo_laptops.csv"):
@@ -227,26 +246,6 @@ if __name__ == "__main__":
         for p in products:
             if not p["id"] or p["id"] in seen_ids:
                 continue
-
-            # Fallback to secondary tech specs endpoint if primary classification specs are missing
-            if not p.get("processor") and not p.get("graphics"):
-                try:
-                    specs = fetch_tech_specs(p["id"], session=session)
-                    tables = specs.get("data", {}).get("tables", [])
-                    for group in tables:
-                        for spec in group.get("specs", []):
-                            headline = (spec.get("headline") or "").strip()
-                            raw_html = spec.get("text") or ""
-                            clean_text = BeautifulSoup(raw_html, "lxml").get_text(separator=" ", strip=True)
-                            if headline == "Processor": p["processor"] = clean_text
-                            elif headline in ("Graphics", "Graphic Card"): p["graphics"] = clean_text
-                            elif headline == "Memory": p["memory"] = clean_text
-                            elif headline == "Storage": p["storage"] = clean_text
-                            elif headline == "Display": p["display"] = clean_text
-                            elif headline == "WIFI": p["wifi"] = clean_text
-                            elif headline == "Battery": p["battery"] = clean_text
-                except Exception as e:
-                    print(f"  Fallback tech specs failed for {p['id']}: {e}")
 
             p["series"] = series_name
             all_rows.append(p)

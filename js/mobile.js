@@ -5,6 +5,7 @@
 
 let allRows = [];
 let isSteamActive = false;
+let dealsOnly = false;
 let displayedCount = 0;
 const PAGE_SIZE = 30;
 
@@ -84,8 +85,9 @@ function getMobileFiltered() {
   const minP = parseFloat(document.getElementById('mMinPrice').value);
   const maxP = parseFloat(document.getElementById('mMaxPrice').value);
 
-  let rows = allRows.filter(r => matchesFilters(r, activeFilters, isSteamActive, q, minP, maxP));
+  let rows = allRows.map(r => rowForStores(r, activeFilters.store)).filter(Boolean).filter(r => matchesFilters(r, activeFilters, isSteamActive, q, minP, maxP));
 
+  if (dealsOnly) rows = rows.filter(r => r.vendor_count > 1);
   const s = document.getElementById('mSortSelect').value;
   sortRows(rows, s);
   return rows;
@@ -142,7 +144,7 @@ function loadMoreMobileCards() {
     if (btn.dataset.bound) return;
     btn.dataset.bound = '1';
     btn.addEventListener('click', () => {
-      const row = allRows.find(r => r._rid === btn.dataset.rid);
+      const row = (window._mFilteredRows || allRows).find(r => r._rid === btn.dataset.rid);
       if (row) openMobileDetail(row);
     });
   });
@@ -158,12 +160,7 @@ function buildMobileCardHtml(r) {
     badgeHtml = '<div class="m-deal-badge">🏷️ ' + r.vendor_count + ' Vendor Deals (Best at ' + escapeHtml(bestVendor) + ')</div>';
   }
 
-  let rawImg = formatImgUrl(r.image_url, r.series || r.best_vendor, r.title);
-  let imgHtml = '';
-  if (rawImg.length > 5) {
-    imgHtml = '<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px;text-align:center;margin:4px 0;height:100px;display:flex;align-items:center;justify-content:center;">'
-      + '<img src="' + escapeHtml(rawImg) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:88px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));" /></div>';
-  }
+  const imgHtml = renderProductImage(r, true);
 
   return '<div class="m-card">'
     + '<div>'
@@ -172,15 +169,16 @@ function buildMobileCardHtml(r) {
     + badgeHtml
     + '</div>'
     + imgHtml
+    + offerStatusHtml(r)
     + '<div class="m-price-tag"><span class="m-price-cur">MYR</span>' + priceStr + '</div>'
     + '<div class="m-specs">'
-    + '<div>⚡ <strong>CPU:</strong> ' + escapeHtml(r.processor || 'N/A') + '</div>'
-    + '<div>🎮 <strong>GPU:</strong> ' + escapeHtml(r.graphics || 'N/A') + '</div>'
-    + '<div>🧠 <strong>RAM:</strong> ' + escapeHtml(r.memory || 'N/A') + ' | 💾 <strong>SSD:</strong> ' + escapeHtml(r.storage || 'N/A') + '</div>'
+    + '<div>⚡ <strong>CPU:</strong> ' + escapeHtml(r.processor || 'Unknown') + '</div>'
+    + '<div>🎮 <strong>GPU:</strong> ' + escapeHtml(r.graphics || 'Unknown') + '</div>'
+    + '<div>🧠 <strong>RAM:</strong> ' + escapeHtml(r.memory || 'Unknown') + ' | 💾 <strong>SSD:</strong> ' + escapeHtml(r.storage || 'Unknown') + '</div>'
     + '</div>'
     + '<div class="m-actions">'
     + '<button class="m-btn secondary m-detail-btn" data-rid="' + r._rid + '">🔍 View Deals</button>'
-    + '<a href="' + escapeHtml(r.url) + '" target="_blank" rel="noopener" class="m-btn primary">Buy Deal ↗</a>'
+    + '<a href="' + escapeHtml(r.url) + '" target="_blank" rel="noopener" class="m-btn primary">View offer ↗</a>'
     + '</div>'
     + '</div>';
 }
@@ -199,37 +197,32 @@ function openMobileDetail(r) {
 
     deals.forEach(d => {
       const pStr = d.price ? 'RM ' + d.price.toLocaleString('en-MY', { minimumFractionDigits: 2 }) : 'Inquiry';
-      const badge = d.isLowest ? ' <span style="color:var(--accent-2);font-weight:700;">★ BEST</span>' : '';
+      const badge = d.isLowest ? ' <span style="color:var(--accent-2);font-weight:700;">LOWEST RECORDED</span>' : '';
       tableHtml += '<tr style="border-bottom:1px solid var(--border);">'
-        + '<td style="padding:8px;">' + escapeHtml(d.vendor) + badge + '</td>'
+        + '<td style="padding:8px;">' + escapeHtml(d.vendor) + badge + offerStatusHtml({...r,...d}) + '</td>'
         + '<td style="padding:8px;color:var(--accent);font-weight:700;">' + pStr + '</td>'
-        + '<td style="padding:8px;"><a href="' + escapeHtml(d.url) + '" target="_blank" style="color:var(--accent-2);text-decoration:none;font-weight:700;">Buy ↗</a></td>'
+        + '<td style="padding:8px;"><a href="' + escapeHtml(d.url) + '" target="_blank" style="color:var(--accent-2);text-decoration:none;font-weight:700;">View offer ↗</a></td>'
         + '</tr>';
     });
     tableHtml += '</table></div>';
   }
 
-  let rawImg = formatImgUrl(r.image_url, r.series || r.best_vendor, r.title);
-  let imgBox = '';
-  if (rawImg.length > 5) {
-    imgBox = '<div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;margin-bottom:12px;">'
-      + '<img src="' + escapeHtml(rawImg) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:130px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.4));" />'
-      + '</div>';
-  }
+  const imgBox = renderProductImage(r, true, 145);
 
   document.getElementById('mDetailBody').innerHTML = ''
     + imgBox
     + '<h3 style="font-size:15px;margin-bottom:6px;">' + escapeHtml(r.title) + '</h3>'
     + '<div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">MPN: <strong style="color:var(--accent);">' + escapeHtml(r.id.toUpperCase()) + '</strong></div>'
     + '<div style="font-size:20px;font-weight:700;color:var(--accent);margin-bottom:12px;">' + priceStr + '</div>'
+    + offerStatusHtml(r) + offerHistoryHtml(r)
     + tableHtml
     + '<h4 style="font-size:12px;color:var(--accent-2);margin:16px 0 8px;">/// Specifications</h4>'
     + '<div style="font-size:12px;line-height:1.6;background:var(--bg);padding:10px;border-radius:8px;border:1px solid var(--border);">'
-    + '<div>⚡ <strong>CPU:</strong> ' + escapeHtml(r.processor || 'N/A') + '</div>'
-    + '<div>🎮 <strong>GPU:</strong> ' + escapeHtml(r.graphics || 'N/A') + '</div>'
-    + '<div>🧠 <strong>RAM:</strong> ' + escapeHtml(r.memory || 'N/A') + '</div>'
-    + '<div>💾 <strong>Storage:</strong> ' + escapeHtml(r.storage || 'N/A') + '</div>'
-    + '<div>🖥️ <strong>Display:</strong> ' + escapeHtml(r.display || 'N/A') + '</div>'
+    + '<div>⚡ <strong>CPU:</strong> ' + escapeHtml(r.processor || 'Unknown') + '</div>'
+    + '<div>🎮 <strong>GPU:</strong> ' + escapeHtml(r.graphics || 'Unknown') + '</div>'
+    + '<div>🧠 <strong>RAM:</strong> ' + escapeHtml(r.memory || 'Unknown') + '</div>'
+    + '<div>💾 <strong>Storage:</strong> ' + escapeHtml(r.storage || 'Unknown') + '</div>'
+    + '<div>🖥️ <strong>Display:</strong> ' + escapeHtml(r.display || 'Unknown') + '</div>'
     + '</div>';
 
   document.getElementById('mDetailOverlay').classList.add('show');
@@ -256,8 +249,8 @@ document.getElementById('chipSteam').addEventListener('click', () => {
   renderMobile();
 });
 document.getElementById('chipDeals').addEventListener('click', () => {
-  activeFilters.store.clear();
-  document.getElementById('mSearchInput').value = '';
+  dealsOnly = !dealsOnly;
+  document.getElementById('chipDeals').setAttribute('aria-pressed', String(dealsOnly));
   renderMobile();
 });
 document.getElementById('chipNvidia').addEventListener('click', () => {
@@ -265,7 +258,9 @@ document.getElementById('chipNvidia').addEventListener('click', () => {
   renderMobile();
 });
 document.getElementById('chip16Gb').addEventListener('click', () => {
-  activeFilters.mem.add('16GB');
+  activeFilters.mem.clear();
+  activeFilters.mem.add('16GB+');
+  updateActiveFilterCount();
   renderMobile();
 });
 
@@ -274,6 +269,8 @@ function resetAllFilters() {
   document.getElementById('mMinPrice').value = '';
   document.getElementById('mMaxPrice').value = '';
   isSteamActive = false;
+  dealsOnly = false;
+  document.getElementById('chipDeals').setAttribute('aria-pressed', 'false');
   document.getElementById('mSteamBanner').style.display = 'none';
 
   Object.keys(activeFilters).forEach(k => activeFilters[k].clear());

@@ -1,0 +1,22 @@
+name: Daily publication watchdog
+on:
+  schedule:
+    - cron: '37 1 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python -m pip install -r requirements-test.txt
+      - name: Alert if scheduled proof is missing or degraded
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -B tools/pages_ops.py watchdog

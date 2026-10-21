@@ -1,0 +1,2054 @@
+{
+  "provenance": "Captured public response; product/specification/variant fields retained, unrelated metadata omitted.",
+  "url": "https://www.allithypermarket.com.my/collections/laptop/products.json?limit=30&page=2",
+  "observed_at": "2026-10-20T09:35:44.534839+00:00",
+  "status_code": 200,
+  "payload": {
+    "products": [
+      {
+        "id": 9072497656036,
+        "title": "Lenovo IdeaPad Slim 3 14AMN8 (82XN00EEMJ/82XN00EDMJ) Laptop Ryzen5-7520U/8GB DDR5/256GB SSD/14\" FHD/H&S+M365 Basic",
+        "handle": "lenovo-ideapad-slim-3-14amn8-82xn00eemj-82xn00edmj-laptop-ryzen5-7520u-8gb-ddr5-256gb-ssd-14-fhd-h-s-m365-basic",
+        "vendor": "Lenovo",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<p>Product Highlights</p>\n<p> </p>\n<p>• AMD Ryzen™ 5 7520U processor for smooth daily productivity</p>\n<p> </p>\n<p>• 14\" Full HD anti-glare display for work, study, and entertainment</p>\n<p> </p>\n<p>• 8GB LPDDR5 memory for seamless multitasking</p>\n<p> </p>\n<p>• 512GB PCIe NVMe SSD for fast boot-up and storage performance</p>\n<p> </p>\n<p>• Slim and lightweight design starting from only 1.37kg</p>\n<p> </p>\n<p>• Wi-Fi 6 &amp; Bluetooth® 5.2 for reliable wireless connectivity</p>\n<p> </p>\n<p>• Rapid Charge Boost support for quick charging convenience</p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p>Brand: Lenovo</p>\n<p> </p>\n<p> </p>\n<p>Product Type: Laptop</p>\n<p> </p>\n<p> </p>\n<p>Model:</p>\n<p> </p>\n<p>• 82XN00EDMJ</p>\n<p> </p>\n<p>• 82XN00EEMJ</p>\n<p> </p>\n<p>Series: IdeaPad Slim 3 14AMN8</p>\n<p> </p>\n<p> </p>\n<p>Processor:</p>\n<p> </p>\n<p>AMD Ryzen™ 5 7520U Processor</p>\n<p> </p>\n<p>Processor Cores / Threads:</p>\n<p> </p>\n<p>4 Cores / 8 Threads</p>\n<p> </p>\n<p>Max Turbo Frequency:</p>\n<p> </p>\n<p>Up to 4.3GHz</p>\n<p> </p>\n<p>Graphics:</p>\n<p> </p>\n<p>AMD Radeon™ 610M Graphics</p>\n<p> </p>\n<p>Display:</p>\n<p> </p>\n<p>14\" Full HD (1920 × 1080) Anti-Glare Display</p>\n<p> </p>\n<p>Memory:</p>\n<p> </p>\n<p>16GB LPDDR5-5500 (Onboard)</p>\n<p> </p>\n<p>Storage:</p>\n<p> </p>\n<p>512GB PCIe NVMe M.2 SSD</p>\n<p> </p>\n<p>Connection Type:</p>\n<p> </p>\n<p>Wi-Fi 6 (802.11ax) + Bluetooth® 5.2</p>\n<p> </p>\n<p>Operating System:</p>\n<p> </p>\n<p>Windows 11 Home</p>\n<p> </p>\n<p>Camera:</p>\n<p> </p>\n<p>HD 720p Webcam with Privacy Shutter</p>\n<p> </p>\n<p>Audio:</p>\n<p> </p>\n<p>Stereo Speakers with Dolby Audio™</p>\n<p> </p>\n<p>Keyboard:</p>\n<p> </p>\n<p>Full-Size Keyboard</p>\n<p> </p>\n<p>Ports:</p>\n<p> </p>\n<p>• 1 × USB-C 3.2 Gen 1</p>\n<p> </p>\n<p>• 2 × USB-A 3.2 Gen 1</p>\n<p> </p>\n<p>• 1 × HDMI 1.4</p>\n<p> </p>\n<p>• 1 × SD Card Reader</p>\n<p> </p>\n<p>• 1 × 3.5mm Audio Combo Jack</p>\n<p> </p>\n<p>• 1 × Power Connector</p>\n<p> </p>\n<p>Battery / Power:</p>\n<p> </p>\n<p>47Wh Integrated Battery</p>\n<p> </p>\n<p>Charging:</p>\n<p> </p>\n<p>65W AC Adapter with Rapid Charge Boost</p>\n<p> </p>\n<p> </p>\n<p>Dimensions &amp; Weight</p>\n<p> </p>\n<p>Product Dimensions:</p>\n<p> </p>\n<p>32.43 × 21.38 × 1.79 cm</p>\n<p> </p>\n<p>Product Weight:</p>\n<p> </p>\n<p>Starting from 1.37kg</p>\n<p> </p>\n<p> </p>\n<p>What's in the Box</p>\n<p> </p>\n<p>• 1 × Lenovo IdeaPad Slim 3 14AMN8 Laptop</p>\n<p> </p>\n<p>• 1 × Lenovo 65W Power Adapter</p>\n<p> </p>\n<p>• 1 × Power Cable</p>\n<p> </p>\n<p>• 1 × User Guide</p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p>Warranty Duration:</p>\n<p> </p>\n<p>2 Years Lenovo Warranty</p>\n<p> </p>\n<p>Warranty Type:</p>\n<p> </p>\n<p>Manufacturer Warranty</p>\n</div>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Grey",
+              "Blue"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49078201516260,
+            "title": "Grey",
+            "option1": "Grey",
+            "option2": null,
+            "option3": null,
+            "sku": "199276276001",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 82435470328036,
+              "product_id": 9072497656036,
+              "position": 3,
+              "created_at": "2026-06-04T10:30:06+08:00",
+              "updated_at": "2026-06-04T10:30:09+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820la-mp1n828vmvi962.jpg?v=1780540209",
+              "variant_ids": [
+                49078201516260
+              ]
+            },
+            "available": true,
+            "price": "2399.00",
+            "grams": 50000,
+            "compare_at_price": "2599.00",
+            "position": 1,
+            "product_id": 9072497656036,
+            "created_at": "2026-06-04T10:30:06+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 49078201549028,
+            "title": "Blue",
+            "option1": "Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "199276276018",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 82435470295268,
+              "product_id": 9072497656036,
+              "position": 2,
+              "created_at": "2026-06-04T10:30:06+08:00",
+              "updated_at": "2026-06-04T10:30:09+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820le-mp1n80xnpvrgda.jpg?v=1780540209",
+              "variant_ids": [
+                49078201549028
+              ]
+            },
+            "available": true,
+            "price": "2399.00",
+            "grams": 50000,
+            "compare_at_price": "2599.00",
+            "position": 2,
+            "product_id": 9072497656036,
+            "created_at": "2026-06-04T10:30:06+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9151776391396,
+        "title": "Lenovo IdeaPad Slim 3 14IWC11 Laptop (83RQ002MMJ/83RQ002LMJ) C5-320/16GB DDR5/512GB SSD/14\" WUXGA",
+        "handle": "lenovo-ideapad-slim-3-14iwc11-laptop-83rq002mmj-83rq002lmj-c5-320-16gb-ddr5-512gb-ssd-14-wuxga",
+        "vendor": "Lenovo",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lh-mq33d20p5hcf69\">\n<p> </p>\n<p>*Free Gift: TNG RM50 Reload PIN (While Stock Last)</p>\n<p> </p>\n<p>Product Highlights</p>\n<p> </p>\n<p> </p>\n<p>• Intel® Core™ 5 320 processor delivers smooth performance for work, study and multitasking</p>\n<p> </p>\n<p>• 14\" WUXGA (1920 × 1200) IPS display with 16:10 aspect ratio for enhanced viewing experience</p>\n<p> </p>\n<p>• 16GB DDR5 RAM for seamless multitasking and productivity</p>\n<p> </p>\n<p>• 512GB PCIe NVMe SSD for fast boot-up and quick file access</p>\n<p> </p>\n<p>• Slim and lightweight design, perfect for students and professionals on the go</p>\n<p> </p>\n<p>• Includes Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n<p> </p>\n<p>• Free Lenovo Backpack included</p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Lenovo</p>\n<p> </p>\n<p> </p>\n<p>Product Type: Laptop</p>\n<p> </p>\n<p> </p>\n<p>Models:</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>83RQ002MMJ – Cosmic Blue</p>\n<p> </p>\n<p> </p>\n<p>83RQ002LMJ – Luna Grey</p>\n<p> </p>\n<p> </p>\n<p>Series: IdeaPad Slim 3 14IWC11</p>\n<p> </p>\n<p> </p>\n<p>Processor:</p>\n<p> </p>\n<p>Intel® Core™ 5 320</p>\n<p> </p>\n<p>Graphics:</p>\n<p> </p>\n<p>Intel® Graphics</p>\n<p> </p>\n<p>Display:</p>\n<p> </p>\n<p>14\" WUXGA (1920 × 1200), IPS, Anti-Glare, 16:10</p>\n<p> </p>\n<p>Memory:</p>\n<p> </p>\n<p>16GB DDR5 RAM</p>\n<p> </p>\n<p>Storage:</p>\n<p> </p>\n<p>512GB PCIe 4.0 NVMe M.2 SSD</p>\n<p> </p>\n<p>Operating System:</p>\n<p> </p>\n<p>Windows 11 Home</p>\n<p> </p>\n<p>Office Software:</p>\n<p> </p>\n<p>Microsoft Office Home 2024</p>\n<p> </p>\n<p>Subscription:</p>\n<p> </p>\n<p>Microsoft 365 Basic (1 Year)</p>\n<p> </p>\n<p>Keyboard:</p>\n<p> </p>\n<p>Full-Size Keyboard</p>\n<p> </p>\n<p> </p>\n<p>What's in the Box</p>\n<p> </p>\n<p> </p>\n<p>• 1 × Lenovo IdeaPad Slim 3 14IWC11 Laptop</p>\n<p> </p>\n<p>• 1 × Lenovo 65W USB-C Power Adapter</p>\n<p> </p>\n<p>• 1 × Power Cable</p>\n<p> </p>\n<p>• 1 × Lenovo Backpack</p>\n<p> </p>\n<p>• 1 × User Manual</p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration:</p>\n<p> </p>\n<p>2 Years Lenovo Onsite Warranty</p>\n<p> </p>\n<p>Warranty Type:</p>\n<p> </p>\n<p>Manufacturer Warranty</p>\n</div>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Cosmic Blue",
+              "Luna Grey"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49475683975396,
+            "title": "Cosmic Blue",
+            "option1": "Cosmic Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "199276229816",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83675626897636,
+              "product_id": 9151776391396,
+              "position": 7,
+              "created_at": "2026-07-22T14:10:25+08:00",
+              "updated_at": "2026-07-22T14:10:28+08:00",
+              "alt": null,
+              "width": 800,
+              "height": 800,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820le-mq33as5vgxe4a9.jpg?v=1784700628",
+              "variant_ids": [
+                49475683975396
+              ]
+            },
+            "available": true,
+            "price": "3049.00",
+            "grams": 50000,
+            "compare_at_price": "3049.00",
+            "position": 1,
+            "product_id": 9151776391396,
+            "created_at": "2026-07-22T14:10:25+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 49475684008164,
+            "title": "Luna Grey",
+            "option1": "Luna Grey",
+            "option2": null,
+            "option3": null,
+            "sku": "199276229809",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83675626864868,
+              "product_id": 9151776391396,
+              "position": 6,
+              "created_at": "2026-07-22T14:10:25+08:00",
+              "updated_at": "2026-07-22T14:10:28+08:00",
+              "alt": null,
+              "width": 800,
+              "height": 800,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l8-mq33aqoa1p8hfc.jpg?v=1784700628",
+              "variant_ids": [
+                49475684008164
+              ]
+            },
+            "available": true,
+            "price": "3049.00",
+            "grams": 50000,
+            "compare_at_price": "3049.00",
+            "position": 2,
+            "product_id": 9151776391396,
+            "created_at": "2026-07-22T14:10:25+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9193817243876,
+        "title": "Lenovo IdeaPad Slim 3 15AMN8 (82XQ01P3MJ / 82XQ01P2MJ) Laptop AMD Ryzen 3 30 8GB DDR5 512GB SSD 15.6\" FHD",
+        "handle": "lenovo-ideapad-slim-3-15amn8-82xq01p3mj-82xq01p2mj-laptop-amd-ryzen-3-30-8gb-ddr5-512gb-ssd-15-6-fhd",
+        "vendor": "Lenovo",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820ld-mqvnkj8vbi8ad2\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p>AMD Ryzen™ 3 30 Processor for smooth everyday productivity</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>8GB DDR5 RAM with 512GB SSD for fast and responsive performance</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>15.6\" Full HD Display for clear and vibrant visuals</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Slim and lightweight design for work, study and entertainment</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Includes Lenovo Backpack</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>2 Years Manufacturer Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Brand: Lenovo</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor: AMD Ryzen™ 3 30</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Graphics: AMD Radeon™ Graphics</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Memory: 8GB DDR5</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Storage: 512GB SSD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Display: 15.6\" Full HD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Software Included:</p>\n\n<p> </p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Available Colours:</p>\n\n<p> </p>\n\n<p>Arctic Grey (82XQ01P3MJ)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Abyss Blue (82XQ01P2MJ)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Arctic Grey",
+              "Abyss Blue"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49663962284260,
+            "title": "Arctic Grey",
+            "option1": "Arctic Grey",
+            "option2": null,
+            "option3": null,
+            "sku": "199276229861",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84435937853668,
+              "product_id": 9193817243876,
+              "position": 8,
+              "created_at": "2026-08-17T16:54:17+08:00",
+              "updated_at": "2026-08-17T16:54:20+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lf-mqvnlunjwkqpa5.jpg?v=1786956860",
+              "variant_ids": [
+                49663962284260
+              ]
+            },
+            "available": true,
+            "price": "2399.00",
+            "grams": 50000,
+            "compare_at_price": "2399.00",
+            "position": 1,
+            "product_id": 9193817243876,
+            "created_at": "2026-08-17T16:54:17+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 49663962317028,
+            "title": "Abyss Blue",
+            "option1": "Abyss Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "199276229830",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84435937886436,
+              "product_id": 9193817243876,
+              "position": 9,
+              "created_at": "2026-08-17T16:54:17+08:00",
+              "updated_at": "2026-08-17T16:54:20+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820ld-mqvnlvybl89867.jpg?v=1786956860",
+              "variant_ids": [
+                49663962317028
+              ]
+            },
+            "available": true,
+            "price": "2379.00",
+            "grams": 50000,
+            "compare_at_price": "2399.00",
+            "position": 2,
+            "product_id": 9193817243876,
+            "created_at": "2026-08-17T16:54:17+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9127274807524,
+        "title": "Lenovo IdeaPad Slim 3 15IWC11 Laptop (83RR00A4MJ/83RR00A3MJ) C5-320/16GB DDR5/512GB SSD/15.3\"WUXGA",
+        "handle": "lenovo-ideapad-slim-3-15iwc11-laptop-83rr00a4mj-83rr00a3mj-c5-320-16gb-ddr5-512gb-ssd-15-3wuxga",
+        "vendor": "Lenovo",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lg-mqbau1933wua8f\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p>Intel® Core™ 5 320 Processor for smooth multitasking</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>16GB DDR5 RAM with 512GB PCIe 4.0 SSD for fast performance</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>15.3\" WUXGA IPS Anti-Glare Display for crisp and vibrant visuals</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>USB-C with Power Delivery &amp; DisplayPort support</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Includes Lenovo Backpack</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>2 Years Manufacturer Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Brand: Lenovo</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor: Intel® Core™ 5 320</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Graphics: Integrated Intel® Graphics</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Memory: 16GB DDR5-5600</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Storage: 512GB M.2 PCIe 4.0 NVMe SSD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Display: 15.3\" WUXGA (1920 × 1200) IPS, Anti-Glare, 400 nits, 60Hz</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Software Included:</p>\n\n<p> </p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Ports:</p>\n\n<p> </p>\n\n<p>2 × USB-A (5Gbps)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>1 × USB-C (5Gbps, Power Delivery &amp; DisplayPort)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>1 × HDMI 1.4</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>1 × SD Card Reader</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>1 × 3.5mm Audio Combo Jack</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Available Colours:</p>\n\n<p> </p>\n\n<p>Luna Grey (83RR00A3MJ)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Cosmic Blue (83RR00A4MJ)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>What's in the Box</p>\n\n<p> </p>\n\n<p>1 × Lenovo IdeaPad Slim 3 15IWC11 Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>1 × Lenovo Backpack</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>1 × Power Adapter</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>1 × User Guide</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Luna Grey",
+              "Cosmic Blue"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49345654751460,
+            "title": "Luna Grey",
+            "option1": "Luna Grey",
+            "option2": null,
+            "option3": null,
+            "sku": "199276229786",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83300526063844,
+              "product_id": 9127274807524,
+              "position": 7,
+              "created_at": "2026-07-06T10:00:31+08:00",
+              "updated_at": "2026-07-06T10:00:34+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lh-mqbavsd4x897eb.jpg?v=1783303234",
+              "variant_ids": [
+                49345654751460
+              ]
+            },
+            "available": true,
+            "price": "3049.00",
+            "grams": 50000,
+            "compare_at_price": "3049.00",
+            "position": 1,
+            "product_id": 9127274807524,
+            "created_at": "2026-07-06T10:00:31+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 49345654784228,
+            "title": "Cosmic Blue",
+            "option1": "Cosmic Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "199276229793",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83300526096612,
+              "product_id": 9127274807524,
+              "position": 8,
+              "created_at": "2026-07-06T10:00:31+08:00",
+              "updated_at": "2026-07-06T10:00:34+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lf-mqbavtsrrf2j59.jpg?v=1783303234",
+              "variant_ids": [
+                49345654784228
+              ]
+            },
+            "available": true,
+            "price": "3049.00",
+            "grams": 50000,
+            "compare_at_price": "3049.00",
+            "position": 2,
+            "product_id": 9127274807524,
+            "created_at": "2026-07-06T10:00:31+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9184819839204,
+        "title": "Lenovo IdeaPad Slim 3 15IWC11(83RR00A6MJ/83RR00A5MJ) Laptop C3-304/8GB DDR5/512GB SSD/15.3\"WUXGA",
+        "handle": "lenovo-ideapad-slim-3-15iwc1183rr00a6mj-83rr00a5mj-laptop-c3-304-8gb-ddr5-512gb-ssd-15-3wuxga",
+        "vendor": "Lenovo",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820l4-mrp90qgcvrbc96\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Core™ 3 304 Processor for everyday work, study and productivity</p>\n\n<p>• 8GB DDR5 RAM with 512GB PCIe NVMe SSD</p>\n\n<p>• 15.3\" WUXGA IPS display with 1920 × 1200 resolution</p>\n\n<p>• 400 nits Anti-Glare display for comfortable everyday viewing</p>\n\n<p>• Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic</p>\n\n<p>• Slim and lightweight design weighing approximately 1.59 kg</p>\n\n<p>• Available in Cosmic Blue and Luna Grey</p>\n\n<p>Key Specifications</p>\n\n<p>• Brand: Lenovo</p>\n\n<p>• Product Type: Notebook Laptop</p>\n\n<p>• Model: IdeaPad Slim 3 15IWC11</p>\n\n<p>• Processor: Intel® Core™ 3 304</p>\n\n<p>• Graphics: Integrated Intel® Graphics</p>\n\n<p>• Memory: 8GB DDR5-5600</p>\n\n<p>• Storage: 512GB PCIe 4.0 NVMe SSD</p>\n\n<p>• Display: 15.3\" WUXGA (1920 × 1200) IPS, Anti-Glare</p>\n\n<p>• Brightness: 400 nits</p>\n\n<p>• Refresh Rate: 60Hz</p>\n\n<p>• Operating System: Windows 11 Home</p>\n\n<p>• Software: Microsoft Office Home 2024 + Microsoft 365 Basic</p>\n\n<p>• Keyboard: Backlit Keyboard</p>\n\n<p>Colour / Model Options:</p>\n\n<p>• Cosmic Blue – 83RR00A5MJ</p>\n\n<p>• Luna Grey – 83RR00A6MJ</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Cosmic Blue",
+              "Luna Grey"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49619347341540,
+            "title": "Cosmic Blue",
+            "option1": "Cosmic Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "199276229878",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84221873783012,
+              "product_id": 9184819839204,
+              "position": 8,
+              "created_at": "2026-08-10T15:30:25+08:00",
+              "updated_at": "2026-08-10T15:30:28+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l7-mrp8zsoixhc87b.jpg?v=1786347028",
+              "variant_ids": [
+                49619347341540
+              ]
+            },
+            "available": true,
+            "price": "2799.00",
+            "grams": 50000,
+            "compare_at_price": "2849.00",
+            "position": 1,
+            "product_id": 9184819839204,
+            "created_at": "2026-08-10T15:30:25+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 49619347374308,
+            "title": "Luna Grey",
+            "option1": "Luna Grey",
+            "option2": null,
+            "option3": null,
+            "sku": "199276229885",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84221873815780,
+              "product_id": 9184819839204,
+              "position": 9,
+              "created_at": "2026-08-10T15:30:25+08:00",
+              "updated_at": "2026-08-10T15:30:28+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lg-mrp8zuft0s9412.jpg?v=1786347028",
+              "variant_ids": [
+                49619347374308
+              ]
+            },
+            "available": true,
+            "price": "2799.00",
+            "grams": 50000,
+            "compare_at_price": "2849.00",
+            "position": 2,
+            "product_id": 9184819839204,
+            "created_at": "2026-08-10T15:30:25+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9198362951908,
+        "title": "Lenovo IdeaPad Slim 3 15IWC11(83RR00RAMJ) Laptop C5-320/16GB DDR5/512GB SSD/15.3\"WUXGA",
+        "handle": "lenovo-ideapad-slim-3-15iwc1183rr00ramj-laptop-c5-320-16gb-ddr5-512gb-ssd-15-3wuxga",
+        "vendor": "Lenovo",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820l8-ms4zmhib9uyq79\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Core™ 5 320 Processor for work, study and everyday productivity</p>\n\n<p>• 16GB DDR5-5600 memory for smooth multitasking</p>\n\n<p>• 512GB PCIe 4.0 NVMe SSD for fast and responsive storage</p>\n\n<p>• 15.3\" WUXGA IPS Anti-Glare display with 400 nits brightness</p>\n\n<p>• Windows 11 Home with Microsoft Office Home 2024</p>\n\n<p>• Includes Microsoft 365 Basic (1 Year)</p>\n\n<p>• Premium Breeze Moss finish with Lenovo Backpack included</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: Lenovo</p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p>Series: IdeaPad Slim 3 15IWC11</p>\n\n<p>Model: 83RR00RAMJ</p>\n\n<p>Processor: Intel® Core™ 5 320</p>\n\n<p>Graphics: Integrated Intel® Graphics</p>\n\n<p>Memory: 16GB DDR5-5600</p>\n\n<p>Memory Slot: 1 × DDR5 SODIMM</p>\n\n<p>Storage: 512GB M.2 PCIe 4.0 NVMe SSD</p>\n\n<p>Display: 15.3\" WUXGA (1920 × 1200) IPS, Anti-Glare</p>\n\n<p>Refresh Rate: 60Hz</p>\n\n<p>Keyboard: Backlit Keyboard with Numeric Keypad</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software: Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Breeze Moss</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years Lenovo</p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Breeze Moss"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49689579290852,
+            "title": "Breeze Moss",
+            "option1": "Breeze Moss",
+            "option2": null,
+            "option3": null,
+            "sku": "828132190358",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84586399564004,
+              "product_id": 9198362951908,
+              "position": 2,
+              "created_at": "2026-08-21T15:18:30+08:00",
+              "updated_at": "2026-08-21T15:18:33+08:00",
+              "alt": null,
+              "width": 1000,
+              "height": 1000,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l9-ms59h3pb0vt3cf.jpg?v=1787296713",
+              "variant_ids": [
+                49689579290852
+              ]
+            },
+            "available": true,
+            "price": "3099.00",
+            "grams": 50000,
+            "compare_at_price": "3199.00",
+            "position": 1,
+            "product_id": 9198362951908,
+            "created_at": "2026-08-21T15:18:30+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 8648480882916,
+        "title": "Lenovo IdeaPad Slim 3 16IRH10R 16\" WUXGA Laptop (Intel® Core™ 5 210H | 16GB | 512GB SSD | Integrated Intel® Graphics)",
+        "handle": "lenovo-ideapad-slim-3-16irh10r-16-wuxga-laptop-intel-core-5-210h-16gb-512gb-ssd-integrated-intel-graphics",
+        "vendor": "Lenovo",
+        "product_type": "NOTEB",
+        "body_html": "<p>🎁 Pre-Installed Microsoft Office Home &amp; Students 2024 + Microsoft 365 Basic (1Y)</p>\n<p>🎁 FREE GIFTS : Lenovo Backpack</p>\n<p><br></p>\n<p>𝐈𝐝𝐞𝐚𝐏𝐚𝐝 𝐒𝐥𝐢𝐦 𝟑 𝟏𝟔𝐈𝐑𝐇𝟏𝟎𝐑</p>\n<p>16\" WUXGA Laptop</p>\n<p><br></p>\n<p>𝐌𝐨𝐝𝐞𝐥</p>\n<p>83K5000WMJ (Cosmic Blue)</p>\n<p>83K5000XMJ (Luna Grey)</p>\n<p><br></p>\n<p>𝐓𝐞𝐜𝐡𝐧𝐢𝐜𝐚𝐥 𝐒𝐩𝐞𝐜𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬</p>\n<p>[OPERATING SYSTEM]</p>\n<p>Windows 11 Home</p>\n<p><br></p>\n<p>[PROCESSOR]</p>\n<p>Intel® Core™ 5 210H Processor</p>\n<p><br></p>\n<p>[GRAPHICS]</p>\n<p>Integrated Intel® Graphics</p>\n<p><br></p>\n<p>[DISPLAY]</p>\n<p>16\" WUXGA (1920x1200) IPS 300nits Anti-glare, 45% NTSC, 60Hz</p>\n<p><br></p>\n<p>[MEMORY]</p>\n<p>8GB Soldered DDR5-4800 + 8GB SO-DIMM DDR5-4800</p>\n<p><br></p>\n<p>[STORAGE]</p>\n<p>512GB SSD M.2 2242 PCIe® 4.0x4 NVMe®</p>\n<p><br></p>\n<p>[I/O PORTS]</p>\n<p>2x USB-A (USB 5Gbps / USB 3.2 Gen 1)</p>\n<p>1x USB-C® (USB 5Gbps / USB 3.2 Gen 1), with USB PD 3.0 and DisplayPort™ 1.2</p>\n<p>1x HDMI® 1.4</p>\n<p>1x Headphone / microphone combo jack (3.5mm)</p>\n<p>1x SD card reader</p>\n<p>1x Power connector</p>\n<p><br></p>\n<p>[KEYBOARD]</p>\n<p>Backlit, English</p>\n<p><br></p>\n<p>[CAMERA]</p>\n<p>FHD 1080p + IR with Privacy Shutter</p>\n<p><br></p>\n<p>[AUDIO]</p>\n<p>Stereo speakers, 2W x2, optimized with Dolby Audio™</p>\n<p><br></p>\n<p>[NETWORK AND COMMUNICATION]</p>\n<p>Wi-Fi® 6, 802.11ax 2x2 + BT5.2</p>\n<p><br></p>\n<p>[BATTERY]</p>\n<p>50Wh</p>\n<p><br></p>\n<p>[WEIGHT]</p>\n<p>1.68 kg</p>\n<p><br></p>\n<p>[DIMENSIONS]</p>\n<p>(W x D x H) 360 x 251 x 16.9-17.9 mm</p>\n<p><br></p>\n<p>[WARRANTY]</p>\n<p>2 Years</p>\n<p><br></p>\n<p>*Limited Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Performance Blue",
+              "Gray"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 46338805825764,
+            "title": "Performance Blue",
+            "option1": "Performance Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "198156797759",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 76054500507876,
+              "product_id": 8648480882916,
+              "position": 3,
+              "created_at": "2025-05-20T15:57:59+08:00",
+              "updated_at": "2026-03-11T16:40:58+08:00",
+              "alt": null,
+              "width": 1280,
+              "height": 1280,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/2-Photoroom_7.png?v=1773218458",
+              "variant_ids": [
+                46338805825764
+              ]
+            },
+            "available": true,
+            "price": "3149.00",
+            "grams": 50000,
+            "compare_at_price": "3149.00",
+            "position": 1,
+            "product_id": 8648480882916,
+            "created_at": "2025-05-20T18:02:05+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 46338805858532,
+            "title": "Gray",
+            "option1": "Gray",
+            "option2": null,
+            "option3": null,
+            "sku": "198156797810",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 76055533945060,
+              "product_id": 8648480882916,
+              "position": 9,
+              "created_at": "2025-05-20T18:01:11+08:00",
+              "updated_at": "2026-03-11T16:40:58+08:00",
+              "alt": null,
+              "width": 1280,
+              "height": 1280,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/grey-Photoroom.png?v=1773218458",
+              "variant_ids": [
+                46338805858532
+              ]
+            },
+            "available": true,
+            "price": "3149.00",
+            "grams": 50000,
+            "compare_at_price": "3149.00",
+            "position": 2,
+            "product_id": 8648480882916,
+            "created_at": "2025-05-20T18:02:05+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 15374913732836,
+        "title": "Lenovo Laptop IdeaPad Slim 3 15AMN8 (82XQ01X0MJ/82XQ01X1MJ) Ryzen3-7320U/8GB DDR5/512GB SSD/15.6\"FHD",
+        "handle": "lenovo-laptop-ideapad-slim-3-15amn8-82xq01x0mj-82xq01x1mj-ryzen3-7320u-8gb-ddr5-512gb-ssd-15-6fhd",
+        "vendor": "Lenovo",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lb-muiwsvwwpwcl8a\">\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Choice of AMD Ryzen 5 7520U or Ryzen 3 7320U processor</p>\n\n<p>• 8GB LPDDR5-5500 memory for everyday productivity</p>\n\n<p>• 512GB PCIe NVMe SSD for fast storage and system responsiveness</p>\n\n<p>• 15.6-inch Full HD IPS anti-glare display with 300 nits brightness</p>\n\n<p>• Integrated AMD Radeon 610M graphics</p>\n\n<p>• Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>• Slim and lightweight design with 2 Years Lenovo Premium Care</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: Lenovo</p>\n\n<p>Product Type: Laptop / Notebook</p>\n\n<p>Series: IdeaPad Slim 3</p>\n\n<p>Model: 15AMN8</p>\n\n<p>Available Variants</p>\n\n<p>Variant 1 – Ryzen 5 / Abyss Blue</p>\n\n<p>• Model Code: 82XQ01X2MJ</p>\n\n<p>• Processor: AMD Ryzen 5 7520U</p>\n\n<p>• CPU: 4 Cores / 8 Threads</p>\n\n<p>• Clock Speed: 2.8GHz Base, Up to 4.3GHz Boost</p>\n\n<p>• Cache: 2MB L2 / 4MB L3</p>\n\n<p>• Graphics: AMD Radeon 610M Integrated Graphics</p>\n\n<p>• Colour: Abyss Blue</p>\n\n<p>Variant 2 – Ryzen 3 / Arctic Grey</p>\n\n<p>• Model Code: 82XQ01X1MJ</p>\n\n<p>• Processor: AMD Ryzen 3 7320U</p>\n\n<p>• CPU: 4 Cores / 8 Threads</p>\n\n<p>• Clock Speed: 2.4GHz Base, Up to 4.1GHz Boost</p>\n\n<p>• Cache: 2MB L2 / 4MB L3</p>\n\n<p>• Graphics: AMD Radeon 610M Integrated Graphics</p>\n\n<p>• Colour: Arctic Grey</p>\n\n<p> </p>\n\n<p>Common Specifications</p>\n\n<p>Memory: 8GB LPDDR5-5500</p>\n\n<p>Memory Configuration: Soldered, Dual-Channel</p>\n\n<p>Memory Upgrade: Not Upgradeable</p>\n\n<p>Storage: 512GB M.2 2242 PCIe 4.0 NVMe SSD</p>\n\n<p>Display Size: 15.6 Inches</p>\n\n<p>Display Resolution: Full HD (1920 × 1080)</p>\n\n<p>Display Panel: IPS, Anti-Glare</p>\n\n<p>Display Brightness: 300 Nits</p>\n\n<p>Touchscreen: No</p>\n\n<p>Operating System: Windows 11 Home Single Language</p>\n\n<p>Microsoft Office: Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>Wireless Connectivity: Wi-Fi 6 (802.11ax 2×2)</p>\n\n<p>Bluetooth: Bluetooth 5.2</p>\n\n<p>Webcam: HD 720p Camera with Privacy Shutter</p>\n\n<p>Audio: Dual 1.5W Stereo Speakers with Dolby Audio</p>\n\n<p>Microphone: Dual-Array Microphones</p>\n\n<p>Keyboard: Full-Size Keyboard with Numeric Keypad</p>\n\n<p>Touchpad: Precision Touchpad</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty Type: Lenovo Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Abyss Blue",
+              "Arctic Grey"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 67675739062500,
+            "title": "Abyss Blue",
+            "option1": "Abyss Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "828132491578",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 87026175410404,
+              "product_id": 15374913732836,
+              "position": 7,
+              "created_at": "2026-10-20T15:20:42+08:00",
+              "updated_at": "2026-10-20T15:20:46+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lg-muiwrtc5dhqdad.jpg?v=1792480846",
+              "variant_ids": [
+                67675739062500
+              ]
+            },
+            "available": true,
+            "price": "2399.00",
+            "grams": 50000,
+            "compare_at_price": "2399.00",
+            "position": 1,
+            "product_id": 15374913732836,
+            "created_at": "2026-10-20T15:20:42+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 67675739095268,
+            "title": "Arctic Grey",
+            "option1": "Arctic Grey",
+            "option2": null,
+            "option3": null,
+            "sku": "828132491592",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 87026175443172,
+              "product_id": 15374913732836,
+              "position": 8,
+              "created_at": "2026-10-20T15:20:42+08:00",
+              "updated_at": "2026-10-20T15:20:46+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820la-muiwruh0eq6ia0.jpg?v=1792480846",
+              "variant_ids": [
+                67675739095268
+              ]
+            },
+            "available": true,
+            "price": "2399.00",
+            "grams": 50000,
+            "compare_at_price": "2399.00",
+            "position": 2,
+            "product_id": 15374913732836,
+            "created_at": "2026-10-20T15:20:42+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 15374979694820,
+        "title": "Lenovo Laptop IdeaPad Slim 3 15AMN8 (82XQ01X2MJ/82XQ01X3MJ) Ryzen5-7520U/8GB DDR5/512GB SSD/15.6\"FHD",
+        "handle": "lenovo-laptop-ideapad-slim-3-15amn8-82xq01x2mj-82xq01x3mj-ryzen5-7520u-8gb-ddr5-512gb-ssd-15-6fhd",
+        "vendor": "Lenovo",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820l8-muiwsvwwrax1f8\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• AMD Ryzen 5 7520U processor with 4 cores and 8 threads</p>\n\n<p>• 8GB LPDDR5-5500 onboard memory for everyday productivity</p>\n\n<p>• 512GB PCIe NVMe SSD for fast storage and responsiveness</p>\n\n<p>• 15.6-inch Full HD IPS anti-glare display with 300 nits brightness</p>\n\n<p>• Integrated AMD Radeon 610M graphics for everyday visual tasks</p>\n\n<p>• Pre-installed Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>• Wi-Fi 6 connectivity, privacy shutter and 2 Years Lenovo Premium Care</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: Lenovo</p>\n\n<p>Product Type: Laptop / Notebook</p>\n\n<p>Series: IdeaPad Slim 3</p>\n\n<p>Model: 15AMN8</p>\n\n<p>Colour Variants</p>\n\n<p>Memory: 8GB Soldered LPDDR5-5500</p>\n\n<p>Memory Configuration: Dual-Channel</p>\n\n<p>Memory Upgrade: Not Upgradeable</p>\n\n<p>Storage: 512GB M.2 2242 PCIe 4.0 NVMe SSD</p>\n\n<p>Display Size: 15.6 Inches</p>\n\n<p>Display Resolution: Full HD (1920 × 1080)</p>\n\n<p>Display Panel: IPS, Anti-Glare</p>\n\n<p>Display Brightness: 300 Nits</p>\n\n<p>Touchscreen: No</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Microsoft Office: Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>Wireless Connectivity: Wi-Fi 6 (802.11ax 2×2)</p>\n\n<p>Bluetooth: Bluetooth 5.2</p>\n\n<p>Webcam: HD 720p Camera with Privacy Shutter</p>\n\n<p>Audio: 2 × 1.5W Stereo Speakers with Dolby Audio</p>\n\n<p>Microphone: Dual-Array Microphones</p>\n\n<p>Keyboard: Full-Size Keyboard with Numeric Keypad</p>\n\n<p>Touchpad: Precision Touchpad</p>\n\n<p>Fingerprint Reader: No</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty Type: Lenovo Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Abyss Blue",
+              "Arctic Grey"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 67676011266276,
+            "title": "Abyss Blue",
+            "option1": "Abyss Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "828132491660",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 87026877792484,
+              "product_id": 15374979694820,
+              "position": 7,
+              "created_at": "2026-10-20T15:39:04+08:00",
+              "updated_at": "2026-10-20T15:39:07+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lg-muiwrtc5dhqdad_d7fa676d-8b8f-4540-9c05-67587f7cd1a7.jpg?v=1792481947",
+              "variant_ids": [
+                67676011266276
+              ]
+            },
+            "available": true,
+            "price": "2599.00",
+            "grams": 50000,
+            "compare_at_price": "2599.00",
+            "position": 1,
+            "product_id": 15374979694820,
+            "created_at": "2026-10-20T15:39:04+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 67676011299044,
+            "title": "Arctic Grey",
+            "option1": "Arctic Grey",
+            "option2": null,
+            "option3": null,
+            "sku": "828132491707",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 87026877825252,
+              "product_id": 15374979694820,
+              "position": 8,
+              "created_at": "2026-10-20T15:39:04+08:00",
+              "updated_at": "2026-10-20T15:39:06+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820la-muiwruh0eq6ia0_4c38492a-a172-43eb-baa5-bceb9e130e1e.jpg?v=1792481946",
+              "variant_ids": [
+                67676011299044
+              ]
+            },
+            "available": true,
+            "price": "2599.00",
+            "grams": 50000,
+            "compare_at_price": "2599.00",
+            "position": 2,
+            "product_id": 15374979694820,
+            "created_at": "2026-10-20T15:39:04+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9193819472100,
+        "title": "Lenovo LOQ 15IRX9 (83DV01JTMJ) Gaming Laptop i5-13450HX/16GB DDR5/512GB SSD/15.6\"FHD 144HZ/RTX3050",
+        "handle": "lenovo-loq-15irx9-83dv01jtmj-gaming-laptop-i5-13450hx-16gb-ddr5-512gb-ssd-15-6fhd-144hz-rtx3050",
+        "vendor": "Lenovo",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820le-mqyed90idwjm1b\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p>Intel® Core™ i5-13450HX Processor for powerful gaming and multitasking</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>NVIDIA® GeForce RTX™ 3050 Graphics for smooth gaming performance</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>16GB DDR5 RAM with 512GB SSD for fast and responsive performance</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>15.6\" Full HD Display with 144Hz refresh rate for immersive gameplay</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Windows 11 Home pre-installed</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Lenovo AI Engine+ optimizes gaming performance intelligently</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>2 Years Manufacturer Warranty (Premium Care Onsite)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Brand: Lenovo</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Gaming Notebook</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor: Intel® Core™ i5-13450HX</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Graphics: NVIDIA® GeForce RTX™ 3050</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Memory: 16GB DDR5</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Storage: 512GB SSD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Display: 15.6\" Full HD, 144Hz</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Colour:</p>\n\n<p> </p>\n\n<p>Luna Grey</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Luna Grey"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49663971885284,
+            "title": "Luna Grey",
+            "option1": "Luna Grey",
+            "option2": null,
+            "option3": null,
+            "sku": "199276230737",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84435973308644,
+              "product_id": 9193819472100,
+              "position": 5,
+              "created_at": "2026-08-17T16:57:57+08:00",
+              "updated_at": "2026-08-17T16:58:02+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lf-mqyebqox94hzbf.jpg?v=1786957082",
+              "variant_ids": [
+                49663971885284
+              ]
+            },
+            "available": true,
+            "price": "4399.00",
+            "grams": 50000,
+            "compare_at_price": "4399.00",
+            "position": 1,
+            "product_id": 9193819472100,
+            "created_at": "2026-08-17T16:57:58+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129321627876,
+        "title": "Microsoft Surface Laptop 8th Edition (EP2-59040) Black 13.8\" 120Hz/Snapdragon X2 Plus/16GB/512GB/W11H",
+        "handle": "microsoft-surface-laptop-8-edition-ep2-59040-black-13-8-120hz-snapdragon-x2-plus-16gb-512gb-w11h",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820l4-mqe6z95rygp776\"></p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p> </p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: Notebook Laptop</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon X2 Plus</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm Adreno Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB</p>\n<p> </p>\n<p> </p>\n<p>Storage: 512GB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 13.8\" PixelSense™ Flow Touchscreen, Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Black"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355837407460,
+            "title": "Black",
+            "option1": "Black",
+            "option2": null,
+            "option3": null,
+            "sku": "196388720354",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348589117668,
+              "product_id": 9129321627876,
+              "position": 3,
+              "created_at": "2026-07-08T15:38:43+08:00",
+              "updated_at": "2026-07-08T15:38:46+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lg-mqe9m13l4nbibb.jpg?v=1783496326",
+              "variant_ids": [
+                49355837407460
+              ]
+            },
+            "available": true,
+            "price": "7399.00",
+            "grams": 50000,
+            "compare_at_price": "7399.00",
+            "position": 1,
+            "product_id": 9129321627876,
+            "created_at": "2026-07-08T15:38:43+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129324249316,
+        "title": "Microsoft Surface Laptop 8th Edition (EP2-59291) Black 13.8\" 120Hz/Snapdragon X2 Elite/16GB/1TB/W11H",
+        "handle": "microsoft-surface-laptop-8-edition-ep2-59291-black-13-8-120hz-snapdragon-x2-elite-16gb-1tb-w11h",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820l8-mqeg7pokowsv64\"></p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p> </p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: Notebook Laptop</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon X2 Elite</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm Adreno Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB</p>\n<p> </p>\n<p> </p>\n<p>Storage: 1TB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 13.8\" PixelSense™ Flow Touchscreen, Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Black"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355843469540,
+            "title": "Black",
+            "option1": "Black",
+            "option2": null,
+            "option3": null,
+            "sku": "196388722792",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348630470884,
+              "product_id": 9129324249316,
+              "position": 3,
+              "created_at": "2026-07-08T15:45:56+08:00",
+              "updated_at": "2026-07-08T15:45:57+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lg-mqe9m13l4nbibb_b82a51c6-8614-4780-a473-712e6bbde9e3.jpg?v=1783496757",
+              "variant_ids": [
+                49355843469540
+              ]
+            },
+            "available": true,
+            "price": "8799.00",
+            "grams": 50000,
+            "compare_at_price": "8799.00",
+            "position": 1,
+            "product_id": 9129324249316,
+            "created_at": "2026-07-08T15:45:56+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129320087780,
+        "title": "Microsoft Surface Laptop 8th Edition (EP2-60134) Black 15\" 120Hz/Snapdragon X2 Elite/16GB/1TB/W11H",
+        "handle": "microsoft-surface-laptop-8-edition-ep2-60134-black-15-120hz-snapdragon-x2-elite-16gb-1tb-w11h",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820ld-mqeg7pokrpxq06\"></p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p> </p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: Notebook Laptop</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon X2 Elite</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm Adreno Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB</p>\n<p> </p>\n<p> </p>\n<p>Storage: 1TB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 15\" PixelSense™ Flow Touchscreen, Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Black"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355824627940,
+            "title": "Black",
+            "option1": "Black",
+            "option2": null,
+            "option3": null,
+            "sku": "196388728916",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348555432164,
+              "product_id": 9129320087780,
+              "position": 3,
+              "created_at": "2026-07-08T15:34:53+08:00",
+              "updated_at": "2026-07-08T15:34:56+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820ld-mqegpfzzd6a5ba_79600c11-7355-4f11-a4ac-a43f03c7d936.jpg?v=1783496096",
+              "variant_ids": [
+                49355824627940
+              ]
+            },
+            "available": true,
+            "price": "9499.00",
+            "grams": 50000,
+            "compare_at_price": "9499.00",
+            "position": 1,
+            "product_id": 9129320087780,
+            "created_at": "2026-07-08T15:34:53+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129319039204,
+        "title": "Microsoft Surface Laptop 8th Edition (EP2-60206) Black 15\" 120Hz/Snapdragon X2 Elite/16GB/512GB/W11H",
+        "handle": "pre-order-microsoft-surface-laptop-8-edition-ep2-60206-black-15-1",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820l7-mqeg7pokqbda10\"></p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p> </p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: Notebook Laptop</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon X2 Elite</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm Adreno Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB</p>\n<p> </p>\n<p> </p>\n<p>Storage: 512GB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 15\" PixelSense™ Flow Touchscreen, Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Black"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355820040420,
+            "title": "Black",
+            "option1": "Black",
+            "option2": null,
+            "option3": null,
+            "sku": "196388729616",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348529643748,
+              "product_id": 9129319039204,
+              "position": 3,
+              "created_at": "2026-07-08T15:32:11+08:00",
+              "updated_at": "2026-07-08T15:32:15+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820ld-mqegpfzzd6a5ba.jpg?v=1783495935",
+              "variant_ids": [
+                49355820040420
+              ]
+            },
+            "available": true,
+            "price": "7899.00",
+            "grams": 50000,
+            "compare_at_price": "7899.00",
+            "position": 1,
+            "product_id": 9129319039204,
+            "created_at": "2026-07-08T15:32:11+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 8446651433188,
+        "title": "Microsoft Surface Pro 11 | Copilot+ PC | 13\" LCD Touchscreen | Snapdragon® X Plus | 16GB Memory | 256GB/512GB SSD",
+        "handle": "microsoft-surface-pro-11-x-plus-13-t-copilot-pc-snapdragon-x-plus-16gb-256-512gb-ssd-device-only-latest-11th-edition-sapphire-platinum-dune-black",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-7r990-lxq9vq2cayqy23\" data-uploading=\"uploaded\" data-upload-status=\"success\" width=\"1500\" height=\"1800\"><img src=\"https://cf.shopee.com.my/file/my-11134208-7r98p-lxq9vq2ccdbe85\" data-uploading=\"uploaded\" data-upload-status=\"success\" width=\"1500\" height=\"1800\"><img src=\"https://cf.shopee.com.my/file/my-11134208-7r98y-lxq9vq2cdrvu35\" data-uploading=\"uploaded\" data-upload-status=\"success\" width=\"1500\" height=\"1800\"></p>\n<p><br></p>\n<p><span>🎁 𝐅𝐫𝐞𝐞 𝐆𝐢𝐟𝐭𝐬 : 𝐒𝐮𝐫𝐟𝐚𝐜𝐞 𝐏𝐫𝐨 Keyboard + 𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭 𝐎𝐟𝐟𝐢𝐜𝐞 𝟑𝟔𝟓 𝐏𝐞𝐫𝐬𝐨𝐧𝐚𝐥 𝐋𝐢𝐜𝐞𝐧𝐬𝐞 𝟏𝟐 𝐌𝐨𝐧𝐭𝐡𝐬 (𝐄𝐒𝐃 𝐄𝐏𝟐-𝟑𝟐𝟑𝟏𝟑) </span></p>\n<p>𝐅𝐫𝐞𝐞 𝐆𝐈𝐅𝐓𝐒 𝐃𝐚𝐭𝐞 𝐑𝐚𝐧𝐠𝐞 - 1/2/26 - 29/2/26<br></p>\n<p><span>*𝐖𝐡𝐢𝐥𝐞 𝐒𝐭𝐨𝐜𝐤 𝐋𝐚𝐬𝐭*</span></p>\n<p>Highlights:</p>\n<p>Copilot + PC</p>\n<p><br></p>\n<p>Tech specs:</p>\n<p>Processor:</p>\n<p>Snapdragon® X Plus (10 Core), with LCD display</p>\n<p><br></p>\n<p>NPU:</p>\n<p>Qualcomm® Hexagon™ with 45 trillion operations per second</p>\n<p><br></p>\n<p>Graphics:</p>\n<p>Qualcomm® Adreno™ GPU</p>\n<p><br></p>\n<p>Memory:</p>\n<p>16GB LPDDR5x RAM</p>\n<p><br></p>\n<p>Storage options:</p>\n<p>Removable solid-state drive (Gen 4 SSD) options: 256GB, 512GB</p>\n<p><br></p>\n<p>Display:</p>\n<p>Surface Pro with LCD display:</p>\n<p>Touchscreen: 13 inch PixelSense™ Flow display</p>\n<p>Resolution: 2880 x 1920 (267 PPI)</p>\n<p>Aspect ratio: 3:2</p>\n<p>Contrast ratio: 1200:1</p>\n<p>Dynamic refresh rate: up to 120 Hz</p>\n<p>Colour profile: sRGB and Vivid</p>\n<p>Individually colour-calibrated display</p>\n<p>Adaptive colour</p>\n<p>Adaptive contrast</p>\n<p>Auto colour management</p>\n<p>Touch: 10-point multi-touch</p>\n<p>Dolby Vision IQ™</p>\n<p>Corning® Gorilla® Glass</p>\n<p><br></p>\n<p>Battery life:</p>\n<p>Surface Pro Wi-Fi:</p>\n<p>Up to 14 hours of local video playback</p>\n<p>Up to 10 hours of active web usage</p>\n<p><br></p>\n<p>Size and weight:</p>\n<p>Length: 287 mm (11.3 inch)</p>\n<p>Width: 209 mm (8.2 inch)</p>\n<p>Height: 9.3 mm (0.37 inch)</p>\n<p>Weight: 895 g (1.97 lbs)</p>\n<p><br></p>\n<p>Video/Cameras:</p>\n<p>Quad HD front-facing Surface Studio Camera</p>\n<p>1440p Quad HD camera with ultra-wide field of view</p>\n<p>10 MP Ultra HD rear-facing camera</p>\n<p><br></p>\n<p>Audio:</p>\n<p>2 W stereo speakers with Dolby® Atmos®</p>\n<p>Support for Bluetooth® LE Audio</p>\n<p><br></p>\n<p>Connections (Ports):</p>\n<p>2 X USB-C® / USB4® ports with support for:</p>\n<p>Charging</p>\n<p>Data transfer</p>\n<p>DisplayPort 1.4a</p>\n<p>Surface Thunderbolt™ 4 Dock and other accessories</p>\n<p>Supports fast charging with minimum 65 W power supply via Surface Connect or USB-C</p>\n<p>Surface Pro Keyboard port </p>\n<p>Surface Connect port </p>\n<p><br></p>\n<p>Network and connectivity:</p>\n<p>Surface Pro Wi-Fi:</p>\n<p>Wi-Fi 7</p>\n<p>Bluetooth® Wireless 5.4 technology</p>\n<p> </p>\n<p>Keyboard Compatibility:</p>\n<p>Surface Pro Flex Keyboard / Keyboard with pen storage / Signature Keyboard / Pro</p>\n<!---->",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Sapphire",
+              "Platinum",
+              "Dune",
+              "Black"
+            ]
+          },
+          {
+            "name": "Storage",
+            "position": 2,
+            "values": [
+              "16GB + 256GB",
+              "16GB + 512GB"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 45396014989540,
+            "title": "Sapphire / 16GB + 256GB",
+            "option1": "Sapphire",
+            "option2": "16GB + 256GB",
+            "option3": null,
+            "sku": "N/A, MICROSOFT, PRO 11 X PLUS 256GB, Sapphire",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 73933673955556,
+              "product_id": 8446651433188,
+              "position": 12,
+              "created_at": "2025-02-04T15:14:25+08:00",
+              "updated_at": "2026-02-23T14:41:35+08:00",
+              "alt": null,
+              "width": 1000,
+              "height": 1000,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/blue_device.jpg?v=1771828895",
+              "variant_ids": [
+                45396014989540,
+                45396015022308
+              ]
+            },
+            "available": false,
+            "price": "5399.00",
+            "grams": 4000,
+            "compare_at_price": "5399.00",
+            "position": 1,
+            "product_id": 8446651433188,
+            "created_at": "2024-07-10T17:28:11+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 45396015022308,
+            "title": "Sapphire / 16GB + 512GB",
+            "option1": "Sapphire",
+            "option2": "16GB + 512GB",
+            "option3": null,
+            "sku": "196388332205",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 73933673955556,
+              "product_id": 8446651433188,
+              "position": 12,
+              "created_at": "2025-02-04T15:14:25+08:00",
+              "updated_at": "2026-02-23T14:41:35+08:00",
+              "alt": null,
+              "width": 1000,
+              "height": 1000,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/blue_device.jpg?v=1771828895",
+              "variant_ids": [
+                45396014989540,
+                45396015022308
+              ]
+            },
+            "available": false,
+            "price": "6699.00",
+            "grams": 50000,
+            "compare_at_price": "6699.00",
+            "position": 2,
+            "product_id": 8446651433188,
+            "created_at": "2024-07-10T17:28:11+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 45396015055076,
+            "title": "Platinum / 16GB + 256GB",
+            "option1": "Platinum",
+            "option2": "16GB + 256GB",
+            "option3": null,
+            "sku": "196388289035",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 73933689290980,
+              "product_id": 8446651433188,
+              "position": 13,
+              "created_at": "2025-02-04T15:15:25+08:00",
+              "updated_at": "2026-02-23T14:41:35+08:00",
+              "alt": null,
+              "width": 1000,
+              "height": 1000,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/platinum_device.jpg?v=1771828895",
+              "variant_ids": [
+                45396015055076,
+                45396015087844
+              ]
+            },
+            "available": true,
+            "price": "5999.00",
+            "grams": 50000,
+            "compare_at_price": "5999.00",
+            "position": 3,
+            "product_id": 8446651433188,
+            "created_at": "2024-07-10T17:28:11+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 45396015087844,
+            "title": "Platinum / 16GB + 512GB",
+            "option1": "Platinum",
+            "option2": "16GB + 512GB",
+            "option3": null,
+            "sku": "196388289202",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 73933689290980,
+              "product_id": 8446651433188,
+              "position": 13,
+              "created_at": "2025-02-04T15:15:25+08:00",
+              "updated_at": "2026-02-23T14:41:35+08:00",
+              "alt": null,
+              "width": 1000,
+              "height": 1000,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/platinum_device.jpg?v=1771828895",
+              "variant_ids": [
+                45396015055076,
+                45396015087844
+              ]
+            },
+            "available": true,
+            "price": "6699.00",
+            "grams": 50000,
+            "compare_at_price": "6699.00",
+            "position": 4,
+            "product_id": 8446651433188,
+            "created_at": "2024-07-10T17:28:11+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 45396015120612,
+            "title": "Dune / 16GB + 256GB",
+            "option1": "Dune",
+            "option2": "16GB + 256GB",
+            "option3": null,
+            "sku": "N/A, MICROSOFT, PRO 11 X PLUS 256GB, DUNE",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 73933690274020,
+              "product_id": 8446651433188,
+              "position": 14,
+              "created_at": "2025-02-04T15:15:36+08:00",
+              "updated_at": "2026-02-23T14:41:35+08:00",
+              "alt": null,
+              "width": 1000,
+              "height": 1000,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/dune_device.jpg?v=1771828895",
+              "variant_ids": [
+                45396015120612,
+                45396015153380
+              ]
+            },
+            "available": false,
+            "price": "5999.00",
+            "grams": 50000,
+            "compare_at_price": "5399.00",
+            "position": 5,
+            "product_id": 8446651433188,
+            "created_at": "2024-07-10T17:28:11+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 45396015153380,
+            "title": "Dune / 16GB + 512GB",
+            "option1": "Dune",
+            "option2": "16GB + 512GB",
+            "option3": null,
+            "sku": "196388332243",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 73933690274020,
+              "product_id": 8446651433188,
+              "position": 14,
+              "created_at": "2025-02-04T15:15:36+08:00",
+              "updated_at": "2026-02-23T14:41:35+08:00",
+              "alt": null,
+              "width": 1000,
+              "height": 1000,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/dune_device.jpg?v=1771828895",
+              "variant_ids": [
+                45396015120612,
+                45396015153380
+              ]
+            },
+            "available": false,
+            "price": "6699.00",
+            "grams": 50000,
+            "compare_at_price": "6699.00",
+            "position": 6,
+            "product_id": 8446651433188,
+            "created_at": "2024-07-10T17:28:11+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 45396015186148,
+            "title": "Black / 16GB + 256GB",
+            "option1": "Black",
+            "option2": "16GB + 256GB",
+            "option3": null,
+            "sku": "N/A, MICROSOFT, PRO 11 X PLUS 256GB, BLACK",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 73933691748580,
+              "product_id": 8446651433188,
+              "position": 15,
+              "created_at": "2025-02-04T15:15:45+08:00",
+              "updated_at": "2026-02-23T14:41:35+08:00",
+              "alt": null,
+              "width": 1000,
+              "height": 1000,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/black_device.jpg?v=1771828895",
+              "variant_ids": [
+                45396015186148,
+                45396015218916
+              ]
+            },
+            "available": false,
+            "price": "5399.00",
+            "grams": 50000,
+            "compare_at_price": "5399.00",
+            "position": 7,
+            "product_id": 8446651433188,
+            "created_at": "2024-07-10T17:28:11+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 45396015218916,
+            "title": "Black / 16GB + 512GB",
+            "option1": "Black",
+            "option2": "16GB + 512GB",
+            "option3": null,
+            "sku": "196388292479",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 73933691748580,
+              "product_id": 8446651433188,
+              "position": 15,
+              "created_at": "2025-02-04T15:15:45+08:00",
+              "updated_at": "2026-02-23T14:41:35+08:00",
+              "alt": null,
+              "width": 1000,
+              "height": 1000,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/black_device.jpg?v=1771828895",
+              "variant_ids": [
+                45396015186148,
+                45396015218916
+              ]
+            },
+            "available": false,
+            "price": "6699.00",
+            "grams": 50000,
+            "compare_at_price": "6699.00",
+            "position": 8,
+            "product_id": 8446651433188,
+            "created_at": "2024-07-10T17:28:11+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 8678011666660,
+        "title": "Microsoft Surface Pro 12\" | Copilot+ PC | 12\" LCD Touchscreen | Snapdragon® X Plus | 16GB Memory | 256GB/512GB SSD",
+        "handle": "pre-order-microsoft-surface-pro-12-copilot-pc-12-lcd-touchscreen-snapdragon-x-plus-16gb-memory-256gb-512gb-ssd",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820lb-mhzomumrho9215\" data-uploading=\"uploaded\" data-upload-status=\"success\" width=\"1000\" height=\"1600\"><img src=\"https://cf.shopee.com.my/file/my-11134208-820li-mhzomun2vu2r14\" data-uploading=\"uploaded\" data-upload-status=\"success\" width=\"1000\" height=\"1700\"></p>\n<p><br></p>\n<p>🎁 𝐅𝐑𝐄𝐄 𝐆𝐈𝐅𝐓𝐒</p>\n<p>- 𝐀𝐮𝐤𝐞𝐲 𝐂𝐡𝐚𝐫𝐠𝐞𝐫 𝐰𝐚𝐥𝐥</p>\n<p>- 𝐀𝐮𝐤𝐞𝐲 𝐂𝐚𝐛𝐥𝐞 544 𝐔𝐒𝐁-𝐂 𝐭𝐨 𝐔𝐒𝐁-𝐂 (240W)</p>\n<p>- 𝐊𝐞𝐲𝐛𝐨𝐚𝐫𝐝 𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭 𝐒𝐮𝐫𝐟𝐚𝐜𝐞 𝐓𝐲𝐩𝐞 𝐂𝐨𝐯𝐞𝐫 𝟏𝟐” 𝐒𝐥𝐚𝐭𝐞 (𝐄𝐏𝟐-𝟑𝟐𝟎𝟐𝟔)</p>\n<p>*𝐖𝐡𝐢𝐥𝐞 𝐒𝐭𝐨𝐜𝐤 𝐋𝐚𝐬𝐭*</p>\n<p><br></p>\n<p>𝐍𝐎𝐓𝐄* (𝐃𝐨𝐞𝐬 𝐍𝐨𝐭 𝐈𝐧𝐜𝐥𝐮𝐝𝐞 𝐒𝐥𝐢𝐦-𝐏𝐞𝐧 𝟐)</p>\n<p><br></p>\n<p>𝐌𝐢𝐜𝐫𝐨𝐬𝐨𝐟𝐭 𝐒𝐮𝐫𝐟𝐚𝐜𝐞 𝐏𝐫𝐨 𝟏𝟐\"</p>\n<p>Tech Specs:</p>\n<p>[Processor]</p>\n<p>Snapdragon® X Plus (8 Core)</p>\n<p><br></p>\n<p>[NPU]</p>\n<p>Qualcomm® Hexagon™ with 45 TOPS</p>\n<p><br></p>\n<p>[Graphics]</p>\n<p>Qualcomm® Adreno™ GPU</p>\n<p><br></p>\n<p>[Memory and storage]</p>\n<p>16GB + 256 / 512 GB SSD</p>\n<p><br></p>\n<p>[Display]</p>\n<p>Touchscreen: 12-inch PixelSense™ LCD display2</p>\n<p>Resolution: 2196 x 1464 (220 PPI)</p>\n<p>Aspect ratio: 3:2</p>\n<p>Contrast ratio: 1200:1</p>\n<p>Refresh rate: up to 90 Hz (60 Hz default)</p>\n<p>Colour profile: sRGB and Enhanced</p>\n<p>Individually colour-calibrated display</p>\n<p>Adaptive colour</p>\n<p>Adaptive contrast</p>\n<p>Touch: 10-point multi-touch</p>\n<p><br></p>\n<p>[Size and Weight]</p>\n<p>Length: 274 mm</p>\n<p>Width: 190 mm</p>\n<p>Height: 7.8 mm</p>\n<p>Weight: 686 g </p>\n<p><br></p>\n<p>[Battery life]</p>\n<p>Up to 16 hours of local video playback</p>\n<p>Up to 12 hours of active web usage</p>\n<p><br></p>\n<p>*Limited Warranty</p>",
+        "options": [
+          {
+            "name": "RAM & Storage",
+            "position": 1,
+            "values": [
+              "16GB + 256GB SSD",
+              "16GB + 512GB SSD"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 46464902168804,
+            "title": "16GB + 256GB SSD",
+            "option1": "16GB + 256GB SSD",
+            "option2": null,
+            "option3": null,
+            "sku": "196388501007",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": null,
+            "available": true,
+            "price": "4999.00",
+            "grams": 50000,
+            "compare_at_price": "4999.00",
+            "position": 1,
+            "product_id": 8678011666660,
+            "created_at": "2025-07-07T17:41:07+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          },
+          {
+            "id": 46464902201572,
+            "title": "16GB + 512GB SSD",
+            "option1": "16GB + 512GB SSD",
+            "option2": null,
+            "option3": null,
+            "sku": "196388501151",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": null,
+            "available": false,
+            "price": "5399.00",
+            "grams": 50000,
+            "compare_at_price": "5399.00",
+            "position": 2,
+            "product_id": 8678011666660,
+            "created_at": "2025-07-07T17:41:07+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129329623268,
+        "title": "Microsoft Surface Pro 12th Edition (EP2-65136) eTablet Platinum 13\" OLED 120Hz/Snapdragon X2 Elite/16GB/512GB/W11H",
+        "handle": "microsoft-surface-pro-13-ep2-65136-etablet-platinum-13-oled-120hz-snapdragon-x2-elite-16gb-512gb-w11h",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820l5-mqe6z95rq1ajf8\"></p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: 2-in-1 Tablet PC</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon X2 Elite</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm Adreno Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB</p>\n<p> </p>\n<p> </p>\n<p>Storage: 512GB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 13\" OLED PixelSense™ Flow Touchscreen, Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Platinum"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355861819620,
+            "title": "Platinum",
+            "option1": "Platinum",
+            "option2": null,
+            "option3": null,
+            "sku": "196388770199",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348760363236,
+              "product_id": 9129329623268,
+              "position": 2,
+              "created_at": "2026-07-08T16:01:19+08:00",
+              "updated_at": "2026-07-08T16:01:23+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l9-mqe592d7qjgi30_6b401223-b58e-441b-86cf-305a675d6afd.jpg?v=1783497683",
+              "variant_ids": [
+                49355861819620
+              ]
+            },
+            "available": true,
+            "price": "7899.00",
+            "grams": 50000,
+            "compare_at_price": "7899.00",
+            "position": 1,
+            "product_id": 9129329623268,
+            "created_at": "2026-07-08T16:01:19+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129326346468,
+        "title": "Microsoft Surface Pro 12th Edition (EP2-65146) eTablet Black 13\" OLED 120Hz/Snapdragon X2 Elite/16GB/512GB/W11H",
+        "handle": "microsoft-surface-pro-13-ep2-65146-etablet-black-13-oled-120hz-snapdragon-x2-elite-16gb-512gb-w11h",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820l6-mqe6z95rsuffde\"></p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p> </p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: 2-in-1 Tablet PC</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon X2 Elite</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm Adreno Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB</p>\n<p> </p>\n<p> </p>\n<p>Storage: 512GB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 13\" OLED PixelSense™ Flow Touchscreen, Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Black"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355849236708,
+            "title": "Black",
+            "option1": "Black",
+            "option2": null,
+            "option3": null,
+            "sku": "196388770274",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348705312996,
+              "product_id": 9129326346468,
+              "position": 2,
+              "created_at": "2026-07-08T15:53:41+08:00",
+              "updated_at": "2026-07-08T15:53:45+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lh-mqe7i9c6pzwvef_640d22fc-ab6e-4511-80e2-ba6cb1f479ba.jpg?v=1783497225",
+              "variant_ids": [
+                49355849236708
+              ]
+            },
+            "available": true,
+            "price": "7899.00",
+            "grams": 50000,
+            "compare_at_price": "7899.00",
+            "position": 1,
+            "product_id": 9129326346468,
+            "created_at": "2026-07-08T15:53:41+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129328247012,
+        "title": "Microsoft Surface Pro 12th Edition (EP2-65229) eTablet Platinum 13\" OLED 120Hz/Snapdragon X2 Elite/32GB/1TB/W11H",
+        "handle": "microsoft-surface-pro-13-ep2-65229-etablet-platinum-13-oled-120hz-snapdragon-x2-elite-32gb-1tb-w11h",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820le-mqe6z95rvnkb6d\"></p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p> </p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: 2-in-1 Tablet PC</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon X2 Elite</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm Adreno Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 32GB</p>\n<p> </p>\n<p> </p>\n<p>Storage: 1TB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 13\" OLED PixelSense™ Flow Touchscreen, Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Platinum"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355853431012,
+            "title": "Platinum",
+            "option1": "Platinum",
+            "option2": null,
+            "option3": null,
+            "sku": "196388771035",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348728578276,
+              "product_id": 9129328247012,
+              "position": 2,
+              "created_at": "2026-07-08T15:57:24+08:00",
+              "updated_at": "2026-07-08T15:57:28+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l9-mqe592d7qjgi30_520ef29c-6b78-4159-9954-a436197a0465.jpg?v=1783497448",
+              "variant_ids": [
+                49355853431012
+              ]
+            },
+            "available": true,
+            "price": "11799.00",
+            "grams": 50000,
+            "compare_at_price": "11799.00",
+            "position": 1,
+            "product_id": 9129328247012,
+            "created_at": "2026-07-08T15:57:24+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129325232356,
+        "title": "Microsoft Surface Pro 12th Edition (EP2-73229) eTablet Platinum 13\" 120Hz/Snapdragon X2 Plus/16GB/256GB/W11H",
+        "handle": "microsoft-surface-pro-13-ep2-73229-etablet-platinum-13-120hz-snapdragon-x2-plus-16gb-256gb-w11h",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820lf-mqe6z95prsw2cd\"></p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p> </p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: 2-in-1 Tablet PC</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon® X Plus</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm® Adreno™ Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB LPDDR5x</p>\n<p> </p>\n<p> </p>\n<p>Storage: 256GB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 13\" PixelSense™ Flow Touchscreen (2880 × 1920), Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Platinum"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355845206244,
+            "title": "Platinum",
+            "option1": "Platinum",
+            "option2": null,
+            "option3": null,
+            "sku": "196388823215",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348685783268,
+              "product_id": 9129325232356,
+              "position": 2,
+              "created_at": "2026-07-08T15:49:06+08:00",
+              "updated_at": "2026-07-08T15:49:09+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l9-mqe592d7qjgi30.jpg?v=1783496949",
+              "variant_ids": [
+                49355845206244
+              ]
+            },
+            "available": true,
+            "price": "6999.00",
+            "grams": 50000,
+            "compare_at_price": "6999.00",
+            "position": 1,
+            "product_id": 9129325232356,
+            "created_at": "2026-07-08T15:49:07+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129325363428,
+        "title": "Microsoft Surface Pro 12th Edition (EP2-73254) eTablet Platinum 13\" 120Hz/Snapdragon X2 Plus/16GB/512GB/W11H",
+        "handle": "microsoft-surface-pro-13-ep2-73254-etablet-platinum-13-120hz-snapdragon-x2-plus-16gb-512gb-w11h",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820l5-mqe6z95romq35d\"></p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p> </p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: 2-in-1 Tablet PC</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon X2 Plus</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm Adreno Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB</p>\n<p> </p>\n<p> </p>\n<p>Storage: 512GB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 13\" PixelSense™ Flow Touchscreen, Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Platinum"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355845566692,
+            "title": "Platinum",
+            "option1": "Platinum",
+            "option2": null,
+            "option3": null,
+            "sku": "196388823420",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348686766308,
+              "product_id": 9129325363428,
+              "position": 2,
+              "created_at": "2026-07-08T15:50:02+08:00",
+              "updated_at": "2026-07-08T15:50:04+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l9-mqe592d7qjgi30_fb558563-4e86-4c53-83c9-8f0057d1522a.jpg?v=1783497004",
+              "variant_ids": [
+                49355845566692
+              ]
+            },
+            "available": true,
+            "price": "6899.00",
+            "grams": 50000,
+            "compare_at_price": "7399.00",
+            "position": 1,
+            "product_id": 9129325363428,
+            "created_at": "2026-07-08T15:50:02+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129325658340,
+        "title": "Microsoft Surface Pro 12th Edition (EP2-73280) eTablet Black 13\" 120Hz/Snapdragon X2 Plus/16GB/512GB/W11H",
+        "handle": "microsoft-surface-pro-13-ep2-73280-etablet-black-13-120hz-snapdragon-x2-plus-16gb-512gb-w11h",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820le-mqe6z95rrfuz3a\">\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: 2-in-1 Tablet PC</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon X2 Plus</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm Adreno Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB</p>\n<p> </p>\n<p> </p>\n<p>Storage: 512GB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 13\" PixelSense™ Flow Touchscreen, Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Black"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355847237860,
+            "title": "Black",
+            "option1": "Black",
+            "option2": null,
+            "option3": null,
+            "sku": "196388823642",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348695941348,
+              "product_id": 9129325658340,
+              "position": 2,
+              "created_at": "2026-07-08T15:51:48+08:00",
+              "updated_at": "2026-07-08T15:51:51+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lh-mqe7i9c6pzwvef.jpg?v=1783497111",
+              "variant_ids": [
+                49355847237860
+              ]
+            },
+            "available": true,
+            "price": "7399.00",
+            "grams": 50000,
+            "compare_at_price": "7399.00",
+            "position": 1,
+            "product_id": 9129325658340,
+            "created_at": "2026-07-08T15:51:48+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9129327165668,
+        "title": "Microsoft Surface Pro 13 (EP2-65028) eTablet Black 13\" OLED 120Hz/Snapdragon X2 Elite/16GB/1TB/W11H",
+        "handle": "microsoft-surface-pro-13-ep2-65028-etablet-black-13-oled-120hz-snapdragon-x2-elite-16gb-1tb-w11h",
+        "vendor": "Microsoft",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lb-mqe6z95ru8zv1d\">\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>🎁 FREE Gifts Included</p>\n<p> </p>\n<p>JBL Live 780NC Wireless On-Ear Headphones</p>\n<p> </p>\n<p> </p>\n<p>Premium Travel Kit (Type-C Cable, 45W USB-C Adapter, USB-C to USB-A Adapter &amp; USB-A to USB-C Adapter)</p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Microsoft</p>\n<p> </p>\n<p> </p>\n<p>Product Type: 2-in-1 Tablet PC</p>\n<p> </p>\n<p> </p>\n<p>Processor: Snapdragon X2 Elite</p>\n<p> </p>\n<p> </p>\n<p>Graphics: Qualcomm Adreno Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB</p>\n<p> </p>\n<p> </p>\n<p>Storage: 1TB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 13\" OLED PixelSense™ Flow Touchscreen, Up to 120Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 1 Year</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Black"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49355851727076,
+            "title": "Black",
+            "option1": "Black",
+            "option2": null,
+            "option3": null,
+            "sku": "196388769186",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83348719337700,
+              "product_id": 9129327165668,
+              "position": 2,
+              "created_at": "2026-07-08T15:55:27+08:00",
+              "updated_at": "2026-07-08T15:55:30+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lh-mqe7i9c6pzwvef_d718ab88-6a33-4bb2-8593-90a9af07109b.jpg?v=1783497330",
+              "variant_ids": [
+                49355851727076
+              ]
+            },
+            "available": true,
+            "price": "9199.00",
+            "grams": 50000,
+            "compare_at_price": "9199.00",
+            "position": 1,
+            "product_id": 9129327165668,
+            "created_at": "2026-07-08T15:55:27+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9177104318692,
+        "title": "MSI Gaming Laptop Cyborg 15 A13VE-2476MY i7-13620H/16GB DDR4/512GB SSD/15.6\"FHD 144Hz/RTX4050",
+        "handle": "msi-gaming-laptop-cyborg-15-a13ve-2476my-i7-13620h-16gb-ddr4-512gb-ssd",
+        "vendor": "MSI",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lh-mrii38awjz0g61\">\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>Intel® Core™ i7-13620H Processor delivers high-performance gaming and multitasking</p>\n\n<p>NVIDIA® GeForce RTX™ 4050 Laptop GPU provides immersive gaming and AI-powered graphics</p>\n\n<p>16GB DDR4 Memory with 512GB PCIe NVMe SSD for fast loading and smooth performance</p>\n\n<p>15.6\" Full HD 144Hz IPS-Level display offers fluid gameplay and sharp visuals</p>\n\n<p>Windows 11 Home for gaming, productivity and entertainment</p>\n\n<p>MSI Cooler Boost technology keeps the system running efficiently during intensive gaming</p>\n\n<p>Futuristic Cyborg Black Edition design with lightweight chassis</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: MSI</p>\n\n<p>Product Type: Gaming Notebook Laptop</p>\n\n<p>Processor: Intel® Core™ i7-13620H</p>\n\n<p>Graphics: NVIDIA® GeForce RTX™ 4050 Laptop GPU</p>\n\n<p>Memory: 16GB DDR4</p>\n\n<p>Storage: 512GB PCIe NVMe SSD</p>\n\n<p>Display: 15.6\" Full HD (1920 × 1080) IPS-Level, 144Hz</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included: Windows 11 Home</p>\n\n<p>Colour: Black</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty: Valid from the invoice date.</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Black Edition"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49580621660388,
+            "title": "Black Edition",
+            "option1": "Black Edition",
+            "option2": null,
+            "option3": null,
+            "sku": "4711377460170",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84058958037220,
+              "product_id": 9177104318692,
+              "position": 5,
+              "created_at": "2026-08-05T16:45:40+08:00",
+              "updated_at": "2026-08-05T16:45:43+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lb-mrig5pncz11oe3.jpg?v=1785919543",
+              "variant_ids": [
+                49580621660388
+              ]
+            },
+            "available": true,
+            "price": "4199.00",
+            "grams": 50000,
+            "compare_at_price": "4199.00",
+            "position": 1,
+            "product_id": 9177104318692,
+            "created_at": "2026-08-05T16:44:50+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9037439467748,
+        "title": "MSI Gaming Laptop Thin 15 B13VF-3492MY i5-13420H/16GB DDR4/512GB SSD/15.6\"FHD 144Hz/RTX4060",
+        "handle": "msi-gaming-laptop-thin-15-b13vf-3492my-i5-13420h-16gb-ddr4-512gb-ssd-15-6fhd-144hz-rtx4060",
+        "vendor": "MSI",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820l7-mo7msiky9fcz0e\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p>•⁠ ⁠Powered by Intel® Core™ i5-13420H processor for high-performance gaming and multitasking</p>\n\n<p> </p>\n\n<p>•⁠ ⁠NVIDIA® GeForce RTX™ 4060 Laptop GPU powers advanced AI with 233 AI TOPS</p>\n\n<p> </p>\n\n<p>•⁠ ⁠15.6\" FHD 144Hz IPS-Level display for smooth gameplay experience</p>\n\n<p> </p>\n\n<p>•⁠ ⁠8GB*2(16GB) DDR4 RAM for responsive multitasking performance</p>\n\n<p> </p>\n\n<p>•⁠ ⁠512GB NVMe PCIe SSD for fast loading and storage</p>\n\n<p> </p>\n\n<p>•⁠ ⁠Slim and lightweight gaming laptop design with Cooler Boost thermal solution</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p>Brand: MSI</p>\n\n<p> </p>\n\n<p>Product Type: Gaming Laptop</p>\n\n<p> </p>\n\n<p>Connection Type: Wi-Fi / Bluetooth</p>\n\n<p> </p>\n\n<p>Feature 1: Intel® Core™ i5-13420H Processor</p>\n\n<p> </p>\n\n<p>Feature 2: NVIDIA® GeForce RTX™ 4060 Laptop GPU 8GB GDDR6</p>\n\n<p> </p>\n\n<p>Feature 3: 16GB DDR4 3200MHz RAM</p>\n\n<p> </p>\n\n<p>Feature 4: 512GB NVMe PCIe Gen4 SSD</p>\n\n<p> </p>\n\n<p>Feature 5: 15.6\" FHD (1920×1080) 144Hz IPS-Level Display</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Dimensions &amp; Weight</p>\n\n<p> </p>\n\n<p>Product Dimensions: 359 × 254 × 21.7 mm</p>\n\n<p> </p>\n\n<p>Product Weight: 1.86 kg</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p> </p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n\n<p> </p>\n\n<p>Battery / Power: 3-Cell 52.4Whr Battery</p>\n\n<p> </p>\n\n<p>Charging: 120W AC Adapter</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "B13VF-3492MY"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 48918847357156,
+            "title": "B13VF-3492MY",
+            "option1": "B13VF-3492MY",
+            "option2": null,
+            "option3": null,
+            "sku": "4711377444194",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 82031982117092,
+              "product_id": 9037439467748,
+              "position": 2,
+              "created_at": "2026-05-14T09:50:17+08:00",
+              "updated_at": "2026-05-14T09:50:21+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lg-mo7mqsgowx6o8e.jpg?v=1778723421",
+              "variant_ids": [
+                48918847357156
+              ]
+            },
+            "available": true,
+            "price": "3879.00",
+            "grams": 50000,
+            "compare_at_price": "3899.00",
+            "position": 1,
+            "product_id": 9037439467748,
+            "created_at": "2026-05-14T09:50:17+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9026429485284,
+        "title": "MSI Gaming Thin 15 B13UC-3456MY i5-13420H/16GB DDR4/512GB SSD/15.6\"FHD 144Hz/RTX3050/H&S+M365 Basic",
+        "handle": "msi-gaming-thin-15-b13uc-3456my-i5-13420h-16gb-ddr4-512gb-ssd-15-6fhd-144hz-rtx3050-h-s-m365-basic",
+        "vendor": "MSI",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lc-mnutarf7f66dc0\">\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Product Highlights</p>\n<p> </p>\n<p>•⁠ ⁠Powered by Intel® Core™ i5-13620H for strong gaming performance</p>\n<p> </p>\n<p>•⁠ ⁠NVIDIA® GeForce RTX™ 3050 graphics for smooth gameplay</p>\n<p> </p>\n<p>•⁠ ⁠15.6\" FHD 144Hz display for fluid visuals</p>\n<p> </p>\n<p>•⁠ ⁠16GB DDR4 RAM for multitasking and gaming</p>\n<p> </p>\n<p>•⁠ ⁠512GB NVMe SSD for fast loading speed</p>\n<p> </p>\n<p>•⁠ ⁠Slim and lightweight gaming design for portability</p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p>Brand: MSI</p>\n<p> </p>\n<p>Product Type: Gaming Laptop</p>\n<p> </p>\n<p>Connection Type: Wi-Fi / Bluetooth</p>\n<p> </p>\n<p>Feature 1: Intel® Core™ i7-13620H Processor (13th Gen)</p>\n<p> </p>\n<p>Feature 2: NVIDIA® GeForce RTX™ 3050 6GB GDDR6</p>\n<p> </p>\n<p>Feature 3: 16GB DDR4 RAM (Upgradeable)</p>\n<p> </p>\n<p>Feature 4: 512GB PCIe NVMe SSD</p>\n<p> </p>\n<p>Feature 5: 15.6\" FHD (1920×1080) 144Hz IPS-Level Display</p>\n<p> </p>\n<p>Battery / Power: 3-Cell 52.4WHr Battery</p>\n<p> </p>\n<p>Charging: 120W AC Adapter</p>\n<p> </p>\n<p> </p>\n<p>Dimensions &amp; Weight</p>\n<p> </p>\n<p>Product Dimensions: ~359 × 254 × 21.7 mm</p>\n<p> </p>\n<p>Product Weight: ~1.86 kg</p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p>Warranty Duration: 2 Years</p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "B13UC-3456MY"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 48873202974948,
+            "title": "B13UC-3456MY",
+            "option1": "B13UC-3456MY",
+            "option2": null,
+            "option3": null,
+            "sku": "4711377429948",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 81884760047844,
+              "product_id": 9026429485284,
+              "position": 2,
+              "created_at": "2026-05-05T10:46:14+08:00",
+              "updated_at": "2026-05-05T10:46:18+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l8-mnuuj51eu8ebdc.jpg?v=1777949178",
+              "variant_ids": [
+                48873202974948
+              ]
+            },
+            "available": true,
+            "price": "3449.00",
+            "grams": 50000,
+            "compare_at_price": "3449.00",
+            "position": 1,
+            "product_id": 9026429485284,
+            "created_at": "2026-05-05T10:46:14+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9128456683748,
+        "title": "MSI Modern 14 F13MG-881MYNN Laptop i5-1334U/16GB DDR4/512GB SSD/14\"FHD",
+        "handle": "msi-modern-14-f13mg-881mynn-laptop-i5-1334u-16gb-ddr4-512gb-ssd-14fhd",
+        "vendor": "MSI",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lc-mqcsyjkys9a9aa\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p>Intel® Core™ i5-1334U Processor for smooth everyday productivity</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>16GB DDR4 RAM with 512GB SSD for fast performance</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>14\" Full HD Display for clear and vibrant visuals</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Lightweight and portable design for work, study and travel</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Includes MSI Sleeve</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>2 Years Manufacturer Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Brand: MSI</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor: Intel® Core™ i5-1334U</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Graphics: Intel® Iris® Xe Graphics</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Memory: 16GB DDR4</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Storage: 512GB SSD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Display: 14\" Full HD (1920 × 1080)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Software Included:</p>\n\n<p> </p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>What's in the Box</p>\n\n<p> </p>\n\n<p>1 × MSI Modern 14 F13MG-881MYNN Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>1 × MSI Sleeve</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>1 × Power Adapter</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "F13MG-881MYNN"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49350759252196,
+            "title": "F13MG-881MYNN",
+            "option1": "F13MG-881MYNN",
+            "option2": null,
+            "option3": null,
+            "sku": "4711377455831",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83324456829156,
+              "product_id": 9128456683748,
+              "position": 5,
+              "created_at": "2026-07-07T12:10:00+08:00",
+              "updated_at": "2026-07-07T12:10:04+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l8-mqcsvjajjaq7f2.jpg?v=1783397404",
+              "variant_ids": [
+                49350759252196
+              ]
+            },
+            "available": true,
+            "price": "2699.00",
+            "grams": 50000,
+            "compare_at_price": "2699.00",
+            "position": 1,
+            "product_id": 9128456683748,
+            "created_at": "2026-07-07T12:10:00+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9210802766052,
+        "title": "MSI Modern 14 F1MG-830MYNN Laptop C5-120U/16GB DDR4/512GB SSD/14\"FHD",
+        "handle": "msi-modern-14-f1mg-830mynn-laptop-c5-120u-16gb-ddr4-512gb-ssd-14fhd",
+        "vendor": "MSI",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lb-msl248jql1c269\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Core™ 5 120U Processor for everyday work and productivity</p>\n\n<p>• 16GB DDR4-3200 dual-channel memory for smooth multitasking</p>\n\n<p>• 512GB PCIe Gen4 NVMe SSD for fast storage and responsiveness</p>\n\n<p>• 14\" Full HD IPS-Level display in a portable design</p>\n\n<p>• White backlit keyboard with dedicated Copilot Key</p>\n\n<p>• Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year) included</p>\n\n<p>• Platinum Gray finish with MSI Sleeve Bag included</p>\n\n<p>Key Specifications</p>\n\n<p>Brand: MSI</p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p>Series: Modern 14 F1M</p>\n\n<p>Model: F1MG-830MYNN</p>\n\n<p>Processor: Intel® Core™ 5 Processor 120U</p>\n\n<p>Processor: 10 Cores / 12 Threads, Up to 5.0GHz</p>\n\n<p>Graphics: Intel® Graphics</p>\n\n<p>Memory: 16GB DDR4-3200 (8GB × 2)</p>\n\n<p>Memory Slots: 2 × DDR4 Slots, Up to 64GB</p>\n\n<p>Storage: 512GB PCIe Gen4 NVMe SSD</p>\n\n<p>Display: 14\" FHD (1920 × 1080), IPS-Level</p>\n\n<p>Keyboard: White Backlit Keyboard with Copilot Key</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included: Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Platinum Gray</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years Limited Warranty</p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Platinum Gray"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49755735982308,
+            "title": "Platinum Gray",
+            "option1": "Platinum Gray",
+            "option2": null,
+            "option3": null,
+            "sku": "4711377443395",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84948139737316,
+              "product_id": 9210802766052,
+              "position": 6,
+              "created_at": "2026-09-01T17:11:17+08:00",
+              "updated_at": "2026-09-01T17:11:21+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l8-msl20fvs51qc60.jpg?v=1788253881",
+              "variant_ids": [
+                49755735982308
+              ]
+            },
+            "available": true,
+            "price": "2799.00",
+            "grams": 50000,
+            "compare_at_price": "2799.00",
+            "position": 1,
+            "product_id": 9210802766052,
+            "created_at": "2026-09-01T17:11:17+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9212188852452,
+        "title": "MSI Modern 14S AI+ G3MG-061MY AI Laptop CU5 322/16GB DDR5/512GB SSD/14\"FHD",
+        "handle": "msi-modern-14s-ai-g3mg-061my-ai-laptop-cu5-322-16gb-ddr5-512gb-ssd-14fhd",
+        "vendor": "MSI",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820l5-msm3z5dmxe6ed1\">\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Core™ Ultra 5 322 Processor with dedicated AI capabilities</p>\n\n<p>• Intel® AI Boost NPU delivering up to 46 NPU TOPS</p>\n\n<p>• 16GB DDR5-5600 dual-channel memory for smooth multitasking</p>\n\n<p>• 512GB PCIe Gen4 NVMe SSD for fast storage performance</p>\n\n<p>• 14\" FHD+ OLED display with vivid 100% DCI-P3 colour coverage</p>\n\n<p>• Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year) included</p>\n\n<p>• Lightweight Urban Silver design with MSI Sleeve Bag included</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: MSI</p>\n\n<p>Product Type: AI Notebook Laptop</p>\n\n<p>Series: Modern 14S AI+ G3M</p>\n\n<p>Model: G3MG-061MY</p>\n\n<p>Copilot+ PC: Yes</p>\n\n<p>Processor: Intel® Core™ Ultra 5 Processor 322</p>\n\n<p>Processor Cores / Threads: 6 Cores / 6 Threads</p>\n\n<p>Maximum Turbo Frequency: Up to 4.4GHz</p>\n\n<p>NPU: Intel® AI Boost – Up to 46 NPU TOPS</p>\n\n<p>Graphics: Intel® Graphics</p>\n\n<p>Memory: 16GB DDR5-5600 (8GB × 2)</p>\n\n<p>Memory Slots: 2 × DDR5 Slots</p>\n\n<p>Maximum Memory: Up to 32GB</p>\n\n<p>Storage: 512GB PCIe Gen4 NVMe SSD</p>\n\n<p>Display: 14\" FHD+ (1920 × 1200) OLED</p>\n\n<p>Colour Gamut: 100% DCI-P3 (Typical)</p>\n\n<p>Display Features: SGS Low Blue Light &amp; Flicker-Free Certified</p>\n\n<p>Keyboard: White Backlit Keyboard with Copilot Key</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included: Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Urban Silver</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years Limited Warranty</p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Urban Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49760349323492,
+            "title": "Urban Silver",
+            "option1": "Urban Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "4711377463942",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84974098448612,
+              "product_id": 9212188852452,
+              "position": 6,
+              "created_at": "2026-09-02T10:26:49+08:00",
+              "updated_at": "2026-09-02T10:26:52+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820la-msm3v9uraio8c7.jpg?v=1788316012",
+              "variant_ids": [
+                49760349323492
+              ]
+            },
+            "available": true,
+            "price": "3899.00",
+            "grams": 50000,
+            "compare_at_price": "3899.00",
+            "position": 1,
+            "product_id": 9212188852452,
+            "created_at": "2026-09-02T10:26:49+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9214143332580,
+        "title": "MSI Modern 15 F1MG-1258MYNN Laptop C5-120U/16GB DDR4/512GB SSD/15.6\"FHD",
+        "handle": "msi-modern-15-f1mg-1258mynn-laptop-c5-120u-16gb-ddr4-512gb-ssd-15-6fhd",
+        "vendor": "MSI",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820le-msnh2a7dlddu34\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Core™ 5 120U Processor for work, study and everyday productivity</p>\n\n<p>• 16GB DDR4-3200 dual-channel memory for smooth multitasking</p>\n\n<p>• 512GB PCIe Gen4 NVMe SSD for fast and responsive storage</p>\n\n<p>• 15.6\" Full HD IPS-Level display for comfortable everyday viewing</p>\n\n<p>• White backlit keyboard with dedicated Copilot Key</p>\n\n<p>• Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year) included</p>\n\n<p>• Platinum Gray finish with MSI Sleeve Bag included</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: MSI</p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p>Series: Modern 15 F1M</p>\n\n<p>Model: F1MG-1258MYNN</p>\n\n<p>Processor: Intel® Core™ 5 Processor 120U</p>\n\n<p>Processor Cores / Threads: 10 Cores / 12 Threads</p>\n\n<p>Processor Speed: Up to 5.0GHz</p>\n\n<p>Graphics: Intel® Graphics</p>\n\n<p>Memory: 16GB DDR4-3200 (8GB × 2)</p>\n\n<p>Memory Slots: 2 × DDR4 Slots</p>\n\n<p>Maximum Memory: Up to 64GB</p>\n\n<p>Storage: 512GB PCIe Gen4 NVMe SSD</p>\n\n<p>Display: 15.6\" FHD (1920 × 1080), IPS-Level</p>\n\n<p>Keyboard: White Backlit Keyboard with Copilot Key</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included: Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Platinum Gray</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years Limited Warranty</p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Platinum Gray"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49771402625252,
+            "title": "Platinum Gray",
+            "option1": "Platinum Gray",
+            "option2": null,
+            "option3": null,
+            "sku": "4711377459648",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 85012012368100,
+              "product_id": 9214143332580,
+              "position": 6,
+              "created_at": "2026-09-03T09:23:22+08:00",
+              "updated_at": "2026-09-03T09:23:26+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l8-msngx5nka0au39.jpg?v=1788398606",
+              "variant_ids": [
+                49771402625252
+              ]
+            },
+            "available": true,
+            "price": "2799.00",
+            "grams": 50000,
+            "compare_at_price": "2799.00",
+            "position": 1,
+            "product_id": 9214143332580,
+            "created_at": "2026-09-03T09:23:22+08:00",
+            "updated_at": "2026-10-20T17:35:44+08:00"
+          }
+        ]
+      }
+    ]
+  }
+}

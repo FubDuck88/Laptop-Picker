@@ -1,4 +1,8 @@
 import sys
+if __package__ in (None, ""):
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from source_adapters import legacy_shopify_rows
 """
 Acer Malaysia Laptop Scraper
 Fetches laptop listings from Acer's catalog API and outputs to acer_laptops.csv.
@@ -352,50 +356,12 @@ def scrape_acer_from_allit():
             if vendor.lower() != "acer":
                 continue
             
-            product_id = str(p.get("id", ""))
-            title = (p.get("title") or "").strip()
-            handle = p.get("handle", "")
-            body_html = p.get("body_html", "")
-            
-            variants = p.get("variants", [])
-            v0 = variants[0] if variants else {}
-            sku = (v0.get("sku") or product_id).strip()
-            price = v0.get("price") or "0"
-            
-            if sku in seen_ids:
-                continue
-            seen_ids.add(sku)
-            
-            product_url = f"{ALLIT_BASE_URL}/products/{handle}" if handle else ALLIT_BASE_URL
-            
-            images = p.get("images", [])
-            img_url = ""
-            if images and isinstance(images, list) and len(images) > 0:
-                img_url = images[0].get("src", "")
-            if img_url.startswith("//"):
-                img_url = "https:" + img_url
-            
-            specs = parse_acer_specs(body_html)
-            
-            all_products.append({
-                "id": sku,
-                "title": title,
-                "price": price,
-                "url": product_url,
-                "image_url": img_url,
-                "series": "Acer (via ALL IT)",
-                "processor": specs.get("processor", ""),
-                "graphics": specs.get("graphics", ""),
-                "memory": specs.get("memory", ""),
-                "storage": specs.get("storage", ""),
-                "display": specs.get("display", ""),
-                "wifi": specs.get("wifi", ""),
-                "battery": specs.get("battery", ""),
-                "others": specs.get("others", ""),
-            })
-            safe_title = title.encode('ascii', 'ignore').decode()
-            print(f"    OK: [{sku}] {safe_title} — RM {price}")
-        
+            for row in legacy_shopify_rows(p):
+                if row["id"] not in seen_ids:
+                    seen_ids.add(row["id"])
+                    row["series"] = "Acer (via ALL IT)"
+                    all_products.append(row)
+
         if len(products) < 250:
             break
         page += 1

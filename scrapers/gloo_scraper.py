@@ -6,6 +6,11 @@ Outputs to data/gloo_laptops.csv.
 
 import os
 import sys
+if __package__ in (None, ""):
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from source_photos import element_photo, photo_url
+from source_normalization import title_specs
 import csv
 import re
 import time
@@ -27,6 +32,39 @@ FIELDNAMES = [
     "processor", "graphics", "memory", "storage",
     "display", "wifi", "battery", "others"
 ]
+
+
+def extract_products_from_page(html):
+    """Only product cards may supply a photo; navigation links are not offers.
+
+    html.parser recovers the product cards from the captured Gloo page markup.
+    This legacy extractor does not qualify Gloo for the verified catalog.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    rows, seen = [], set()
+    for card in soup.select(".product-layout"):
+        anchor = card.select_one(".product-image-container a[href]") or card.select_one("h4 a[href]")
+        if anchor is None:
+            continue
+        url = photo_url(anchor.get("href"), "https://www.gloo.com.my/")
+        image = card.select_one(".product-image-container img") or card.select_one(".image img")
+        title = (anchor.get("title") or (image.get("alt") if image else None) or anchor.get_text(" ", strip=True)).strip()
+        price = card.select_one(".price-new") or card.select_one(".price")
+        match = re.search(r"RM\s*([\d,]+(?:\.\d{2})?)", price.get_text(" ", strip=True)) if price else None
+        if not url or not title or not match or url in seen:
+            continue
+        seen.add(url)
+        button = card.select_one("[onclick*='cart.add']")
+        identifier = re.search(r"cart\.add\('([^']+)'", button.get("onclick", "")) if button else None
+        # Stable URL identity if the vendor's explicit product ID is absent.
+        row = dict.fromkeys(FIELDNAMES, "")
+        row.update(title_specs(title))
+        row.update(id=identifier[1] if identifier else url, title=title,
+                   price=match[1].replace(",", ""), url=url,
+                   image_url=element_photo(image, url) or "", series="Gloo Official",
+                   others="Gloo SNS Network Official Distributor Warranty")
+        rows.append(row)
+    return rows
 
 
 def scrape_gloo():
@@ -59,72 +97,9 @@ def scrape_gloo():
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(2)
 
-        soup = BeautifulSoup(driver.page_source, "lxml")
+        html = driver.page_source
         driver.quit()
-
-        seen = set()
-        for a in soup.find_all("a", href=True):
-            href = a["href"]
-            title = a.get_text(strip=True)
-            if not title or len(title) < 8 or title in seen:
-                continue
-
-            # Filter for laptop title keywords
-            t_low = title.lower()
-            if not any(k in t_low for k in ["laptop", "notebook", "vivobook", "zenbook", "ideapad", "thinkpad", "rog", "tuf", "victus", "pavilion", "macbook", "predator", "nitro", "legion", "loq"]):
-                continue
-
-            seen.add(title)
-
-            # Price lookup in container
-            parent = a.find_parent(["div", "li", "article"])
-            price = ""
-            img_url = ""
-            if parent:
-                p_text = parent.get_text()
-                p_match = re.search(r"RM\s*([\d,]+(?:\.\d{2})?)", p_text)
-                if p_match:
-                    price = p_match.group(1).replace(",", "")
-                img_el = parent.find("img", src=True) or parent.find("img")
-                if img_el:
-                    img_url = (img_el.get("data-src") or img_el.get("data-srcset") or img_el.get("srcset") or img_el.get("src") or "").strip()
-                    if img_url.startswith("//"):
-                        img_url = "https:" + img_url
-                    elif img_url.startswith("/"):
-                        img_url = "https://www.gloo.com.my" + img_url
-
-            if not href.startswith("http"):
-                href = "https://www.gloo.com.my" + href
-
-            # Extract specs from title
-            proc = re.search(r'(?:Intel\s+)?(?:Core\s+)?(?:Ultra\s+)?\d?\s*(?:i[3579]|CU\d)[^\s,)]*|Ryzen\s*\d?\s*\d{4}[A-Z]*', title, re.I)
-            gpu = re.search(r'(?:GeForce\s+)?(?:RTX|GTX)\s*\d{4}[^\s,)]*|Radeon[^\s,)]*|Intel\s+Graphics', title, re.I)
-            ram = re.search(r'\b\d+\s*GB\b(?:\s*DDR[45]|\s*LPDDR\w*)?', title, re.I)
-            ssd = re.search(r'\b\d+(?:\.\d+)?\s*(?:TB|GB)\s*(?:SSD|NVMe|PCIe)?', title, re.I)
-
-            gloo_id = ""
-            id_m = re.search(r'([A-Z0-9]{5,10})', title)
-            if id_m:
-                gloo_id = id_m.group(1)
-            else:
-                gloo_id = f"GLOO-{len(scraped_data)+1}"
-
-            scraped_data.append({
-                "id": gloo_id,
-                "title": title,
-                "price": price,
-                "url": href,
-                "image_url": img_url,
-                "series": "Gloo Official",
-                "processor": proc.group(0) if proc else "",
-                "graphics": gpu.group(0) if gpu else "",
-                "memory": ram.group(0) if ram else "",
-                "storage": ssd.group(0) if ssd else "",
-                "display": "",
-                "wifi": "",
-                "battery": "",
-                "others": "Gloo SNS Network Official Distributor Warranty"
-            })
+        scraped_data = extract_products_from_page(html)
 
         print(f"  Scraped {len(scraped_data)} laptops from Gloo Malaysia.")
 

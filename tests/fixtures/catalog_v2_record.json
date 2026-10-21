@@ -1,0 +1,161 @@
+{
+  "provenance": "Synthetic source-adapter contract example. No live observation or real current offer is claimed.",
+  "record": {
+    "configuration": {
+      "brand": "HP",
+      "manufacturer_part_number": "15-FA2547TX",
+      "title": "HP Test Laptop 16GB",
+      "product_type": "laptop",
+      "identity_scope": "exact_variant",
+      "cpu_model": "Intel Core i7-13650HX",
+      "gpu_model": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "gpu_kind": "discrete",
+      "vram_gb": 8,
+      "memory": {
+        "capacity_gb": 16,
+        "label": "16GB DDR5"
+      },
+      "storage": {
+        "capacity_gb": 1000,
+        "label": "1TB SSD"
+      },
+      "display": {
+        "diagonal_inches": 15.6,
+        "resolution_width": 1920,
+        "resolution_height": 1080,
+        "refresh_hz": 144,
+        "label": "15.6 inch FHD 144Hz"
+      },
+      "evidence": {
+        "brand": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "HP"
+        },
+        "manufacturer_part_number": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "15-FA2547TX"
+        },
+        "product_type": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "laptop"
+        },
+        "identity_scope": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "exact_variant"
+        },
+        "cpu_model": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "Intel Core i7-13650HX"
+        },
+        "gpu_model": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "gpu_kind": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "discrete"
+        },
+        "vram_gb": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "8"
+        },
+        "memory": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "16GB DDR5"
+        },
+        "storage": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "1TB SSD"
+        },
+        "display": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "15.6 inch FHD 144Hz"
+        }
+      }
+    },
+    "offer": {
+      "seller": "Example Retailer",
+      "source_product_id": "hp-product-123",
+      "variant_id": "16gb-1tb",
+      "url": "https://shop.example/products/hp-test?variant=16gb",
+      "price_myr": "RM 3,999.00",
+      "price_basis": "public",
+      "currency": "MYR",
+      "condition": "new",
+      "availability": "in_stock",
+      "observed_at": "2026-10-20T00:15:00Z",
+      "evidence": {
+        "seller": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "Example Retailer"
+        },
+        "price_basis": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "Public listed price; no conditional discounts"
+        },
+        "source_product_id": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "hp-product-123"
+        },
+        "variant_id": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "16gb-1tb"
+        },
+        "url": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "https://shop.example/products/hp-test?variant=16gb"
+        },
+        "condition": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "new"
+        },
+        "availability": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "in_stock"
+        },
+        "price": {
+          "source_url": "https://shop.example/products/hp-test?variant=16gb",
+          "observed_at": "2026-10-20T00:15:00Z",
+          "method": "structured",
+          "raw_value": "RM 3,999.00"
+        }
+      }
+    }
+  }
+}

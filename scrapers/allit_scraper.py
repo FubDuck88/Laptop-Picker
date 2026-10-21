@@ -1,4 +1,9 @@
 import sys
+if __package__ in (None, ""):
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from source_normalization import title_specs
+from source_adapters import legacy_shopify_rows
 """
 ALL IT Hypermarket Laptop Scraper
 Fetches laptop listings from allithypermarket.com.my Shopify JSON API
@@ -171,60 +176,7 @@ def _assign_spec(specs, key, val, others_parts):
 
 
 def parse_specs_from_title(title):
-    """Fallback: extract basic specs directly from product title.
-    
-    ALL IT titles often contain specs inline, e.g.:
-    'HP AI Laptop 15-fd2115TU CU5-225U/16GB DDR5/512GB SSD/15.6"FHD'
-    """
-    specs = {
-        "processor": "",
-        "graphics": "",
-        "memory": "",
-        "storage": "",
-        "display": "",
-        "wifi": "",
-        "battery": "",
-        "others": ""
-    }
-    if not title:
-        return specs
-    
-    t_low = title.lower()
-    
-    # Processor patterns
-    proc_patterns = [
-        r'(?:Intel\s+)?(?:Core\s+)?(?:Ultra\s+)?\d?\s*(?:i[3579]|C[UuA]\d)[^\s/]*(?:-\d+[A-Z]*)?',
-        r'Ryzen\s*\d?\s*\d{4}[A-Z]*',
-        r'Athlon[^\s/]*',
-        r'Snapdragon[^\s/]*',
-    ]
-    for pat in proc_patterns:
-        m = re.search(pat, title, re.IGNORECASE)
-        if m:
-            specs["processor"] = m.group(0).strip()
-            break
-    
-    # Memory (RAM) 
-    m = re.search(r'(\d+GB\s*(?:DDR[45]\w*|LPDDR\w*|RAM))', title, re.IGNORECASE)
-    if m:
-        specs["memory"] = m.group(1).strip()
-    
-    # Storage
-    m = re.search(r'(\d+(?:GB|TB)\s*(?:SSD|NVMe|PCIe)[^\s/]*)', title, re.IGNORECASE)
-    if m:
-        specs["storage"] = m.group(1).strip()
-    
-    # Display
-    m = re.search(r'(\d+\.?\d*["\u201d]?\s*(?:FHD|QHD|WUXGA|WQXGA|UHD|HD|OLED)[^\s/]*(?:\s*\d+Hz)?)', title, re.IGNORECASE)
-    if m:
-        specs["display"] = m.group(1).strip()
-    
-    # Graphics
-    m = re.search(r'((?:RTX|GTX|GeForce|Radeon)\s*\d+[^\s/]*)', title, re.IGNORECASE)
-    if m:
-        specs["graphics"] = m.group(1).strip()
-    
-    return specs
+    return title_specs(title)
 
 
 def create_session():
@@ -242,7 +194,7 @@ def fetch_json_with_retry(session, url, max_retries=2, initial_wait=2):
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
                 "Accept": "application/json, text/plain, */*"
             }
-            r = requests.get(url, headers=headers, timeout=15)
+            r = session.get(url, headers=headers, timeout=15)
 
             if r.status_code == 429:
                 wait_time = initial_wait * (attempt + 1)
@@ -309,66 +261,13 @@ def scrape_allit():
             break
 
         for p in products:
-            product_id = str(p.get("id", ""))
-            title = (p.get("title") or "").strip()
-            handle = p.get("handle", "")
-            vendor = p.get("vendor", "")
-            body_html = p.get("body_html", "")
-
-            # Skip Acer products — handled by acer_scraper.py
-            if vendor.lower() == "acer":
+            # Acer uses the same variant-safe parser through its fallback.
+            if (p.get("vendor") or "").lower() == "acer":
                 continue
-
-            # Get variant info (use first variant for price/sku)
-            variants = p.get("variants", [])
-            v0 = variants[0] if variants else {}
-            sku = (v0.get("sku") or product_id).strip()
-            price = v0.get("price") or "0"
-
-            # Skip duplicates
-            if sku in seen_ids:
-                continue
-            seen_ids.add(sku)
-
-            # Build product URL
-            product_url = f"{BASE_URL}/products/{handle}" if handle else BASE_URL
-
-            # Get image URL
-            images = p.get("images", [])
-            img_url = ""
-            if images and isinstance(images, list) and len(images) > 0:
-                img_url = images[0].get("src", "")
-            if img_url.startswith("//"):
-                img_url = "https:" + img_url
-
-            # Parse specs from body HTML, with title fallback
-            specs = parse_allit_body_html(body_html)
-            
-            # If body_html parsing missed specs, try extracting from title
-            title_specs = parse_specs_from_title(title)
-            for key in ("processor", "graphics", "memory", "storage", "display"):
-                if not specs[key] and title_specs.get(key):
-                    specs[key] = title_specs[key]
-
-            row = {
-                "id": sku,
-                "title": title,
-                "price": price,
-                "url": product_url,
-                "image_url": img_url,
-                "series": f"ALL IT - {vendor}" if vendor else "ALL IT Hypermarket",
-                "processor": specs.get("processor", ""),
-                "graphics": specs.get("graphics", ""),
-                "memory": specs.get("memory", ""),
-                "storage": specs.get("storage", ""),
-                "display": specs.get("display", ""),
-                "wifi": specs.get("wifi", ""),
-                "battery": specs.get("battery", ""),
-                "others": specs.get("others", ""),
-            }
-            all_products.append(row)
-            safe_title = title.encode('ascii', 'ignore').decode()
-            print(f"    OK: [{sku}] {safe_title} — RM {price}")
+            for row in legacy_shopify_rows(p):
+                if row["id"] not in seen_ids:
+                    seen_ids.add(row["id"])
+                    all_products.append(row)
 
         # Check if there are more pages
         if len(products) < PAGE_SIZE:

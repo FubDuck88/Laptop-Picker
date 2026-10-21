@@ -1,0 +1,9 @@
+{
+  "provenance": "Captured public response; product/specification/variant fields retained, unrelated metadata omitted.",
+  "url": "https://www.allithypermarket.com.my/collections/laptop/products.json?limit=30&page=3",
+  "observed_at": "2026-10-20T09:35:44.971806+00:00",
+  "status_code": 200,
+  "payload": {
+    "products": []
+  }
+}

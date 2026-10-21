@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="no-referrer" />
   <title>Laptop Price Analytics & Market Statistics | Laptop Picker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,13 +11,18 @@
   <link
     href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/analytics.css">
+  <link rel="stylesheet" href="css/catalog.css">
 </head>
 
 <body class="analytics-page">
 
+<aside class="catalog-status" aria-label="Catalog status">
+    <p id="catalogMessage" role="status" aria-live="polite">Loading verified offers…</p>
+    <button id="catalogRetry" type="button" hidden>Retry loading catalog</button>
+    <label><input type="checkbox" id="showExpired"> Include expired offers (over seven days old)</label>
+  </aside>
   <!-- Global Header Navigation -->
   <header
     style="background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between;">
@@ -43,8 +48,8 @@
 
     <div class="analytics-header">
       <div class="analytics-title-group">
-        <h1>📊 Malaysian Laptop Market Price Analytics</h1>
-        <div class="analytics-subtitle">Real-time statistical breakdown across 10 official Malaysian stores & distributors</div>
+        <h1>📊 Laptop Catalog Price Analytics</h1>
+        <div class="analytics-subtitle">Statistics calculated from the loaded laptop catalog</div>
       </div>
     </div>
 
@@ -135,7 +140,7 @@
         <select id="analyticsSortSelect" style="padding: 8px 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 12px; cursor: pointer;">
           <option value="price-asc">💲 Price: Low to High</option>
           <option value="recommended">⭐ Best Value (Recommended)</option>
-          <option value="popular">🔥 Most Popular (Steam Specs)</option>
+          <option value="popular">🔥 Most Popular (Gaming preset)</option>
           <option value="price-desc">💰 Price: High to Low</option>
           <option value="name-asc">🔤 Model Name (A-Z)</option>
         </select>
@@ -155,14 +160,13 @@
           <span class="kpi-icon">📦</span>
         </div>
         <div class="kpi-value" id="statTotalCount">-</div>
-        <div class="kpi-subtext" id="statTotalSubtext">848 Priced Models (75 Unpriced Excluded)</div>
+        <div class="kpi-subtext" id="statTotalSubtext">Verified configurations in the loaded catalog</div>
       </div>
 
       <!-- Mean Price -->
       <div class="kpi-card">
         <div class="kpi-header" style="display: flex; align-items: center; justify-content: space-between;">
           <span class="kpi-label">Mean (Average)</span>
-          <span id="meanPriceTrend" class="kpi-trend" style="display: inline-block;"></span>
           <span class="kpi-icon">📈</span>
         </div>
         <div class="kpi-value" id="statMeanPrice">RM -</div>
@@ -173,18 +177,16 @@
       <div class="kpi-card" style="border: 1px solid rgba(56, 189, 248, 0.4); background: linear-gradient(135deg, var(--bg-card) 0%, rgba(56, 189, 248, 0.08) 100%);">
         <div class="kpi-header" style="display: flex; align-items: center; justify-content: space-between;">
           <span class="kpi-label" style="color: var(--accent-1); font-weight: 700;">🎯 Median Price</span>
-          <span id="medianPriceTrend" class="kpi-trend" style="display: inline-block;"></span>
           <span class="kpi-icon">🎯</span>
         </div>
         <div class="kpi-value" id="statMedianPrice" style="color: #38bdf8;">RM -</div>
-        <div class="kpi-subtext" style="color: #7dd3fc; font-weight: 600;">Accurate 50% Market Midpoint</div>
+        <div class="kpi-subtext" style="color: #7dd3fc; font-weight: 600;">Midpoint of filtered catalog prices</div>
       </div>
 
       <!-- Mode Price -->
       <div class="kpi-card">
         <div class="kpi-header" style="display: flex; align-items: center; justify-content: space-between;">
           <span class="kpi-label">Mode (Most Common)</span>
-          <span id="modePriceTrend" class="kpi-trend" style="display: inline-block;"></span>
           <span class="kpi-icon">📊</span>
         </div>
         <div class="kpi-value" id="statModePrice">RM -</div>
@@ -195,7 +197,6 @@
       <div class="kpi-card">
         <div class="kpi-header" style="display: flex; align-items: center; justify-content: space-between;">
           <span class="kpi-label">Lowest Price</span>
-          <span id="lowestPriceTrend" class="kpi-trend down" style="display: inline-block;"></span>
           <span class="kpi-icon">🏷️</span>
         </div>
         <a id="statLowestPrice" href="#" target="_blank" class="kpi-value kpi-value-link">RM -</a>
@@ -206,7 +207,6 @@
       <div class="kpi-card">
         <div class="kpi-header" style="display: flex; align-items: center; justify-content: space-between;">
           <span class="kpi-label">Highest Price</span>
-          <span id="highestPriceTrend" class="kpi-trend up" style="display: inline-block;"></span>
           <span class="kpi-icon">👑</span>
         </div>
         <a id="statHighestPrice" href="#" target="_blank" class="kpi-value kpi-value-link">RM -</a>
@@ -223,7 +223,7 @@
           <div class="chart-hint" id="priceChartRange">Click any bar to filter the laptop spec table below</div>
         </div>
         <button id="steamFilterBtn" class="btn secondary sm" style="display: flex; align-items: center; gap: 6px; font-size: 12px; padding: 6px 12px; background: transparent; border: 1px solid var(--accent-2); color: var(--accent-2); border-radius: 6px; cursor: pointer;">
-          <span id="steamFilterText">Filter Steam Specs</span>
+          <span id="steamFilterText">Filter Gaming preset</span>
         </button>
       </div>
 
@@ -238,51 +238,15 @@
       </div>
     </div>
 
-    <!-- 3. Market Price Fluctuation Line Graph Card -->
-    <div class="chart-card" style="margin-top: 28px;">
-      <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
-        <div>
-          <div class="chart-title">📈 Market Price Fluctuation Trend</div>
-          <div class="chart-hint" id="fluctuationSubtext">Historical tracking of Mean & Median price movements across Malaysian distributors</div>
-        </div>
-        
-        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-          <!-- Timeframe Toggle Buttons -->
-          <div class="time-toggle-group" style="display: flex; gap: 4px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 3px;">
-            <button class="trend-time-btn active" data-timeframe="week" style="padding: 4px 10px; font-size: 11px; border: none; background: #38bdf8; color: #0f172a; font-weight: 700; border-radius: 6px; cursor: pointer; transition: all 0.2s ease;">Week</button>
-            <button class="trend-time-btn" data-timeframe="month" style="padding: 4px 10px; font-size: 11px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s ease;">Month</button>
-            <button class="trend-time-btn" data-timeframe="year" style="padding: 4px 10px; font-size: 11px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s ease;">Year</button>
-            <button class="trend-time-btn" data-timeframe="alltime" style="padding: 4px 10px; font-size: 11px; border: none; background: transparent; color: var(--text-muted); font-weight: 600; border-radius: 6px; cursor: pointer; transition: all 0.2s ease;">All Time</button>
-          </div>
-
-          <div style="display: flex; align-items: center; gap: 14px; font-size: 12px; font-weight: 600;">
-            <span style="color: #f59e0b; display: flex; align-items: center; gap: 6px;">
-              <span style="width: 14px; height: 3px; background: #f59e0b; display: inline-block; border-radius: 2px; box-shadow: 0 0 6px rgba(245, 158, 11, 0.8);"></span> Mean Price
-            </span>
-            <span style="color: #38bdf8; display: flex; align-items: center; gap: 6px;">
-              <span style="width: 14px; height: 3px; background: #38bdf8; display: inline-block; border-radius: 2px; box-shadow: 0 0 6px rgba(56, 189, 248, 0.8);"></span> Median Price
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="trend-line-container" style="position: relative; height: 210px; width: 100%; box-sizing: border-box;">
-        <svg id="priceTrendSvg" width="100%" height="100%" viewBox="0 0 800 200" preserveAspectRatio="none" style="overflow: visible;">
-          <!-- SVG Paths, Gradients, and Hover Dots dynamically populated by analytics.js -->
-        </svg>
-      </div>
-
-      <div id="trendXAxisLabels" style="display: flex; justify-content: space-between; margin-top: 14px; color: var(--text-muted); font-size: 11px; font-weight: 600; padding: 0 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px;">
-        <span>Jun 16</span>
-        <span>Jun 23</span>
-        <span>Jun 30</span>
-        <span>Jul 07</span>
-        <span>Jul 14</span>
-        <span>Jul 21</span>
-        <span>Jul 28</span>
-        <span>Aug 04 (Today)</span>
-      </div>
-    </div>
+    <!-- Historical observations will be introduced after collection is verified. -->
+    <section class="chart-card" aria-labelledby="priceHistoryTitle" style="margin-top: 28px;">
+      <h2 class="chart-title" id="priceHistoryTitle">Price History</h2>
+      <p class="chart-hint" id="priceHistoryUnavailable">Load a verified catalog to see recorded observations.</p>
+      <p class="chart-hint">Choose a seller offer. Every point is an actual observation; gaps are not filled.</p>
+      <label for="historyOffer">Seller offer</label>
+      <select id="historyOffer"></select>
+      <div id="priceHistoryBody"></div>
+    </section>
 
       <!-- 3. Interactive Spec & Price Table -->
       <div class="analytics-table-card">
@@ -293,7 +257,7 @@
             <select id="analyticsTableSort" style="padding: 4px 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 12px; cursor: pointer;">
               <option value="price-asc">💲 Price: Low to High</option>
               <option value="recommended">⭐ Best Value (Recommended)</option>
-              <option value="popular">🔥 Most Popular (Steam Specs)</option>
+              <option value="popular">🔥 Most Popular (Gaming preset)</option>
               <option value="price-desc">💰 Price: High to Low</option>
               <option value="name-asc">🔤 Model Name (A-Z)</option>
             </select>
@@ -322,7 +286,8 @@
     </div>
 
     <!-- Shared Data & Analytics Scripts -->
-    <script src="data/data.js"></script>
+    <script src="js/release.js"></script>
+  <script src="js/catalog.js"></script>
     <script src="js/core.js"></script>
     <script src="js/analytics.js"></script>
     <div class="modal-overlay" id="specModalOverlay">

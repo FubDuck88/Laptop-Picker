@@ -1,0 +1,38 @@
+name: Recover interrupted Pages publication
+on:
+  workflow_run:
+    workflows: [Verified Pages release, Daily verified laptop collection]
+    types: [completed]
+permissions:
+  contents: read
+  actions: write
+jobs:
+  request:
+    if: github.event.workflow_run.conclusion != 'success' && github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Recover only the interrupted current deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FAILED_RUN: ${{ github.event.workflow_run.id }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          python - <<'PY'
+          import base64,json,os,urllib.request,urllib.error
+          base='https://api.github.com/repos/'+os.environ['GH_REPO']
+          headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'}
+          try:
+              with urllib.request.urlopen(urllib.request.Request(base+'/contents/state.json?ref=codex/deployment-state',headers=headers),timeout=30) as r:
+                  value=json.load(r)
+          except urllib.error.HTTPError as e:
+              if e.code==404:raise SystemExit(0)
+              raise
+          state=json.loads(base64.b64decode(value['content']))
+          if str((state.get('active_attempt') or {}).get('run_id'))!=os.environ['FAILED_RUN']:
+              print('Stale or pre-publication failure; no recovery dispatched.');raise SystemExit(0)
+          body=json.dumps({'ref':'main','inputs':{'mode':'recover','recover_run':os.environ['FAILED_RUN']}}).encode()
+          headers['Content-Type']='application/json'
+          request=urllib.request.Request(base+'/actions/workflows/pages-release.yml/dispatches',data=body,headers=headers,method='POST')
+          with urllib.request.urlopen(request,timeout=30) as r:print('Guarded recovery dispatched:',r.status)
+          PY

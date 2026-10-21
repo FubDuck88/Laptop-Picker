@@ -1,0 +1,2069 @@
+{
+  "provenance": "Captured public ALL IT response, retaining product/specification/variant fields; image and marketing metadata omitted.",
+  "url": "https://www.allithypermarket.com.my/collections/laptop/products.json?limit=30&page=1",
+  "observed_at": "2026-10-20T09:26:34.783229+00:00",
+  "status_code": 200,
+  "payload": {
+    "products": [
+      {
+        "id": 9130483613924,
+        "title": "Acer Acer Aspire 7 Gaming Laptop (A715-59G-54Q6 /A715-59G-527W) C5-210H/8GB DDR4/512GB SSD/15.6\" FHD 144Hz/RTX3050",
+        "handle": "acer-acer-aspire-7-gaming-laptop-a715-59g-54q6-a715-59g-527w-c5-210h-8gb-ddr4-512gb-ssd-15-6-fhd-144hz-rtx3050",
+        "vendor": "Acer",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cf.shopee.com.my/file/my-11134208-820la-mqfnp8sh5340ec\"></p>\n<p> </p>\n<p>*Free Gift: TNG RM50 Reload PIN (While Stock Last)</p>\n<p> </p>\n<p>Product Highlights</p>\n<p> </p>\n<p> </p>\n<p>Intel® Core™ 5 210H Processor for gaming and productivity</p>\n<p> </p>\n<p> </p>\n<p>NVIDIA® GeForce RTX™ 3050 Graphics for smooth gaming and creative work</p>\n<p> </p>\n<p> </p>\n<p>8GB DDR4 RAM with 512GB SSD</p>\n<p> </p>\n<p> </p>\n<p>15.6\" Full HD IPS Display with 144Hz refresh rate</p>\n<p> </p>\n<p> </p>\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n<p> </p>\n<p> </p>\n<p>2 Years Manufacturer Warranty</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: Acer</p>\n<p> </p>\n<p> </p>\n<p>Product Type: Gaming Notebook</p>\n<p> </p>\n<p> </p>\n<p>Processor: Intel® Core™ 5 210H</p>\n<p> </p>\n<p> </p>\n<p>Graphics: NVIDIA® GeForce RTX™ 3050</p>\n<p> </p>\n<p> </p>\n<p>Memory: 8GB DDR4</p>\n<p> </p>\n<p> </p>\n<p>Storage: 512GB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 15.6\" Full HD IPS, 144Hz</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p>Software Included:</p>\n<p> </p>\n<p> </p>\n<p>Microsoft Office Home 2024</p>\n<p> </p>\n<p> </p>\n<p>Microsoft 365 Basic (1 Year)</p>\n<p> </p>\n<p> </p>\n<p>Available Colours:</p>\n<p> </p>\n<p> </p>\n<p>Thunder Black (A715-59G-54Q6)</p>\n<p> </p>\n<p> </p>\n<p>Thunder Grey (A715-59G-527W)</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>What's in the Box</p>\n<p> </p>\n<p>1 × Acer Aspire 7 Gaming A715-59G Laptop</p>\n<p> </p>\n<p> </p>\n<p>1 × AC Power Adapter</p>\n<p> </p>\n<p> </p>\n<p>1 × Power Cord</p>\n<p> </p>\n<p> </p>\n<p>1 × User Guide</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p> </p>\n<p>Warranty Duration: 2 Years</p>\n<p> </p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty<br><br></p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Thunder Black",
+              "Thunder Grey"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49360233038052,
+            "title": "Thunder Black",
+            "option1": "Thunder Black",
+            "option2": null,
+            "option3": null,
+            "sku": "4711721057414",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83383186751716,
+              "product_id": 9130483613924,
+              "position": 9,
+              "created_at": "2026-07-09T11:41:37+08:00",
+              "updated_at": "2026-07-09T11:41:40+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l6-mqfnyui9k9vxa1.jpg?v=1783568500",
+              "variant_ids": [
+                49360233038052
+              ]
+            },
+            "available": true,
+            "price": "3289.00",
+            "grams": 50000,
+            "compare_at_price": "3299.00",
+            "position": 1,
+            "product_id": 9130483613924,
+            "created_at": "2026-07-09T11:41:37+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49360233070820,
+            "title": "Thunder Grey",
+            "option1": "Thunder Grey",
+            "option2": null,
+            "option3": null,
+            "sku": "4711721107591",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83383186784484,
+              "product_id": 9130483613924,
+              "position": 10,
+              "created_at": "2026-07-09T11:41:37+08:00",
+              "updated_at": "2026-07-09T11:41:40+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l8-mqfn397hyh3f8e.jpg?v=1783568500",
+              "variant_ids": [
+                49360233070820
+              ]
+            },
+            "available": true,
+            "price": "3299.00",
+            "grams": 50000,
+            "compare_at_price": "3299.00",
+            "position": 2,
+            "product_id": 9130483613924,
+            "created_at": "2026-07-09T11:41:37+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9193816490212,
+        "title": "Acer Aspire Lite 14 AL14-53M-56UN Laptop C5-120U/8GB DDR4/512GB SSD/14\"WUXGA",
+        "handle": "acer-aspire-lite-14-al14-53m-56un-laptop-c5-120u-8gb-ddr4-512gb-ssd-14wuxga",
+        "vendor": "Acer",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820ld-mqrcuhod9pu560\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p>Intel® Core™ 5 120U Processor for smooth everyday productivity</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>8GB DDR4 RAM with 512GB SSD for fast and responsive performance</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>14\" WUXGA Display for sharp and vibrant visuals</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Slim and lightweight design for work, study and entertainment</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Expandable memory for future upgrades</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>2 Years Manufacturer Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Brand: Acer</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor: Intel® Core™ 5 120U</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Graphics: Intel® Graphics</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Memory: 8GB DDR4</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Storage: 512GB SSD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Display: 14\" WUXGA (1920 × 1200)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Software Included:</p>\n\n<p> </p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Colour:</p>\n\n<p> </p>\n\n<p>Silver</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49663960547556,
+            "title": "Silver",
+            "option1": "Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "4711721114643",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84435927531748,
+              "product_id": 9193816490212,
+              "position": 7,
+              "created_at": "2026-08-17T16:53:22+08:00",
+              "updated_at": "2026-08-17T16:53:26+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lf-mqrcs3eqx1jf92.jpg?v=1786956806",
+              "variant_ids": [
+                49663960547556
+              ]
+            },
+            "available": true,
+            "price": "2689.00",
+            "grams": 50000,
+            "compare_at_price": "2699.00",
+            "position": 1,
+            "product_id": 9193816490212,
+            "created_at": "2026-08-17T16:53:22+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9212283879652,
+        "title": "Acer Aspire Lite 15 AL15-32P-C6X3 Laptop N4500/8GB DDR4/512GB SSD/15.6\"FHD",
+        "handle": "acer-aspire-lite-15-al15-32p-c6x3-laptop-n4500-8gb-ddr4-512gb-ssd-15-6fhd",
+        "vendor": "Acer",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lg-msm3z5do95hl0e\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Celeron® N4500 Processor for everyday computing and productivity</p>\n\n<p>• 8GB DDR4 memory for daily multitasking</p>\n\n<p>• 512GB PCIe NVMe Gen4 SSD for fast and responsive storage</p>\n\n<p>• 15.6\" Full HD 1920 × 1080 display with Acer ComfyView™</p>\n\n<p>• Windows 11 Home for a familiar and productive experience</p>\n\n<p>• Microsoft Office Home &amp; Student + Microsoft 365 Basic (1 Year) included</p>\n\n<p>• Lightweight 1.60 kg design for home, study and office use</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: Acer</p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p>Series: Aspire Lite 15</p>\n\n<p>Model: AL15-32P-C6X3</p>\n\n<p>Part Number: NX.DDZSM.001</p>\n\n<p>Internal Code: NBB002</p>\n\n<p>Processor: Intel® Celeron® N4500</p>\n\n<p>Processor Cores / Threads: 2 Cores / 2 Threads</p>\n\n<p>Processor Speed: 1.10GHz, Up to 2.80GHz</p>\n\n<p>Graphics: Intel® UHD Graphics</p>\n\n<p>Memory: 8GB DDR4</p>\n\n<p>Maximum Memory: 8GB</p>\n\n<p>Storage: 512GB PCIe NVMe Gen4 SSD</p>\n\n<p>Display: 15.6\" FHD (1920 × 1080), Acer ComfyView™</p>\n\n<p>Refresh Rate: 60Hz</p>\n\n<p>Aspect Ratio: 16:9</p>\n\n<p>Keyboard: Non-Backlit Keyboard</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included: Microsoft Office Home &amp; Student + Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Pure Silver</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Pure Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49761831420132,
+            "title": "Pure Silver",
+            "option1": "Pure Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "4711474921291",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84976174694628,
+              "product_id": 9212283879652,
+              "position": 7,
+              "created_at": "2026-09-02T11:52:53+08:00",
+              "updated_at": "2026-09-02T11:52:56+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820li-msm722ht0cg7bb.jpg?v=1788321176",
+              "variant_ids": [
+                49761831420132
+              ]
+            },
+            "available": true,
+            "price": "1859.00",
+            "grams": 50000,
+            "compare_at_price": "1899.00",
+            "position": 1,
+            "product_id": 9212283879652,
+            "created_at": "2026-09-02T11:52:53+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9221642617060,
+        "title": "Acer Aspire Lite 15 AL15-44P-R62R Laptop Ryzen7-7730U/8GB DDR4/512GB SSD/15.6\"FHD",
+        "handle": "acer-aspire-lite-15-al15-44p-r62r-laptop-ryzen7-7730u-8gb-ddr4-512gb-ssd-15-6fhd",
+        "vendor": "Acer",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820l5-mstbpn52p2q0d6\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• AMD Ryzen™ 7 7730U Processor for everyday productivity and multitasking</p>\n\n<p>• 8GB DDR4 memory with upgrade support</p>\n\n<p>• 512GB PCIe Gen4 NVMe SSD for fast and responsive storage</p>\n\n<p>• 15.6\" Full HD IPS Acer ComfyView™ display</p>\n\n<p>• Windows 11 Home for work, study and everyday use</p>\n\n<p>• Microsoft Office Home &amp; Student + Microsoft 365 Basic (1 Year) included</p>\n\n<p>• Slim and lightweight Light Silver design weighing approximately 1.5 kg</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: Acer</p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p>Series: Aspire Lite 15</p>\n\n<p>Model: AL15-44P-R62R</p>\n\n<p>Part Number: NX.DJVSM.002</p>\n\n<p>Internal Code: NBB002</p>\n\n<p>Processor: AMD Ryzen™ 7 7730U</p>\n\n<p>Graphics: AMD Radeon™ Graphics</p>\n\n<p>Memory: 8GB DDR4</p>\n\n<p>Memory Type: DDR4 SO-DIMM</p>\n\n<p>Memory Slots: 2 × SO-DIMM</p>\n\n<p>Storage: 512GB PCIe Gen4 NVMe SSD</p>\n\n<p>Display: 15.6\" FHD (1920 × 1080) IPS, Acer ComfyView™</p>\n\n<p>Aspect Ratio: 16:9</p>\n\n<p>Camera: 1080p FHD Webcam</p>\n\n<p>Wireless: Wi-Fi 6</p>\n\n<p>Bluetooth: Bluetooth 5.1 or Above</p>\n\n<p>Keyboard: Non-Backlit Keyboard</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included: Microsoft Office Home &amp; Student + Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Light Silver</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years Local Warranty</p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Light Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49809154343140,
+            "title": "Light Silver",
+            "option1": "Light Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "4711721115633",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 85163411177700,
+              "product_id": 9221642617060,
+              "position": 7,
+              "created_at": "2026-09-07T11:44:03+08:00",
+              "updated_at": "2026-09-07T11:44:06+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l8-mstbmqru82diec.jpg?v=1788752646",
+              "variant_ids": [
+                49809154343140
+              ]
+            },
+            "available": true,
+            "price": "2999.00",
+            "grams": 50000,
+            "compare_at_price": "2999.00",
+            "position": 1,
+            "product_id": 9221642617060,
+            "created_at": "2026-09-07T11:44:03+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9138597855460,
+        "title": "Acer Aspire Lite 15 AL15-53P-56JV Laptop C5-120U/8GB DDR4/512GB SSD/15.6\" FHD/W11",
+        "handle": "acer-aspire-lite-15-al15-53p-56jv-laptop-c5-120u-8gb-ddr4-512gb-ssd-15-6-fhd-w11",
+        "vendor": "Acer",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lh-mqmq3fmgqwp8b5\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p>Intel® Core™ 5 120U Processor for everyday productivity</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>8GB DDR4 RAM with 512GB SSD for smooth multitasking</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>15.6\" Full HD Display for clear and vibrant visuals</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Windows 11 Home with Microsoft Office Home &amp; Student 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Slim and lightweight design for work, study and travel</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Expandable memory for future upgrades</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>2 Years Manufacturer Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p>Brand: Acer</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor: Intel® Core™ 5 120U</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Graphics: Intel® Graphics</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Memory: 8GB DDR4</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Storage: 512GB SSD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Display: 15.6\" Full HD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Software Included:</p>\n\n<p> </p>\n\n<p>Microsoft Office Home &amp; Student 2024</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Colour:</p>\n\n<p> </p>\n\n<p>Pure Silver</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Pure Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49395016270052,
+            "title": "Pure Silver",
+            "option1": "Pure Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "4711721104088",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83475695567076,
+              "product_id": 9138597855460,
+              "position": 6,
+              "created_at": "2026-07-14T11:37:28+08:00",
+              "updated_at": "2026-07-14T11:37:31+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l7-mqmpzes7xrf2de.jpg?v=1784000251",
+              "variant_ids": [
+                49395016270052
+              ]
+            },
+            "available": true,
+            "price": "2679.00",
+            "grams": 50000,
+            "compare_at_price": "2699.00",
+            "position": 1,
+            "product_id": 9138597855460,
+            "created_at": "2026-07-14T11:37:28+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9184489504996,
+        "title": "HP 14-EM0299AU (E15ZZPA) Laptop Ryzen3-7320U/8GB DDR5/512GB/14\"FHD",
+        "handle": "hp-14-em0299au-e15zzpa-laptop-ryzen3-7320u-8gb-ddr5-512gb-14fhd",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820la-mrazmywe4cuc1f\">\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>AMD Ryzen™ 3 7320U Processor delivers reliable performance for work, study and everyday computing</p>\n\n<p>8GB LPDDR5 Memory with 512GB PCIe NVMe SSD for fast boot-up and smooth multitasking</p>\n\n<p>14\" Full HD IPS Anti-Glare display provides clear and comfortable viewing</p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p>Lightweight and portable design weighing only 1.40kg</p>\n\n<p>HP Fast Charge supports up to 50% battery in approximately 45 minutes</p>\n\n<p>Ideal for students, home users and office productivity</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p>Processor: AMD Ryzen™ 3 7320U</p>\n\n<p>Graphics: AMD Radeon™ Graphics</p>\n\n<p>Memory: 8GB LPDDR5</p>\n\n<p>Storage: 512GB PCIe NVMe M.2 SSD</p>\n\n<p>Display: 14\" Full HD (1920 × 1080) IPS Anti-Glare</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p> </p>\n\n<p>Software Included:</p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p>Colour:</p>\n\n<p>Natural Silver</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty: Valid from the invoice date.</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Natural Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49617730404580,
+            "title": "Natural Silver",
+            "option1": "Natural Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "881767354434",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84215489888484,
+              "product_id": 9184489504996,
+              "position": 3,
+              "created_at": "2026-08-10T11:27:39+08:00",
+              "updated_at": "2026-08-10T11:27:42+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820li-mrazfyp2kwlcf1.jpg?v=1786332462",
+              "variant_ids": [
+                49617730404580
+              ]
+            },
+            "available": true,
+            "price": "2399.00",
+            "grams": 50000,
+            "compare_at_price": "2399.00",
+            "position": 1,
+            "product_id": 9184489504996,
+            "created_at": "2026-08-10T11:27:39+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9153532428516,
+        "title": "HP 14-EM0303AU/EM0302AU(DW3M8PA/DW3M9PA) Ryzen7-7730U/16GB DDR4/512GB SSD/14\"FHD",
+        "handle": "hp-14-em0303au-em0302audw3m8pa-dw3m9pa-ryzen7-7730u-16gb-ddr4-512gb-ssd-14fhd",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lc-mqzvi5i4qxhcea\">\n<p> </p>\n<p>*Free Gift: TNG RM50 Reload PIN (While Stock Last)</p>\n<p> </p>\n<p>Product Highlights</p>\n<p> </p>\n<p>AMD Ryzen™ 7 7730U Processor for powerful everyday multitasking</p>\n<p> </p>\n<p> </p>\n<p>16GB DDR4 RAM with 512GB SSD for fast and responsive performance</p>\n<p> </p>\n<p> </p>\n<p>14\" Full HD Display for clear and vibrant visuals</p>\n<p> </p>\n<p> </p>\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n<p> </p>\n<p> </p>\n<p>Slim and lightweight design for work, study and entertainment</p>\n<p> </p>\n<p> </p>\n<p>HP Fast Charge support for convenient charging</p>\n<p> </p>\n<p> </p>\n<p>2 Years Manufacturer Warranty (Onsite Warranty)</p>\n<p> </p>\n<p> </p>\n<p>The two models differ only by colour:</p>\n<p> </p>\n<p>Warm Gold (DW3M8PA)</p>\n<p> </p>\n<p> </p>\n<p>Natural Silver (DW3M9PA)</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Key Specifications</p>\n<p> </p>\n<p> </p>\n<p>Brand: HP</p>\n<p> </p>\n<p> </p>\n<p>Product Type: Notebook Laptop</p>\n<p> </p>\n<p> </p>\n<p>Processor: AMD Ryzen™ 7 7730U</p>\n<p> </p>\n<p> </p>\n<p>Graphics: AMD Radeon™ Graphics</p>\n<p> </p>\n<p> </p>\n<p>Memory: 16GB DDR4</p>\n<p> </p>\n<p> </p>\n<p>Storage: 512GB SSD</p>\n<p> </p>\n<p> </p>\n<p>Display: 14\" Full HD</p>\n<p> </p>\n<p> </p>\n<p>Operating System: Windows 11 Home</p>\n<p> </p>\n<p> </p>\n<p>Software Included:</p>\n<p> </p>\n<p>Microsoft Office Home 2024</p>\n<p> </p>\n<p> </p>\n<p>Microsoft 365 Basic (1 Year)</p>\n<p> </p>\n<p> </p>\n<p>Available Colours:</p>\n<p> </p>\n<p> </p>\n<p>Warm Gold (DW3M8PA)</p>\n<p> </p>\n<p> </p>\n<p>Natural Silver (DW3M9PA)</p>\n<p> </p>\n<p> </p>\n<p> </p>\n<p>Warranty</p>\n<p> </p>\n<p>Warranty Duration: 2 Years</p>\n<p> </p>\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Warm Gold",
+              "Natural Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49486369816804,
+            "title": "Warm Gold",
+            "option1": "Warm Gold",
+            "option2": null,
+            "option3": null,
+            "sku": "826581702702",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83699808370916,
+              "product_id": 9153532428516,
+              "position": 3,
+              "created_at": "2026-07-23T15:13:25+08:00",
+              "updated_at": "2026-07-23T15:13:28+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l4-mqzvdnpoijnkca.jpg?v=1784790808",
+              "variant_ids": [
+                49486369816804
+              ]
+            },
+            "available": true,
+            "price": "2999.00",
+            "grams": 50000,
+            "compare_at_price": "2999.00",
+            "position": 1,
+            "product_id": 9153532428516,
+            "created_at": "2026-07-23T15:13:25+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49486369849572,
+            "title": "Natural Silver",
+            "option1": "Natural Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "826581702696",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83699808403684,
+              "product_id": 9153532428516,
+              "position": 4,
+              "created_at": "2026-07-23T15:13:25+08:00",
+              "updated_at": "2026-07-23T15:13:28+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820ld-mqzvdp2zp4w175.jpg?v=1784790808",
+              "variant_ids": [
+                49486369849572
+              ]
+            },
+            "available": true,
+            "price": "2999.00",
+            "grams": 50000,
+            "compare_at_price": "2999.00",
+            "position": 2,
+            "product_id": 9153532428516,
+            "created_at": "2026-07-23T15:13:25+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9184487342308,
+        "title": "HP 14-EM0305AU (E16A0PA) Laptop Ryzen3-7320U/8GB DDR5/512GB/14\"FHD",
+        "handle": "hp-14-em0305au-e16a0pa-laptop-ryzen3-7320u-8gb-ddr5-512gb-14fhd",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lb-mrazmywefldy66\">\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>AMD Ryzen™ 3 7320U Processor delivers reliable performance for work, study and everyday productivity</p>\n\n<p>8GB LPDDR5 Memory with 512GB PCIe NVMe SSD for responsive multitasking and fast storage</p>\n\n<p>14\" Full HD IPS Anti-Glare display provides crisp visuals and comfortable viewing</p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p>Lightweight and slim design, ideal for students, professionals and daily mobile use</p>\n\n<p>HP Fast Charge supports up to 50% battery in approximately 45 minutes</p>\n\n<p>Elegant Gold finish for a premium and stylish appearance</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p>Processor: AMD Ryzen™ 3 7320U</p>\n\n<p>Graphics: AMD Radeon™ Graphics</p>\n\n<p>Memory: 8GB LPDDR5</p>\n\n<p>Storage: 512GB PCIe NVMe M.2 SSD</p>\n\n<p>Display: 14\" Full HD (1920 × 1080) IPS Anti-Glare</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included:</p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Gold</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty: Valid from the invoice date.</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Gold"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49617719918820,
+            "title": "Gold",
+            "option1": "Gold",
+            "option2": null,
+            "option3": null,
+            "sku": "881767354441",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84215457317092,
+              "product_id": 9184487342308,
+              "position": 4,
+              "created_at": "2026-08-10T11:25:17+08:00",
+              "updated_at": "2026-08-10T11:25:21+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lb-mrbcatyu03k40d.jpg?v=1786332321",
+              "variant_ids": [
+                49617719918820
+              ]
+            },
+            "available": true,
+            "price": "2399.00",
+            "grams": 50000,
+            "compare_at_price": "2399.00",
+            "position": 1,
+            "product_id": 9184487342308,
+            "created_at": "2026-08-10T11:25:17+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9238117122276,
+        "title": "HP 14-ep1253TU (E21QCPA) Laptop C5-120U/16GB DDR4/512GB SSD/14\"FHD",
+        "handle": "hp-14-ep1253tu-e21qcpa-laptop-c5-120u-16gb-ddr4-512gb-ssd-14fhd",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lh-mt7iuxng3r4154\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Core™ 5 120U Processor for work, study and everyday productivity</p>\n\n<p>• 16GB DDR4-3200 dual-channel memory for smooth multitasking</p>\n\n<p>• 512GB PCIe NVMe M.2 SSD for fast and responsive storage</p>\n\n<p>• 14\" Full HD IPS anti-glare display with 300 nits brightness</p>\n\n<p>• HP True Vision 1080p FHD camera with privacy shutter</p>\n\n<p>• Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year) included</p>\n\n<p>• Lightweight Natural Silver design for work and everyday mobility</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p>Series: HP Laptop 14</p>\n\n<p>Model: 14-ep1253TU</p>\n\n<p>Product Number: E21QCPA</p>\n\n<p>Internal Code: NBB015</p>\n\n<p>Processor: Intel® Core™ 5 Processor 120U</p>\n\n<p>Processor Cores / Threads: 10 Cores / 12 Threads</p>\n\n<p>Processor Speed: Up to 5.0GHz</p>\n\n<p>Graphics: Integrated Intel® Graphics</p>\n\n<p>Memory: 16GB DDR4-3200 (2 × 8GB)</p>\n\n<p>Storage: 512GB PCIe NVMe M.2 SSD</p>\n\n<p>Display: 14\" FHD (1920 × 1080), IPS, Micro-Edge, Anti-Glare</p>\n\n<p>Brightness: 300 nits</p>\n\n<p>Camera: HP True Vision 1080p FHD Camera with Privacy Shutter</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included: Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Natural Silver</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty Type: HP Onsite Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Natural Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49879906975972,
+            "title": "Natural Silver",
+            "option1": "Natural Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "881767563539",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 85559741939940,
+              "product_id": 9238117122276,
+              "position": 6,
+              "created_at": "2026-09-17T10:30:16+08:00",
+              "updated_at": "2026-09-17T10:30:19+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820li-mt7iul2at05l75.jpg?v=1789612219",
+              "variant_ids": [
+                49879906975972
+              ]
+            },
+            "available": true,
+            "price": "2799.00",
+            "grams": 50000,
+            "compare_at_price": "2849.00",
+            "position": 1,
+            "product_id": 9238117122276,
+            "created_at": "2026-09-17T10:30:16+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9141797683428,
+        "title": "HP 15-fc0878AU-15-fc0880AU Laptop Ryzen5-7530U/8GB DDR4/512GB SSD/15.6\"FHD",
+        "handle": "hp-15-fc0878au-15-fc0880au-laptop-ryzen5-7530u-8gb-ddr4-512gb-ssd-15-6fhd",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lf-mpx09ylesnimac\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>• AMD Ryzen™ 5 7530U processor for smooth everyday performance and multitasking</p>\n\n<p> </p>\n\n<p>• 15.6\" Full HD anti-glare display for work, study and entertainment</p>\n\n<p> </p>\n\n<p>• 8GB DDR4 RAM for efficient daily computing</p>\n\n<p> </p>\n\n<p>• 512GB PCIe NVMe SSD for fast boot-up and quick file access</p>\n\n<p> </p>\n\n<p>• AMD Radeon™ Graphics for multimedia and light content creation</p>\n\n<p> </p>\n\n<p>• Slim and lightweight design for easy portability</p>\n\n<p> </p>\n\n<p>• Includes Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Brand: HP</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Models:</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>HP 15-fc0878AU – Gold (D93C7PA)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>HP 15-fc0880AU – Silver (D93C8PA)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Series: HP Laptop 15</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor:</p>\n\n<p> </p>\n\n<p>AMD Ryzen™ 5 7530U</p>\n\n<p> </p>\n\n<p>Graphics:</p>\n\n<p> </p>\n\n<p>AMD Radeon™ Graphics</p>\n\n<p> </p>\n\n<p>Display:</p>\n\n<p> </p>\n\n<p>15.6\" Full HD (1920 × 1080)</p>\n\n<p> </p>\n\n<p>Memory:</p>\n\n<p> </p>\n\n<p>8GB DDR4 RAM</p>\n\n<p> </p>\n\n<p>Storage:</p>\n\n<p> </p>\n\n<p>512GB PCIe NVMe M.2 SSD</p>\n\n<p> </p>\n\n<p>Operating System:</p>\n\n<p> </p>\n\n<p>Windows 11 Home</p>\n\n<p> </p>\n\n<p>Office Software:</p>\n\n<p> </p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>What's in the Box</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>• 1 × HP 15 Laptop</p>\n\n<p> </p>\n\n<p>• 1 × HP 45W Smart AC Adapter</p>\n\n<p> </p>\n\n<p>• 1 × Power Cable</p>\n\n<p> </p>\n\n<p>• 1 × User Manual</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Duration:</p>\n\n<p> </p>\n\n<p>2 Years HP Onsite Warranty</p>\n\n<p> </p>\n\n<p>Warranty Type:</p>\n\n<p> </p>\n\n<p>Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Gold",
+              "Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49414325305572,
+            "title": "Gold",
+            "option1": "Gold",
+            "option2": null,
+            "option3": null,
+            "sku": "821844599969",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83529580871908,
+              "product_id": 9141797683428,
+              "position": 5,
+              "created_at": "2026-07-16T09:46:45+08:00",
+              "updated_at": "2026-07-16T09:46:49+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lf-mpx01ihhfifjc4.jpg?v=1784166409",
+              "variant_ids": [
+                49414325305572
+              ]
+            },
+            "available": true,
+            "price": "2549.00",
+            "grams": 50000,
+            "compare_at_price": "2549.00",
+            "position": 1,
+            "product_id": 9141797683428,
+            "created_at": "2026-07-16T09:46:46+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49414325338340,
+            "title": "Silver",
+            "option1": "Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "821844599983",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83529581035748,
+              "product_id": 9141797683428,
+              "position": 10,
+              "created_at": "2026-07-16T09:46:45+08:00",
+              "updated_at": "2026-07-16T09:46:48+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820la-mpx0hywnx8g2db.jpg?v=1784166408",
+              "variant_ids": [
+                49414325338340
+              ]
+            },
+            "available": true,
+            "price": "2549.00",
+            "grams": 50000,
+            "compare_at_price": "2549.00",
+            "position": 2,
+            "product_id": 9141797683428,
+            "created_at": "2026-07-16T09:46:46+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9184486621412,
+        "title": "HP 15-fc0952AU/fc0962AU  (E16A3PA/E16A4PA) Laptop Ryzen3-7320U/8GB DDR5/512GB/15.6\"FHD",
+        "handle": "hp-15-fc0952au-fc0962au-e16a3pa-e16a4pa-laptop-ryzen3-7320u-8gb-ddr5-512gb-15-6fhd",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lb-mrazmywegzye3d\">\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>AMD Ryzen™ 3 7320U Processor delivers reliable performance for work, study and everyday productivity</p>\n\n<p>8GB LPDDR5 Memory with 512GB PCIe NVMe SSD for responsive multitasking and fast storage</p>\n\n<p>15.6\" Full HD IPS Anti-Glare display offers clear visuals with a comfortable viewing experience</p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p>Slim and lightweight design with full-size keyboard and numeric keypad</p>\n\n<p>HP Fast Charge supports up to 50% battery in approximately 45 minutes</p>\n\n<p>Ideal for students, office users and home productivity</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p>Processor: AMD Ryzen™ 3 7320U</p>\n\n<p>Graphics: AMD Radeon™ Graphics</p>\n\n<p>Memory: 8GB LPDDR5</p>\n\n<p>Storage: 512GB PCIe NVMe M.2 SSD</p>\n\n<p>Display: 15.6\" Full HD (1920 × 1080) IPS Anti-Glare</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included:</p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Natural Silver/Gold</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty: Valid from the invoice date.</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Natural Silver",
+              "Gold"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49617708974308,
+            "title": "Natural Silver",
+            "option1": "Natural Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "881767354472",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84215421272292,
+              "product_id": 9184486621412,
+              "position": 5,
+              "created_at": "2026-08-10T11:22:01+08:00",
+              "updated_at": "2026-08-10T11:22:03+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lb-mrbf6h82z8jr4b.jpg?v=1786332123",
+              "variant_ids": [
+                49617708974308
+              ]
+            },
+            "available": true,
+            "price": "2399.00",
+            "grams": 50000,
+            "compare_at_price": "2399.00",
+            "position": 1,
+            "product_id": 9184486621412,
+            "created_at": "2026-08-10T11:22:01+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49617709007076,
+            "title": "Gold",
+            "option1": "Gold",
+            "option2": null,
+            "option3": null,
+            "sku": "881767354496",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84215421305060,
+              "product_id": 9184486621412,
+              "position": 6,
+              "created_at": "2026-08-10T11:22:01+08:00",
+              "updated_at": "2026-08-10T11:22:03+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l8-mrbf6ha1n30k14.jpg?v=1786332123",
+              "variant_ids": [
+                49617709007076
+              ]
+            },
+            "available": true,
+            "price": "2399.00",
+            "grams": 50000,
+            "compare_at_price": "2399.00",
+            "position": 2,
+            "product_id": 9184486621412,
+            "created_at": "2026-08-10T11:22:01+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9078318596324,
+        "title": "HP AI Laptop 15-fd2115TU-15-fd2116TU-15-fd2117TU CU5-225U/16GB DDR5/512GB SSD/15.6\"FHD",
+        "handle": "hp-ai-laptop-15-fd2115tu-15-fd2116tu-15-fd2117tu-cu5-225u-16gb-ddr5-512gb-ssd-15-6fhd",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820l5-mpa6ol1rtmvh2e\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>• Intel® Core™ Ultra 5 225U processor with AI-enhanced performance for productivity and multitasking</p>\n\n<p> </p>\n\n<p>• 15.6\" Full HD anti-glare display for work, study and entertainment</p>\n\n<p> </p>\n\n<p>• 16GB DDR5 RAM for smooth multitasking and faster responsiveness</p>\n\n<p> </p>\n\n<p>• 512GB PCIe NVMe SSD for fast boot-up and file access</p>\n\n<p> </p>\n\n<p>• Intel® AI Boost NPU for next-generation AI computing features</p>\n\n<p> </p>\n\n<p>• Slim and lightweight design suitable for students and professionals</p>\n\n<p> </p>\n\n<p>• Includes Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Brand: HP</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Models:</p>\n\n<p> </p>\n\n<p>• D4QU5PA (Gold)</p>\n\n<p> </p>\n\n<p>• D4QU6PA (Blue)</p>\n\n<p> </p>\n\n<p>• D4QU7PA (Silver)</p>\n\n<p> </p>\n\n<p>Series: HP 15-fd2115TU</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor:</p>\n\n<p> </p>\n\n<p>Intel® Core™ Ultra 5 225U</p>\n\n<p> </p>\n\n<p>Processor Cores / Threads:</p>\n\n<p> </p>\n\n<p>12 Cores / 14 Threads</p>\n\n<p> </p>\n\n<p>Max Turbo Frequency:</p>\n\n<p> </p>\n\n<p>Up to 4.8GHz</p>\n\n<p> </p>\n\n<p>NPU:</p>\n\n<p> </p>\n\n<p>Intel® AI Boost</p>\n\n<p> </p>\n\n<p>Graphics:</p>\n\n<p> </p>\n\n<p>Intel® Graphics</p>\n\n<p> </p>\n\n<p>Display:</p>\n\n<p> </p>\n\n<p>15.6\" Full HD (1920 × 1080) Anti-Glare Display</p>\n\n<p> </p>\n\n<p>Brightness:</p>\n\n<p> </p>\n\n<p>300 nits</p>\n\n<p> </p>\n\n<p>Color Gamut:</p>\n\n<p> </p>\n\n<p>62.5% sRGB</p>\n\n<p> </p>\n\n<p>Memory:</p>\n\n<p> </p>\n\n<p>16GB DDR5 RAM</p>\n\n<p> </p>\n\n<p>Storage:</p>\n\n<p> </p>\n\n<p>512GB PCIe NVMe M.2 SSD</p>\n\n<p> </p>\n\n<p>Connection Type:</p>\n\n<p> </p>\n\n<p>Wi-Fi 6 + Bluetooth® 5.3</p>\n\n<p> </p>\n\n<p>Operating System:</p>\n\n<p> </p>\n\n<p>Windows 11 Home</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>What's in the Box</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>• 1 × HP 15-fd2115TU Laptop</p>\n\n<p> </p>\n\n<p>• 1 × HP 65W Power Adapter</p>\n\n<p> </p>\n\n<p>• 1 × Power Cable</p>\n\n<p> </p>\n\n<p>• 1 × User Manual</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Duration:</p>\n\n<p> </p>\n\n<p>2 Years HP Warranty</p>\n\n<p> </p>\n\n<p>Warranty Type:</p>\n\n<p> </p>\n\n<p>Manufacturer Warrant</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Gold",
+              "Silver",
+              "Blue"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49117455909092,
+            "title": "Gold",
+            "option1": "Gold",
+            "option2": null,
+            "option3": null,
+            "sku": "199896777544",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 82541087326436,
+              "product_id": 9078318596324,
+              "position": 2,
+              "created_at": "2026-06-10T11:12:15+08:00",
+              "updated_at": "2026-06-10T11:12:22+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820la-mpa8l911qkn6c8.jpg?v=1781061142",
+              "variant_ids": [
+                49117455909092
+              ]
+            },
+            "available": true,
+            "price": "3089.00",
+            "grams": 50000,
+            "compare_at_price": "3099.00",
+            "position": 1,
+            "product_id": 9078318596324,
+            "created_at": "2026-06-10T11:12:15+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49117455941860,
+            "title": "Silver",
+            "option1": "Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "199896777568",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 82541087391972,
+              "product_id": 9078318596324,
+              "position": 4,
+              "created_at": "2026-06-10T11:12:15+08:00",
+              "updated_at": "2026-06-10T11:12:18+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lb-mpa8lc0l6qdpc9.jpg?v=1781061138",
+              "variant_ids": [
+                49117455941860
+              ]
+            },
+            "available": true,
+            "price": "3089.00",
+            "grams": 50000,
+            "compare_at_price": "3099.00",
+            "position": 2,
+            "product_id": 9078318596324,
+            "created_at": "2026-06-10T11:12:15+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49117455974628,
+            "title": "Blue",
+            "option1": "Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "199896777551",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 82541087359204,
+              "product_id": 9078318596324,
+              "position": 3,
+              "created_at": "2026-06-10T11:12:15+08:00",
+              "updated_at": "2026-06-10T11:12:18+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l6-mpa8laobp1qn68.jpg?v=1781061138",
+              "variant_ids": [
+                49117455974628
+              ]
+            },
+            "available": true,
+            "price": "3089.00",
+            "grams": 50000,
+            "compare_at_price": "3099.00",
+            "position": 3,
+            "product_id": 9078318596324,
+            "created_at": "2026-06-10T11:12:15+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 15341473235172,
+        "title": "HP Gaming Laptop HyperX Omen 16-ap1002AX (DJ6P0PA) Ryzen7-8745HX/16GB DDR5/512GB SSD/16\"2.5K 240Hz/RTX5060",
+        "handle": "hp-gaming-laptop-hyperx-omen-16-ap1002ax-dj6p0pa-ryzen7-8745hx-16gb-ddr5-512gb-ssd-162-5k-240hz-rtx5060",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<h2 data-pm-slice=\"1 1 []\"><span>Product Highlights</span></h2>\n<p><span>• AMD Ryzen 7 8745HX processor with 8 cores and 16 threads</span><br><span>• NVIDIA GeForce RTX 5060 Laptop GPU with 8GB GDDR7</span><br><span>• 16\" 2.5K display with ultra-fast 240Hz refresh rate</span><br><span>• 500 nits brightness and 100% sRGB colour coverage</span><br><span>• 16GB DDR5 memory with 512GB PCIe Gen4 NVMe SSD</span><br><span>• OMEN AI and OMEN Gaming Hub for gaming performance optimisation</span><br><span>• Includes Microsoft Office Home &amp; Microsoft 365 Basic (1 Year)</span></p>\n<h2><span>Key Specifications</span></h2>\n<p><strong><span>Brand:</span></strong><span> HP</span><br><strong><span>Product Type:</span></strong><span> Gaming Notebook</span><br><strong><span>Series:</span></strong><span> HyperX OMEN 16</span><br><strong><span>Model:</span></strong><span> 16-ap1002AX</span><br><strong><span>Product Number:</span></strong><span> DJ6P0PA</span><br><strong><span>Internal Code:</span></strong><span> NBB045</span><br><strong><span>Processor:</span></strong><span> AMD Ryzen 7 8745HX, 8 Cores / 16 Threads, up to 5.1GHz, 32MB L3 Cache</span><br><strong><span>Graphics:</span></strong><span> NVIDIA GeForce RTX 5060 Laptop GPU, 8GB GDDR7</span><br><strong><span>Memory:</span></strong><span> 16GB DDR5</span><br><strong><span>Storage:</span></strong><span> 512GB PCIe Gen4 NVMe M.2 SSD</span><br><strong><span>Display:</span></strong><span> 16\" 2.5K IPS Anti-Glare Display</span><br><strong><span>Resolution:</span></strong><span> 2560 × 1600</span><br><strong><span>Refresh Rate:</span></strong><span> Up to 240Hz</span><br><strong><span>Response Time:</span></strong><span> 3ms</span><br><strong><span>Brightness:</span></strong><span> 500 nits</span><br><strong><span>Colour Gamut:</span></strong><span> 100% sRGB</span><br><strong><span>Display Features:</span></strong><span> Micro-Edge | Low Blue Light | Flicker-Free</span><br><strong><span>Keyboard:</span></strong><span> Full-Size Backlit Keyboard with Numeric Keypad &amp; 26-Key Rollover Anti-Ghosting</span><br><strong><span>Operating System:</span></strong><span> Windows 11 Home</span><br><strong><span>Software Included:</span></strong><span> Microsoft Office Home + Microsoft 365 Basic (1 Year)</span><br><strong><span>Colour:</span></strong><span> Shadow Black</span></p>\n<h2 data-pm-slice=\"1 1 []\"><span>Warranty</span></h2>\n<p><strong><span>Warranty Duration:</span></strong><span> 2 Years</span><br><strong><span>Warranty Type:</span></strong><span> HP Onsite Manufacturer Warranty</span></p>",
+        "options": [
+          {
+            "name": "Title",
+            "position": 1,
+            "values": [
+              "Default Title"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 67488721928420,
+            "title": "Default Title",
+            "option1": "Default Title",
+            "option2": null,
+            "option3": null,
+            "sku": "826581148081",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": null,
+            "available": true,
+            "price": "7299.00",
+            "grams": 50000,
+            "compare_at_price": null,
+            "position": 1,
+            "product_id": 15341473235172,
+            "created_at": "2026-10-07T14:31:39+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 15337246130404,
+        "title": "HP Gaming Laptop Victus 15-fa3005TX (E3KW8PA) C5-205H/16GB DDR4/512GB SSD/15.6\"FHD 144Hz/RTX3050",
+        "handle": "hp-gaming-laptop-victus-15-fa3005tx-e3kw8pa-c5-205h-16gb-ddr4-512gb-ssd-15-6fhd-144hz-rtx3050",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lc-mtxb1u3wruo4df\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Core™ 5 205H Processor with 8 cores and 12 threads</p>\n\n<p>• NVIDIA® GeForce RTX™ 3050 Laptop GPU with 6GB GDDR6</p>\n\n<p>• 16GB DDR4-3200 memory for gaming and multitasking</p>\n\n<p>• 512GB PCIe Gen4 NVMe SSD for fast storage performance</p>\n\n<p>• 15.6\" FHD IPS gaming display with smooth 144Hz refresh rate</p>\n\n<p>• Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year) included</p>\n\n<p>• Mica Silver gaming design with backlit keyboard</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: Gaming Notebook Laptop</p>\n\n<p>Series: Victus Gaming 15</p>\n\n<p>Model: 15-fa3005TX</p>\n\n<p>Product Number: E3KW8PA</p>\n\n<p>Internal Code: NBB045</p>\n\n<p>Processor: Intel® Core™ 5 205H</p>\n\n<p>Processor Cores / Threads: 8 Cores / 12 Threads</p>\n\n<p>Processor Speed: Up to 4.8GHz</p>\n\n<p>Graphics: NVIDIA® GeForce RTX™ 3050 Laptop GPU</p>\n\n<p>Graphics Memory: 6GB GDDR6</p>\n\n<p>Memory: 16GB DDR4-3200 (1 × 16GB)</p>\n\n<p>Storage: 512GB PCIe Gen4 NVMe M.2 SSD</p>\n\n<p>Display: 15.6\" FHD (1920 × 1080), IPS, Micro-Edge, Anti-Glare</p>\n\n<p>Refresh Rate: 144Hz</p>\n\n<p>Brightness: 300 nits</p>\n\n<p>Colour Gamut: 62.5% sRGB</p>\n\n<p>Keyboard: Full-Size Backlit Keyboard with Numeric Keypad</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included: Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Mica Silver</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Mica Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 67452935569636,
+            "title": "Mica Silver",
+            "option1": "Mica Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "885981063738",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 86341767200996,
+              "product_id": 15337246130404,
+              "position": 6,
+              "created_at": "2026-10-05T12:06:11+08:00",
+              "updated_at": "2026-10-05T12:06:15+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l7-mtxb1d9l8dmsfc.jpg?v=1791173175",
+              "variant_ids": [
+                67452935569636
+              ]
+            },
+            "available": true,
+            "price": "4199.00",
+            "grams": 50000,
+            "compare_at_price": "4199.00",
+            "position": 1,
+            "product_id": 15337246130404,
+            "created_at": "2026-10-05T12:06:11+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 15337435234532,
+        "title": "HP Gaming Laptop Victus 15-fa3017TX (E3KX2PA) C5-205H/8GB DDR4/512GB SSD/15.6\"FHD 144Hz/RTX3050",
+        "handle": "hp-gaming-laptop-victus-15-fa3017tx-e3kx2pa-c5-205h-8gb-ddr4-512gb-ssd-15-6fhd-144hz-rtx3050",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820l6-mtxb1u3xijgh6e\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Core™ 5 205H Processor with 8 cores and 12 threads</p>\n\n<p>• NVIDIA® GeForce RTX™ 3050 Laptop GPU with 6GB GDDR6</p>\n\n<p>• 8GB DDR4-3200 memory with upgrade capability</p>\n\n<p>• 512GB PCIe Gen4 NVMe SSD for fast storage performance</p>\n\n<p>• 15.6\" FHD IPS gaming display with smooth 144Hz refresh rate</p>\n\n<p>• Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year) included</p>\n\n<p>• Mica Silver gaming design with full-size backlit keyboard</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: Gaming Notebook Laptop</p>\n\n<p>Series: Victus Gaming 15</p>\n\n<p>Model: 15-fa3017TX</p>\n\n<p>Product Number: E3KX2PA</p>\n\n<p>Internal Code: NBB045</p>\n\n<p>Processor: Intel® Core™ 5 205H</p>\n\n<p>Processor Cores / Threads: 8 Cores / 12 Threads</p>\n\n<p>Processor Speed: Up to 4.8GHz</p>\n\n<p>Cache: 12MB L3</p>\n\n<p>Graphics: NVIDIA® GeForce RTX™ 3050 Laptop GPU</p>\n\n<p>Graphics Memory: 6GB GDDR6</p>\n\n<p>Memory: 8GB DDR4-3200 (1 × 8GB)</p>\n\n<p>Storage: 512GB PCIe Gen4 NVMe M.2 SSD</p>\n\n<p>Display: 15.6\" FHD (1920 × 1080), IPS, Micro-Edge, Anti-Glare</p>\n\n<p>Refresh Rate: 144Hz</p>\n\n<p>Brightness: 300 nits</p>\n\n<p>Colour Gamut: 62.5% sRGB</p>\n\n<p>Keyboard: Full-Size Backlit Keyboard with Numeric Keypad</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included: Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Mica Silver</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Mica Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 67454277157092,
+            "title": "Mica Silver",
+            "option1": "Mica Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "885981063769",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 86346645864676,
+              "product_id": 15337435234532,
+              "position": 6,
+              "created_at": "2026-10-05T14:47:52+08:00",
+              "updated_at": "2026-10-05T14:47:55+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l7-mtxb1d9l8dmsfc_b3127bb9-ba90-458c-b550-e34e22e40b8d.jpg?v=1791182875",
+              "variant_ids": [
+                67454277157092
+              ]
+            },
+            "available": true,
+            "price": "3949.00",
+            "grams": 50000,
+            "compare_at_price": "3949.00",
+            "position": 1,
+            "product_id": 15337435234532,
+            "created_at": "2026-10-05T14:47:52+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9207265263844,
+        "title": "HP HyperX OMEN 15-ga0066TX 15.3'' 2.5K 180Hz Gaming Laptop ( i7-14650HX, 16GB, 512GB, RTX5060 8GB, W11)",
+        "handle": "hp-hyperx-omen-15-ga0066tx-15-3-2-5k-180hz-gaming-laptop-i7-14650hx-16gb-512gb-rtx5060-8gb-w11",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<h2><span>Product Highlights</span></h2>\n<p class=\"isSelectedEnd\"><span>• Intel® Core™ i7-14650HX Processor for high-performance gaming and multitasking</span><br><span>• NVIDIA® GeForce RTX™ 5060 Laptop GPU with 8GB GDDR7 dedicated graphics</span><br><span>• 16GB DDR5-5600 memory with 512GB PCIe Gen4 NVMe SSD</span><br><span>• 15.3\" 2.5K IPS display with ultra-smooth 180Hz refresh rate</span><br><span>• 500 nits brightness and 100% sRGB colour gamut</span><br><span>• 4-Zone RGB backlit keyboard with 26-Key Rollover Anti-Ghostin</span><br></p>\n<h2><span>Key Specifications</span></h2>\n<p><strong><span>Brand:</span></strong><span> HP</span><br><strong><span>Product Type:</span></strong><span> Gaming Notebook Laptop</span><br><strong><span>Series:</span></strong><span> HyperX OMEN 15</span><br><strong><span>Model:</span></strong><span> 15-ga0066TX</span><br><strong><span>Processor:</span></strong><span> Intel® Core™ i7-14650HX</span><br><strong><span>Graphics:</span></strong><span> NVIDIA® GeForce RTX™ 5060 Laptop GPU 8GB GDDR7</span><br><strong><span>Memory:</span></strong><span> 16GB DDR5-5600</span><br><strong><span>Memory Slots:</span></strong><span> 2 Slots</span><br><strong><span>Storage:</span></strong><span> 512GB PCIe Gen4 NVMe M.2 SSD</span><br><strong><span>Storage Expansion:</span></strong><span> 2 × M.2 SSD Slots</span><br><strong><span>Display:</span></strong><span> 15.3\" 2.5K (2560 × 1600) IPS, Micro-Edge, Anti-Glare</span><br><strong><span>Refresh Rate:</span></strong><span> Up to 180Hz</span><br><strong><span>Response Time:</span></strong><span> 3ms</span><br><strong><span>Brightness:</span></strong><span> 500 nits</span><br><strong><span>Colour Gamut:</span></strong><span> 100% sRGB</span><br><strong><span>Keyboard:</span></strong><span> Full-Size 4-Zone RGB Backlit Keyboard with Numeric Keypad</span><br><strong><span>Operating System:</span></strong><span> Windows 11 Home</span><br><strong><span>Colour:</span></strong><span> Shadow Black</span></p>",
+        "options": [
+          {
+            "name": "Title",
+            "position": 1,
+            "values": [
+              "Default Title"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49734121095396,
+            "title": "Default Title",
+            "option1": "Default Title",
+            "option2": null,
+            "option3": null,
+            "sku": "ga0066TX",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": null,
+            "available": true,
+            "price": "8999.00",
+            "grams": 50000,
+            "compare_at_price": null,
+            "position": 1,
+            "product_id": 9207265263844,
+            "created_at": "2026-08-28T15:38:53+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9207259496676,
+        "title": "HP HyperX OMEN 15-ga0264TX 15.3'' 2K 165Hz Gaming Laptop ( i7-14650HX, 16GB, 512GB, RTX5050 8GB, W11",
+        "handle": "hp-hyperx-omen-15-ga0264tx-15-3-2k-165hz-gaming-laptop-i7-14650hx-16gb-512gb-rtx5050-8gb-w11",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<h2><span>Product Highlights</span></h2>\n<p class=\"isSelectedEnd\"><span>• Intel® Core™ i7-14650HX Processor delivers powerful gaming and multitasking performance</span><br><span>• NVIDIA® GeForce RTX™ 5050 Laptop GPU with 8GB GDDR7 dedicated graphics</span><br><span>• 16GB DDR5-5600 memory with 512GB PCIe Gen4 NVMe SSD</span><br><span>• 15.3\" 2K IPS display with smooth 165Hz refresh rate</span><br><span>• 4-zone RGB backlit keyboard with 26-Key Rollover Anti-Ghosting</span><br><span>• OMEN Tempest Cooling with HyperX-enhanced gaming experience</span></p>\n<h2><span>Key Specifications</span></h2>\n<p><strong><span>Brand:</span></strong><span> HP</span><br><strong><span>Product Type:</span></strong><span> Gaming Notebook Laptop</span><br><strong><span>Series:</span></strong><span> HyperX OMEN 15</span><br><strong><span>Model:</span></strong><span> 15-ga0264TX</span><br><strong><span>Processor:</span></strong><span> Intel® Core™ i7-14650HX</span><br><strong><span>Graphics:</span></strong><span> NVIDIA® GeForce RTX™ 5050 Laptop GPU 8GB GDDR7</span><br><strong><span>Memory:</span></strong><span> 16GB DDR5-5600</span><br><strong><span>Memory Configuration:</span></strong><span> 1 × 16GB</span><br><strong><span>Storage:</span></strong><span> 512GB PCIe Gen4 NVMe M.2 SSD</span><br><strong><span>Display:</span></strong><span> 15.3\" 2K (1920 × 1200) IPS, Micro-Edge, Anti-Glare</span><br><strong><span>Refresh Rate:</span></strong><span> Up to 165Hz</span><br><strong><span>Response Time:</span></strong><span> 6.5ms</span><br><strong><span>Brightness:</span></strong><span> 300 nits</span><br><strong><span>Colour Gamut:</span></strong><span> 62.5% sRGB</span><br><strong><span>Keyboard:</span></strong><span> Full-Size 4-Zone RGB Backlit Keyboard with Numeric Keypad</span><br><strong><span>Operating System:</span></strong><span> Windows 11 Home</span><br><strong><span>Colour:</span></strong><span> Shadow Black</span></p>",
+        "options": [
+          {
+            "name": "Title",
+            "position": 1,
+            "values": [
+              "Default Title"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49734037700836,
+            "title": "Default Title",
+            "option1": "Default Title",
+            "option2": null,
+            "option3": null,
+            "sku": "15-ga0264TX",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": null,
+            "available": true,
+            "price": "6399.00",
+            "grams": 50000,
+            "compare_at_price": null,
+            "position": 1,
+            "product_id": 9207259496676,
+            "created_at": "2026-08-28T15:28:15+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9072605561060,
+        "title": "HP HyperX Omen 15-gb0040AX Laptop GeForce RTX5050/Ryzen5 240/16GB DDR5/512GB SSD/15.3\" WQXGA 165Hz",
+        "handle": "hp-hyperx-omen-15-gb0040ax-laptop-ryzen5-240-16gb-ddr5-512gb-ssd-15-3-wqxga-165hz-rtx5050",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<h2 data-section-id=\"qhhk8d\" data-start=\"153\" data-end=\"174\">Product Highlights</h2>\n<p data-start=\"176\" data-end=\"696\">• AMD Ryzen™ 5 240 processor with high boost performance for gaming &amp; multitasking<br data-start=\"258\" data-end=\"261\">• NVIDIA® GeForce RTX™ 5050 8GB GDDR7 for smooth AAA gaming with ray tracing<br data-start=\"337\" data-end=\"340\">• 15.3” WQXGA (1920×1200) IPS display with 165Hz refresh rate for fluid visuals<br data-start=\"419\" data-end=\"422\">• 16GB DDR5 RAM for stable multitasking and gaming performance<br data-start=\"484\" data-end=\"487\">• 512GB PCIe Gen4 SSD for fast loading times and quick system response<br data-start=\"557\" data-end=\"560\">• HyperX OMEN cooling system for sustained gaming performance<br data-start=\"621\" data-end=\"624\">• Premium gaming design with backlit keyboard and OMEN tuning software</p>\n<hr data-start=\"698\" data-end=\"701\">\n<h2 data-section-id=\"rkota4\" data-start=\"703\" data-end=\"724\">Key Specifications</h2>\n<p data-start=\"726\" data-end=\"809\">Brand: HP (HyperX OMEN Series)<br data-start=\"756\" data-end=\"759\">Product Type: Gaming Laptop<br data-start=\"786\" data-end=\"789\">Model: 15-gb0040AX</p>\n<p data-start=\"811\" data-end=\"883\">Processor:<br>AMD Ryzen™ 5 240<br data-start=\"838\" data-end=\"841\">(6 cores / 12 threads, up to 5.0GHz boost)</p>\n<p data-start=\"885\" data-end=\"930\">Graphics:<br>NVIDIA® GeForce RTX™ 5050 8GB GDDR7</p>\n<p data-start=\"932\" data-end=\"981\">Display:<br>15.3\" WQXGA (1920 × 1200) IPS Anti-Glare</p>\n<p data-start=\"983\" data-end=\"1002\">Refresh Rate:<br>165Hz</p>\n<p data-start=\"1004\" data-end=\"1024\">Brightness:<br>300 nits</p>\n<p data-start=\"1026\" data-end=\"1049\">Color Gamut:<br>62.5% sRGB</p>\n<p data-start=\"1051\" data-end=\"1077\">Memory:<br>16GB DDR5-5600 RAM</p>\n<p data-start=\"1079\" data-end=\"1112\">Storage:<br>512GB PCIe Gen4 NVMe SSD</p>\n<p data-start=\"1114\" data-end=\"1155\">Connection Type:<br>Wi-Fi 6 + Bluetooth® 5.4</p>\n<p data-start=\"1157\" data-end=\"1190\">Operating System:<br>Windows 11 Home</p>\n<p data-start=\"1192\" data-end=\"1240\">Keyboard:<br>Full-size Backlit Keyboard with Numpad</p>\n<p data-start=\"1242\" data-end=\"1291\">Audio:<br>DTS:X Ultra + Dual Speakers (HyperX tuned)</p>\n<p data-start=\"1293\" data-end=\"1431\">Ports:<br>• 2 × USB-A 10Gbps<br data-start=\"1318\" data-end=\"1321\">• 1 × USB-C (DP + PD support)<br data-start=\"1350\" data-end=\"1353\">• 1 × HDMI 2.1<br data-start=\"1367\" data-end=\"1370\">• 1 × RJ45 LAN<br data-start=\"1384\" data-end=\"1387\">• 1 × 3.5mm Audio Jack<br data-start=\"1409\" data-end=\"1412\">• 1 × Power Input</p>\n<p data-start=\"1433\" data-end=\"1462\">Battery / Power:<br>70Wh Battery</p>\n<p data-start=\"1464\" data-end=\"1492\">Charging:<br>150W Power Adapter</p>",
+        "options": [
+          {
+            "name": "Title",
+            "position": 1,
+            "values": [
+              "Default Title"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49079241015524,
+            "title": "Default Title",
+            "option1": "Default Title",
+            "option2": null,
+            "option3": null,
+            "sku": "199896776868",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": null,
+            "available": true,
+            "price": "5099.00",
+            "grams": 50000,
+            "compare_at_price": "5099.00",
+            "position": 1,
+            "product_id": 9072605561060,
+            "created_at": "2026-06-04T11:44:08+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9207282565348,
+        "title": "HP HyperX Omen 16-am2163TX Gaming Laptop i7-14650HX/16GB DDR5/512GB SSD/16\"2.5K 240Hz/RTX5060/H&S+M365 Basic",
+        "handle": "hp-hyperx-omen-16-am2163tx-gaming-laptop-i7-14650hx-16gb-ddr5-512gb-ssd-162-5k-240hz-rtx5060-h-s-m365-basic",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<h2><span>Product Highlights</span></h2>\n<p class=\"isSelectedEnd\"><span>• Intel® Core™ i7-14650HX Processor for high-performance gaming and multitasking</span><br><span>• NVIDIA® GeForce RTX™ 5060 Laptop GPU with 8GB GDDR7 graphics</span><br><span>• 16GB DDR5 memory with fast 512GB PCIe Gen4 NVMe SSD</span><br><span>• 16\" 2.5K IPS display with ultra-smooth 240Hz refresh rate</span><br><span>• 500 nits brightness and 100% sRGB colour gamut</span><br><span>• Full-size 4-Zone RGB backlit keyboard with 26-Key Rollover Anti-Ghosting</span><br><span>• Windows 11 Home with Office Home + Microsoft 365 Basic (1 Year)</span></p>\n<h2><span>Key Specifications</span></h2>\n<p><strong><span>Brand:</span></strong><span> HP</span><br><strong><span>Product Type:</span></strong><span> Gaming Notebook Laptop</span><br><strong><span>Series:</span></strong><span> HyperX OMEN 16</span><br><strong><span>Model:</span></strong><span> 16-am2163TX</span><br><strong><span>Product Number:</span></strong><span> E08Z5PA</span><br><strong><span>Internal Code:</span></strong><span> NBB045</span><br><strong><span>Processor:</span></strong><span> Intel® Core™ i7-14650HX</span><br><strong><span>Processor Cores / Threads:</span></strong><span> 16 Cores / 24 Threads</span><br><strong><span>Processor Speed:</span></strong><span> Up to 5.2GHz</span><br><strong><span>Graphics:</span></strong><span> NVIDIA® GeForce RTX™ 5060 Laptop GPU</span><br><strong><span>Graphics Memory:</span></strong><span> 8GB GDDR7</span><br><strong><span>Memory:</span></strong><span> 16GB DDR5-5600 (1 × 16GB)</span><br><strong><span>Storage:</span></strong><span> 512GB PCIe Gen4 NVMe M.2 SSD</span><br><strong><span>Display:</span></strong><span> 16\" 2.5K (2560 × 1600) IPS, Micro-Edge, Anti-Glare</span><br><strong><span>Aspect Ratio:</span></strong><span> 16:10</span><br><strong><span>Refresh Rate:</span></strong><span> Up to 240Hz</span><br><strong><span>Response Time:</span></strong><span> 3ms</span><br><strong><span>Brightness:</span></strong><span> 500 nits</span><br><strong><span>Colour Gamut:</span></strong><span> 100% sRGB</span><br><strong><span>Keyboard:</span></strong><span> Full-Size 4-Zone RGB Backlit Keyboard with Numeric Keypad</span><br><strong><span>Keyboard Feature:</span></strong><span> 26-Key Rollover Anti-Ghosting</span><br><strong><span>Operating System:</span></strong><span> Windows 11 Home</span><br><strong><span>Software:</span></strong><span> Microsoft Office Home + Microsoft 365 Basic (1 Year)</span><br><strong><span>Colour:</span></strong><span> Shadow Black</span></p>",
+        "options": [
+          {
+            "name": "Title",
+            "position": 1,
+            "values": [
+              "Default Title"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49734198493412,
+            "title": "Default Title",
+            "option1": "Default Title",
+            "option2": null,
+            "option3": null,
+            "sku": "881767021145",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": null,
+            "available": true,
+            "price": "7199.00",
+            "grams": 50000,
+            "compare_at_price": "7199.00",
+            "position": 1,
+            "product_id": 9207282565348,
+            "created_at": "2026-08-28T16:01:44+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9193822028004,
+        "title": "HP Laptop 15-fc0956AU/fc0957AU (DW3N3PA/DW3N4PA) Ryzen7-7730U/16GB DDR4/512GB SSD/14\"FHD",
+        "handle": "hp-15-fc0956au-dw3n3pa-laptop-ryzen7-7730u-16gb-ddr4-512gb-ssd-14fhd",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lc-mr5beasihrlwed\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p>AMD Ryzen™ 7 7730U Processor for powerful everyday productivity</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>16GB DDR4 RAM with 512GB SSD for fast and responsive performance</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>15.6\" Full HD IPS Display for clear and vibrant visuals</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Full-size backlit keyboard with numeric keypad</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>HP Fast Charge support for convenient charging</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>2 Years Manufacturer Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Brand: HP</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor: AMD Ryzen™ 7 7730U</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Graphics: AMD Radeon™ Graphics</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Memory: 16GB DDR4</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Storage: 512GB SSD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Display: 15.6\" Full HD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Software Included:</p>\n\n<p> </p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Colour:</p>\n\n<p> </p>\n\n<p>Warm Gold</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Gold",
+              "Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49663984337124,
+            "title": "Gold",
+            "option1": "Gold",
+            "option2": null,
+            "option3": null,
+            "sku": "826581702740",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84436017250532,
+              "product_id": 9193822028004,
+              "position": 3,
+              "created_at": "2026-08-17T17:05:20+08:00",
+              "updated_at": "2026-08-17T17:05:24+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820la-mr5b4jdwd6v429.jpg?v=1786957524",
+              "variant_ids": [
+                49663984337124
+              ]
+            },
+            "available": true,
+            "price": "2999.00",
+            "grams": 50000,
+            "compare_at_price": "2999.00",
+            "position": 1,
+            "product_id": 9193822028004,
+            "created_at": "2026-08-17T17:05:20+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 50529321746660,
+            "title": "Silver",
+            "option1": "Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "826581702757",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 85852606726372,
+              "product_id": 9193822028004,
+              "position": 2,
+              "created_at": "2026-09-24T09:29:54+08:00",
+              "updated_at": "2026-09-24T09:29:55+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/Silver_870cf11a-5671-41e5-b415-78e84cc2dbd6.jpg?v=1790213395",
+              "variant_ids": [
+                50529321746660
+              ]
+            },
+            "available": true,
+            "price": "2999.00",
+            "grams": 50000,
+            "compare_at_price": "2999.00",
+            "position": 2,
+            "product_id": 9193822028004,
+            "created_at": "2026-09-24T09:30:52+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9247334432996,
+        "title": "HP Laptop 15-fd1628TU/fd1627TU/fd1626TU C5-120U/16GB DDR4/512GB SSD/15.6\"FHD",
+        "handle": "hp-laptop-15-fd1628tu-fd1627tu-fd1626tu-c5-120u-16gb-ddr4-512gb-ssd-15-6fhd",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lb-mter5ko2ups8bb\">\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Core™ 5 120U Processor for work, study and everyday productivity</p>\n\n<p>• 16GB DDR4-3200 dual-channel memory for smooth multitasking</p>\n\n<p>• 512GB PCIe NVMe M.2 SSD for fast and responsive storage</p>\n\n<p>• 15.6\" Full HD IPS anti-glare display with 300 nits brightness</p>\n\n<p>• Full-size backlit keyboard with numeric keypad</p>\n\n<p>• Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year) included</p>\n\n<p>• Available in Warm Gold, Moonlight Blue and Natural Silver</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p>Series: HP Laptop 15</p>\n\n<p>Processor: Intel® Core™ 5 120U</p>\n\n<p>Processor Cores / Threads: 10 Cores / 12 Threads</p>\n\n<p>Processor Speed: Up to 5.0GHz</p>\n\n<p>Graphics: Integrated Intel® Graphics</p>\n\n<p>Memory: 16GB DDR4-3200 (2 × 8GB)</p>\n\n<p>Storage: 512GB PCIe NVMe M.2 SSD</p>\n\n<p>Display: 15.6\" FHD (1920 × 1080), IPS, Micro-Edge, Anti-Glare</p>\n\n<p>Brightness: 300 nits</p>\n\n<p>Colour Gamut: 62.5% sRGB</p>\n\n<p>Keyboard: Full-Size Backlit Keyboard with Numeric Keypad</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included: Microsoft Office Home 2024 + Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty Type: HP Onsite Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Warm Gold",
+              "Moonlight Blue",
+              "Natural Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49933707149540,
+            "title": "Warm Gold",
+            "option1": "Warm Gold",
+            "option2": null,
+            "option3": null,
+            "sku": "881767563560",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 85770084614372,
+              "product_id": 9247334432996,
+              "position": 7,
+              "created_at": "2026-09-22T12:03:57+08:00",
+              "updated_at": "2026-09-22T12:04:01+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lb-mter4k30dszu5f.jpg?v=1790049841",
+              "variant_ids": [
+                49933707149540
+              ]
+            },
+            "available": true,
+            "price": "2849.00",
+            "grams": 50000,
+            "compare_at_price": "2849.00",
+            "position": 1,
+            "product_id": 9247334432996,
+            "created_at": "2026-09-22T12:03:57+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49933707182308,
+            "title": "Moonlight Blue",
+            "option1": "Moonlight Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "881767563577",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 85770084647140,
+              "product_id": 9247334432996,
+              "position": 8,
+              "created_at": "2026-09-22T12:03:57+08:00",
+              "updated_at": "2026-09-22T12:04:01+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l6-mter4m8nqqkpee.jpg?v=1790049841",
+              "variant_ids": [
+                49933707182308
+              ]
+            },
+            "available": true,
+            "price": "2849.00",
+            "grams": 50000,
+            "compare_at_price": "2849.00",
+            "position": 2,
+            "product_id": 9247334432996,
+            "created_at": "2026-09-22T12:03:57+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49933707215076,
+            "title": "Natural Silver",
+            "option1": "Natural Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "881767563584",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 85770084679908,
+              "product_id": 9247334432996,
+              "position": 9,
+              "created_at": "2026-09-22T12:03:57+08:00",
+              "updated_at": "2026-09-22T12:03:59+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lf-mter4no31tsa45.jpg?v=1790049839",
+              "variant_ids": [
+                49933707215076
+              ]
+            },
+            "available": true,
+            "price": "2849.00",
+            "grams": 50000,
+            "compare_at_price": "2849.00",
+            "position": 3,
+            "product_id": 9247334432996,
+            "created_at": "2026-09-22T12:03:57+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 8963332604132,
+        "title": "HP Laptop AI 15-fd2120TU/fd2119TU/fd2118TU CU7-255U/16GB DDR5/512GB SSD/15.6\"FHD/Sil/H&S+M365 Basic",
+        "handle": "hp-laptop-ai-15-fd2120tu-fd2119tu-fd2118tu-cu7-255u-16gb-ddr5-512gb-ssd-15-6fhd-sil-h-s-m365-basic",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<p>HP LAPTOP 15-FD2118TU - WARM GOLD</p>\n\n<p>HP LAPTOP 15-FD2119TU - MOONLIGHT BLUE</p>\n\n<p>HP LAPTOP 15-FD2120TU - NATURAL SILVER</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Pre-installed Software Microsoft Office Home &amp; Student 2024</p>\n\n<p>Processor: Intel® Core™ Ultra 7 255U (up to 5.2 GHz with Intel® Turbo Boost Technology, 12 MB L3 cache, 12 cores, 14 threads)</p>\n\n<p>Memory: 16 GB DDR5-5600 MHz RAM (1 x 16 GB) Extra 1 slot to upgrade</p>\n\n<p>Storage: 512 GB PCIe® NVMe™ M.2 solid-state drive (SSD)</p>\n\n<p>Graphics: Intel Integrated Graphics</p>\n\n<p>Display: 15.6-inch diagonal, FHD (1920 x 1080), IPS, micro-edge, anti-glare, 300 nits 62.5% sRGB</p>\n\n<p>Camera: HP True Vision 720p HD camera with temporal noise reduction and integrated dual array digital microphones</p>\n\n<p>Audio &amp; Video Dual speakers</p>\n\n<p>Network/Connectivity: Realtek Wi-Fi 6 (2x2) and Bluetooth® 5.3 wireless card (supports gigabit data rate)</p>\n\n<p>Keyboard Backlit</p>\n\n<p>Interfaces:</p>\n\n<p>2x USB Type-A (5Gbps signaling rate)</p>\n\n<p>1x AC smart pin</p>\n\n<p>1x HDMI 1.4b</p>\n\n<p>1 X 3.5mm audio Jack</p>\n\n<p>1x USB Type-C® (10Gbps signaling rate, supports USB Power Delivery, DisplayPort™ 1.2, HP Sleep and Charge)</p>\n\n<p>Battery/Power: 3-cell, 41 Wh Li-ion polymer</p>\n\n<p>Dimensions: 35.98 x 23.6 x 1.86 cm (W x D x H)</p>\n\n<p>Weight: 1.65 kg</p>\n\n<p>Warranty: 2 Years</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Gold",
+              "Blue",
+              "Sliver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 48216552243428,
+            "title": "Gold",
+            "option1": "Gold",
+            "option2": null,
+            "option3": null,
+            "sku": "199896777599",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 81089259602148,
+              "product_id": 8963332604132,
+              "position": 4,
+              "created_at": "2026-03-12T16:57:50+08:00",
+              "updated_at": "2026-03-12T16:57:54+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lg-mlq58uyyxp8vba.jpg?v=1773305874",
+              "variant_ids": [
+                48216552243428
+              ]
+            },
+            "available": true,
+            "price": "3599.00",
+            "grams": 50000,
+            "compare_at_price": "3599.00",
+            "position": 1,
+            "product_id": 8963332604132,
+            "created_at": "2026-03-12T16:57:50+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 48216552276196,
+            "title": "Blue",
+            "option1": "Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "199896777582",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 81089259634916,
+              "product_id": 8963332604132,
+              "position": 5,
+              "created_at": "2026-03-12T16:57:50+08:00",
+              "updated_at": "2026-03-12T16:57:54+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lb-mlq58wtkyxvn54.jpg?v=1773305874",
+              "variant_ids": [
+                48216552276196
+              ]
+            },
+            "available": false,
+            "price": "3599.00",
+            "grams": 50000,
+            "compare_at_price": "3599.00",
+            "position": 2,
+            "product_id": 8963332604132,
+            "created_at": "2026-03-12T16:57:50+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 48216552308964,
+            "title": "Sliver",
+            "option1": "Sliver",
+            "option2": null,
+            "option3": null,
+            "sku": "199896777605",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 81089259667684,
+              "product_id": 8963332604132,
+              "position": 6,
+              "created_at": "2026-03-12T16:57:50+08:00",
+              "updated_at": "2026-03-12T16:57:54+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lb-mlq58ymokoapef.jpg?v=1773305874",
+              "variant_ids": [
+                48216552308964
+              ]
+            },
+            "available": true,
+            "price": "3599.00",
+            "grams": 50000,
+            "compare_at_price": "3599.00",
+            "position": 3,
+            "product_id": 8963332604132,
+            "created_at": "2026-03-12T16:57:50+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9139600720100,
+        "title": "HP OmniBook 3 14-hy0059AU (DN6Z9PA) Laptop Ryzen5 40/8GB DDR5/512GB SSD/14\"2K",
+        "handle": "hp-omnibook-3-14-hy0059au-dn6z9pa-laptop-ryzen5-40-8gb-ddr5-512gb-ssd-142k",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820l9-mqo6hf095tzfdb\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p>AMD Ryzen™ 5 40 Processor for smooth everyday productivity</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>8GB DDR5 RAM with 512GB SSD for fast performance</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>14\" 2K IPS Display for sharp and vibrant visuals</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Slim and lightweight design for work, study and entertainment</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>HP Fast Charge support for convenient charging</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>2 Years Manufacturer Warranty (Onsite Warranty)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Brand: HP</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Notebook Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor: AMD Ryzen™ 5 40</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Graphics: AMD Radeon™ Graphics</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Memory: 8GB DDR5</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Storage: 512GB SSD</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Display: 14\" 2K (1920 × 1200)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Software Included:</p>\n\n<p> </p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Mica Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49401716244708,
+            "title": "Mica Silver",
+            "option1": "Mica Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "826581325727",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83502383825124,
+              "product_id": 9139600720100,
+              "position": 5,
+              "created_at": "2026-07-15T11:39:34+08:00",
+              "updated_at": "2026-07-15T11:39:38+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820le-mqo7nwst766m90.jpg?v=1784086778",
+              "variant_ids": [
+                49401716244708
+              ]
+            },
+            "available": true,
+            "price": "2679.00",
+            "grams": 50000,
+            "compare_at_price": "2699.00",
+            "position": 1,
+            "product_id": 9139600720100,
+            "created_at": "2026-07-15T11:39:34+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9141796176100,
+        "title": "HP OmniBook 3 Laptop (14-hu0084TU/hu0085TU/hu0086TU/hu0087TU) C5-120U/8GB DDR5/512GB SSD/14\"2K",
+        "handle": "hp-omnibook-3-laptop-14-hu0084tu-hu0085tu-hu0086tu-hu0087tu-c5-120u-8gb-ddr5-512gb-ssd-142k",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lc-mq1afo0mw6q723\">\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>• Intel® Core™ 5 120U processor for smooth productivity and multitasking</p>\n\n<p> </p>\n\n<p>• 14\" 2K (1920 × 1200) IPS display with 16:10 aspect ratio for sharp visuals</p>\n\n<p> </p>\n\n<p>• 8GB DDR5 RAM for responsive everyday performance</p>\n\n<p> </p>\n\n<p>• 512GB PCIe NVMe SSD for fast boot-up and quick file access</p>\n\n<p> </p>\n\n<p>• Intel® Graphics for daily productivity and multimedia entertainment</p>\n\n<p> </p>\n\n<p>• Lightweight and portable design ideal for students and professionals</p>\n\n<p> </p>\n\n<p>• Includes Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Brand: HP</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Product Type: Laptop</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Models:</p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p> </p>\n\n<p>14-hu0084TU – Warm Gold</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>14-hu0085TU – Starlit Blue</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>14-hu0086TU – Mica Silver</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>14-hu0087TU – Glacier Silver</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Series: HP OmniBook 3 14</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Processor:</p>\n\n<p> </p>\n\n<p>Intel® Core™ 5 120U</p>\n\n<p> </p>\n\n<p>Graphics:</p>\n\n<p> </p>\n\n<p>Intel® Graphics</p>\n\n<p> </p>\n\n<p>Display:</p>\n\n<p> </p>\n\n<p>14\" 2K (1920 × 1200), 16:10</p>\n\n<p> </p>\n\n<p>Memory:</p>\n\n<p> </p>\n\n<p>8GB DDR5 RAM</p>\n\n<p> </p>\n\n<p>Storage:</p>\n\n<p> </p>\n\n<p>512GB PCIe NVMe M.2 SSD</p>\n\n<p> </p>\n\n<p>Operating System:</p>\n\n<p> </p>\n\n<p>Windows 11 Home</p>\n\n<p> </p>\n\n<p>Office Software:</p>\n\n<p> </p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p> </p>\n\n<p>Subscription:</p>\n\n<p> </p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>What's in the Box</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>• 1 × HP OmniBook 3 14 Laptop</p>\n\n<p> </p>\n\n<p>• 1 × HP 65W USB-C Power Adapter</p>\n\n<p> </p>\n\n<p>• 1 × Power Cable</p>\n\n<p> </p>\n\n<p>• 1 × User Manual</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p> </p>\n\n<p> </p>\n\n<p>Warranty Duration:</p>\n\n<p> </p>\n\n<p>2 Years HP Onsite Warranty</p>\n\n<p> </p>\n\n<p>Warranty Type:</p>\n\n<p> </p>\n\n<p>Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Warm Gold",
+              "Starlit Blue",
+              "Mica Silver",
+              "Glacier Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49414320980196,
+            "title": "Warm Gold",
+            "option1": "Warm Gold",
+            "option2": null,
+            "option3": null,
+            "sku": "826581325680",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83529565569252,
+              "product_id": 9141796176100,
+              "position": 3,
+              "created_at": "2026-07-16T09:44:48+08:00",
+              "updated_at": "2026-07-16T09:44:51+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l7-mq1a983quvbgb2.jpg?v=1784166291",
+              "variant_ids": [
+                49414320980196
+              ]
+            },
+            "available": true,
+            "price": "3399.00",
+            "grams": 50000,
+            "compare_at_price": "3399.00",
+            "position": 1,
+            "product_id": 9141796176100,
+            "created_at": "2026-07-16T09:44:48+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49414321012964,
+            "title": "Starlit Blue",
+            "option1": "Starlit Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "826581325703",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83529565536484,
+              "product_id": 9141796176100,
+              "position": 2,
+              "created_at": "2026-07-16T09:44:48+08:00",
+              "updated_at": "2026-07-16T09:44:51+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l5-mq1a96usu9ky5d.jpg?v=1784166291",
+              "variant_ids": [
+                49414321012964
+              ]
+            },
+            "available": true,
+            "price": "3399.00",
+            "grams": 50000,
+            "compare_at_price": "3399.00",
+            "position": 2,
+            "product_id": 9141796176100,
+            "created_at": "2026-07-16T09:44:48+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49414321045732,
+            "title": "Mica Silver",
+            "option1": "Mica Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "826581325697",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83529565602020,
+              "product_id": 9141796176100,
+              "position": 4,
+              "created_at": "2026-07-16T09:44:48+08:00",
+              "updated_at": "2026-07-16T09:44:52+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l9-mq1a99hvp05d6c.jpg?v=1784166292",
+              "variant_ids": [
+                49414321045732
+              ]
+            },
+            "available": true,
+            "price": "3399.00",
+            "grams": 50000,
+            "compare_at_price": "3399.00",
+            "position": 3,
+            "product_id": 9141796176100,
+            "created_at": "2026-07-16T09:44:48+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49414321078500,
+            "title": "Glacier Silver",
+            "option1": "Glacier Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "826581325710",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 83529565634788,
+              "product_id": 9141796176100,
+              "position": 5,
+              "created_at": "2026-07-16T09:44:48+08:00",
+              "updated_at": "2026-07-16T09:44:51+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l6-mq1a9ava8e8102.jpg?v=1784166291",
+              "variant_ids": [
+                49414321078500
+              ]
+            },
+            "available": true,
+            "price": "3399.00",
+            "grams": 50000,
+            "compare_at_price": "3399.00",
+            "position": 4,
+            "product_id": 9141796176100,
+            "created_at": "2026-07-16T09:44:48+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9184483606756,
+        "title": "HP Omnibook 7 Aero NG AI 13-bg1051AU (D4QK2PA) Laptop Ryzen AI 5 340/16GB/512GB SSD/13.3\" WUXGA",
+        "handle": "hp-omnibook-7-aero-ng-ai-13-bg1051au-d4qk2pa-laptop-ryzen-ai-5-340-16gb-512gb-ssd-13-3-wuxga",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lg-mrazmyweieiu23\">\n<p> </p>\n<p>Product Highlights</p>\n<p>AMD Ryzen™ AI 5 340 Processor with dedicated NPU delivering up to 50 TOPS AI performance for Copilot+ PC experiences</p>\n<p>16GB LPDDR5x Memory and 512GB PCIe Gen4 NVMe SSD for fast multitasking and storage</p>\n<p>13.3\" WUXGA (1920 × 1200) IPS Anti-Glare display with 400 nits brightness and 100% sRGB colour gamut</p>\n<p>Windows 11 Home with Microsoft Office Home 2024 pre-installed</p>\n<p>Ultra-lightweight design weighing less than 1kg for exceptional portability</p>\n<p>5MP IR Camera with Poly Camera Pro for enhanced video conferencing</p>\n<p>HP Fast Charge and long battery life for all-day productivity</p>\n<p> </p>\n<p>Key Specifications</p>\n<p>Brand: HP</p>\n<p>Product Type: AI Notebook Laptop</p>\n<p>Processor: AMD Ryzen™ AI 5 340</p>\n<p>Graphics: AMD Radeon™ 840M Graphics</p>\n<p>Memory: 16GB LPDDR5x-7500 (Onboard)</p>\n<p>Storage: 512GB PCIe Gen4 NVMe M.2 SSD</p>\n<p>Display: 13.3\" WUXGA (1920 × 1200) IPS Anti-Glare, 400 nits, 100% sRGB</p>\n<p>Operating System: Windows 11 Home</p>\n<p>Software Included:</p>\n<p>Microsoft Office Home 2024</p>\n<p>Colour: Glacier Silver</p>\n<p> </p>\n<p>Warranty</p>\n<p>Warranty Duration: 2 Years</p>\n<p>Warranty: Valid from the invoice date.</p>\n</div>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Glacier Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49617674240228,
+            "title": "Glacier Silver",
+            "option1": "Glacier Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "199896775090",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84215305306340,
+              "product_id": 9184483606756,
+              "position": 6,
+              "created_at": "2026-08-10T11:18:54+08:00",
+              "updated_at": "2026-08-10T11:18:58+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lc-mrbgyr9ebmdo8f.jpg?v=1786331938",
+              "variant_ids": [
+                49617674240228
+              ]
+            },
+            "available": true,
+            "price": "4399.00",
+            "grams": 50000,
+            "compare_at_price": "4399.00",
+            "position": 1,
+            "product_id": 9184483606756,
+            "created_at": "2026-08-10T11:18:55+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9184480395492,
+        "title": "HP OmniBook 7 AI 14-fr0006TU/fr0007TU/fr0008TU Laptop CU5-225U/16GB DDR5/512GB SSD/14\"2K",
+        "handle": "hp-omnibook-7-ai-14-fr0006tu-fr0007tu-fr0008tu-laptop-cu5-225u-16gb-ddr5-512gb-ssd-142k",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lg-mrfa5iuo8v7w09\">\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>Intel® Core™ Ultra 5 225U Processor with Intel AI Boost for smarter AI-powered productivity</p>\n\n<p>16GB LPDDR5 Memory with 512GB PCIe Gen4 NVMe SSD for smooth multitasking and fast performance</p>\n\n<p>14\" 2K (1920 × 1200) IPS Anti-Glare display delivers crisp details and vibrant colours</p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p>Slim and lightweight premium aluminium design for work, study and travel</p>\n\n<p>AI-powered Copilot+ ready features with all-day productivity</p>\n\n<p>Available in Meteor Silver, Glacier Silver and Pink</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: AI Notebook Laptop</p>\n\n<p>Processor: Intel® Core™ Ultra 5 225U</p>\n\n<p>Graphics: Intel® Graphics</p>\n\n<p>Memory: 16GB LPDDR5</p>\n\n<p>Storage: 512GB PCIe Gen4 NVMe M.2 SSD</p>\n\n<p>Display: 14\" 2K (1920 × 1200) IPS Anti-Glare</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included:</p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p>Available Colours:</p>\n\n<p>Pink (BN1V4PA)</p>\n\n<p>Meteor Silver (BN2D5PA)</p>\n\n<p>Glacier Silver (BN1V5PA)</p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty: Valid from the invoice date.</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Pink",
+              "Meteor Silver",
+              "Glacier Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49617633444068,
+            "title": "Pink",
+            "option1": "Pink",
+            "option2": null,
+            "option3": null,
+            "sku": "199251303418",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84215140417764,
+              "product_id": 9184480395492,
+              "position": 5,
+              "created_at": "2026-08-10T11:16:05+08:00",
+              "updated_at": "2026-08-10T11:16:07+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lh-mrf9xqibt1jg39.jpg?v=1786331767",
+              "variant_ids": [
+                49617633444068
+              ]
+            },
+            "available": false,
+            "price": "4199.00",
+            "grams": 50000,
+            "compare_at_price": "4199.00",
+            "position": 1,
+            "product_id": 9184480395492,
+            "created_at": "2026-08-10T11:15:37+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49617633476836,
+            "title": "Meteor Silver",
+            "option1": "Meteor Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "199251304507",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84215140483300,
+              "product_id": 9184480395492,
+              "position": 7,
+              "created_at": "2026-08-10T11:16:05+08:00",
+              "updated_at": "2026-08-10T11:16:08+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820la-mrf9xqgyrdonb0.jpg?v=1786331768",
+              "variant_ids": [
+                49617633476836
+              ]
+            },
+            "available": true,
+            "price": "4199.00",
+            "grams": 50000,
+            "compare_at_price": "4199.00",
+            "position": 2,
+            "product_id": 9184480395492,
+            "created_at": "2026-08-10T11:15:37+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49617633509604,
+            "title": "Glacier Silver",
+            "option1": "Glacier Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "199251303425",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84215140450532,
+              "product_id": 9184480395492,
+              "position": 6,
+              "created_at": "2026-08-10T11:16:05+08:00",
+              "updated_at": "2026-08-10T11:16:08+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l4-mrf9xqit1wjoad.jpg?v=1786331768",
+              "variant_ids": [
+                49617633509604
+              ]
+            },
+            "available": true,
+            "price": "4199.00",
+            "grams": 50000,
+            "compare_at_price": "4199.00",
+            "position": 3,
+            "product_id": 9184480395492,
+            "created_at": "2026-08-10T11:15:37+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9184443302116,
+        "title": "HP Omnibook 7 AI 14-fr0069TU (D4QX7PA) Laptop CU5-225H/16GB DDR5/512GB SSD/14\"2K",
+        "handle": "hp-omnibook-7-ai-14-fr0069tu-d4qx7pa-laptop-cu5-225h-16gb-ddr5-512gb-ssd-142k",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820li-mrfa4ebu4jy843\">\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>Intel® Core™ Ultra 5 225H Processor with Intel AI Boost for enhanced AI-powered productivity</p>\n\n<p>16GB LPDDR5 Memory with 512GB PCIe Gen4 NVMe SSD for smooth multitasking and fast performance</p>\n\n<p>14\" 2K (1920 × 1200) IPS Anti-Glare display delivers sharp and vibrant visuals</p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p>Slim and lightweight design built to military-grade durability standards</p>\n\n<p>Full-size backlit keyboard for comfortable typing in any environment</p>\n\n<p>Ideal for professionals, students and everyday productivity</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: AI Notebook Laptop</p>\n\n<p>Processor: Intel® Core™ Ultra 5 225H</p>\n\n<p>Graphics: Intel® Arc™ 130T Graphics</p>\n\n<p>Memory: 16GB LPDDR5</p>\n\n<p>Storage: 512GB PCIe Gen4 NVMe M.2 SSD</p>\n\n<p>Display: 14\" 2K (1920 × 1200) IPS Anti-Glare</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included:</p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Glacier Silver</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty: Valid from the invoice date.</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Glacier Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49617389813988,
+            "title": "Glacier Silver",
+            "option1": "Glacier Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "199896777889",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84214086140132,
+              "product_id": 9184443302116,
+              "position": 4,
+              "created_at": "2026-08-10T10:27:37+08:00",
+              "updated_at": "2026-08-10T10:27:41+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820lg-mrf9wn1rclqfcc.jpg?v=1786328861",
+              "variant_ids": [
+                49617389813988
+              ]
+            },
+            "available": true,
+            "price": "4199.00",
+            "grams": 50000,
+            "compare_at_price": "4199.00",
+            "position": 1,
+            "product_id": 9184443302116,
+            "created_at": "2026-08-10T10:27:37+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9184429900004,
+        "title": "HP Omnibook 7 AI 14-fr0071TU/fr0072TU (D4QP7PA/D4QP8PA) CU7-255U/16GB DDR5/512GB SSD/14\"2K",
+        "handle": "hp-omnibook-7-ai-14-fr0071tu-fr0072tu-d4qp7pa-d4qp8pa-cu7-255u-16gb-ddr5-512gb-ssd-142k",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820lh-mrfa4eby58g7b4\">\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>Intel® Core™ Ultra 7 255U Processor with Intel AI Boost for next-generation AI productivity</p>\n\n<p>16GB LPDDR5 Memory with 512GB PCIe Gen4 NVMe SSD for fast multitasking and storage</p>\n\n<p>14\" 2K (1920 × 1200) IPS Anti-Glare display delivers sharp, vibrant visuals</p>\n\n<p>Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</p>\n\n<p>Lightweight premium aluminium chassis with military-grade durability</p>\n\n<p>Full-size backlit keyboard with AI-enhanced video conferencing features</p>\n\n<p>Available in Meteor Silver and Glacier Silver</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: AI Notebook Laptop</p>\n\n<p>Processor: Intel® Core™ Ultra 7 255U</p>\n\n<p>Graphics: Intel® Graphics</p>\n\n<p>Memory: 16GB LPDDR5</p>\n\n<p>Storage: 512GB PCIe Gen4 NVMe M.2 SSD</p>\n\n<p>Display: 14\" 2K (1920 × 1200) IPS Anti-Glare</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software Included:</p>\n\n<p>Microsoft Office Home 2024</p>\n\n<p>Microsoft 365 Basic (1 Year)</p>\n\n<p>Available Colours: Meteor Silver (D4QP7PA) / Glacier Silver (D4QP8PA)</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty: Valid from the invoice date.</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Meteor Silver",
+              "Glacier Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49617196318948,
+            "title": "Meteor Silver",
+            "option1": "Meteor Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "199896777018",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84213258191076,
+              "product_id": 9184429900004,
+              "position": 4,
+              "created_at": "2026-08-10T09:48:21+08:00",
+              "updated_at": "2026-08-10T09:48:25+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820l8-mrfbzck94ao7be.jpg?v=1786326505",
+              "variant_ids": [
+                49617196318948
+              ]
+            },
+            "available": true,
+            "price": "4599.00",
+            "grams": 50000,
+            "compare_at_price": "4599.00",
+            "position": 1,
+            "product_id": 9184429900004,
+            "created_at": "2026-08-10T09:48:21+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49617196351716,
+            "title": "Glacier Silver",
+            "option1": "Glacier Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "199896776981",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84213258256612,
+              "product_id": 9184429900004,
+              "position": 6,
+              "created_at": "2026-08-10T09:48:21+08:00",
+              "updated_at": "2026-08-10T09:48:25+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820ld-mrfbzo9p7fnrb8.jpg?v=1786326505",
+              "variant_ids": [
+                49617196351716
+              ]
+            },
+            "available": true,
+            "price": "4599.00",
+            "grams": 50000,
+            "compare_at_price": "4599.00",
+            "position": 2,
+            "product_id": 9184429900004,
+            "created_at": "2026-08-10T09:48:21+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9200978362596,
+        "title": "HP Victus 15-fa2743TX (DT7T9PA) Gaming Laptop i7-14650HX/16GB DDR5/512GB SSD/15.6\"FHD 144Hz/RTX4050",
+        "handle": "hp-victus-15-fa2743tx-dt7t9pa-gaming-laptop-i7-14650hx-16gb-ddr5-512gb-ssd-15-6fhd-144hz-rtx4050",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<div>\n<img src=\"https://cf.shopee.com.my/file/my-11134208-820li-ms9apet4rtvs9d\">\n<p> </p>\n\n<p> </p>\n\n<p>Product Highlights</p>\n\n<p>• Intel® Core™ i7-14650HX Processor for powerful gaming and multitasking</p>\n\n<p>• NVIDIA® GeForce RTX™ 4050 Laptop GPU for smooth gaming performance</p>\n\n<p>• 16GB DDR5-5600 memory with 512GB PCIe Gen4 NVMe SSD</p>\n\n<p>• 15.6\" Full HD IPS display with smooth 144Hz refresh rate</p>\n\n<p>• 1-Zone RGB backlit keyboard for gaming and everyday use</p>\n\n<p>• Windows 11 Home with Microsoft Office Home + Microsoft 365 Basic (1 Year)</p>\n\n<p>• Mica Silver gaming design with 2 Years Warranty</p>\n\n<p> </p>\n\n<p>Key Specifications</p>\n\n<p>Brand: HP</p>\n\n<p>Product Type: Gaming Notebook Laptop</p>\n\n<p>Series: Victus Gaming 15</p>\n\n<p>Model: 15-fa2743TX</p>\n\n<p>Product Number: DT7T9PA</p>\n\n<p>Processor: Intel® Core™ i7-14650HX</p>\n\n<p>Graphics: NVIDIA® GeForce RTX™ 4050 Laptop GPU 6GB</p>\n\n<p>Memory: 16GB DDR5-5600</p>\n\n<p>Storage: 512GB PCIe Gen4 NVMe M.2 SSD</p>\n\n<p>Display: 15.6\" FHD (1920 × 1080) IPS, Anti-Glare</p>\n\n<p>Refresh Rate: 144Hz</p>\n\n<p>Brightness: 300 nits</p>\n\n<p>Keyboard: 1-Zone RGB Backlit Keyboard</p>\n\n<p>Operating System: Windows 11 Home</p>\n\n<p>Software: Microsoft Office Home + Microsoft 365 Basic (1 Year)</p>\n\n<p>Colour: Mica Silver</p>\n\n<p> </p>\n\n<p>Warranty</p>\n\n<p>Warranty Duration: 2 Years</p>\n\n<p>Warranty Type: Manufacturer Warranty</p>\n</div>\n",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Mica Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49705164112100,
+            "title": "Mica Silver",
+            "option1": "Mica Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "826581552925",
+            "requires_shipping": true,
+            "taxable": false,
+            "featured_image": {
+              "id": 84663207657700,
+              "product_id": 9200978362596,
+              "position": 2,
+              "created_at": "2026-08-24T10:56:30+08:00",
+              "updated_at": "2026-08-24T10:56:34+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/my-11134207-820la-ms9al4bvb6dh33.jpg?v=1787540194",
+              "variant_ids": [
+                49705164112100
+              ]
+            },
+            "available": true,
+            "price": "4599.00",
+            "grams": 50000,
+            "compare_at_price": "4599.00",
+            "position": 1,
+            "product_id": 9200978362596,
+            "created_at": "2026-08-24T10:56:30+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      },
+      {
+        "id": 9153305510116,
+        "title": "HP Victus 15-fb3074AX/fb3075AX (BT1Q8PA/BT1Q9PA) Gaming Laptop Ryzen7-7445HS/8GB DDR5/512GB SSD/15.6\"FHD 144Hz/RTX2050",
+        "handle": "hp-victus-15-fb3074ax-fb3075ax-bt1q8pa-bt1q9pa-gaming-laptop-ryzen7-7445hs-8gb-ddr5-512gb-ssd-15-6fhd-144hz-rtx2050",
+        "vendor": "HP",
+        "product_type": "NOTEB",
+        "body_html": "<p><img src=\"https://cdn.shopify.com/s/files/1/1974/9033/files/For-ALL-IT-all-platform_cac4a1c5-b3a2-401c-9a67-65e9b7e5fc43.jpg?v=1784775691\" alt=\"\"></p>\n<p> </p>\n<h2 data-section-id=\"qhhk8d\" data-start=\"113\" data-end=\"134\" class=\"PDq2pG_selectionAnchorContainer\">Product Highlights<span aria-hidden=\"true\" class=\"PDq2pG_selectionAnchor\"></span>\n</h2>\n<ul data-start=\"136\" data-end=\"590\">\n<li data-section-id=\"1xtfdi7\" data-start=\"136\" data-end=\"195\">AMD Ryzen™ 7 7445HS Processor for gaming and multitasking</li>\n<li data-section-id=\"iplitc\" data-start=\"196\" data-end=\"262\">NVIDIA® GeForce RTX™ 2050 Graphics for smooth gaming performance</li>\n<li data-section-id=\"e7pskt\" data-start=\"263\" data-end=\"328\">8GB DDR5 RAM with 512GB SSD for fast and responsive performance</li>\n<li data-section-id=\"kgkdij\" data-start=\"329\" data-end=\"399\">15.6\" Full HD Display with 144Hz refresh rate for immersive gameplay</li>\n<li data-section-id=\"z8xn7m\" data-start=\"400\" data-end=\"480\">Windows 11 Home with Microsoft Office Home 2024 &amp; Microsoft 365 Basic (1 Year)</li>\n<li data-section-id=\"1le0slg\" data-start=\"481\" data-end=\"540\">Full-size backlit keyboard for enhanced gaming experience</li>\n<li data-section-id=\"1ihr1ve\" data-start=\"541\" data-end=\"590\">2 Years Manufacturer Warranty (Onsite Warranty)</li>\n</ul>\n<p data-start=\"592\" data-end=\"629\">The two models differ only by colour:</p>\n<ul data-start=\"630\" data-end=\"720\">\n<li data-section-id=\"hkarrk\" data-start=\"630\" data-end=\"658\">Performance Blue (BT1Q8PA)</li>\n<li data-section-id=\"1cs07kr\" data-start=\"659\" data-end=\"720\">Mica Silver (BT1Q9PA) <span class=\"\" data-state=\"closed\"></span>\n</li>\n</ul>\n<hr data-start=\"722\" data-end=\"725\">\n<h2 data-section-id=\"rkota4\" data-start=\"727\" data-end=\"748\">Key Specifications</h2>\n<p data-start=\"750\" data-end=\"763\"><strong data-start=\"750\" data-end=\"760\">Brand:</strong> HP</p>\n<p data-start=\"765\" data-end=\"798\"><strong data-start=\"765\" data-end=\"782\">Product Type:</strong> Gaming Notebook</p>\n<p data-start=\"800\" data-end=\"834\"><strong data-start=\"800\" data-end=\"814\">Processor:</strong> AMD Ryzen™ 7 7445HS</p>\n<p data-start=\"836\" data-end=\"875\"><strong data-start=\"836\" data-end=\"849\">Graphics:</strong> NVIDIA® GeForce RTX™ 2050</p>\n<p data-start=\"877\" data-end=\"897\"><strong data-start=\"877\" data-end=\"888\">Memory:</strong> 8GB DDR5</p>\n<p data-start=\"899\" data-end=\"921\"><strong data-start=\"899\" data-end=\"911\">Storage:</strong> 512GB SSD</p>\n<p data-start=\"923\" data-end=\"956\"><strong data-start=\"923\" data-end=\"935\">Display:</strong> 15.6\" Full HD, 144Hz</p>\n<p data-start=\"958\" data-end=\"995\"><strong data-start=\"958\" data-end=\"979\">Operating System:</strong> Windows 11 Home</p>\n<p data-start=\"997\" data-end=\"1019\"><strong data-start=\"997\" data-end=\"1019\">Software Included:</strong></p>\n<ul data-start=\"1020\" data-end=\"1079\">\n<li data-section-id=\"f1otg7\" data-start=\"1020\" data-end=\"1048\">Microsoft Office Home 2024</li>\n<li data-section-id=\"drnlbd\" data-start=\"1049\" data-end=\"1079\">Microsoft 365 Basic (1 Year)</li>\n</ul>\n<p data-start=\"1081\" data-end=\"1103\"><strong data-start=\"1081\" data-end=\"1103\">Available Colours:</strong></p>\n<ul data-start=\"1104\" data-end=\"1194\">\n<li data-section-id=\"hkarrk\" data-start=\"1104\" data-end=\"1132\">Performance Blue (BT1Q8PA)</li>\n<li data-section-id=\"1v05vwb\" data-start=\"1133\" data-end=\"1194\">Mica Silver (BT1Q9PA)<br>\n</li>\n</ul>\n<p> </p>\n<h2 data-section-id=\"cctytt\" data-start=\"1625\" data-end=\"1636\" class=\"PDq2pG_selectionAnchorContainer\">Warranty<span aria-hidden=\"true\" class=\"PDq2pG_selectionAnchor\"></span>\n</h2>\n<p data-start=\"1638\" data-end=\"1668\"><strong data-start=\"1638\" data-end=\"1660\">Warranty Duration:</strong> 2 Years</p>\n<p data-start=\"1670\" data-end=\"1766\"><strong data-start=\"1670\" data-end=\"1688\">Warranty Type:</strong> Manufacturer Warranty</p>",
+        "options": [
+          {
+            "name": "Color",
+            "position": 1,
+            "values": [
+              "Performance Blue",
+              "Mica Silver"
+            ]
+          }
+        ],
+        "variants": [
+          {
+            "id": 49485539377380,
+            "title": "Performance Blue",
+            "option1": "Performance Blue",
+            "option2": null,
+            "option3": null,
+            "sku": "199251537356",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 83695956394212,
+              "product_id": 9153305510116,
+              "position": 2,
+              "created_at": "2026-07-23T11:07:14+08:00",
+              "updated_at": "2026-07-23T11:07:15+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/Untitled-1_a0fc0e9d-3511-407f-a5fa-ba74d8ff81c6.jpg?v=1784776035",
+              "variant_ids": [
+                49485539377380
+              ]
+            },
+            "available": true,
+            "price": "3199.00",
+            "grams": 50000,
+            "compare_at_price": "3199.00",
+            "position": 1,
+            "product_id": 9153305510116,
+            "created_at": "2026-07-23T11:09:46+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          },
+          {
+            "id": 49485539410148,
+            "title": "Mica Silver",
+            "option1": "Mica Silver",
+            "option2": null,
+            "option3": null,
+            "sku": "199251537349",
+            "requires_shipping": true,
+            "taxable": true,
+            "featured_image": {
+              "id": 83695957246180,
+              "product_id": 9153305510116,
+              "position": 3,
+              "created_at": "2026-07-23T11:07:21+08:00",
+              "updated_at": "2026-07-23T11:07:23+08:00",
+              "alt": null,
+              "width": 1024,
+              "height": 1024,
+              "src": "https://cdn.shopify.com/s/files/1/1974/9033/files/Untitled-6_4a53146a-cac5-4d09-95fb-75a06961bc6d.jpg?v=1784776043",
+              "variant_ids": [
+                49485539410148
+              ]
+            },
+            "available": false,
+            "price": "3199.00",
+            "grams": 50000,
+            "compare_at_price": "3199.00",
+            "position": 2,
+            "product_id": 9153305510116,
+            "created_at": "2026-07-23T11:09:46+08:00",
+            "updated_at": "2026-10-20T17:26:34+08:00"
+          }
+        ]
+      }
+    ]
+  }
+}

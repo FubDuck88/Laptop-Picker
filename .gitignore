@@ -7,3 +7,9 @@ venv/
 .env
 *.exe
 *.spec
+
+# Transient collection state and private rejected raw records
+artifacts/
+data/.collection.lock
+data/.release-*.tmp
+data/releases/.release-*.tmp

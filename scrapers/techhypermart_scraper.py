@@ -1,4 +1,9 @@
 import sys
+if __package__ in (None, ""):
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from source_normalization import title_specs
+from source_photos import element_photo, photo_url
 """
 TechHypermart Notebook Scraper
 Uses undetected_chromedriver to bypass Cloudflare protection and fetch notebook listings
@@ -25,63 +30,7 @@ CATEGORY_URL = f"{BASE_URL}/notebooks"
 
 
 def parse_specs_from_title(title):
-    """Parses processor, graphics, memory, storage, and display from TechHypermart title strings."""
-    specs = {
-        "processor": "",
-        "graphics": "",
-        "memory": "",
-        "storage": "",
-        "display": "",
-        "wifi": "",
-        "battery": "",
-        "others": ""
-    }
-    if not title:
-        return specs
-
-    # Processor patterns
-    proc_pats = [
-        r'(?:Intel\s+)?(?:Core\s+)?(?:Ultra\s+)?\d?\s*(?:i[3579]|C[UuA]\d)[^\s,()]*',
-        r'Core\s+[^\s,()]+',
-        r'R[3579][-\s]\d{3,4}[A-Z]*',
-        r'Ryzen\s*\d?\s*\d{4}[A-Z]*',
-        r'Athlon[^\s,()]*',
-        r'Celeron[^\s,()]*',
-    ]
-    for pat in proc_pats:
-        m = re.search(pat, title, re.IGNORECASE)
-        if m:
-            specs["processor"] = m.group(0).strip()
-            break
-
-    # Memory (RAM)
-    m_ram = re.search(r'\b([8|12|16|24|32|64]{1,2}\s*GB(?:\s*(?:D5|D4|DDR[45]\w*|LPDDR[45]X?|RAM))?)\b', title, re.IGNORECASE)
-    if m_ram:
-        specs["memory"] = m_ram.group(1).strip()
-
-    # Storage (256GB, 512GB, 1TB, 2TB, SSD, NVMe, PCIe, G4, G3)
-    m_sto = re.search(r'\b((?:128|256|512|1024)\s*GB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?|\d\s*TB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?)\b', title, re.IGNORECASE)
-    if m_sto:
-        specs["storage"] = m_sto.group(1).strip()
-
-    # Fix case where storage matched RAM
-    if specs["storage"].lower() == specs["memory"].lower() or (re.search(r'^\d{1,2}\s*GB', specs["storage"], re.IGNORECASE) and not re.search(r'SSD|NVMe|PCIe|Gen\d|G[345]|M\.2', specs["storage"], re.IGNORECASE)):
-        specs["storage"] = ""
-        m_sto_fallback = re.search(r'\b((?:256|512|1024)\s*GB|\d\s*TB)\b', title, re.IGNORECASE)
-        if m_sto_fallback and m_sto_fallback.group(1).lower() != specs["memory"].lower():
-            specs["storage"] = m_sto_fallback.group(1).strip()
-
-    # Display
-    m = re.search(r'(\d+\.?\d*["\u201d]?\s*(?:FHD|QHD|WUXGA|WQXGA|UHD|HD|OLED|IPS)[^\s,()]*(\s*\d+Hz)?)', title, re.IGNORECASE)
-    if m:
-        specs["display"] = m.group(1).strip()
-
-    # Graphics
-    m = re.search(r'((?:NV\s*)?(?:RTX|GTX|GeForce|Radeon|Arc)\s*\d+[^\s,()]*)', title, re.IGNORECASE)
-    if m:
-        specs["graphics"] = m.group(1).strip()
-
-    return specs
+    return title_specs(title)
 
 
 def extract_products_from_page(html_content):
@@ -99,18 +48,10 @@ def extract_products_from_page(html_content):
             title = caption_a.get_text(strip=True) if caption_a else ""
 
         link_tag = item.select_one("a.product-img") or item.select_one(".caption h4 a")
-        product_url = link_tag.get("href", "").strip() if link_tag else ""
+        product_url = photo_url(link_tag.get("href", ""), BASE_URL + '/') if link_tag else None
 
         # Image URL (Check data-src, srcset, src)
-        img_url = ""
-        if img_tag:
-            img_url = (img_tag.get("data-src") or img_tag.get("src") or img_tag.get("srcset") or "").strip()
-            if img_url.startswith("//"):
-                img_url = "https:" + img_url
-            elif img_url.startswith("/"):
-                img_url = BASE_URL + img_url
-            elif img_url.startswith("image/"):
-                img_url = BASE_URL + "/" + img_url
+        img_url = element_photo(img_tag, BASE_URL + '/') or ""
 
         # Price
         price_el = item.select_one(".price-new") or item.select_one(".price")

@@ -1,0 +1,206 @@
+name: Verified Pages release
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [drill, cutover, daily, recover]
+        default: drill
+      recover_run:
+        description: Failed run identity for guarded recovery
+        type: string
+        default: ''
+  workflow_call:
+    inputs:
+      mode:
+        type: string
+        default: daily
+      recover_run:
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verified-laptop-publication
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: https://fubduck88.github.io/Laptop-Picker/
+    env:
+      GH_TOKEN: ${{ github.token }}
+      OP_MODE: ${{ inputs.mode || 'daily' }}
+      RECOVER_RUN: ${{ inputs.recover_run }}
+      SITE_URL: https://fubduck88.github.io/Laptop-Picker/
+    outputs:
+      outcome: ${{ steps.outcome.outputs.value }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install checked runtime and browser dependencies
+        run: |
+          python -m pip install -r requirements-test.txt playwright
+          python -m playwright install --with-deps chromium
+      - name: Resolve and verify stored recovery bytes
+        id: prepare
+        run: python -B tools/pages_ops.py prepare --output artifacts/pages
+      - uses: actions/upload-artifact@v4
+        if: steps.prepare.outcome == 'success'
+        with:
+          name: pages-recovery
+          path: artifacts/pages/recovery/artifact.tar
+          if-no-files-found: error
+      - name: Run offline checks
+        if: env.OP_MODE != 'recover'
+        run: python -B tools/check.py
+      - name: Seed previous public release without changing its observations
+        if: env.OP_MODE != 'recover'
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          from pages_package import read_archive
+          operation=json.loads(Path('artifacts/pages/operation.json').read_text())
+          files=read_archive('artifacts/pages/recovery/artifact.tar',operation['recovery']['archive_sha256'])
+          for name,body in files.items():
+              if name.startswith('data/'):
+                  target=Path(name); target.parent.mkdir(parents=True,exist_ok=True); target.write_bytes(body)
+          PY
+      - name: Collect qualified source into validated local release
+        id: collect
+        if: env.OP_MODE == 'cutover' || env.OP_MODE == 'daily'
+        run: python -B tools/run_daily.py --sources allit --diagnostics-dir artifacts/pages/collection
+      - name: Independently audit qualified source
+        if: env.OP_MODE == 'cutover' || env.OP_MODE == 'daily'
+        run: python -B tools/audit_source_release.py --output artifacts/pages/source-audit.json
+      - name: Build independently allowlisted public and candidate archives
+        id: build
+        if: env.OP_MODE != 'recover'
+        run: |
+          RECOVERY_SHA=$(python -c "import json;print(json.load(open('artifacts/pages/operation.json'))['recovery']['archive_sha256'])")
+          python -B tools/build_pages.py --output artifacts/pages --identity "${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" --recovery-archive artifacts/pages/recovery/artifact.tar --recovery-sha "$RECOVERY_SHA"
+          python -B tools/pages_ops.py publish --output artifacts/pages
+      - uses: actions/upload-artifact@v4
+        if: steps.build.outcome == 'success'
+        with:
+          name: pages-candidate
+          path: artifacts/pages/candidate/artifact.tar
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: steps.build.outcome == 'success'
+        with:
+          name: pages-public
+          path: artifacts/pages/public/artifact.tar
+          if-no-files-found: error
+      - name: Deploy candidate while retaining known-good public root
+        id: candidate
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: pages-candidate
+      - name: Verify hosted candidate or detect controlled failures
+        id: candidate_check
+        if: steps.candidate.outcome == 'success'
+        continue-on-error: true
+        run: |
+          if [ "$OP_MODE" = drill ]; then
+            python -B tools/verify_pages.py --url "$SITE_URL" --manifest artifacts/pages/candidate/manifest.json --drill
+          else
+            python -B tools/verify_pages.py --url "$SITE_URL" --manifest artifacts/pages/candidate/manifest.json
+          fi
+      - name: Activate independently checked public artifact
+        id: activate
+        if: env.OP_MODE != 'drill' && steps.candidate_check.outcome == 'success'
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: pages-public
+      - name: Verify canonical public URLs
+        id: public_check
+        if: steps.activate.outcome == 'success'
+        continue-on-error: true
+        run: python -B tools/verify_pages.py --url "$SITE_URL" --manifest artifacts/pages/public/manifest.json
+      - name: Restore stored known-good artifact automatically
+        id: restore
+        if: always() && steps.prepare.outcome == 'success' && steps.public_check.outcome != 'success'
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: pages-recovery
+      - name: Verify actual restored public site
+        id: restore_check
+        if: always() && steps.restore.outcome == 'success'
+        continue-on-error: true
+        run: |
+          if [ "$(python -c "import json;print(json.load(open('artifacts/pages/recovery/manifest.json'))['kind'])")" = maintenance-M ]; then
+            python -B tools/verify_maintenance.py --url "$SITE_URL" --manifest artifacts/pages/recovery/manifest.json --attempts 12
+          else
+            python -B tools/verify_pages.py --url "$SITE_URL" --manifest artifacts/pages/recovery/manifest.json
+          fi
+      - name: Record operation outcome with stale-run guard
+        id: outcome
+        if: always()
+        env:
+          PREPARED: ${{ steps.prepare.outcome }}
+          BUILT: ${{ steps.build.outcome }}
+          CANDIDATE_RESULT: ${{ steps.candidate_check.outcome }}
+          PUBLIC_RESULT: ${{ steps.public_check.outcome }}
+          RESTORED: ${{ steps.restore_check.outcome }}
+        run: |
+          VALUE=failed-restored
+          if [ "$PUBLIC_RESULT" = success ]; then VALUE=verified
+          elif [ "$OP_MODE" = recover ] && [ "$RESTORED" = success ]; then VALUE=recovered
+          elif [ "$OP_MODE" = drill ] && [ "$BUILT" = success ] && [ "$CANDIDATE_RESULT" = failure ] && [ "$RESTORED" = success ]; then
+            python -c "import json;d=json.load(open('artifacts/pages/drill.json'));assert d['baseline_verified'] and d['detected']==['http','hash','frontend']"
+            VALUE=drill-restored
+          elif [ "$BUILT" != success ] && [ "$RESTORED" = success ]; then VALUE=degraded-retained
+          elif [ "$RESTORED" != success ]; then VALUE=recovery-unproven
+          fi
+          echo "value=$VALUE" >> "$GITHUB_OUTPUT"
+          if [ "$PREPARED" = success ]; then python -B tools/pages_ops.py finish --output artifacts/pages --outcome "$VALUE"; fi
+          if [ "$VALUE" != verified ] && [ "$VALUE" != drill-restored ] && [ "$VALUE" != recovered ]; then exit 1; fi
+      - name: Retain bounded operational evidence separately from Pages
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-operation-${{ github.run_id }}
+          path: |
+            artifacts/pages/**/*.json
+            artifacts/pages/**/*.sha256
+          retention-days: 30
+  notify:
+    needs: release
+    if: always() && needs.release.outputs.outcome != 'verified'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python -m pip install -r requirements-test.txt
+      - name: Notify owner through the operational incident
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OUTCOME: ${{ needs.release.outputs.outcome || 'failed/degraded' }}
+        run: python -B tools/pages_ops.py notify --outcome "$OUTCOME"

@@ -1,4 +1,8 @@
 import sys
+if __package__ in (None, ""):
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from source_normalization import gpu_model
 import requests
 import json
 import csv
@@ -23,33 +27,8 @@ HEADERS = {
 
 
 def infer_graphics(cpu_str, title, raw_spec):
-    """Fallback integrated graphics inference when summary bullet omits iGPU."""
-    text = (cpu_str + " " + title + " " + raw_spec).lower()
-    
-    # Discrete GPUs
-    rtx_m = re.search(r'\b(rtx\s*\d{4}(?:\s*ti)?)\b', text)
-    if rtx_m:
-        return "NVIDIA GeForce " + rtx_m.group(1).upper()
-    gtx_m = re.search(r'\b(gtx\s*\d{4}(?:\s*ti)?)\b', text)
-    if gtx_m:
-        return "NVIDIA GeForce " + gtx_m.group(1).upper()
-    rx_m = re.search(r'\b(radeon\s*rx\s*\d{4}\w*)\b', text)
-    if rx_m:
-        return "AMD " + rx_m.group(1).title()
-
-    # Integrated GPUs
-    if "intel arc" in text or "core ultra" in text:
-        return "Intel Arc Graphics"
-    if "iris xe" in text:
-        return "Intel Iris Xe Graphics"
-    if "radeon" in text or "ryzen" in text or "amd" in text:
-        return "AMD Radeon Graphics"
-    if "snapdragon" in text or "adreno" in text:
-        return "Qualcomm Adreno Graphics"
-    if "intel" in text or "core" in text:
-        return "Intel Integrated Graphics"
-    
-    return "Integrated Graphics"
+    # Only return a GPU named by the source; CPU family does not prove a GPU.
+    return gpu_model(title + " " + raw_spec)
 
 
 def parse_model_spec(html_str):

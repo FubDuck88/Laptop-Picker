@@ -3,14 +3,14 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="no-referrer" />
   <title>Laptop Picker Mobile | Compare Specs & Deals</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <link rel="stylesheet" href="css/mobile.css">
+  <link rel="stylesheet" href="css/catalog.css">
 </head>
 
 <body>
@@ -30,10 +30,15 @@
     </div>
   </header>
 
+<aside class="catalog-status" aria-label="Catalog status">
+    <p id="catalogMessage" role="status" aria-live="polite">Loading verified offers…</p>
+    <button id="catalogRetry" type="button" hidden>Retry loading catalog</button>
+    <label><input type="checkbox" id="showExpired"> Include expired offers (over seven days old)</label>
+  </aside>
   <!-- Quick Preset Chips Bar -->
   <div class="m-chip-bar">
     <button class="m-chip active" id="chipAll">All Laptops</button>
-    <button class="m-chip" id="chipSteam">🎮 Steam Specs Preset</button>
+    <button class="m-chip" id="chipSteam">🎮 Gaming preset</button>
     <button class="m-chip" id="chipDeals">🏷️ Multi-Vendor Deals</button>
     <button class="m-chip" id="chipNvidia">🟢 RTX Gaming</button>
     <button class="m-chip" id="chip16Gb">🧠 16GB+ RAM</button>
@@ -41,7 +46,7 @@
 
   <!-- Active Steam Banner -->
   <div class="m-banner" id="mSteamBanner" style="display:none;">
-    <span>🎮 <strong>July 2026 Steam Specs Active</strong></span>
+    <span>🎮 <strong>Gaming preset active</strong></span>
     <button id="mClearSteam" style="background:none;border:none;color:var(--accent);font-weight:700;font-size:11px;cursor:pointer;">Clear</button>
   </div>
 
@@ -74,7 +79,7 @@
 
     <button class="m-nav-item" id="navSteamSheet">
       <span class="m-nav-icon">🎮</span>
-      <span>Steam Survey</span>
+      <span>Gaming preset</span>
     </button>
   </nav>
 
@@ -93,10 +98,10 @@
         <!-- Steam Spec Preset Banner in Sheet -->
         <div class="m-filter-group" style="background:linear-gradient(135deg, rgba(87,217,198,0.1) 0%, rgba(255,176,32,0.1) 100%);">
           <div style="padding:12px 14px;">
-            <div style="font-size:12px;font-weight:700;color:var(--accent-2);margin-bottom:6px;">🎮 Steam Hardware Survey (July 2026)</div>
+            <div style="font-size:12px;font-weight:700;color:var(--accent-2);margin-bottom:6px;">🎮 Gaming preset rules</div>
             <div style="font-size:11px;color:var(--text-dim);margin-bottom:8px;">Filters to 16GB+ RAM, RTX 3060/4060+ GPU & 6+ Core CPU.</div>
             <button class="m-btn secondary" id="mSteamPresetToggle" style="width:100%;padding:8px;font-size:11px;border-color:var(--accent-2);color:var(--accent-2);">
-              🎯 Toggle Steam July 2026 Specs
+              🎯 Toggle Gaming preset
             </button>
           </div>
         </div>
@@ -167,7 +172,7 @@
               <li class="m-cb-item"><input type="checkbox" id="mgpu-4060" data-key="gpu" data-val="RTX 4060" /><label for="mgpu-4060">RTX 4060</label></li>
               <li class="m-cb-item"><input type="checkbox" id="mgpu-4050" data-key="gpu" data-val="RTX 4050" /><label for="mgpu-4050">RTX 4050</label></li>
               <li class="m-cb-item"><input type="checkbox" id="mgpu-3050" data-key="gpu" data-val="RTX 3050" /><label for="mgpu-3050">RTX 3050</label></li>
-              <li class="m-cb-item"><input type="checkbox" id="mgpu-igpu" data-key="gpu" data-val="Iris" /><label for="mgpu-igpu">Integrated (Iris / Arc / Radeon)</label></li>
+              <li class="m-cb-item"><input type="checkbox" id="mgpu-igpu" data-key="gpu" data-val="integrated" /><label for="mgpu-igpu">Integrated (Iris / Arc / Radeon)</label></li>
             </ul>
           </div>
         </div>
@@ -242,30 +247,24 @@
     </div>
   </div>
 
-  <!-- Steam Survey Info Mobile Sheet -->
+  <!-- Gaming preset Info Mobile Sheet -->
   <div class="m-sheet-overlay" id="mSteamOverlay">
     <div class="m-sheet">
       <div class="m-sheet-head">
-        <span class="m-sheet-title">🎮 Steam Survey Benchmark (July 2026)</span>
+        <span class="m-sheet-title">🎮 Gaming preset Benchmark (July 2026)</span>
         <button class="m-sheet-close" id="closeSteamSheet">✕</button>
       </div>
       <div class="m-sheet-body" style="font-size:12px;line-height:1.5;">
         <div class="table-scroll-box">
-          <table style="width:100%;border-collapse:collapse;margin-bottom:12px;background:var(--bg);border-radius:8px;overflow:hidden;">
-            <tr style="background:var(--surface-raised);text-align:left;"><th style="padding:8px;">Component</th><th style="padding:8px;">Steam Top Spec</th><th style="padding:8px;">Share</th></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;">GPU</td><td style="padding:8px;">NVIDIA RTX 3060 / 4060+</td><td style="padding:8px;color:var(--accent-2);">72.72%</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;">RAM</td><td style="padding:8px;">16 GB System RAM</td><td style="padding:8px;color:var(--accent-2);">40.97%</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;">CPU</td><td style="padding:8px;">8 Cores (27.8%) & 6 Cores (27.5%)</td><td style="padding:8px;color:var(--accent-2);">55.37%</td></tr>
-            <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;">Display</td><td style="padding:8px;">1920 x 1080 Full HD</td><td style="padding:8px;color:var(--accent-2);">51.10%</td></tr>
-            <tr><td style="padding:8px;">Storage</td><td style="padding:8px;">Above 1 TB Storage</td><td style="padding:8px;color:var(--accent-2);">49.33%</td></tr>
-          </table>
+          <p>Local gaming preset: known 16–32GB system RAM, price up to RM10,000, selected mainstream RTX/GTX GPUs and Core i5/i7, Ultra 5/7 or Ryzen 5/7 CPUs. Unknown required specifications do not qualify. This is not a measured popularity ranking.</p>
         </div>
         <button class="m-btn primary" id="applySteamFromSheet" style="width:100%;padding:10px;">Apply Steam Preset Filter</button>
       </div>
     </div>
   </div>
 
-  <script src="data/data.js"></script>
+  <script src="js/release.js"></script>
+  <script src="js/catalog.js"></script>
   <script src="js/core.js"></script>
   <script src="js/mobile.js"></script>
 

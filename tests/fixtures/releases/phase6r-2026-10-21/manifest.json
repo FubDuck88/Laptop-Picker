@@ -1,0 +1,18 @@
+{
+  "fixture_manifest_version": 1,
+  "purpose": "Post-6R GPU extraction repair; historical regression input, not a live recommendation or gate receipt",
+  "source_release_sha256": "4024cf5e837eaafe955f6eead170810535b2d7f2d8a5364e666215e4236f903d",
+  "release_version": 1,
+  "catalog_schema_version": 2,
+  "configuration_count": 22,
+  "offer_count": 22,
+  "gpu_kind_known": 5,
+  "vram_known": 4,
+  "field_review_status": "Pending FubDuck88 review; automated evidence checks do not approve coverage",
+  "file_sha256": {
+    "catalog-v2.schema.json": "e8ef64659c4c5f9687a192d5169be9f12722c0f4a5b9d36f6f8177cdd868a0ba",
+    "clock.json": "0b21843387e203af797dc946c854d6369b96c2e4367e314cea486a6a9c2f145f",
+    "current.json": "cc2b8a2c888aed482792aff9ad1d880bd07ddcad6a52ccef9de412dfd07af642",
+    "releases/4024cf5e837eaafe955f6eead170810535b2d7f2d8a5364e666215e4236f903d.json": "4024cf5e837eaafe955f6eead170810535b2d7f2d8a5364e666215e4236f903d"
+  }
+}

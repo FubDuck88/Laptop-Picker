@@ -1,0 +1,6 @@
+# Hash-addressed releases must survive Windows/Unix checkout byte for byte.
+data/current.json -text whitespace=cr-at-eol
+data/releases/*.json -text whitespace=cr-at-eol
+tests/fixtures/releases/** whitespace=cr-at-eol
+# Literal captured HTML includes source whitespace used by parser regressions.
+tests/fixtures/captured/*.html -text whitespace=-blank-at-eol,cr-at-eol

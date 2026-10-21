@@ -26,15 +26,11 @@ let currentMeanPrice = 0;
 let currentMedianPrice = 0;
 let currentModePrice = 0;
 let currentBenchmark = { name: 'mean', val: 0 };
-let currentTrendTimeframe = 'week';
 
 function initAnalytics(rawRows) {
   console.log('[analytics] Initializing analytics with rows:', rawRows ? rawRows.length : 0);
-  if (!rawRows || !Array.isArray(rawRows) || rawRows.length === 0) {
-    console.error('[analytics] No laptop data loaded.');
-    return;
-  }
-  globalRawRows = rawRows;
+  globalRawRows = rawRows || [];
+  renderRecordedHistory();
 
   // Dynamically populate CPU, GPU, and RAM dropdowns from actual dataset
   populateAnalyticsFilterDropdowns(rawRows);
@@ -49,37 +45,15 @@ function initAnalytics(rawRows) {
       if (isSteamFilterActive) {
         steamBtn.style.background = 'var(--accent-2)';
         steamBtn.style.color = '#1A1305';
-        if (btnText) btnText.textContent = 'Steam Specs Filter ON ✓';
+        if (btnText) btnText.textContent = 'Gaming preset Filter ON ✓';
       } else {
         steamBtn.style.background = 'transparent';
         steamBtn.style.color = 'var(--accent-2)';
-        if (btnText) btnText.textContent = 'Filter Steam Specs';
+        if (btnText) btnText.textContent = 'Filter Gaming preset';
       }
       renderAnalyticsView();
     });
   }
-
-  // Bind Timeframe Toggle Buttons (Week, Month, Year, All Time)
-  document.querySelectorAll('.trend-time-btn').forEach(btn => {
-    if (!btn.dataset.bound) {
-      btn.dataset.bound = '1';
-      btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.trend-time-btn').forEach(b => {
-          b.classList.remove('active');
-          b.style.background = 'transparent';
-          b.style.color = 'var(--text-muted)';
-          b.style.fontWeight = '600';
-        });
-        const target = e.currentTarget;
-        target.classList.add('active');
-        target.style.background = '#38bdf8';
-        target.style.color = '#0f172a';
-        target.style.fontWeight = '700';
-        currentTrendTimeframe = target.dataset.timeframe || 'week';
-        renderPriceTrendGraph(currentMeanPrice, currentMedianPrice);
-      });
-    }
-  });
 
   // Bind Filter Controls & Sort Selects
   const brandEl = document.getElementById('analyticsBrandFilter');
@@ -132,7 +106,7 @@ function initAnalytics(rawRows) {
         steamBtn.style.background = 'transparent';
         steamBtn.style.color = 'var(--accent-2)';
         const btnText = document.getElementById('steamFilterText');
-        if (btnText) btnText.textContent = 'Filter Steam Specs';
+        if (btnText) btnText.textContent = 'Filter Gaming preset';
       }
       renderAnalyticsView();
     });
@@ -152,67 +126,10 @@ function populateAnalyticsFilterDropdowns(rows) {
   const ramSet = new Set();
 
   rows.forEach(r => {
-    const text = `${r.processor || ''} ${r.graphics || ''} ${r.memory || ''} ${r.title || ''}`.toLowerCase();
-
-    // Check GPUs present in dataset
-    const knownGpus = [
-      { val: 'rtx 3050', label: 'RTX 3050' },
-      { val: 'rtx 3060', label: 'RTX 3060' },
-      { val: 'rtx 3070', label: 'RTX 3070' },
-      { val: 'rtx 4050', label: 'RTX 4050' },
-      { val: 'rtx 4060', label: 'RTX 4060' },
-      { val: 'rtx 4070', label: 'RTX 4070' },
-      { val: 'rtx 5050', label: 'RTX 5050' },
-      { val: 'rtx 5060', label: 'RTX 5060' },
-      { val: 'rtx 5070', label: 'RTX 5070' },
-      { val: 'gtx 1650', label: 'GTX 1650' },
-      { val: 'radeon', label: 'Radeon' },
-      { val: 'iris', label: 'Iris Xe' },
-      { val: 'intel graphics', label: 'Intel Integrated' }
-    ];
-
-    knownGpus.forEach(g => {
-      const cleanVal = g.val.replace(/\s+/g, '');
-      if (text.includes(g.val) || text.includes(cleanVal)) {
-        gpuSet.add(JSON.stringify(g));
-      }
-    });
-
-    // Check CPUs present in dataset
-    const knownCpus = [
-      { val: 'i3', label: 'Core i3' },
-      { val: 'i5', label: 'Core i5' },
-      { val: 'i7', label: 'Core i7' },
-      { val: 'i9', label: 'Core i9' },
-      { val: 'ultra 5', label: 'Core Ultra 5' },
-      { val: 'ultra 7', label: 'Core Ultra 7' },
-      { val: 'ultra 9', label: 'Core Ultra 9' },
-      { val: 'ryzen 3', label: 'Ryzen 3' },
-      { val: 'ryzen 5', label: 'Ryzen 5' },
-      { val: 'ryzen 7', label: 'Ryzen 7' },
-      { val: 'ryzen 9', label: 'Ryzen 9' },
-      { val: 'r5', label: 'Ryzen 5 (R5)' },
-      { val: 'r7', label: 'Ryzen 7 (R7)' },
-      { val: 'r9', label: 'Ryzen 9 (R9)' },
-      { val: 'c5', label: 'Core 5 / C5' },
-      { val: 'cu5', label: 'Core Ultra 5 (CU5)' },
-      { val: 'c7', label: 'Core 7 / C7' },
-      { val: 'cu7', label: 'Core Ultra 7 (CU7)' }
-    ];
-
-    knownCpus.forEach(c => {
-      const cleanVal = c.val.replace(/\s+/g, '');
-      if (text.includes(c.val) || text.includes(cleanVal)) {
-        cpuSet.add(JSON.stringify(c));
-      }
-    });
-
-    // Check RAM present in dataset
-    [8, 12, 16, 24, 32, 64].forEach(m => {
-      if (text.includes(m + 'gb') || text.includes(m + ' gb')) {
-        ramSet.add(m);
-      }
-    });
+    if (r.graphics) gpuSet.add(JSON.stringify({val: r.graphics.toLowerCase(), label: r.graphics}));
+    if (r.processor) cpuSet.add(JSON.stringify({val: r.processor.toLowerCase(), label: r.processor}));
+    const gb = systemRamGb(r);
+    if (gb != null) ramSet.add(gb);
   });
 
   const parsedGpus = [...gpuSet].map(s => JSON.parse(s));
@@ -255,60 +172,28 @@ function renderAnalyticsView() {
     if (pVal <= 0) return;
 
     const isSteamMatch = typeof matchesSteamSpecs === 'function' ? matchesSteamSpecs(r) : true;
-    const fullText = `${r.title || ''} ${r.processor || ''} ${r.graphics || ''} ${r.memory || ''} ${r.storage || ''} ${r.series || ''}`.toLowerCase();
-
-    // 1. Laptop Brand / Manufacturer
-    if (brandVal && !fullText.includes(brandVal)) return;
-
-    // 2. CPU Brand (Intel vs AMD)
-    if (cpuBrandVal) {
-      if (cpuBrandVal === 'intel' && !/intel|core|i3|i5|i7|i9|ultra/i.test(fullText)) return;
-      if (cpuBrandVal === 'amd' && !/amd|ryzen/i.test(fullText)) return;
-    }
-
-    // 3. GPU Brand (NVIDIA vs AMD vs Intel)
-    if (gpuBrandVal) {
-      if (gpuBrandVal === 'nvidia' && !/geforce|rtx|gtx|nvidia/i.test(fullText)) return;
-      if (gpuBrandVal === 'amd' && !/radeon|amd|rx\s*\d/i.test(fullText)) return;
-      if (gpuBrandVal === 'intel' && !/intel|arc|iris|uhd/i.test(fullText)) return;
-    }
-
-    // 4. VRAM Capacity
+    const cpu = (r.processor || '').toLowerCase();
+    const gpu = (r.graphics || '').toLowerCase();
+    if (brandVal && (r.brand ? r.brand.toLowerCase() !== brandVal : !r.title.toLowerCase().includes(brandVal))) return;
+    if (cpuBrandVal === 'intel' && !/intel|core|i[3579]|ultra/.test(cpu)) return;
+    if (cpuBrandVal === 'amd' && !/amd|ryzen/.test(cpu)) return;
+    if (gpuBrandVal === 'nvidia' && !/geforce|rtx|gtx|nvidia/.test(gpu)) return;
+    if (gpuBrandVal === 'amd' && !/radeon|\brx\s*\d/.test(gpu)) return;
+    if (gpuBrandVal === 'intel' && !/intel|arc|iris|uhd/.test(gpu)) return;
     if (vramVal) {
-      if (vramVal === '4gb' && !/4\s*gb\s*(gddr|vram)|3050\s*4gb/i.test(fullText)) return;
-      if (vramVal === '6gb' && !/6\s*gb\s*(gddr|vram)|3060|4050/i.test(fullText)) return;
-      if (vramVal === '8gb' && !/8\s*gb\s*(gddr|vram)|3070|4060|4070|5060/i.test(fullText)) return;
-      if (vramVal === '12gb+' && !/12\s*gb|16\s*gb\s*(gddr|vram)|3080|4080|4090|5080|5090/i.test(fullText)) return;
-      if (vramVal === 'shared' && !/integrated|iris|shared|uhd|radeon graphics/i.test(fullText)) return;
+      const gb = r.vram_gb;
+      if (vramVal === 'shared' ? !isIntegratedGpu(r)
+        : gb == null || (vramVal.endsWith('+') ? gb < parseInt(vramVal) : gb !== parseInt(vramVal))) return;
     }
-
-    // 5. Storage Capacity
     if (storageVal) {
-      if (storageVal === '512gb' && !/512\s*gb|512gb/i.test(fullText)) return;
-      if (storageVal === '1tb' && !/1\s*tb|1tb|1024\s*gb/i.test(fullText)) return;
-      if (storageVal === '2tb+' && !/2\s*tb|2tb|4\s*tb/i.test(fullText)) return;
+      const gb = r.storage_gb;
+      const target = storageVal.includes('tb') ? parseInt(storageVal) * 1000 : parseInt(storageVal);
+      if (gb == null || (storageVal.endsWith('+') ? gb < target : gb !== target)) return;
     }
-
-    // 6. Specific GPU Tier
-    if (gpuVal) {
-      const gpuClean = gpuVal.replace(/\s+/g, '');
-      const matchGpu = fullText.includes(gpuVal) || fullText.includes(gpuClean);
-      if (!matchGpu) return;
-    }
-
-    // 7. System RAM
-    if (ramVal) {
-      const ramClean = ramVal.replace(/\s+/g, '');
-      const matchRam = fullText.includes(ramVal) || fullText.includes(ramClean);
-      if (!matchRam) return;
-    }
-
-    // 8. Specific CPU Tier
-    if (cpuVal) {
-      const cpuClean = cpuVal.replace(/\s+/g, '');
-      const matchCpu = fullText.includes(cpuVal) || fullText.includes(cpuClean);
-      if (!matchCpu) return;
-    }
+    if (gpuVal && !gpu.includes(gpuVal)) return;
+    if (ramVal && systemRamGb(r) !== parseInt(ramVal)) return;
+    if (cpuVal && !cpu.includes(cpuVal)) return;
+    if (isSteamFilterActive && !isSteamMatch) return;
 
     validLaptops.push({
       ...r,
@@ -337,6 +222,10 @@ function renderAnalyticsView() {
     
     const chartContainer = document.getElementById('priceBarChart');
     if (chartContainer) chartContainer.innerHTML = '';
+    for (const id of ['lowestLaptopName','highestLaptopName','modeSubtext','statTotalSubtext','chartYAxis','chartXAxis','priceChartRange']) { const el = document.getElementById(id); if (el) el.textContent = ''; }
+    for (const id of ['statLowestPrice','statHighestPrice']) { const el = document.getElementById(id); if (el) { el.href = '#'; el.title = ''; } }
+    currentMeanPrice = currentMedianPrice = currentModePrice = 0;
+    currentBenchmark = {name:'mean', val:0};
     renderLaptopTable([]);
     return;
   }
@@ -379,19 +268,10 @@ function renderAnalyticsView() {
   });
   currentModePrice = modePrice;
 
-  // Calculate weekly trend delta
-  const priceDealsCount = validLaptops.filter(r => r.vendor_count > 1).length;
-  const trendPercent = +(((priceDealsCount / count) * 4.2) - 1.5).toFixed(1);
-
-  // Render KPI Summary Cards & Dynamic Price Change vs. Last Week Badges
-  // Previous week baseline tracking factor (1.4% overall market drop vs last week)
-  const prevWeekMeanFactor = 1.0142;
-  const prevWeekMedianFactor = 1.0081;
-
   const totalEl = document.getElementById('statTotalCount');
   if (totalEl) {
     totalEl.textContent = isSteamFilterActive
-      ? `${activeSubset.length} / ${count} Steam Models`
+      ? `${activeSubset.length} / ${count} Gaming preset models`
       : count.toLocaleString() + ' Models';
   }
   const totalSubEl = document.getElementById('statTotalSubtext');
@@ -402,83 +282,30 @@ function renderAnalyticsView() {
 
   const meanEl = document.getElementById('statMeanPrice');
   if (meanEl) meanEl.textContent = fmtPrice(meanPrice);
-  const meanTrendEl = document.getElementById('meanPriceTrend');
-  if (meanTrendEl) {
-    const prevMean = meanPrice * prevWeekMeanFactor;
-    const meanDiffPct = (((meanPrice - prevMean) / prevMean) * 100).toFixed(1);
-    if (meanDiffPct >= 0) {
-      meanTrendEl.className = 'kpi-trend up';
-      meanTrendEl.textContent = `+${meanDiffPct}% vs last week`;
-    } else {
-      meanTrendEl.className = 'kpi-trend down';
-      meanTrendEl.textContent = `${meanDiffPct}% vs last week`;
-    }
-  }
-
   const medianEl = document.getElementById('statMedianPrice');
   if (medianEl) medianEl.textContent = fmtPrice(medianPrice);
-  const medianTrendEl = document.getElementById('medianPriceTrend');
-  if (medianTrendEl) {
-    const prevMedian = medianPrice * prevWeekMedianFactor;
-    const medianDiffPct = (((medianPrice - prevMedian) / prevMedian) * 100).toFixed(1);
-    if (medianDiffPct >= 0) {
-      medianTrendEl.className = 'kpi-trend up';
-      medianTrendEl.textContent = `+${medianDiffPct}% vs last week`;
-    } else {
-      medianTrendEl.className = 'kpi-trend down';
-      medianTrendEl.textContent = `${medianDiffPct}% vs last week`;
-    }
-  }
-
   const modeEl = document.getElementById('statModePrice');
   if (modeEl) modeEl.textContent = fmtPrice(modePrice);
   const modeSub = document.getElementById('modeSubtext');
   if (modeSub) modeSub.textContent = `Peak Frequency (${maxFreq} models at RM ${modePrice.toLocaleString()})`;
-  const modeTrendEl = document.getElementById('modePriceTrend');
-  if (modeTrendEl) {
-    modeTrendEl.className = 'kpi-trend';
-    modeTrendEl.textContent = '0.0% vs last week';
-  }
-
-  // Lowest & Highest Cards with clickable detail links & dynamic trend badges vs last week
+  // Lowest and highest currently listed prices with store links
   const minLink = document.getElementById('statLowestPrice');
   if (minLink) {
     minLink.textContent = fmtPrice(minPrice);
     minLink.href = lowestLaptop.url || '#';
     minLink.title = lowestLaptop.title;
   }
-  const lowestTrendEl = document.getElementById('lowestPriceTrend');
-  if (lowestTrendEl && minPrice > 0) {
-    const prevMin = minPrice * 1.025; // 2.5% deal drop vs last week
-    const minDiffPct = (((minPrice - prevMin) / prevMin) * 100).toFixed(1);
-    lowestTrendEl.className = 'kpi-trend down';
-    lowestTrendEl.textContent = `${minDiffPct}% vs last week`;
-  }
-
   const maxLink = document.getElementById('statHighestPrice');
   if (maxLink) {
     maxLink.textContent = fmtPrice(maxPrice);
     maxLink.href = highestLaptop.url || '#';
     maxLink.title = highestLaptop.title;
   }
-  const highestTrendEl = document.getElementById('highestPriceTrend');
-  if (highestTrendEl) {
-    highestTrendEl.className = 'kpi-trend';
-    highestTrendEl.textContent = '0.0% vs last week';
-  }
-
   const lowNameEl = document.getElementById('lowestLaptopName');
   if (lowNameEl) lowNameEl.textContent = lowestLaptop.title.slice(0, 45) + '...';
 
   const highNameEl = document.getElementById('highestLaptopName');
   if (highNameEl) highNameEl.textContent = highestLaptop.title.slice(0, 45) + '...';
-
-  const trendEl = document.getElementById('statTrend');
-  if (trendEl) {
-    const isUp = trendPercent >= 0;
-    trendEl.textContent = (isUp ? '+' : '') + trendPercent + '% vs last week';
-    trendEl.className = 'kpi-trend ' + (isUp ? 'up' : 'down');
-  }
 
   // 2. Build Price Distribution Per 100 Laptops
   renderPriceHistogram(validLaptops, 100);
@@ -542,14 +369,14 @@ function renderPriceHistogram(laptops, binSize = 100) {
         const matchRatioPct = bin.count > 0 ? ((bin.matchingCount / bin.count) * 100).toFixed(1) : 0;
         barCol.innerHTML = `<div class="hist-bar-fill" style="height:${pct}%;"><div class="hist-bar-match-fill" style="height:${matchRatioPct}%;"></div></div>`;
         barCol.title = bin.overflow
-          ? `RM ${bin.min.toLocaleString()}+: ${bin.matchingCount} Steam matching (${bin.count} total)`
-          : `RM ${bin.min.toLocaleString()} – RM ${(bin.max - 1).toLocaleString()}: ${bin.matchingCount} Steam matching (${bin.count} total)`;
+          ? `RM ${bin.min.toLocaleString()}+: ${bin.matchingCount} gaming preset matches (${bin.count} total)`
+          : `RM ${bin.min.toLocaleString()} – RM ${(bin.max - 1).toLocaleString()}: ${bin.matchingCount} gaming preset matches (${bin.count} total)`;
       } else {
         barCol.className = 'hist-bar-col shaded-bin' + (bin.overflow ? ' overflow-bin' : '');
         barCol.innerHTML = `<div class="hist-bar-fill" style="height:${pct}%;"></div>`;
         barCol.title = bin.overflow
-          ? `RM ${bin.min.toLocaleString()}+: 0 Steam matching (${bin.count} total)`
-          : `RM ${bin.min.toLocaleString()} – RM ${(bin.max - 1).toLocaleString()}: 0 Steam matching (${bin.count} total)`;
+          ? `RM ${bin.min.toLocaleString()}+: 0 gaming preset matches (${bin.count} total)`
+          : `RM ${bin.min.toLocaleString()} – RM ${(bin.max - 1).toLocaleString()}: 0 gaming preset matches (${bin.count} total)`;
       }
     } else {
       barCol.className = 'hist-bar-col' + (bin.overflow ? ' overflow-bin' : '');
@@ -693,142 +520,11 @@ function renderPriceHistogram(laptops, binSize = 100) {
       ? ` (+${overflowLaptops.length} above RM${cappedMax.toLocaleString()})`
       : '';
     const matchNote = isSteamFilterActive
-      ? ` · ${laptops.filter(r => r.isSteamMatch).length} match Steam survey`
+      ? ` · ${laptops.filter(r => r.isSteamMatch).length} match gaming preset`
       : '';
     rangeLabel.textContent = `RM ${minPrice.toLocaleString()} – RM ${cappedMax.toLocaleString()} · ${bins.length} bars · ${laptops.length} laptops total${tailNote}${matchNote}`;
   }
 
-  // 3. Render Historical Market Price Fluctuation Line Graph
-  renderPriceTrendGraph(currentMeanPrice, currentMedianPrice);
-}
-
-function renderPriceTrendGraph(currentMean, currentMedian) {
-  const svg = document.getElementById('priceTrendSvg');
-  const labelsEl = document.getElementById('trendXAxisLabels');
-  const subtextEl = document.getElementById('fluctuationSubtext');
-  if (!svg) return;
-
-  const timeframeDatasets = {
-    week: {
-      subtext: 'Weekly tracking of Mean & Median price movements across Malaysian distributors',
-      data: [
-        { label: "Jun 16", mean: 7480, median: 6450 },
-        { label: "Jun 23", mean: 7420, median: 6390 },
-        { label: "Jun 30", mean: 7380, median: 6350 },
-        { label: "Jul 07", mean: 7340, median: 6320 },
-        { label: "Jul 14", mean: 7290, median: 6300 },
-        { label: "Jul 21", mean: 7260, median: 6290 },
-        { label: "Jul 28", mean: 7250, median: 6280 },
-        { label: "Aug 04", mean: Math.round(currentMean || 7243), median: Math.round(currentMedian || 6271) }
-      ]
-    },
-    month: {
-      subtext: 'Monthly tracking of Mean & Median price movements over the past 6 months',
-      data: [
-        { label: "Mar 2026", mean: 7850, median: 6790 },
-        { label: "Apr 2026", mean: 7690, median: 6650 },
-        { label: "May 2026", mean: 7540, median: 6520 },
-        { label: "Jun 2026", mean: 7410, median: 6380 },
-        { label: "Jul 2026", mean: 7280, median: 6290 },
-        { label: "Aug 2026", mean: Math.round(currentMean || 7243), median: Math.round(currentMedian || 6271) }
-      ]
-    },
-    year: {
-      subtext: 'Annual price tracking over the past 3 years in the Malaysian market',
-      data: [
-        { label: "2024", mean: 8450, median: 7200 },
-        { label: "2025", mean: 7890, median: 6750 },
-        { label: "2026 YTD", mean: Math.round(currentMean || 7243), median: Math.round(currentMedian || 6271) }
-      ]
-    },
-    alltime: {
-      subtext: 'Complete historical catalog trend since tracking began (2024 - Present)',
-      data: [
-        { label: "Q1 2024", mean: 8600, median: 7350 },
-        { label: "Q3 2024", mean: 8300, median: 7100 },
-        { label: "Q1 2025", mean: 8050, median: 6900 },
-        { label: "Q3 2025", mean: 7750, median: 6600 },
-        { label: "Q1 2026", mean: 7500, median: 6450 },
-        { label: "Q3 2026", mean: Math.round(currentMean || 7243), median: Math.round(currentMedian || 6271) }
-      ]
-    }
-  };
-
-  const activeSet = timeframeDatasets[currentTrendTimeframe] || timeframeDatasets.week;
-  if (subtextEl) subtextEl.textContent = activeSet.subtext;
-
-  // Adjust historical scale proportionately if a spec filter is active
-  const meanRatio = currentMean > 0 ? (currentMean / 7243) : 1;
-  const medianRatio = currentMedian > 0 ? (currentMedian / 6271) : 1;
-
-  const data = activeSet.data.map(t => ({
-    label: t.label,
-    mean: Math.round(t.mean * meanRatio),
-    median: Math.round(t.median * medianRatio)
-  }));
-
-  const allVals = data.flatMap(d => [d.mean, d.median]);
-  const minVal = Math.min(...allVals) * 0.95;
-  const maxVal = Math.max(...allVals) * 1.05;
-  const valSpan = (maxVal - minVal) || 1;
-
-  const viewBoxW = 800;
-  const viewBoxH = 200;
-  const paddingY = 25;
-  const plotH = viewBoxH - (paddingY * 2);
-
-  const getX = (idx) => (idx / Math.max(1, data.length - 1)) * viewBoxW;
-  const getY = (val) => viewBoxH - paddingY - (((val - minVal) / valSpan) * plotH);
-
-  // Generate SVG Points
-  const meanPoints = data.map((d, i) => `${getX(i).toFixed(1)},${getY(d.mean).toFixed(1)}`);
-  const medianPoints = data.map((d, i) => `${getX(i).toFixed(1)},${getY(d.median).toFixed(1)}`);
-
-  const meanPath = `M ${meanPoints.join(' L ')}`;
-  const medianPath = `M ${medianPoints.join(' L ')}`;
-
-  const meanArea = `M 0,${viewBoxH} L ${meanPoints.join(' L ')} L ${viewBoxW},${viewBoxH} Z`;
-  const medianArea = `M 0,${viewBoxH} L ${medianPoints.join(' L ')} L ${viewBoxW},${viewBoxH} Z`;
-
-  svg.innerHTML = `
-    <defs>
-      <linearGradient id="meanGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.3" />
-        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
-      </linearGradient>
-      <linearGradient id="medianGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35" />
-        <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
-      </linearGradient>
-    </defs>
-
-    <!-- Area Fills -->
-    <path d="${meanArea}" fill="url(#meanGrad)" />
-    <path d="${medianArea}" fill="url(#medianGrad)" />
-
-    <!-- Line Paths -->
-    <path d="${meanPath}" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6));" />
-    <path d="${medianPath}" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.6));" />
-
-    <!-- Data Node Circles -->
-    ${data.map((d, i) => {
-      const mx = getX(i).toFixed(1);
-      const my = getY(d.mean).toFixed(1);
-      const dy = getY(d.median).toFixed(1);
-      return `
-        <circle cx="${mx}" cy="${my}" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" style="cursor:pointer;">
-          <title>${d.label}: Mean RM ${d.mean.toLocaleString()}</title>
-        </circle>
-        <circle cx="${mx}" cy="${dy}" r="5" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5" style="cursor:pointer;">
-          <title>${d.label}: Median RM ${d.median.toLocaleString()}</title>
-        </circle>
-      `;
-    }).join('')}
-  `;
-
-  if (labelsEl) {
-    labelsEl.innerHTML = data.map(d => `<span>${d.label}</span>`).join('');
-  }
 }
 
 function renderLaptopTable(items, titleFilter = 'All Laptops Price Directory') {
@@ -868,7 +564,7 @@ function renderLaptopTable(items, titleFilter = 'All Laptops Price Directory') {
     }
 
     const matchBadgeHtml = (isSteamFilterActive && r.isSteamMatch)
-      ? `<span class="badge-steam-match">✓ Steam Spec Match</span>`
+      ? `<span class="badge-steam-match">✓ Gaming preset match</span>`
       : '';
 
     // Store Deal Savings across multi-vendor prices
@@ -905,11 +601,12 @@ function renderLaptopTable(items, titleFilter = 'All Laptops Price Directory') {
       <td>#${idx + 1}</td>
       <td>
         <div class="table-laptop-cell">
-          <img src="${typeof formatImgUrl === 'function' ? formatImgUrl(r.image_url, r.series, r.title) : (r.image_url || 'https://p3-ofp.static.pub/ShareResource/na/products/laptops/subseries-hero/lenovo-legion-pro-7i-gen-9-16inch-intel-hero.png')}" alt="" class="table-laptop-img" loading="lazy">
+          ${renderProductImage(r, false, 40)}
           <div>
             <a href="${r.url}" target="_blank" rel="noopener" class="table-laptop-title" data-noexpand="1">${escapeHtml(r.title)}</a>
             <div class="table-laptop-vendor">
               ${escapeHtml(r.best_vendor || r.series || 'Retailer')} 
+              ${offerStatusHtml(r)}
               ${r.vendor_count > 1 ? `<span class="badge-multi">${r.vendor_count} Stores</span>` : ''}
               ${matchBadgeHtml}
             </div>
@@ -938,10 +635,6 @@ function openLaptopModal(laptop) {
   const body = document.getElementById('specModalBody');
   if (!overlay || !body) return;
 
-  const img = typeof formatImgUrl === 'function'
-    ? formatImgUrl(laptop.image_url, laptop.series, laptop.title)
-    : (laptop.image_url || 'https://via.placeholder.com/120');
-
   const specRows = [
     ['Processor', laptop.processor],
     ['Graphics', laptop.graphics],
@@ -955,7 +648,9 @@ function openLaptopModal(laptop) {
 
   body.innerHTML = `
     <div class="spec-modal-head">
-      <img src="${img}" alt="" class="spec-modal-img">
+      ${renderProductImage(laptop, false, 120)}
+      ${offerStatusHtml(laptop)}
+      ${offerHistoryHtml(laptop)}
       <div>
         <h3>${escapeHtml(laptop.title)}</h3>
         <div class="spec-modal-vendor">${escapeHtml(laptop.best_vendor || laptop.series || 'Retailer')}</div>
@@ -984,3 +679,26 @@ function closeLaptopModal() {
 document.addEventListener('click', (e) => {
   if (e.target.id === 'specModalOverlay') closeLaptopModal();
 });
+function renderRecordedHistory() {
+  const select = document.getElementById('historyOffer');
+  const hint = document.getElementById('priceHistoryUnavailable');
+  const body = document.getElementById('priceHistoryBody');
+  if (!select || !hint || !body) return;
+  const offers = new Map();
+  for (const receipt of verifiedRelease?.history?.receipts || []) offers.set(receipt.offer.id, receipt.offer);
+  const configs = verifiedRelease?.history?.configurations || {};
+  const selected = select.value;
+  select.innerHTML = [...offers.values()].map(o => '<option value="' + escapeHtml(o.id) + '">'
+    + escapeHtml(`${configs[o.configuration_id]?.title || o.source_product_id} — ${o.seller} (${o.variant_id})`) + '</option>').join('');
+  if (offers.has(selected)) select.value = selected;
+  select.disabled = offers.size === 0;
+  function show() {
+    const offer = offers.get(select.value);
+    if (!offer) { hint.textContent = 'No recorded price observations are available.'; body.innerHTML = ''; return; }
+    const points = recordedHistory(verifiedRelease, offer.id);
+    hint.textContent = points.length === 1 ? 'One observation; no price trend yet.' : `${points.length} recorded observations for this exact seller offer.`;
+    body.innerHTML = offerHistoryHtml({verified:true, offer_ids:[offer.id], deals:[{id:offer.id, vendor:offer.seller}]});
+  }
+  select.onchange = show;
+  show();
+}

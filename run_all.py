@@ -14,6 +14,9 @@ from collections import defaultdict
 import sys
 import importlib
 
+from catalog_v2 import build_legacy_catalog, write_catalog
+from source_normalization import (comparison_key, is_family_level, manufacturer_part_number, title_specs)
+
 def get_base_dir():
     if getattr(sys, 'frozen', False):
         return os.path.dirname(sys.executable)
@@ -33,102 +36,20 @@ FIELDNAMES = [
 
 
 def extract_part_number(title, rid):
-    """Extracts official part number / model code from title or ID."""
-    text = (rid + " " + title).upper()
-
-    # 1. Lenovo MTM (10 characters: 83xxxxxx, 21xxxxxx, 22xxxxxx)
-    m = re.search(r'\b(83[A-Z0-9]{8}|21[A-Z0-9]{8}|22[A-Z0-9]{8})\b', text)
-    if m:
-        return m.group(1)
-
-    # 2. ASUS Part Numbers: FA608U-HITU066W, FX608J-MRRV058W, GA403G-MSY018W, G614P-HTS157WP
-    m = re.search(r'\b([A-Z]{2}\d{3}[A-Z]{1,2}[-\s][A-Z0-9]{4,10})\b', text)
-    if m:
-        return m.group(1).replace(" ", "-")
-
-    # 3. HP Part Numbers: 15-FA2547TX, 16-AM0166TX, 15-FB3220AX, 16-AP0057AX, 14-FB0045TX
-    m = re.search(r'\b(\d{2}-[A-Z]{2}\d{4,5}[A-Z]{1,2})\b', text)
-    if m:
-        return m.group(1)
-
-    # 4. MSI Part Numbers: C13WFO-419MY, B8WH-026MY, E8WGK-036MY, A2WJ-1230MY, B13UC-3456MY
-    m = re.search(r'\b([A-Z0-9]{4,6}[-\s][0-9]{3,4}MY)\b', text)
-    if m:
-        return m.group(1).replace(" ", "-")
-
-    # 5. Acer Part Numbers: A715-59G-501E, PHN16-71-72SS, PHN16-I31-551G, A715-59G-527W
-    m = re.search(r'\b([A-Z0-9]{4,6}[-\s][A-Z0-9]{2,4}[-\s][A-Z0-9]{3,6})\b', text)
-    if m:
-        return m.group(1).replace(" ", "-")
-
-    # 6. Generic model code pattern
-    m = re.search(r'\b([A-Z]{2}\d{3}[A-Z]{1,2}[-\s][A-Z0-9]{5,10})\b', text)
-    if m:
-        return m.group(1).replace(" ", "-")
-
-    return None
+    return manufacturer_part_number(title, rid)
 
 
 def extract_specs_from_title(title, existing_item):
-    """
-    Intelligently extracts missing CPU, GPU, RAM, Storage, and Display specs 
-    from product title or description text if fields were left empty by scrapers.
-    """
-    text = (title + " " + (existing_item.get("others") or "")).strip()
-    
-    # 1. Processor (CPU)
-    proc = existing_item.get("processor", "").strip()
-    if not proc or len(proc) < 3:
-        m = re.search(r'\b(Intel®?\s*Core™?\s*(?:Ultra\s*)?[iI\d][\w\d-]+\s*(?:processor)?|AMD\s*Ryzen™?\s*\d[\w\d-]+|Core\s*Ultra\s*\d\s*\d+[\w\d]*|[iI][3579][-\s]\d{4,5}[\w\d]*|Athlon[\w\d\s-]*|C5-\d+[\w\d]*|CU5-\d+[\w\d]*)\b', text, re.IGNORECASE)
-        if m:
-            proc = m.group(1).strip()
-
-    # 2. Graphics (GPU)
-    gfx = existing_item.get("graphics", "").strip()
-    if not gfx or len(gfx) < 3:
-        m = re.search(r'\b(NVIDIA®?\s*GeForce\s*RTX™?\s*\d{4}\b[\w\d\s]*|RTX\s*\d{4}\b[\w\d\s]*|GTX\s*\d{4}\b[\w\d\s]*|AMD\s*Radeon™?\s*[\w\d\s]*|Intel®?\s*(?:Arc|Graphics|Iris\s*Xe)\b[\w\d\s]*)\b', text, re.IGNORECASE)
-        if m:
-            gfx = m.group(1).strip()
-
-    # 3. Memory (RAM)
-    mem = existing_item.get("memory", "").strip()
-    if not mem or len(mem) < 2:
-        m_ram = re.search(r'\b([8|12|16|24|32|64]{1,2}\s*GB(?:\s*(?:D5|D4|DDR[45]\w*|LPDDR[45]X?|RAM))?)\b', text, re.IGNORECASE)
-        if m_ram:
-            mem = m_ram.group(1).strip()
-
-    # 4. Storage (SSD/HDD)
-    sto = existing_item.get("storage", "").strip()
-    if not sto or len(sto) < 2:
-        m_sto = re.search(r'\b((?:128|256|512|1024)\s*GB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?|\d\s*TB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?)\b', text, re.IGNORECASE)
-        if m_sto:
-            sto = m_sto.group(1).strip()
-
-    # Disambiguate if storage was incorrectly populated with RAM value (e.g. storage = '16GB D5')
-    if sto and mem and (sto.lower() == mem.lower() or (re.search(r'^\d{1,2}\s*GB', sto, re.IGNORECASE) and not re.search(r'SSD|NVMe|PCIe|Gen\d|G[345]|M\.2', sto, re.IGNORECASE))):
-        sto = ""
-        m_sto_fallback = re.search(r'\b((?:256|512|1024)\s*GB|\d\s*TB)\b', text, re.IGNORECASE)
-        if m_sto_fallback and m_sto_fallback.group(1).lower() != mem.lower():
-            sto = m_sto_fallback.group(1).strip()
-
-    # 5. Display
-    disp = existing_item.get("display", "").strip()
-    if not disp or len(disp) < 3:
-        m = re.search(r'\b(1[34567]\.?[0-6]?"?\s*(?:diagonal)?\s*(?:FHD|WUXGA|QHD\+?|4K|2\.5K|OLED|IPS|144Hz|165Hz|240Hz)?)\b', text, re.IGNORECASE)
-        if m:
-            disp = m.group(1).strip()
-
-    return {
-        "processor": proc,
-        "graphics": gfx,
-        "memory": mem,
-        "storage": sto,
-        "display": disp
-    }
+    # Extract bounded title tokens, never free-form marketing paragraphs.
+    parsed = title_specs(title)
+    return {name: existing_item.get(name) or parsed[name]
+            for name in ("processor", "graphics", "memory", "storage", "display")}
 
 
 def clean_vendor_name(series_str, source_file):
     """Normalizes vendor name for deal comparison strings."""
+    if "via all it" in (series_str or "").lower():
+        return "ALL IT"
     if "allit" in source_file:
         return "ALL IT"
     if "pcimage" in source_file:
@@ -220,6 +141,8 @@ def combine_all_csvs():
     # Group items by Part Number (MPN) or unique hardware signature
     groups = defaultdict(list)
     for item in all_items:
+        if is_family_level(item):
+            continue
         title = (item.get("title") or "").strip()
         rid = (item.get("id") or "").strip()
         if not title or not rid or title.lower() in ["untitled model", "untitled"]:
@@ -231,18 +154,7 @@ def combine_all_csvs():
             if v and not item.get(k):
                 item[k] = v
 
-        mpn = extract_part_number(title, rid)
-        if mpn:
-            key = mpn
-        else:
-            # Build unique hardware signature for models sharing base names
-            cpu_sig = re.sub(r'\s+', '', (item.get("processor") or "").lower())[:12]
-            gpu_sig = re.sub(r'\s+', '', (item.get("graphics") or "").lower())[:10]
-            ram_sig = re.sub(r'\s+', '', (item.get("memory") or "").lower())[:6]
-            sto_sig = re.sub(r'\s+', '', (item.get("storage") or "").lower())[:6]
-            title_clean = re.sub(r'[^a-zA-Z0-9]', '', title.lower())[:25]
-            
-            key = f"{title_clean}_{cpu_sig}_{gpu_sig}_{ram_sig}_{sto_sig}"
+        key = comparison_key(item)
 
         groups[key].append(item)
 
@@ -290,14 +202,7 @@ def combine_all_csvs():
             if o["url"]:
                 vendor_urls_list.append(f"{v_name}: {o['url']}")
 
-        # Merge specs (pick most complete non-empty string across vendor offers)
-        for field in ["processor", "graphics", "memory", "storage", "display", "wifi", "battery"]:
-            best_spec = master_item.get(field, "")
-            for o in offers:
-                cand = o["item"].get(field, "")
-                if len(cand) > len(best_spec):
-                    best_spec = cand
-            master_item[field] = best_spec
+        # Matched offers already agree on full hardware; preserve the actual priced row.
 
         # Pick best image_url across all vendor offers if best_offer is missing image
         best_img = master_item.get("image_url", "").strip()
@@ -306,23 +211,9 @@ def combine_all_csvs():
             if not best_img or (cand_img and cand_img.startswith("http") and not best_img.startswith("http")):
                 best_img = cand_img
 
-        # If image is still missing or placeholder, set high quality brand fallback URL
+        # Unknown photos stay unknown; never substitute a different model by brand.
         if not best_img or "1x1" in best_img or "placeholder" in best_img or "data:image" in best_img:
-            t_low = (master_item.get("title", "") + " " + master_item.get("series", "")).lower()
-            if any(k in t_low for k in ["asus", "rog", "tuf"]):
-                best_img = "https://dlcdnrog.asus.com/rog/media/1684365775369.jpg"
-            elif any(k in t_low for k in ["lenovo", "legion", "loq", "ideapad"]):
-                best_img = "https://p3-ofp.static.pub/ShareResource/na/products/laptops/subseries-hero/lenovo-legion-pro-7i-gen-9-16inch-intel-hero.png"
-            elif any(k in t_low for k in ["acer", "nitro", "predator", "aspire"]):
-                best_img = "https://images.acer.com/is/image/acer/Predator-Helios-16-PH16-71-RGB-KBD-Backlit-on-01a-1?$png-large$"
-            elif any(k in t_low for k in ["hp", "victus", "omen", "pavilion"]):
-                best_img = "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c08962256.png"
-            elif any(k in t_low for k in ["msi", "cyborg", "katana", "thin"]):
-                best_img = "https://asset.msi.com/resize/image/global/product/product_16842065874c2d3a958e94e438c823053bb074906f.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png"
-            elif any(k in t_low for k in ["dell", "alienware", "g15", "g16"]):
-                best_img = "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/g-series/g15-5530/media-gallery/black/notebook-g15-5530-nt-black-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=600&qlt=100,0&resMode=sharp2&size=600,402"
-            else:
-                best_img = "https://p3-ofp.static.pub/ShareResource/na/products/laptops/subseries-hero/lenovo-legion-pro-7i-gen-9-16inch-intel-hero.png"
+            best_img = ""
 
         master_item["image_url"] = best_img
         master_item["id"] = mpn_key
@@ -342,6 +233,13 @@ def combine_all_csvs():
 
     # Also export as compact JSON for faster frontend loading
     export_json(master_rows)
+
+    # Shadow export from original source CSVs, never from inferred/merged rows.
+    # Legacy imports stay diagnostic-only until source adapters supply evidence.
+    v2_build = build_legacy_catalog(csv_files)
+    write_catalog(v2_build, DATA_DIR)
+    rejected = sum(report["rejected_count"] for report in v2_build.catalog["run_reports"])
+    print(f"  Exported catalog.v2.json; {rejected} legacy records retained as unverified diagnostics")
 
     multi_count = sum(1 for r in master_rows if r["vendor_count"] > 1)
     print(f"\nSuccessfully combined {len(master_rows)} unique laptops into master_laptops.csv!")

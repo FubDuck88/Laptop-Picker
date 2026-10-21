@@ -11,48 +11,42 @@ function escapeHtml(s) {
   return d.innerHTML;
 }
 
-function formatImgUrl(raw, vendorStr, titleStr) {
-  let u = (raw || '').trim();
-  if (u.startsWith('//')) u = 'https:' + u;
-  else if (u.startsWith('http://') || u.startsWith('https://')) u = u.replace(/([^:])\/{2,}/g, '$1/');
-  else if (u.startsWith('/')) {
-    const v = (vendorStr || '').toLowerCase();
-    if (v.includes('techhypermart')) u = 'https://www.techhypermart.com' + u;
-    else if (v.includes('pcimage') || v.includes('pc image')) u = 'https://store.pcimage.com.my' + u;
-    else if (v.includes('all it') || v.includes('allit')) u = 'https://www.allithypermarket.com.my' + u;
-    else if (v.includes('acer')) u = 'https://store.acer.com' + u;
-    else if (v.includes('gloo')) u = 'https://www.gloo.com.my' + u;
-    else u = 'https://p3-ofp.static.pub' + u;
-  } else if (u.startsWith('image/')) {
-    u = 'https://www.techhypermart.com/' + u;
-  }
-
-  // Fallback high-res brand image if URL is missing or placeholder
-  if (!u || u.includes('1x1') || u.includes('placeholder') || u.includes('data:image')) {
-    const t = `${vendorStr || ''} ${titleStr || ''}`.toLowerCase();
-    if (t.includes('asus') || t.includes('rog') || t.includes('tuf')) {
-      return 'https://dlcdnrog.asus.com/rog/media/1684365775369.jpg';
-    }
-    if (t.includes('lenovo') || t.includes('legion') || t.includes('loq') || t.includes('ideapad')) {
-      return 'https://p3-ofp.static.pub/ShareResource/na/products/laptops/subseries-hero/lenovo-legion-pro-7i-gen-9-16inch-intel-hero.png';
-    }
-    if (t.includes('acer') || t.includes('nitro') || t.includes('predator') || t.includes('aspire')) {
-      return 'https://images.acer.com/is/image/acer/Predator-Helios-16-PH16-71-RGB-KBD-Backlit-on-01a-1?$png-large$';
-    }
-    if (t.includes('hp') || t.includes('victus') || t.includes('omen') || t.includes('pavilion')) {
-      return 'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c08962256.png';
-    }
-    if (t.includes('msi') || t.includes('cyborg') || t.includes('katana') || t.includes('thin')) {
-      return 'https://asset.msi.com/resize/image/global/product/product_16842065874c2d3a958e94e438c823053bb074906f.png62405b38c58fe0f07fcef2367d8a9ba1/1024.png';
-    }
-    if (t.includes('dell') || t.includes('alienware') || t.includes('g15') || t.includes('g16')) {
-      return 'https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/g-series/g15-5530/media-gallery/black/notebook-g15-5530-nt-black-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=600&qlt=100,0&resMode=sharp2&size=600,402';
-    }
-    return 'https://p3-ofp.static.pub/ShareResource/na/products/laptops/subseries-hero/lenovo-legion-pro-7i-gen-9-16inch-intel-hero.png';
-  }
-
-  return u;
+function formatImgUrl(raw, vendorStr, titleStr, productUrl) {
+  const value = (raw || '').trim();
+  if (!value || /^(data:|javascript:|blob:)/i.test(value) || /\s/.test(value)) return '';
+  const knownStores = [
+    [/techhypermart/i, 'https://www.techhypermart.com/'],
+    [/pc\s?image/i, 'https://store.pcimage.com.my/'],
+    [/all\s?it/i, 'https://www.allithypermarket.com.my/'],
+    [/acer/i, 'https://store.acer.com/'],
+    [/gloo/i, 'https://www.gloo.com.my/']
+  ];
+  try {
+    const base = productUrl && /^https?:\/\//i.test(productUrl) ? productUrl
+      : knownStores.find(([pattern]) => pattern.test(vendorStr || ''))?.[1];
+    if (!base && !/^(https?:)?\/\//i.test(value)) return '';
+    const url = new URL(value.startsWith('//') ? 'https:' + value : value, base);
+    if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) return '';
+    return url.href;
+  } catch (_) { return ''; }
 }
+
+function renderProductImage(row, mobile = false, height = mobile ? 100 : 110) {
+  const url = formatImgUrl(row.image_url, row.series || row.best_vendor, row.title, row.url);
+  const compactStyle = height <= 48 ? "width:64px;flex:0 0 64px;margin:0;" : "";
+  return '<div class="product-photo" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;margin:10px 0;height:' + height + 'px;display:flex;align-items:center;justify-content:center;' + compactStyle + '">'
+    + (url ? '<img data-product-photo src="' + escapeHtml(url) + '" alt="' + escapeHtml(row.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:' + (height - 15) + 'px;width:auto;max-width:100%;object-fit:contain;" />' : '')
+    + '<span class="photo-unavailable" role="img" aria-label="Product photo unavailable"' + (url ? ' hidden' : '') + ' style="color:var(--text-dim);font-size:12px;">Photo unavailable</span></div>';
+}
+
+// Capture image failures, including cards inserted by Load More. Never retry a broken URL forever.
+document.addEventListener('error', event => {
+  const image = event.target;
+  if (!image || !image.matches || !image.matches('img[data-product-photo]')) return;
+  image.hidden = true;
+  const placeholder = image.parentElement.querySelector('.photo-unavailable');
+  if (placeholder) placeholder.hidden = false;
+}, true);
 
 function fmtPrice(n) {
   if (!n) return 'RM -';
@@ -61,55 +55,86 @@ function fmtPrice(n) {
 
 // ── Data Loading ─────────────────────────────────────────────────────────────
 
+let verifiedRelease = null;
+let catalogTimer = null;
+let catalogRefresh = null;
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && catalogRefresh) catalogRefresh();
+});
 function loadData(callback) {
-  if (window.preloadedRows && Array.isArray(window.preloadedRows) && window.preloadedRows.length > 0) {
-    console.log('[core] Loaded preloadedRows (' + window.preloadedRows.length + ' rows)');
-    return callback(window.preloadedRows);
-  }
-
-  // Try JSON endpoints, fall back to CSV
-  fetch('data/laptops.json')
-    .catch(() => fetch('laptops.json'))
-    .then(res => {
-      if (!res.ok) throw new Error('JSON not found');
-      return res.json();
-    })
-    .then(data => {
-      console.log('[core] Loaded laptops.json (' + data.length + ' rows)');
-      callback(data);
-    })
-    .catch(() => {
-      console.log('[core] JSON not available, falling back to CSV...');
-      Papa.parse('data/master_laptops.csv', {
-        download: true,
-        header: true,
-        skipEmptyLines: true,
-        complete: function (results) {
-          console.log('[core] Loaded data/master_laptops.csv (' + results.data.length + ' rows)');
-          callback(results.data);
-        },
-        error: function () {
-          Papa.parse('master_laptops.csv', {
-            download: true,
-            header: true,
-            skipEmptyLines: true,
-            complete: function (res2) {
-              console.log('[core] Loaded master_laptops.csv (' + res2.data.length + ' rows)');
-              callback(res2.data);
-            },
-            error: function (err) {
-              console.error('[core] Error loading data:', err);
-              callback([]);
-            }
-          });
-        }
-      });
-    });
+  const message = document.getElementById('catalogMessage');
+  const retry = document.getElementById('catalogRetry');
+  const expired = document.getElementById('showExpired');
+  if (message) message.textContent = 'Loading verified offers…';
+  if (retry) { retry.hidden = true; retry.onclick = () => loadData(callback); }
+  if (catalogTimer) clearInterval(catalogTimer);
+  catalogRefresh = null;
+  return loadVerifiedRelease().then(release => {
+    verifiedRelease = release;
+    function refresh() {
+      const includeExpired = !!expired?.checked;
+      const rows = verifiedCatalogRows(release, { includeExpired });
+      const hidden = release.catalog.offers.filter(o => !offerFreshness(o).show_by_default).length;
+      const sellers = [...new Set(release.catalog.offers.map(o => o.seller))].join(', ');
+      const retained = release.source_decisions.filter(s => s.state === 'retained').length;
+      if (message) message.textContent = `${rows.length} verified configurations from ${sellers || 'qualified sources'}. `
+        + `${hidden} offers older than seven days hidden by default. `
+        + (retained ? `${retained} sources retained their last successful observations. ` : '')
+        + 'Public MYR prices exclude shipping and conditional discounts. Check stock with the seller.';
+      callback(rows);
+    }
+    if (expired) expired.onchange = refresh;
+    catalogRefresh = refresh;
+    refresh();
+    catalogTimer = setInterval(refresh, 60000);
+    return release;
+  }).catch(() => {
+    verifiedRelease = null;
+    if (message) message.textContent = 'Verified catalog could not be loaded. Please retry.';
+    if (retry) retry.hidden = false;
+    callback([]);
+    return null;
+  });
 }
 
-// ── Vendor Deal Parsing ──────────────────────────────────────────────────────
+function systemRamGb(row) {
+  if (row.verified) return row.memory_gb;
+  const raw = (row.memory || '').split(/\b(?:max(?:imum)?|up to|upgrade)/i)[0];
+  const modules = raw.match(/(\d+)\s*GB\s*[*×x]\s*(\d+)/i);
+  if (modules) return Number(modules[1]) * Number(modules[2]);
+  const values = [...raw.matchAll(/\b(\d+)\s*GB\b/gi)].map(m => Number(m[1]));
+  return new Set(values).size === 1 ? values[0] : null;
+}
+
+function isIntegratedGpu(row) {
+  if (row.verified) return row.gpu_kind === 'integrated';
+  return /integrated|iris|uhd|intel arc graphics|radeon graphics/i.test(row.graphics || '')
+    && !/RTX|GTX|\bRX\s*\d|Arc\s+[AB]\d/i.test(row.graphics || '');
+}
+
+function offerStatusHtml(row) {
+  if (!row.verified) return '';
+  const time = new Date(row.observed_at).toLocaleString('en-MY', { timeZone: 'Asia/Kuala_Lumpur' });
+  const stock = {in_stock:'In stock', out_of_stock:'Out of stock', unknown:'Stock unknown'}[row.availability] || 'Stock unknown';
+  return '<div class="offer-status">' + escapeHtml(`${row.freshness.toUpperCase()} · ${stock} · Observed ${time} MYT`) + '</div>';
+}
+
+function offerHistoryHtml(row) {
+  if (!row.verified || !verifiedRelease) return '';
+  return '<section class="offer-history"><h4>Recorded price history</h4>' + row.offer_ids.map(id => {
+    const points = recordedHistory(verifiedRelease, id);
+    if (!points.length) return '<p>No recorded observations for this offer.</p>';
+    const seller = (row.deals || []).find(d => d.id === id)?.vendor || row.series;
+    return '<h5>' + escapeHtml(seller) + '</h5><p>' + (points.length === 1 ? 'One observation; no price trend yet.' : points.length + ' recorded observations. Gaps mean no observation.')
+      + '</p><div class="history-scroll"><table><thead><tr><th>Observed (Malaysia time)</th><th>Price</th><th>Stock</th></tr></thead><tbody>'
+      + points.map(o => '<tr><td>' + escapeHtml(new Date(o.observed_at).toLocaleString('en-MY', {timeZone:'Asia/Kuala_Lumpur'}))
+        + '</td><td>' + fmtPrice(o.price_sen / 100) + '</td><td>' + escapeHtml(o.availability.replaceAll('_', ' ')) + '</td></tr>').join('')
+      + '</tbody></table></div>';
+  }).join('') + '</section>';
+}
 
 function parseVendorDeals(r) {
+  if (Array.isArray(r.deals)) return r.deals;
   if (!r.vendor_prices) {
     const vName = (r.best_vendor ? r.best_vendor.split(' (')[0] : r.series) || 'Store Deal';
     return [{ vendor: vName, price: r.price, url: r.url, isLowest: true }];
@@ -144,32 +169,40 @@ function parseVendorDeals(r) {
   return deals;
 }
 
-// ── Steam Hardware Survey Matching (July 2026) ──────────────────────────────
+function rowForStores(row, stores) {
+  if (!row.verified || !stores.size) return row;
+  const deals = row.deals.filter(d => stores.has(d.vendor));
+  if (!deals.length) return null;
+  const best = deals[0];
+  return {...row, price:best.price, price_sen:best.price_sen, url:best.url, image_url:best.image_url,
+    best_vendor:best.vendor, series:best.vendor, availability:best.availability,
+    observed_at:best.observed_at, freshness:best.freshness, deals,
+    offer_ids:deals.map(d => d.id), vendor_count:new Set(deals.map(d => d.vendor)).size};
+}
+
+// ── Optional gaming preset matching ──────────────────────────────
 
 function matchesSteamSpecs(r) {
-  const fullText = `${r.processor || ''} ${r.graphics || ''} ${r.memory || ''} ${r.title || ''} ${r.others || ''}`.toLowerCase();
+  const gpuText = (r.graphics || '').toLowerCase();
+  const cpuText = (r.processor || '').toLowerCase();
 
   // 1. Realistic Price Cap for Steam Survey Laptops (under RM 10,000)
   const pVal = typeof r.price === 'number' ? r.price : (parseFloat(r.price) || 0);
-  if (pVal > 10000) return false;
+  if (pVal <= 0 || pVal > 10000) return false;
 
   // 2. Realistic RAM Spec: 16GB to 32GB (Steam #1 & #2 Share)
-  const memMatch = fullText.match(/(\d+)\s*gb/i);
-  let ramGb = memMatch ? parseInt(memMatch[1], 10) : 0;
-  if (ramGb === 0 && /16\s*gb|32\s*gb|16gb|32gb/i.test(fullText)) {
-    ramGb = 16;
-  }
-  if (ramGb > 0 && (ramGb < 16 || ramGb > 32)) return false;
+  const ramGb = systemRamGb(r);
+  if (ramGb == null || ramGb < 16 || ramGb > 32) return false;
 
   // 3. Realistic GPU Spec: Steam sweet-spot gaming GPUs (RTX 3050, 3060, 3070, 4050, 4060, 4070, 5050, 5060, 5070, GTX 1650/1660)
   // Exclude extreme workstation / ultra-flagships (RTX 4080, 4090, 5080, 5090, Quadro)
-  if (/4080|4090|5080|5090|quadro|workstation|rtx\s*a\d{4}/i.test(fullText)) return false;
+  if (/4080|4090|5080|5090|quadro|workstation|rtx\s*a\d{4}/i.test(gpuText)) return false;
 
-  const hasRealisticGpu = /(3050|3060|3070|4050|4060|4070|5050|5060|5070|gtx\s*1650|gtx\s*1660)/i.test(fullText);
+  const hasRealisticGpu = /(?:rtx\s*(?:3050|3060|3070|4050|4060|4070|5050|5060|5070)|gtx\s*(?:1650|1660))\b/i.test(gpuText);
   if (!hasRealisticGpu) return false;
 
   // 4. Realistic CPU Spec: 6 to 8+ Core Mainstream CPUs (i5, i7, Ultra 5, Ultra 7, Ryzen 5, Ryzen 7)
-  const hasRealisticCpu = /i5|i7|ultra\s*[57]|ryzen\s*[57]/i.test(fullText) || /\b(6|8|10|12|14|16)\s*core[s]?\b/i.test(fullText);
+  const hasRealisticCpu = /i5|i7|ultra\s*[57]|ryzen\s*[57]/i.test(cpuText);
   if (!hasRealisticCpu) return false;
 
   return true;
@@ -181,7 +214,7 @@ function calcRecommendedScore(r) {
   let specPoints = 0;
 
   // GPU Tier Points
-  const gfx = (r.graphics || r.title || '').toLowerCase();
+  const gfx = (r.graphics || '').toLowerCase();
   if (gfx.includes('5090') || gfx.includes('4090')) specPoints += 100;
   else if (gfx.includes('5080') || gfx.includes('4080')) specPoints += 85;
   else if (gfx.includes('5070') || gfx.includes('4070')) specPoints += 70;
@@ -190,13 +223,13 @@ function calcRecommendedScore(r) {
   else specPoints += 15;
 
   // RAM Points
-  const mem = (r.memory || r.title || '').toLowerCase();
+  const mem = (r.memory || '').toLowerCase();
   if (mem.includes('64gb')) specPoints += 40;
   else if (mem.includes('32gb')) specPoints += 30;
   else if (mem.includes('16gb')) specPoints += 20;
 
   // CPU Points
-  const cpu = (r.processor || r.title || '').toLowerCase();
+  const cpu = (r.processor || '').toLowerCase();
   if (cpu.includes('ultra 9') || cpu.includes('i9') || cpu.includes('ryzen 9')) specPoints += 30;
   else if (cpu.includes('ultra 7') || cpu.includes('i7') || cpu.includes('ryzen 7')) specPoints += 20;
   else if (cpu.includes('ultra 5') || cpu.includes('i5') || cpu.includes('ryzen 5')) specPoints += 10;
@@ -215,7 +248,7 @@ function calcPopularityScore(r) {
   score += (r.vendor_count || 1) * 25;
 
   // 2. High Demand GPUs (Steam Survey top cards)
-  const gfx = (r.graphics || r.title || '').toLowerCase();
+  const gfx = (r.graphics || '').toLowerCase();
   if (gfx.includes('4060')) score += 50;
   else if (gfx.includes('3060')) score += 45;
   else if (gfx.includes('5060')) score += 40;
@@ -223,12 +256,12 @@ function calcPopularityScore(r) {
   else if (gfx.includes('4070') || gfx.includes('5070')) score += 30;
 
   // 3. Most Popular RAM (16GB #1 at 41%, 32GB #2)
-  const mem = (r.memory || r.title || '').toLowerCase();
+  const mem = (r.memory || '').toLowerCase();
   if (mem.includes('16gb') || mem.includes('16 gb')) score += 40;
   else if (mem.includes('32gb') || mem.includes('32 gb')) score += 30;
 
   // 4. Most Popular CPU Tiers
-  const cpu = (r.processor || r.title || '').toLowerCase();
+  const cpu = (r.processor || '').toLowerCase();
   if (cpu.includes('i7') || cpu.includes('ultra 7') || cpu.includes('ryzen 7')) score += 35;
   else if (cpu.includes('i5') || cpu.includes('ultra 5') || cpu.includes('ryzen 5')) score += 30;
   else if (cpu.includes('i9') || cpu.includes('ultra 9') || cpu.includes('ryzen 9')) score += 25;
@@ -244,7 +277,7 @@ function dispInchPrefix(displayStr) {
 }
 
 function detectBrand(proc, fullRow) {
-  const text = `${proc || ''} ${fullRow ? (fullRow.title || '') + ' ' + (fullRow.others || '') : ''}`.toLowerCase();
+  const text = `${proc || ''} ${fullRow && !fullRow.verified ? (fullRow.title || '') + ' ' + (fullRow.others || '') : ''}`.toLowerCase();
 
   // 1. AMD CPUs
   if (/amd|ryzen|\br[3579]\b|\br3-|\br5-|\br7-|\br9-|athlon|threadripper|7\d{3}hs|8\d{3}hs|5\d{3}u|7\d{3}u/i.test(text)) {
@@ -332,30 +365,32 @@ function matchesFilters(r, activeFilters, isSteamActive, searchQuery, minPrice, 
 
   // CPU Filter
   if (activeFilters.cpu.size) {
-    const proc = (r.processor || r.title || '').replace(/[®™©]/g, '').replace(/\s+/g, ' ').toLowerCase();
+    const proc = (r.processor || '').replace(/[®™©]/g, '').replace(/\s+/g, ' ').toLowerCase();
     const match = [...activeFilters.cpu].some(v => proc.includes(v.toLowerCase()));
     if (!match) return false;
   }
 
   // GPU Filter
   if (activeFilters.gpu.size) {
-    const gfx = (r.graphics || r.title || '').replace(/[®™©]/g, '').toLowerCase();
+    const gfx = (r.graphics || '').replace(/[®™©]/g, '').toLowerCase();
     const sorted = [...activeFilters.gpu].sort((a, b) => b.length - a.length);
-    const match = sorted.some(v => gfx.includes(v.toLowerCase()));
+    const match = sorted.some(v => ['Iris', 'integrated'].includes(v) ? isIntegratedGpu(r) : gfx.includes(v.toLowerCase()));
     if (!match) return false;
   }
 
   // RAM Filter
   if (activeFilters.mem.size) {
-    const mem = (r.memory || r.title || '').toLowerCase();
-    const match = [...activeFilters.mem].some(v => mem.includes(v.toLowerCase()));
+    const gb = systemRamGb(r);
+    const match = gb != null && [...activeFilters.mem].some(v => v.endsWith('+') ? gb >= parseInt(v) : gb === parseInt(v));
     if (!match) return false;
   }
 
   // Storage Filter
   if (activeFilters.sto.size) {
-    const sto = (r.storage || r.title || '').toLowerCase();
-    const match = [...activeFilters.sto].some(v => sto.includes(v.toLowerCase()));
+    const sto = (r.storage || '').toLowerCase();
+    const match = [...activeFilters.sto].some(v => r.verified
+      ? r.storage_gb === parseFloat(v) * (/tb/i.test(v) ? 1000 : 1)
+      : sto.includes(v.toLowerCase()));
     if (!match) return false;
   }
 
@@ -373,66 +408,10 @@ function matchesFilters(r, activeFilters, isSteamActive, searchQuery, minPrice, 
 
 // ── Row Normalization ────────────────────────────────────────────────────────
 
-function extractTitleSpecs(title, others) {
-  const text = (title + ' ' + (others || '')).trim();
-  let proc = '', gfx = '', mem = '', sto = '', disp = '';
-
-  const mCpu = text.match(/\b(Intel®?\s*Core™?\s*(?:Ultra\s*)?[iI\d][\w\d-]+\s*(?:processor)?|AMD\s*Ryzen™?\s*\d[\w\d-]+|Core\s*Ultra\s*\d\s*\d+[\w\d]*|[iI][3579][-\s]\d{4,5}[\w\d]*|Athlon[\w\d\s-]*|C5-\d+[\w\d]*|CU5-\d+[\w\d]*)\b/i);
-  if (mCpu) proc = mCpu[1].trim();
-
-  const mGpu = text.match(/\b(NVIDIA®?\s*GeForce\s*RTX™?\s*\d{4}\b[\w\d\s]*|RTX\s*\d{4}\b[\w\d\s]*|GTX\s*\d{4}\b[\w\d\s]*|AMD\s*Radeon™?\s*[\w\d\s]*|Intel®?\s*(?:Arc|Graphics|Iris\s*Xe)\b[\w\d\s]*)\b/i);
-  if (mGpu) gfx = mGpu[1].trim();
-
-  const mRam = text.match(/\b([8|12|16|24|32|64]{1,2}\s*GB(?:\s*(?:D5|D4|DDR[45]\w*|LPDDR[45]X?|RAM))?)\b/i);
-  if (mRam) mem = mRam[1].trim();
-
-  const mSto = text.match(/\b((?:128|256|512|1024)\s*GB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?|\d\s*TB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?)\b/i);
-  if (mSto) sto = mSto[1].trim();
-
-  // Disambiguate if storage matched RAM value (e.g. storage = '16GB D5')
-  if (sto && mem && (sto.toLowerCase() === mem.toLowerCase() || (/^\d{1,2}\s*GB/i.test(sto) && !/SSD|NVMe|PCIe|Gen\d|G[345]|M\.2/i.test(sto)))) {
-    sto = '';
-    const mStoFallback = text.match(/\b((?:256|512|1024)\s*GB|\d\s*TB)\b/i);
-    if (mStoFallback && mStoFallback[1].toLowerCase() !== mem.toLowerCase()) {
-      sto = mStoFallback[1].trim();
-    }
-  }
-
-  const mDisp = text.match(/\b(1[34567]\.?[0-6]?"?\s*(?:diagonal)?\s*(?:FHD|WUXGA|QHD\+?|4K|2\.5K|OLED|IPS|144Hz|165Hz|240Hz)?)\b/i);
-  if (mDisp) disp = mDisp[1].trim();
-
-  return { proc, gfx, mem, sto, disp };
-}
-
 function normalizeRow(r, i, idPrefix) {
-  const title = r.title || 'Untitled model';
-  const parsed = extractTitleSpecs(title, r.others);
-
-  return {
-    _rid: (idPrefix || 'r') + i,
-    id: r.id || '',
-    title: title,
-    price: parseFloat(r.price) || 0,
-    best_vendor: r.best_vendor || '',
-    vendor_prices: r.vendor_prices || '',
-    vendor_count: parseInt(r.vendor_count) || 1,
-    vendor_urls: r.vendor_urls || '',
-    image_url: r.image_url || '',
-    processor: r.processor && r.processor.length >= 3 ? r.processor : (parsed.proc || r.processor || ''),
-    graphics: r.graphics && r.graphics.length >= 3 ? r.graphics : (parsed.gfx || r.graphics || ''),
-    memory: r.memory && r.memory.length >= 2 ? r.memory : (parsed.mem || r.memory || ''),
-    storage: r.storage && r.storage.length >= 2 ? r.storage : (parsed.sto || r.storage || ''),
-    display: r.display && r.display.length >= 3 ? r.display : (parsed.disp || r.display || ''),
-    wifi: r.wifi || '',
-    battery: r.battery || '',
-    others: r.others || '',
-    series: r.series || 'Store Catalog',
-    url: (() => {
-      let u = r.url || '#';
-      if (u !== '#' && u.includes('lenovo.com') && !u.includes('/my/en/')) {
-        u = u.replace('https://www.lenovo.com', 'https://www.lenovo.com/my/en');
-      }
-      return u;
-    })()
-  };
+  return { ...r, _rid: r._rid || (idPrefix || 'r') + i, id: r.id || '', title: r.title || 'Untitled model',
+    price: Number(r.price) || 0, vendor_count: Number(r.vendor_count) || 1,
+    processor: r.processor || '', graphics: r.graphics || '', memory: r.memory || '',
+    storage: r.storage || '', display: r.display || '', wifi: r.wifi || '', battery: r.battery || '',
+    others: r.others || '', url: r.url || '#', series: r.series || '' };
 }

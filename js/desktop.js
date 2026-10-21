@@ -51,30 +51,6 @@ const modalOverlay = document.getElementById('modalOverlay');
 const closeModal = document.getElementById('closeModal');
 const compareTableWrap = document.getElementById('compareTableWrap');
 
-// ── Drag & Drop CSV ──────────────────────────────────────────────────────────
-
-if (dzBox && fileInput) {
-  dzBox.addEventListener('click', () => fileInput.click());
-  fileInput.addEventListener('change', e => {
-    if (e.target.files.length) handleFile(e.target.files[0]);
-  });
-  dzBox.addEventListener('dragover', e => { e.preventDefault(); dzBox.classList.add('drag-over'); });
-  dzBox.addEventListener('dragleave', () => dzBox.classList.remove('drag-over'));
-  dzBox.addEventListener('drop', e => {
-    e.preventDefault(); dzBox.classList.remove('drag-over');
-    if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-  });
-}
-
-function handleFile(file) {
-  Papa.parse(file, {
-    header: true,
-    skipEmptyLines: true,
-    complete: results => processRows(results.data),
-    error: err => alert('CSV Error: ' + err.message)
-  });
-}
-
 // ── Scroll Back to Top ───────────────────────────────────────────────────────
 
 window.addEventListener('scroll', () => {
@@ -134,12 +110,12 @@ function updateSteamUI() {
   if (isSteamSpecActive) {
     steamSpecBtn.style.background = 'var(--accent-2)';
     steamSpecBtn.style.color = '#1A1305';
-    steamBtnText.textContent = 'Steam July 2026 Filter ON ✓';
+    steamBtnText.textContent = 'Gaming preset ON ✓';
     steamBanner.style.display = 'flex';
   } else {
     steamSpecBtn.style.background = 'transparent';
     steamSpecBtn.style.color = 'var(--accent-2)';
-    steamBtnText.textContent = 'Filter Steam July 2026 Specs';
+    steamBtnText.textContent = 'Filter gaming preset';
     steamBanner.style.display = 'none';
   }
 }
@@ -255,188 +231,17 @@ function populateStoreFilter() {
 
 // ── Spec Extraction Functions ────────────────────────────────────────────────
 
-function splitAtMarkers(raw, markerRe) {
-  const s = raw.replace(/[\u00ae\u2122\u00a9]/g, '').replace(/\s+/g, ' ');
-  const hits = [];
-  let m;
-  const re = new RegExp(markerRe.source, 'gi');
-  while ((m = re.exec(s)) !== null) hits.push({ index: m.index, text: m[0] });
-  if (!hits.length) return [];
-  return hits.map((h, i) => ({
-    markerText: h.text.trim(),
-    segment: s.slice(h.index, i + 1 < hits.length ? hits[i + 1].index : s.length).replace(/\s+/g, ' ').trim()
-  }));
-}
-
-const CPU_TIERS = ['Core i3', 'Core i5', 'Core i7', 'Core i9', 'Core 3', 'Core 5', 'Core 7', 'Core 9', 'Core Ultra 5', 'Core Ultra 7', 'Core Ultra 9', 'Ryzen 3', 'Ryzen 5', 'Ryzen 7', 'Ryzen 9', 'Ryzen AI 5', 'Ryzen AI 7', 'Ryzen AI 9', 'Snapdragon'];
-function cpuTierIdx(label) {
-  const i = CPU_TIERS.findIndex(t => label.toLowerCase().includes(t.toLowerCase()));
-  return i === -1 ? 999 : i;
-}
-
-function extractCpuOptions(raw) {
-  if (!raw) return [];
-  const cpuRe = /Core\s+Ultra\s+\d|Core\s+i\d|Core\s+\d|Ryzen\s+AI\s+\d|Ryzen\s+\d|Snapdragon[\w\s]{0,12}/i;
-  const segs = splitAtMarkers(raw, cpuRe);
-  if (!segs.length) return [];
-  const seen = new Set();
-  const results = [];
-  segs.forEach(({ markerText, segment }) => {
-    let label = markerText.replace(/\s+(processor|cpu|up|with|and|to|series)$/i, '').trim();
-    if (label.length < 3 || seen.has(label.toLowerCase())) return;
-    seen.add(label.toLowerCase());
-    const detail = segment.replace(/\s+(processor|cpu)\b/gi, '').replace(/\s+/g, ' ').slice(0, 110).trim();
-    results.push({ label, detail });
-  });
-  results.sort((a, b) => cpuTierIdx(a.label) - cpuTierIdx(b.label));
-  return results;
-}
-
-const GPU_TIERS = ['Iris Xe', 'Integrated', 'Qualcomm', 'Radeon', 'Arc', 'RTX 3050', 'RTX 3060', 'RTX 3070', 'RTX 3080', 'RTX 3090', 'RTX 4050', 'RTX 4060', 'RTX 4070', 'RTX 4080', 'RTX 4090', 'RTX 5050', 'RTX 5060', 'RTX 5070', 'RTX 5070 Ti', 'RTX 5080', 'RTX 5090'];
-function gpuTierIdx(label) {
-  const i = GPU_TIERS.findIndex(t => label.toLowerCase().includes(t.toLowerCase()));
-  return i === -1 ? 999 : i;
-}
-
-function extractGpuOptions(raw) {
-  if (!raw) return [];
-  const gpuRe = /(?:GeForce\s+)?(?:RTX|GTX)\s+\d{4}(?:\s+Ti)?|Radeon(?:\s+\w+){0,3}|Iris\s+Xe\w*|Arc\b[^\n,]{0,20}|Integrated(?:\s+Graphics)?|Qualcomm(?:\s+\w+)?/i;
-  const segs = splitAtMarkers(raw, gpuRe);
-  if (!segs.length) return [];
-  const seen = new Set();
-  const results = [];
-  segs.forEach(({ markerText, segment }) => {
-    let label = markerText.replace(/^GeForce\s+/i, '').replace(/Laptop\s+GPU/i, '').trim();
-    if (label.length < 2 || seen.has(label.toLowerCase())) return;
-    seen.add(label.toLowerCase());
-    let detail = label;
-    const vram = segment.match(/(\d+GB\s+GDDR\w+)/i);
-    const power = segment.match(/(\d+W)\s*(?:TGP|incl|max|\()/i);
-    const tops = segment.match(/([\d,]+)\s*(?:AI\s*)?TOPS/i);
-    const clock = segment.match(/([\d,]+)\s*MHz\s*Boost/i);
-    if (vram) detail += ', ' + vram[1];
-    if (power) detail += ', ' + power[1];
-    if (clock) detail += ', ' + clock[1].replace(',', '.') + 'MHz';
-    if (tops) detail += ', ' + tops[1] + ' AI TOPS';
-    results.push({ label, detail });
-  });
-  results.sort((a, b) => gpuTierIdx(a.label) - gpuTierIdx(b.label));
-  return results;
-}
-
-function extractMemOptions(raw) {
-  if (!raw) return [];
-  const stripped = raw.replace(/\([^)]*\)/g, '   ');
-  const sizeRe = /\b(\d+)\s*GB\b/gi;
-  const hits = [];
-  let m;
-  while ((m = sizeRe.exec(stripped)) !== null) hits.push({ index: m.index, gb: parseInt(m[1]) });
-  if (!hits.length) return [];
-  const seen = new Set();
-  const results = [];
-  hits.forEach((h, i) => {
-    const endIdx = i + 1 < hits.length ? hits[i + 1].index : raw.length;
-    const label = h.gb + 'GB';
-    if (seen.has(label)) return;
-    seen.add(label);
-    const segment = raw.slice(h.index, endIdx).replace(/\s+/g, ' ').trim();
-    const memType = segment.match(/(LPDDR\w+|DDR\w+)/i);
-    const speed = segment.match(/([\d,]+)\s*MT\/s/i);
-    const chan = segment.match(/\b(dual|single)\s*channel/i);
-    let detail = label;
-    if (memType) detail += ' ' + memType[1];
-    if (speed) detail += ' ' + speed[1].replace(',', '.') + ' MT/s';
-    if (chan) detail += ', ' + chan[1] + '-channel';
-    results.push({ label, detail });
-  });
-  results.sort((a, b) => parseInt(a.label) - parseInt(b.label));
-  return results;
-}
-
-function extractStorageOptions(raw) {
-  if (!raw) return [];
-  const stripped = raw.replace(/\([^)]*\)/g, '   ');
-  const sizeRe = /\b(\d+(?:\.\d+)?)\s*(TB|GB)\b/gi;
-  const hits = [];
-  let m;
-  while ((m = sizeRe.exec(stripped)) !== null) {
-    hits.push({ index: m.index, label: m[1] + m[2].toUpperCase(), bytes: m[2].toUpperCase() === 'TB' ? parseFloat(m[1]) * 1e12 : parseFloat(m[1]) * 1e9 });
-  }
-  if (!hits.length) return [];
-  const seen = new Set();
-  const results = [];
-  hits.forEach((h, i) => {
-    if (seen.has(h.label)) return;
-    seen.add(h.label);
-    const endIdx = i + 1 < hits.length ? hits[i + 1].index : raw.length;
-    const segment = raw.slice(h.index, endIdx).replace(/\s+/g, ' ').trim();
-    const form = segment.match(/\b(M\.2|NVMe|PCIe(?:\s+Gen\d)?|SSD|HDD)\b/i);
-    let detail = h.label;
-    if (form) detail += ' ' + form[1];
-    else detail += ' SSD';
-    results.push({ label: h.label, detail, bytes: h.bytes });
-  });
-  results.sort((a, b) => a.bytes - b.bytes);
-  return results;
-}
-
-function extractDisplayOptions(raw) {
-  if (!raw) return [];
-  const s = raw.replace(/[\u201c\u201d\u2033\u2032]/g, '"');
-  const size = s.match(/^(\d{2}(?:\.\d)?)["\s]/);
-  const res = s.match(/\b(FHD|QHD|WUXGA|WQXGA|4K|UHD|\d{3,4}\s*x\s*\d{3,4})\b/i);
-  const panel = s.match(/\b(OLED|IPS|TN|VA|AMOLED)\b/i);
-  const hz = s.match(/(\d{2,3})\s*Hz/i);
-  let label = '';
-  if (size) label += size[1] + '"';
-  if (res) label += ' ' + res[1].toUpperCase();
-  if (panel) label += ' ' + panel[1].toUpperCase();
-  if (hz) label += ' ' + hz[1] + 'Hz';
-  return [{ label: label.trim() || s.slice(0, 40), detail: label.trim() }];
-}
-
-function extractBatteryOptions(raw) {
-  if (!raw) return [];
-  const whr = raw.match(/(\d+(?:\.\d+)?)\s*Wh?r?\b/i);
-  let label = whr ? whr[1] + 'Wh' : raw.slice(0, 20);
-  return [{ label, detail: label }];
-}
-
 function specRow(label, raw) {
-  if (!raw) return '';
-  let options;
-  switch (label) {
-    case 'cpu': options = extractCpuOptions(raw); break;
-    case 'gpu': options = extractGpuOptions(raw); break;
-    case 'ram': options = extractMemOptions(raw); break;
-    case 'disk': options = extractStorageOptions(raw); break;
-    case 'screen': options = extractDisplayOptions(raw); break;
-    case 'batt': options = extractBatteryOptions(raw); break;
-    default: options = [{ label: raw.replace(/\s+/g, ' ').slice(0, 60), detail: raw.replace(/\s+/g, ' ').trim() }];
-  }
-  if (!options.length) {
-    const fb = raw.replace(/\s+/g, ' ').trim();
-    return '<li><span class="k">' + label + '</span><span class="v spec-val" title="' + fb.replace(/"/g, '&quot;') + '">' + escapeHtml(fb.slice(0, 60)) + '</span></li>';
-  }
-  const base = options[0];
-  const top = options.length > 1 ? options[options.length - 1] : null;
-  let html = '<li><span class="k">' + label + '</span><span class="v">'
-    + '<span class="spec-val" title="' + base.detail.replace(/"/g, '&quot;') + '">' + escapeHtml(base.label) + '</span>';
-  if (top) {
-    html += ' <span class="upgrade-hint" title="' + top.detail.replace(/"/g, '&quot;') + '">up to ' + escapeHtml(top.label) + '</span>';
-  }
-  html += '</span></li>';
-  return html;
+  return '<li><span class="k">' + escapeHtml(label) + '</span><span class="v spec-val">'
+    + escapeHtml(raw || 'Unknown') + '</span></li>';
 }
-
-// ── Filtering ────────────────────────────────────────────────────────────────
 
 function getFiltered() {
   const q = searchInput.value.trim();
   const min = parseFloat(minPrice.value);
   const max = parseFloat(maxPrice.value);
 
-  let rows = allRows.filter(r => matchesFilters(r, activeFilters, isSteamSpecActive, q, min, max));
+  let rows = allRows.map(r => rowForStores(r, activeFilters.store)).filter(Boolean).filter(r => matchesFilters(r, activeFilters, isSteamSpecActive, q, min, max));
 
   const sort = sortSelect.value;
   sortRows(rows, sort);
@@ -448,7 +253,7 @@ function getFiltered() {
 function render() {
   displayedCount = 0;
   const rows = getFiltered();
-  resultCount.textContent = rows.length + (rows.length === 1 ? ' model matches' : ' models match');
+  resultCount.textContent = rows.length + (rows.length === 1 ? ' configuration matches' : ' configurations match');
 
   if (rows.length === 0) {
     grid.innerHTML = '<div class="empty-results">No models match these filters.</div>';
@@ -529,13 +334,7 @@ function buildCardHtml(r) {
   const isMultiVendor = deals.length > 1;
   const bestVendorName = deals[0] ? deals[0].vendor : (r.best_vendor || r.series);
 
-  let rawUrl = formatImgUrl(r.image_url, r.series || r.best_vendor, r.title);
-
-  let imgHtml = '';
-  if (rawUrl.length > 5) {
-    imgHtml = '<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;margin:10px 0;height:110px;display:flex;align-items:center;justify-content:center;">'
-      + '<img src="' + escapeHtml(rawUrl) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:95px;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.3));" /></div>';
-  }
+  const imgHtml = renderProductImage(r);
 
   let dealBadgeHtml = '';
   if (isMultiVendor) {
@@ -551,6 +350,7 @@ function buildCardHtml(r) {
     + '<div class="compare-check ' + (checked ? 'checked' : '') + '" data-rid="' + r._rid + '">' + (checked ? '&#10003;' : '') + '</div></div>'
     + '<div><span class="badge ' + bClass + '">' + bLabel + '</span></div>'
     + imgHtml
+    + offerStatusHtml(r)
     + '<div class="price-tag"><span class="cur">MYR</span>' + (r.price ? r.price.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '—') + '</div>'
     + '<ul class="spec-list">'
     + specRow('cpu', r.processor) + specRow('gpu', r.graphics) + specRow('ram', r.memory)
@@ -566,13 +366,7 @@ function buildCardHtml(r) {
 // ── Image Rendering ──────────────────────────────────────────────────────────
 
 function renderLaptopSvg(r) {
-  let rawUrl = formatImgUrl(r.image_url, r.series || r.best_vendor, r.title);
-
-  if (rawUrl.length > 5) {
-    return '<img src="' + escapeHtml(rawUrl) + '" alt="' + escapeHtml(r.title) + '" loading="lazy" referrerpolicy="no-referrer" style="max-height:160px;max-width:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.5));display:block;margin:0 auto;" onerror="this.style.display=\'none\';if(this.nextElementSibling)this.nextElementSibling.style.display=\'block\';" />'
-      + '<div style="display:none;">' + renderLaptopFallbackSvg(r) + '</div>';
-  }
-  return renderLaptopFallbackSvg(r);
+  return renderProductImage(r, false, 160);
 }
 
 function renderLaptopFallbackSvg(r) {
@@ -616,10 +410,10 @@ function openDetailModal(r) {
 
     deals.forEach(d => {
       const oPriceStr = d.price ? 'RM ' + d.price.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 'Contact Store';
-      const dealBadge = d.isLowest && d.price ? '<span class="best-deal-badge">★ BEST PRICE DEAL</span>' : '<span style="color:var(--text-faint);font-size:11px;">Standard Offer</span>';
+      const dealBadge = d.isLowest && d.price ? '<span class="best-deal-badge">★ LOWEST RECORDED DEAL</span>' : '<span style="color:var(--text-faint);font-size:11px;">Standard Offer</span>';
 
       vendorTableHtml += '<tr>'
-        + '<td><strong style="color:var(--text-bright);font-size:13px;">' + escapeHtml(d.vendor) + '</strong></td>'
+        + '<td><strong style="color:var(--text-bright);font-size:13px;">' + escapeHtml(d.vendor) + '</strong>' + offerStatusHtml({...r,...d}) + '</td>'
         + '<td><strong style="color:var(--accent);font-size:14px;">' + oPriceStr + '</strong></td>'
         + '<td>' + dealBadge + '</td>'
         + '<td><a class="view-link" href="' + escapeHtml(d.url) + '" target="_blank" rel="noopener" style="padding:5px 12px;font-size:11.5px;background:var(--surface-raised);border:1px solid var(--border);border-radius:6px;">Buy Deal &#8599;</a></td>'
@@ -635,20 +429,21 @@ function openDetailModal(r) {
     + '    <h2>' + escapeHtml(r.title) + '</h2>'
     + '    <div class="part-tag"><span class="pid">PART #: ' + escapeHtml(partId) + '</span> <span class="badge ' + bClass + '">' + bLabel + '</span></div>'
     + '    <div class="detail-price-box"><span class="price-num">' + priceStr + '</span><span class="price-cur">LOWEST MYR</span></div>'
-    + '    <div><a class="view-link" href="' + escapeHtml(r.url) + '" target="_blank" rel="noopener" style="padding:8px 16px;background:var(--accent);color:#1A1305;border-radius:6px;font-weight:700;">Buy Lowest Price Deal &#8599;</a></div>'
+    + '    <div><a class="view-link" href="' + escapeHtml(r.url) + '" target="_blank" rel="noopener" style="padding:8px 16px;background:var(--accent);color:#1A1305;border-radius:6px;font-weight:700;">View seller offer &#8599;</a></div>'
     + '  </div>'
     + '</div>'
+    + offerStatusHtml(r) + offerHistoryHtml(r)
     + vendorTableHtml
     + '<div class="spec-sec"><h3>/// Full Technical Specifications</h3>'
     + '<div class="spec-grid-detail">'
-    + '  <div class="spec-detail-card"><div class="spec-d-label">⚡ PROCESSOR (CPU)</div><div class="spec-d-val">' + escapeHtml(r.processor || 'N/A') + '</div></div>'
-    + '  <div class="spec-detail-card"><div class="spec-d-label">🎮 GRAPHICS (GPU)</div><div class="spec-d-val">' + escapeHtml(r.graphics || 'N/A') + '</div></div>'
-    + '  <div class="spec-detail-card"><div class="spec-d-label">🧠 MEMORY (RAM)</div><div class="spec-d-val">' + escapeHtml(r.memory || 'N/A') + '</div></div>'
-    + '  <div class="spec-detail-card"><div class="spec-d-label">💾 STORAGE (SSD)</div><div class="spec-d-val">' + escapeHtml(r.storage || 'N/A') + '</div></div>'
-    + '  <div class="spec-detail-card"><div class="spec-d-label">🖥️ DISPLAY PANEL</div><div class="spec-d-val">' + escapeHtml(r.display || 'N/A') + '</div></div>'
-    + '  <div class="spec-detail-card"><div class="spec-d-label">📡 WI-FI & BLUETOOTH</div><div class="spec-d-val">' + escapeHtml(r.wifi || 'Standard WLAN') + '</div></div>'
-    + '  <div class="spec-detail-card"><div class="spec-d-label">🔋 BATTERY & CHARGER</div><div class="spec-d-val">' + escapeHtml(r.battery || 'Integrated Battery') + '</div></div>'
-    + '  <div class="spec-detail-card"><div class="spec-d-label">⚙️ OS, WARRANTY & OTHER DETAILS</div><div class="spec-d-val">' + escapeHtml(r.others || 'N/A') + '</div></div>'
+    + '  <div class="spec-detail-card"><div class="spec-d-label">⚡ PROCESSOR (CPU)</div><div class="spec-d-val">' + escapeHtml(r.processor || 'Unknown') + '</div></div>'
+    + '  <div class="spec-detail-card"><div class="spec-d-label">🎮 GRAPHICS (GPU)</div><div class="spec-d-val">' + escapeHtml(r.graphics || 'Unknown') + '</div></div>'
+    + '  <div class="spec-detail-card"><div class="spec-d-label">🧠 MEMORY (RAM)</div><div class="spec-d-val">' + escapeHtml(r.memory || 'Unknown') + '</div></div>'
+    + '  <div class="spec-detail-card"><div class="spec-d-label">💾 STORAGE (SSD)</div><div class="spec-d-val">' + escapeHtml(r.storage || 'Unknown') + '</div></div>'
+    + '  <div class="spec-detail-card"><div class="spec-d-label">🖥️ DISPLAY PANEL</div><div class="spec-d-val">' + escapeHtml(r.display || 'Unknown') + '</div></div>'
+    + '  <div class="spec-detail-card"><div class="spec-d-label">📡 WI-FI & BLUETOOTH</div><div class="spec-d-val">' + escapeHtml(r.wifi || 'Unknown') + '</div></div>'
+    + '  <div class="spec-detail-card"><div class="spec-d-label">🔋 BATTERY & CHARGER</div><div class="spec-d-val">' + escapeHtml(r.battery || 'Unknown') + '</div></div>'
+    + '  <div class="spec-detail-card"><div class="spec-d-label">⚙️ OS, WARRANTY & OTHER DETAILS</div><div class="spec-d-val">' + escapeHtml(r.others || 'Unknown') + '</div></div>'
     + '</div></div>';
 
   detailModalOverlay.classList.add('show');
@@ -731,10 +526,4 @@ document.querySelectorAll('.filter-group-header').forEach(header => {
 
 // ── Data Load on Page Ready ──────────────────────────────────────────────────
 
-window.addEventListener('DOMContentLoaded', () => {
-  if (window.preloadedRows && window.preloadedRows.length > 0) {
-    processRows(window.preloadedRows);
-  } else {
-    loadData(processRows);
-  }
-});
+window.addEventListener('DOMContentLoaded', () => loadData(processRows));

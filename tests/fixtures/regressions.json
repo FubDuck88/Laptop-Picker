@@ -1,0 +1,38 @@
+{
+  "provenance": "Synthetic minimal reproductions of defects observed during the Phase 1 code review; not live retailer observations.",
+  "gaming_laptop": {
+    "id": "gaming-16",
+    "title": "Gaming Laptop",
+    "processor": "Intel Core i7-13650HX",
+    "graphics": "NVIDIA GeForce RTX 4060 8GB GDDR6",
+    "memory": "16GB DDR5",
+    "storage": "1TB SSD",
+    "price": 4999
+  },
+  "shopify_variants": {
+    "id": 123,
+    "title": "HP Test Laptop 16GB / 32GB",
+    "vendor": "HP",
+    "handle": "test-laptop",
+    "body_html": "<table><tr><td>Memory</td><td>32GB DDR5</td></tr></table>",
+    "images": [],
+    "variants": [
+      {"id": 101, "sku": "HP-16", "title": "16GB", "price": "3999.00", "available": true},
+      {"id": 102, "sku": "HP-32", "title": "32GB", "price": "4499.00", "available": true}
+    ]
+  },
+  "conflicting_offers": [
+    {"id": "83DV00ABMJ", "title": "Lenovo Test 83DV00ABMJ", "price": "3999.00", "url": "https://seller-a.example/laptop", "processor": "Intel Core i7-13650HX", "graphics": "RTX 4060", "memory": "16GB", "storage": "512GB SSD", "display": "15.6 FHD"},
+    {"id": "83DV00ABMJ", "title": "Lenovo Test 83DV00ABMJ", "price": "4499.00", "url": "https://seller-b.example/laptop", "processor": "Intel Core i7-13650HX", "graphics": "RTX 4060", "memory": "32GB DDR5 RAM", "storage": "1TB NVMe SSD", "display": "15.6 FHD"}
+  ],
+  "family_offer": {
+    "id": "family-123",
+    "title": "ASUS Test Family",
+    "price": "3999.00",
+    "url": "https://www.asus.com/my/laptops/test-family/",
+    "processor": "Up to Intel Core Ultra 7",
+    "graphics": "Up to NVIDIA RTX 4070",
+    "memory": "Up to 32GB DDR5",
+    "storage": "Up to 2TB SSD"
+  }
+}

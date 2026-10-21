@@ -1,4 +1,9 @@
 import sys
+if __package__ in (None, ""):
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from source_normalization import title_specs
+from source_photos import photo_url
 """
 PC Image Malaysia Gaming Laptop Scraper
 Fetches laptop listings from store.pcimage.com.my/collection/gaming-laptop
@@ -31,61 +36,7 @@ HEADERS = {
 
 
 def parse_specs_from_title(title):
-    """Parses processor, graphics, memory, storage, and display from PC Image title strings."""
-    specs = {
-        "processor": "",
-        "graphics": "",
-        "memory": "",
-        "storage": "",
-        "display": "",
-        "wifi": "",
-        "battery": "",
-        "others": ""
-    }
-    if not title:
-        return specs
-
-    # Processor patterns
-    proc_pats = [
-        r'(?:Intel\s+)?(?:Core\s+)?(?:Ultra\s+)?\d?\s*(?:i[3579]|C[UuA]\d)[^\s/]*(?:-\d+[A-Z]*)?',
-        r'R[3579]\s*\d{3,4}[A-Z]*',
-        r'Ryzen\s*\d?\s*\d{4}[A-Z]*',
-        r'Athlon[^\s/]*',
-    ]
-    for pat in proc_pats:
-        m = re.search(pat, title, re.IGNORECASE)
-        if m:
-            specs["processor"] = m.group(0).strip()
-            break
-
-    # Memory (RAM)
-    m_ram = re.search(r'\b([8|12|16|24|32|64]{1,2}\s*GB(?:\s*(?:D5|D4|DDR[45]\w*|LPDDR[45]X?|RAM))?)\b', title, re.IGNORECASE)
-    if m_ram:
-        specs["memory"] = m_ram.group(1).strip()
-
-    # Storage (256GB, 512GB, 1TB, 2TB, SSD, NVMe, PCIe, G4, G3)
-    m_sto = re.search(r'\b((?:128|256|512|1024)\s*GB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?|\d\s*TB(?:\s*(?:G[345]|SSD|NVMe|PCIe|Gen\d))?)\b', title, re.IGNORECASE)
-    if m_sto:
-        specs["storage"] = m_sto.group(1).strip()
-
-    # Fix case where storage matched RAM
-    if specs["storage"].lower() == specs["memory"].lower() or (re.search(r'^\d{1,2}\s*GB', specs["storage"], re.IGNORECASE) and not re.search(r'SSD|NVMe|PCIe|Gen\d|G[345]|M\.2', specs["storage"], re.IGNORECASE)):
-        specs["storage"] = ""
-        m_sto_fallback = re.search(r'\b((?:256|512|1024)\s*GB|\d\s*TB)\b', title, re.IGNORECASE)
-        if m_sto_fallback and m_sto_fallback.group(1).lower() != specs["memory"].lower():
-            specs["storage"] = m_sto_fallback.group(1).strip()
-
-    # Display
-    m = re.search(r'(\d+\.?\d*["\u201d]?\s*(?:FHD|QHD|WUXGA|WQXGA|UHD|HD|OLED)[^\s/]*(?:\s*\d+Hz)?)', title, re.IGNORECASE)
-    if m:
-        specs["display"] = m.group(1).strip()
-
-    # Graphics
-    m = re.search(r'((?:RTX|GTX|GeForce|Radeon)\s*\d+[^\s/]*)', title, re.IGNORECASE)
-    if m:
-        specs["graphics"] = m.group(1).strip()
-
-    return specs
+    return title_specs(title)
 
 
 def extract_products_from_html(html_text):
@@ -169,7 +120,8 @@ def scrape_pcimage():
                 images = p.get("images") or []
                 img_url = ""
                 if images and isinstance(images, list) and len(images) > 0:
-                    img_url = images[0].get("x420_url") or images[0].get("url") or ""
+                    image = images[0] if isinstance(images[0], dict) else {}
+                    img_url = photo_url(image.get("x420_url") or image.get("url"), product_url) or ""
 
                 # Parse specs
                 specs = parse_specs_from_title(name)
