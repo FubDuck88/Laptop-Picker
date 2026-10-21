@@ -1,0 +1,31 @@
+name: Controlled Pages timeout recovery
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: verified-laptop-publication
+  cancel-in-progress: false
+jobs:
+  arm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python -m pip install -r requirements-test.txt
+      - name: Record interrupted-run identity and verify recovery bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -B tools/pages_ops.py prepare --mode timeout-drill --output artifacts/pages
+  timeout:
+    needs: arm
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Cause a real controlled runner timeout without publishing data
+        run: python -c "import time; print('Controlled timeout; workflow_run must restore the stored public archive.',flush=True); time.sleep(120)"

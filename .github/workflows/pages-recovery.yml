@@ -1,7 +1,7 @@
 name: Recover interrupted Pages publication
 on:
   workflow_run:
-    workflows: [Verified Pages release, Daily verified laptop collection]
+    workflows: [Verified Pages release, Daily verified laptop collection, Controlled Pages timeout recovery]
     types: [completed]
 permissions:
   contents: read

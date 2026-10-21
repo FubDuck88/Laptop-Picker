@@ -90,7 +90,7 @@ def delivery_verified(state):
 
 
 def prepare(github,mode,output,expected_run=None):
-    if mode not in ('drill','cutover','daily','recover'):
+    if mode not in ('drill','cutover','daily','recover','timeout-drill'):
         raise ValueError('Unknown publication mode')
     state,version=github.state()
     if mode=='daily' and state['publication_inhibited']:raise ValueError('Publication inhibited until approved cutover')
@@ -107,7 +107,8 @@ def prepare(github,mode,output,expected_run=None):
     manifest=download(pin,Path(output)/'recovery')
     (Path(output)/'operation.json').write_text(json.dumps({'mode':mode,'recovery':pin,'manifest':manifest},indent=2)+'\n')
     if mode!='recover':
-        state['active_attempt']={'run_id':run_id(),'mode':mode,'started_at':now(),'source_commit':os.environ['GITHUB_SHA']}
+        state['active_attempt']={'run_id':run_id(),'mode':mode,'started_at':now(),'source_commit':os.environ['GITHUB_SHA'],
+                                 'prior_publication_inhibited':state['publication_inhibited']}
     github.save(state,version)
     print('Recovered archive bytes verified; operation prepared.',flush=True)
 
@@ -145,6 +146,9 @@ def finish(github,output,outcome):
         if outcome=='drill-restored':
             state['recovery_drill']={'passed':True,'run_id':run_id(),'recorded_at':now(),
                                      'detected':['http','hash','frontend']}
+        if outcome=='recovered' and active.get('mode')=='timeout-drill':
+            state['publication_inhibited']=active['prior_publication_inhibited']
+            state['timeout_recovery_drill']={'passed':True,'failed_run':expected,'recovery_run':run_id(),'recorded_at':now()}
     state['last_operation']={'run_id':run_id(),'mode':mode,'outcome':outcome,'recorded_at':now()}
     if outcome!='recovery-unproven':state['active_attempt']=None
     github.save(state,version)
@@ -158,8 +162,7 @@ def notify(github,outcome):
           f'Run: https://github.com/{REPO}/actions/runs/{run_id()}\n\n'
           f'Retained/restored release: `{pin.get("release_sha256","maintenance")}`. '
           f'Last real observation: `{pin.get("observed_at","no live catalog in maintenance")}`.\n\n'
-          'The controlled drill keeps maintenance visible and restores the stored archive. '
-          'A real failed publication retains/restores the recorded known-good release. '
+          'The initial controlled drill restores maintenance. Later failed publications restore the stored verified public archive. '
           'Check the run for recovery outcome; no successful recovery is implied by issue creation.\n\n'
           'If delivery cannot be verified through the authenticated recipient inbox, comment exactly **received** '
           'after this notification reaches you. Delivery proof does not approve source data or design.')

@@ -94,3 +94,13 @@ class DeploymentGuardsTests(unittest.TestCase):
         self.assertTrue(schedule_overdue(value,as_of=datetime.fromisoformat('2026-10-22T01:37:00+00:00')))
         value['last_schedule']={'passed':True,'recorded_at':'2026-10-22T00:10:00+00:00'}
         self.assertFalse(schedule_overdue(value,as_of=datetime.fromisoformat('2026-10-22T01:37:00+00:00')))
+
+    def test_controlled_timeout_recovery_preserves_pretest_schedule_state(self):
+        value=state();value['public']={'release_sha256':'b'*64};value['publication_inhibited']=False
+        value['active_attempt']={'run_id':'old','mode':'timeout-drill','prior_publication_inhibited':False}
+        github=self.github(value)
+        with patch.dict(os.environ,{'GITHUB_RUN_ID':'recovery','OP_MODE':'recover','RECOVER_RUN':'old'}):
+            finish(github,'.','recovered')
+        saved=github.save.call_args.args[0]
+        self.assertFalse(saved['publication_inhibited'])
+        self.assertTrue(saved['timeout_recovery_drill']['passed'])
