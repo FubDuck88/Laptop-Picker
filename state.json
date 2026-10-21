@@ -52,5 +52,15 @@
     "failed_run": "39603595580",
     "recovery_run": "39603867438",
     "recorded_at": "2026-10-21T12:59:04.194306+00:00"
+  },
+  "gate_isolation": {
+    "implemented": true,
+    "environment": "local",
+    "phase": "6R",
+    "operational_gate_id": "7667d8da039a4a2b847b5ecc97bf6e70",
+    "implementation_sha256": "369081cd48b4b203bb9b0f6b0440e4a299ecc6b3238e41ab229dc4e75bd2e2b1",
+    "healthy_operational_receipt": true,
+    "evidence_sha256": "818d581c1ddd5d964f253c5da2870af647853e23497b1b5251858f7caa91be90",
+    "recorded_at": "2026-10-21T13:08:52.719934+00:00"
   }
 }
