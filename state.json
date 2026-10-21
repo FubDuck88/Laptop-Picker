@@ -11,7 +11,7 @@
   "active_attempt": null,
   "last_schedule": null,
   "notification": {
-    "issue": null,
+    "issue": 1,
     "receipt_confirmed": false
   },
   "publication_inhibited": true,
