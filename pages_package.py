@@ -21,9 +21,20 @@ def write_archive(files, folder, *, kind, release_sha=None, prefix=''):
             raise ValueError('Unsafe archive path')
         if any(x in name.split('/') for x in ('tests', 'artifacts', '__pycache__', '.git', '.github')) or 'diagnostic' in name:
             raise ValueError('Excluded deployment input')
-    with tarfile.open(folder/'artifact.tar', 'w', format=tarfile.USTAR_FORMAT) as tar:
+    # Match the Pages upload action: an explicit ./ root and parent directories.
+    # A flat tar list is locally extractable but is not its normal deployment layout.
+    with tarfile.open(folder/'artifact.tar', 'w', format=tarfile.GNU_FORMAT) as tar:
+        directories={'.'}
+        for name in files:
+            directories.update(str(parent) for parent in Path(name).parents if str(parent)!='.')
+        for name in sorted(directories,key=lambda n:(len(n.split('/')),n)):
+            entry=tarfile.TarInfo('.' if name=='.' else './'+name)
+            entry.type=tarfile.DIRTYPE
+            entry.mode=0o755
+            entry.mtime=0
+            tar.addfile(entry)
         for name, body in sorted(files.items()):
-            item = tarfile.TarInfo(name)
+            item = tarfile.TarInfo('./'+name)
             item.size, item.mode, item.mtime = len(body), 0o644, 0
             tar.addfile(item, io.BytesIO(body))
     manifest = {'manifest_version':1, 'kind':kind, 'archive_sha256':sha((folder/'artifact.tar').read_bytes()),
@@ -41,11 +52,14 @@ def read_archive(path, expected_sha):
     files = {}
     with tarfile.open(path, 'r') as tar:
         for member in tar.getmembers():
-            if not member.isfile() or member.size > 40*1024*1024 or member.name in files:
-                raise ValueError('Invalid or duplicate archive member')
-            if member.name.startswith('/') or '..' in member.name.split('/'):
+            name=member.name.removeprefix('./')
+            if member.name=='.' and member.isdir():continue
+            if name.startswith('/') or '..' in name.split('/'):
                 raise ValueError('Unsafe recovery archive member')
-            files[member.name] = tar.extractfile(member).read()
+            if member.isdir():continue
+            if not member.isfile() or member.size > 40*1024*1024 or name in files:
+                raise ValueError('Invalid or duplicate archive member')
+            files[name] = tar.extractfile(member).read()
     return files
 
 
