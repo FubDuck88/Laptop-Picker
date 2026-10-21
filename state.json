@@ -16,13 +16,7 @@
     "source_commit": "933a06462408bb2b19879222326f3119e2a6957e",
     "observed_at": "2026-10-21T12:33:45.492702+00:00"
   },
-  "active_attempt": {
-    "run_id": "39603595580",
-    "mode": "timeout-drill",
-    "started_at": "2026-10-21T12:56:09.355225+00:00",
-    "source_commit": "7a0d0dea86fb4df5ee3eeffb53b5bdc4afd7453f",
-    "prior_publication_inhibited": false
-  },
+  "active_attempt": null,
   "last_schedule": null,
   "notification": {
     "issue": 1,
@@ -37,10 +31,10 @@
   },
   "publication_inhibited": false,
   "last_operation": {
-    "run_id": "39600483435",
-    "mode": "cutover",
-    "outcome": "verified",
-    "recorded_at": "2026-10-21T12:34:25.641634+00:00"
+    "run_id": "39603867438",
+    "mode": "recover",
+    "outcome": "recovered",
+    "recorded_at": "2026-10-21T12:59:04.194326+00:00"
   },
   "recovery_drill": {
     "passed": true,
@@ -52,5 +46,11 @@
       "frontend"
     ]
   },
-  "cutover_at": "2026-10-21T12:34:25.641537+00:00"
+  "cutover_at": "2026-10-21T12:34:25.641537+00:00",
+  "timeout_recovery_drill": {
+    "passed": true,
+    "failed_run": "39603595580",
+    "recovery_run": "39603867438",
+    "recorded_at": "2026-10-21T12:59:04.194306+00:00"
+  }
 }
