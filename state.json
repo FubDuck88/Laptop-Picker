@@ -12,7 +12,14 @@
   "last_schedule": null,
   "notification": {
     "issue": 1,
-    "receipt_confirmed": false
+    "receipt_confirmed": false,
+    "delivery_verified": {
+      "recipient": "FubDuck88",
+      "issue": 1,
+      "method": "authenticated_repository_notifications_api",
+      "checked_at": "2026-10-21T12:31:02.760491+00:00",
+      "evidence_sha256": "4381945b196d0942f335e24a2721938ba968084ef6035abed5365e1a55102e1e"
+    }
   },
   "publication_inhibited": true,
   "last_operation": {
@@ -20,5 +27,15 @@
     "mode": "drill",
     "outcome": "drill-restored",
     "recorded_at": "2026-10-21T12:26:17.586877+00:00"
+  },
+  "recovery_drill": {
+    "passed": true,
+    "run_id": "39598958048",
+    "recorded_at": "2026-10-21T12:23:03Z",
+    "detected": [
+      "http",
+      "hash",
+      "frontend"
+    ]
   }
 }
