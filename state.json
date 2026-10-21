@@ -8,16 +8,17 @@
     "source_commit": "fca90cc7f153f3b92c917808d212316792a546f3"
   },
   "public": null,
-  "active_attempt": {
-    "run_id": "39598126437",
-    "mode": "drill",
-    "started_at": "2026-10-21T12:16:12.313739+00:00",
-    "source_commit": "c21f89c5b6b5faebcf8f634fb17ca486fea2d86d"
-  },
+  "active_attempt": null,
   "last_schedule": null,
   "notification": {
     "issue": null,
     "receipt_confirmed": false
   },
-  "publication_inhibited": true
+  "publication_inhibited": true,
+  "last_operation": {
+    "run_id": "39598126437",
+    "mode": "drill",
+    "outcome": "failed-restored",
+    "recorded_at": "2026-10-21T12:17:27.238296+00:00"
+  }
 }
