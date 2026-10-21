@@ -16,7 +16,13 @@
     "source_commit": "933a06462408bb2b19879222326f3119e2a6957e",
     "observed_at": "2026-10-21T12:33:45.492702+00:00"
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "run_id": "39603595580",
+    "mode": "timeout-drill",
+    "started_at": "2026-10-21T12:56:09.355225+00:00",
+    "source_commit": "7a0d0dea86fb4df5ee3eeffb53b5bdc4afd7453f",
+    "prior_publication_inhibited": false
+  },
   "last_schedule": null,
   "notification": {
     "issue": 1,
