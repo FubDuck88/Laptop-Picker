@@ -9,26 +9,20 @@
   },
   "public": {
     "kind": "public-P",
-    "tag": "pages-41384849795-1",
-    "release_id": 431051485,
-    "archive_sha256": "d68922488db87dbeb2d5f3afd20db4ce61c5cfa55563de3a2e2387e6bbc26868",
-    "release_sha256": "8d51ff829e41cfd462d9aa611f5ee8f4bf51c7ea0f7a54f3941e21b719e63352",
+    "tag": "pages-41580439763-1",
+    "release_id": 432290683,
+    "archive_sha256": "ac72a71ead730046dec55105a0a9bde0189197d88f0c9906ee358b0adfc3446d",
+    "release_sha256": "5fd57620fa80b1897c2f505541a7f594843cb205dc984f2f041caa1172d06ea6",
     "source_commit": "98032837dde5d22fab24e14bd1abf63e908264c8",
-    "observed_at": "2026-11-02T03:46:54.945325+00:00"
+    "observed_at": "2026-11-03T04:51:33.502419+00:00"
   },
-  "active_attempt": {
-    "run_id": "41580439763",
-    "mode": "daily",
-    "started_at": "2026-11-03T04:51:11.081414+00:00",
-    "source_commit": "98032837dde5d22fab24e14bd1abf63e908264c8",
-    "prior_publication_inhibited": false
-  },
+  "active_attempt": null,
   "last_schedule": {
-    "run_id": "41384849795",
-    "recorded_at": "2026-11-02T03:48:06.120947+00:00",
+    "run_id": "41580439763",
+    "recorded_at": "2026-11-03T04:53:40.239925+00:00",
     "event": "schedule",
     "passed": true,
-    "release_sha256": "8d51ff829e41cfd462d9aa611f5ee8f4bf51c7ea0f7a54f3941e21b719e63352"
+    "release_sha256": "5fd57620fa80b1897c2f505541a7f594843cb205dc984f2f041caa1172d06ea6"
   },
   "notification": {
     "issue": 1,
@@ -43,10 +37,10 @@
   },
   "publication_inhibited": false,
   "last_operation": {
-    "run_id": "41384849795",
+    "run_id": "41580439763",
     "mode": "daily",
     "outcome": "verified",
-    "recorded_at": "2026-11-02T03:48:06.120951+00:00"
+    "recorded_at": "2026-11-03T04:53:40.239933+00:00"
   },
   "recovery_drill": {
     "passed": true,
