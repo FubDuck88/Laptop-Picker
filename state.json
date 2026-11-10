@@ -16,13 +16,7 @@
     "source_commit": "98032837dde5d22fab24e14bd1abf63e908264c8",
     "observed_at": "2026-11-04T04:17:40.659524+00:00"
   },
-  "active_attempt": {
-    "run_id": "42762542198",
-    "mode": "daily",
-    "started_at": "2026-11-10T05:30:49.574028+00:00",
-    "source_commit": "98032837dde5d22fab24e14bd1abf63e908264c8",
-    "prior_publication_inhibited": false
-  },
+  "active_attempt": null,
   "last_schedule": {
     "run_id": "41772244127",
     "recorded_at": "2026-11-04T04:18:41.159150+00:00",
@@ -43,10 +37,10 @@
   },
   "publication_inhibited": false,
   "last_operation": {
-    "run_id": "42559137786",
+    "run_id": "42762542198",
     "mode": "daily",
     "outcome": "degraded-retained",
-    "recorded_at": "2026-11-09T03:59:05.039966+00:00"
+    "recorded_at": "2026-11-10T05:31:37.871822+00:00"
   },
   "recovery_drill": {
     "passed": true,
