@@ -16,7 +16,13 @@
     "source_commit": "98032837dde5d22fab24e14bd1abf63e908264c8",
     "observed_at": "2026-11-14T04:26:46.236292+00:00"
   },
-  "active_attempt": null,
+  "active_attempt": {
+    "run_id": "43675585726",
+    "mode": "daily",
+    "started_at": "2026-11-15T04:11:22.771630+00:00",
+    "source_commit": "98032837dde5d22fab24e14bd1abf63e908264c8",
+    "prior_publication_inhibited": false
+  },
   "last_schedule": {
     "run_id": "43556602026",
     "recorded_at": "2026-11-14T04:27:52.867513+00:00",
